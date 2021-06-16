@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5840f604c0b741a885a95bca592d1c23, type: 3}
+  m_Name: ExampleModule1
+  m_EditorClassIdentifier: 
+  Id: ExampleModule
+  Name: Example Module
+  Version: 1.0
+  Author: VRLabs
+  RequiredIncludes: []
+  Enabled:
+    Name: 
+    DisplayName: 
+    Type: 
+    DefaultValue: 
+    Attributes: 
+    EnableValue: 0
+  Properties: []
+  IncompatibleWith: []
+  Templates: []
+  Functions:
+  - Name: DoSomething
+    AppendAfter: '#K#MAINPASSENTRY'
+    Priority: 0
+    ShaderFunctionCode: {fileID: 1413292532103889072, guid: 55a288a5a8d45a74e8bf3f0ee396c57c,
+      type: 3}
+    UsedVariables:
+    - Name: availableVariable
+      Type: float
+    VariableSinkKeyword: 
+    CodeSinkKeyword: 
