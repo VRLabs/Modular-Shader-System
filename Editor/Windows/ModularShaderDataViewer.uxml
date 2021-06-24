@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <uie:ObjectField label="Modular shader" name="ModularShaderField" />
+    <ui:ScrollView style="width: 100%; height: 100%;">
+        <ui:Foldout text="Properties" name="PropertiesFoldout" />
+        <ui:Foldout text="Variables" name="VariablesFoldout" />
+        <ui:Foldout text="Functions" name="FunctionsFoldout" />
+    </ui:ScrollView>
+</ui:UXML>

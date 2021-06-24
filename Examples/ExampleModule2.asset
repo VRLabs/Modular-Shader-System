@@ -30,7 +30,7 @@ MonoBehaviour:
   Functions:
   - Name: DoSomething2
     AppendAfter: '#K#MAINPASSENTRY'
-    Priority: 0
+    Priority: 100
     ShaderFunctionCode: {fileID: 1413292532103889072, guid: 35e466f48e6f22d43b3f8730de2b17d7,
       type: 3}
     UsedVariables:

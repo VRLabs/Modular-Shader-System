@@ -1,0 +1,35 @@
+.type-label {
+    -unity-font-style: italic;
+    font-size: 11px;
+    color: gray;
+    flex-grow: 1;
+    -unity-text-align: middle-right;
+    margin-right: 8px;
+    align-self: auto;
+}
+
+#PropertiesFoldout #VariablesFoldout #FunctionsFoldout{
+    margin-bottom: 5px;
+}
+
+.priority-label {
+    -unity-font-style: italic;
+    font-size: 11px;
+    color: gray;
+    flex-grow: 1;
+    -unity-text-align: middle-right;
+    margin-right: 8px;
+    align-self: auto;
+}
+
+.hierarchy-foldout{
+    flex-grow: 1;
+}
+
+.unity-foldout--depth-0 > .unity-foldout__content{
+    margin-left: 30px;
+}
+
+.unity-foldout > Toggle{
+    margin-bottom: 1px;
+}
