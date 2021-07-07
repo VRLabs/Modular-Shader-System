@@ -24,9 +24,23 @@ MonoBehaviour:
     DefaultValue: 
     Attributes: 
     EnableValue: 0
-  Properties: []
+  Properties:
+  - Name: 
+    DisplayName: 
+    Type: 
+    DefaultValue: 
+    Attributes: 
+  - Name: 
+    DisplayName: 
+    Type: 
+    DefaultValue: 
+    Attributes: 
   IncompatibleWith: []
-  Templates: []
+  Templates:
+  - Keyword: 
+    Template: {fileID: 0}
+    IsCGOnly: 0
+    TemplateKeywords: []
   Functions:
   - Name: DoSomething
     AppendAfter: '#K#MAINPASSENTRY'

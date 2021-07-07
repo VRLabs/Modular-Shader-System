@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:TextField picking-mode="Ignore" label="Name" binding-path="Name" />
+    <ui:TextField picking-mode="Ignore" label="Append After" binding-path="AppendAfter" />
+    <uie:IntegerField label="Priority" value="100" binding-path="Priority" />
+    <uie:PropertyField binding-path="ShaderFunctionCode" label="Function Code" focusable="true" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="UsedVariables" />
+    <ui:TextField picking-mode="Ignore" label="Variable Sink " binding-path="VariableSinkKeyword" />
+    <ui:TextField picking-mode="Ignore" label="Code Sink " binding-path="CodeSinkKeyword" />
+</ui:UXML>

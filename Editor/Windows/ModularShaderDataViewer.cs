@@ -64,7 +64,7 @@ namespace VRLabs.ModularShaderSystem
             });
             
             // Add stylesheet
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/VRLabs/ModularShaderSystem/Editor/Windows/ModularShaderDataViewer.uss");
+            var styleSheet = Resources.Load<StyleSheet>("MSSUIElements/ModularShaderDataViewer");
             root.styleSheets.Add(styleSheet);
         }
 

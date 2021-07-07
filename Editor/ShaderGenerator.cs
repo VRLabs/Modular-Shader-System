@@ -248,13 +248,8 @@ namespace VRLabs.ModularShaderSystem
         {
             shaderFile.AppendLine("SubShader");
             shaderFile.AppendLine("{");
-
-            using (var sr = new StringReader(_shader.ShaderTemplate.Template))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                    shaderFile.AppendLine(line);
-            }
+            
+            shaderFile.AppendLine(_shader.ShaderTemplate.Template);
 
             WriteModuleTemplates(shaderFile, currentSettings);
         }
@@ -341,7 +336,7 @@ namespace VRLabs.ModularShaderSystem
                 foreach (var template in module.Templates)
                 {
                     var tmp = new StringBuilder();
-
+                    tmp.AppendLine(template.Template.ToString());
                     tmp.AppendLine("#K#" + template.Keyword);
                     shaderFile.Replace("#K#" + template.Keyword, tmp.ToString());
                 }

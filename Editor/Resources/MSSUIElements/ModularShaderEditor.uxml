@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Label text="Base Information" style="-unity-font-style: bold; font-size: 12px; margin-bottom: 4px;" />
+    <ui:TextField picking-mode="Ignore" label="Id" value="filler text" text="filler text" binding-path="Id" />
+    <ui:TextField picking-mode="Ignore" label="Name" value="filler text" text="filler text" binding-path="Name" />
+    <ui:TextField picking-mode="Ignore" label="Version" value="filler text" text="filler text" binding-path="Version" />
+    <ui:TextField picking-mode="Ignore" label="Author" value="filler text" text="filler text" binding-path="Author" />
+    <ui:Label text="Settings" style="-unity-font-style: bold; margin-top: 20px; margin-bottom: 4px;" />
+    <uie:ObjectField label="Shader Template" binding-path="ShaderTemplate" />
+    <ui:TextField picking-mode="Ignore" label="Shader Path" value="filler text" text="filler text" binding-path="ShaderPath" />
+    <ui:TextField label="Custom Editor" binding-path="CustomEditor" />
+    <VRLabs.ModularShaderSystem.InspectorList binding-path="TemplateKeywords" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.InspectorList binding-path="Properties" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.InspectorList binding-path="BaseModules" show-elements-text="false" />
+</ui:UXML>

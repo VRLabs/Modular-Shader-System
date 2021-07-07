@@ -20,7 +20,9 @@ MonoBehaviour:
   ShaderTemplate: {fileID: 1413292532103889072, guid: 8413fbf2aed995743a142e65863f1538,
     type: 3}
   CustomEditor: 
-  TemplateKeywords: []
+  TemplateKeywords:
+  - aa
+  - aa
   Properties:
   - Name: _SrcBlend
     DisplayName: SrcBlend

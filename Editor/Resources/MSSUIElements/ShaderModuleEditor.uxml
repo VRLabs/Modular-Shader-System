@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Label text="Base Information" style="margin-bottom: 4px; -unity-font-style: bold;" />
+    <ui:TextField picking-mode="Ignore" label="Id" binding-path="Id" />
+    <ui:TextField picking-mode="Ignore" label="Name" binding-path="Name" />
+    <ui:TextField picking-mode="Ignore" label="Author" binding-path="Author" />
+    <ui:TextField picking-mode="Ignore" label="Version" binding-path="Version" />
+    <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
+    <uie:PropertyField binding-path="Enabled" label="Enable Property" focusable="true" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Properties" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Functions" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Templates" />
+</ui:UXML>

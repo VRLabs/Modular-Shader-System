@@ -17,7 +17,9 @@ namespace VRLabs.ModularShaderSystem
             Template = template;
         }
         public TemplateAsset() : this("") { }
-        
+
+        public override string ToString() => Template;
+
         //TODO: add preview icon
         [MenuItem("Assets/Create/Modular Shader/Template", priority = 9)]
         private static void CreateTemplate()
