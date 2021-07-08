@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:TextField picking-mode="Ignore" label="Namespace" value="VRLabs" text="VRLabs" name="NamespaceField" />
+    <ui:VisualElement style="flex-direction: row; margin-bottom: 5px;">
+        <ui:Label text="Preview:" style="margin-left: 15px;" />
+        <ui:Label text="VRLabs.ModularShaderSystem" name="NamespacePreview" style="-unity-font-style: italic;" />
+    </ui:VisualElement>
+    <ui:TextField picking-mode="Ignore" label="Default variable sink" value="VARIABLESINK" text="VARIABLESINK" name="VariableSinkField" />
+    <ui:TextField picking-mode="Ignore" label="Default code sink" value="CODESINK" text="CODESINK" name="CodeSinkField" />
+    <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplate" text="stemplate" name="ExtensionField" />
+    <ui:Button text="Embed" name="EmbedButton" />
+</ui:UXML>

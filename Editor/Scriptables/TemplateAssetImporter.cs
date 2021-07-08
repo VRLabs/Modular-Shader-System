@@ -5,15 +5,16 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    [ScriptedImporter(1, "stemplate")]
+    [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
     public class TemplateAssetImporter : ScriptedImporter
     { 
+        //TODO: add icon
         public override void OnImportAsset(AssetImportContext ctx)
         {
             var subAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             subAsset.Template = File.ReadAllText(ctx.assetPath);
             //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
-            ctx.AddObjectToAsset("stemplate", subAsset/*, icon*/);
+            ctx.AddObjectToAsset(MSSConstants.TEMPLATE_EXTENSION, subAsset/*, icon*/);
             ctx.SetMainObject(subAsset);
         }
 

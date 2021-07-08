@@ -10,9 +10,6 @@ namespace VRLabs.ModularShaderSystem
 {
     public class ShaderGenerator
     {
-        public const string DEFAULT_VARIABLES_SINK = "VARIABLESINK";
-        public const string DEFAULT_CODE_SINK = "CODESINK";
-
         private ModularShader _shader;
         private List<ShaderModule> _modules;
         private List<EnableProperty> _nonCgPropertyEnablers;
@@ -173,8 +170,8 @@ namespace VRLabs.ModularShaderSystem
 
         private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
-            WriteVariablesToSink(shaderFile, functions, DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(DEFAULT_VARIABLES_SINK)))
+            WriteVariablesToSink(shaderFile, functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
+            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
                 WriteVariablesToSink(shaderFile, functions, sink);
         }
 
@@ -208,7 +205,7 @@ namespace VRLabs.ModularShaderSystem
                 StringBuilder functionCallSequence = new StringBuilder();
                 int tabs = 2;
                 tabs = WriteFunctionCallSequence(functions, function, module, functionCode, functionCallSequence, tabs);
-                string codeSink = string.IsNullOrWhiteSpace(function.CodeSinkKeyword) ? DEFAULT_CODE_SINK : function.CodeSinkKeyword;
+                string codeSink = string.IsNullOrWhiteSpace(function.CodeSinkKeyword) ? MSSConstants.DEFAULT_CODE_SINK : function.CodeSinkKeyword;
 
                 functionCode.AppendLine("#K#" + codeSink);
                 shaderFile.Replace("#K#" + codeSink, functionCode.ToString());

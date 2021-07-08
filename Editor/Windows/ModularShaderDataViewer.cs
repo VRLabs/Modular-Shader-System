@@ -32,11 +32,11 @@ namespace VRLabs.ModularShaderSystem
             VisualElement root = rootVisualElement;
 
             // Import UXML
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/VRLabs/ModularShaderSystem/Editor/Windows/ModularShaderDataViewer.uxml");
-            _propertyViewUxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/VRLabs/ModularShaderSystem/Editor/Windows/PropertyView.uxml");
-            _functionViewUxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/VRLabs/ModularShaderSystem/Editor/Windows/FunctionView.uxml");
-            VisualElement UxmlBase = visualTree.CloneTree();
-            root.Add(UxmlBase);
+            var visualTree = Resources.Load<VisualTreeAsset>("MSSUIElements/ModularShaderDataViewer");
+            _propertyViewUxml = Resources.Load<VisualTreeAsset>("MSSUIElements/PropertyView");
+            _functionViewUxml = Resources.Load<VisualTreeAsset>("MSSUIElements/FunctionView");
+            VisualElement uxmlBase = visualTree.CloneTree();
+            root.Add(uxmlBase);
             
             // Query all needed fields
             _modularShaderField = root.Q<ObjectField>("ModularShaderField");
@@ -90,8 +90,8 @@ namespace VRLabs.ModularShaderSystem
             
             // Update variables
             _variablesFoldout.Clear();
-            GetVariables(functions, ShaderGenerator.DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(ShaderGenerator.DEFAULT_VARIABLES_SINK)))
+            GetVariables(functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
+            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
                 GetVariables(functions, sink);
             
             // Update Functions

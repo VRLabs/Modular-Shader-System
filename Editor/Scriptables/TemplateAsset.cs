@@ -28,7 +28,7 @@ namespace VRLabs.ModularShaderSystem
             MethodInfo getActiveFolderPath = projectWindowUtilType.GetMethod("GetActiveFolderPath", BindingFlags.Static | BindingFlags.NonPublic);
             object obj = getActiveFolderPath.Invoke(null, new object[0]);
             string pathToCurrentFolder = obj.ToString();
-            string uniquePath = AssetDatabase.GenerateUniqueAssetPath(pathToCurrentFolder + "/Template.stemplate");
+            string uniquePath = AssetDatabase.GenerateUniqueAssetPath($"{pathToCurrentFolder}/Template.{MSSConstants.TEMPLATE_EXTENSION}");
             
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateNewAsset>(), uniquePath, null, (string) null);
         }
