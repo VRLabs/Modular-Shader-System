@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    [CreateAssetMenu(fileName = "ShaderModule", menuName = "Modular Shader/Shader Module", order = 0)]
+    [CreateAssetMenu(fileName = "ShaderModule", menuName = MSSConstants.CREATE_PATH +"/Shader Module", order = 0)]
     public class ShaderModule : ScriptableObject
     {
         public string Id;

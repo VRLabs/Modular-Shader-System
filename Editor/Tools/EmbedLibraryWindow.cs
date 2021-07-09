@@ -11,7 +11,7 @@ using VRLabs.ModularShaderSystem;
 
 public class EmbedLibraryWindow : EditorWindow
 {
-    [MenuItem("VRLabs/Modular Shader/Embed Library")]
+    [MenuItem(MSSConstants.WINDOW_PATH + "/Embed Library")]
     public static void ShowExample()
     {
         EmbedLibraryWindow wnd = GetWindow<EmbedLibraryWindow>();
@@ -27,6 +27,8 @@ public class EmbedLibraryWindow : EditorWindow
     private TextField _codeSinkField;
     private TextField _variableSinkField;
     private TextField _templateExtension;
+    private TextField _windowPathField;
+    private TextField _createPathField;
     private Label _namespaceLabel;
     private Button _embedButton;
 
@@ -36,7 +38,7 @@ public class EmbedLibraryWindow : EditorWindow
         VisualElement root = rootVisualElement;
 
         // Import UXML
-        var visualTree =Resources.Load<VisualTreeAsset>("MSSUIElements/EmberLibraryWindow");
+        var visualTree =Resources.Load<VisualTreeAsset>("MSSUIElements/EmbedLibraryWindow");
         VisualElement labelFromUxml = visualTree.CloneTree();
         root.Add(labelFromUxml);
         
@@ -44,6 +46,8 @@ public class EmbedLibraryWindow : EditorWindow
         _codeSinkField = root.Q<TextField>("VariableSinkField");
         _variableSinkField = root.Q<TextField>("CodeSinkField");
         _templateExtension = root.Q<TextField>("ExtensionField");
+        _windowPathField = root.Q<TextField>("WindowPathField");
+        _createPathField = root.Q<TextField>("CreatePathField");
         _namespaceLabel = root.Q<Label>("NamespacePreview");
         _embedButton = root.Q<Button>("EmbedButton");
         
@@ -83,13 +87,13 @@ public class EmbedLibraryWindow : EditorWindow
         if (Directory.Exists(path + "/ModularShaderSystem"))
             Directory.Delete(path + "/ModularShaderSystem", true);
             
-        CopyDirectory(PATH, path, _namespaceField.value, _codeSinkField.value, _variableSinkField.value, _templateExtension.value, "", false);
+        CopyDirectory(PATH, path, _namespaceField.value, _codeSinkField.value, _variableSinkField.value, _templateExtension.value, _windowPathField.value, _createPathField.value, "", false);
 
         AssetDatabase.Refresh();
     }
 
 
-    private static void CopyDirectory(string oldPath, string newPath, string customNamespace, string codeSink, string variableSink, string extension, string subpath, bool keepComments)
+    private static void CopyDirectory(string oldPath, string newPath, string customNamespace, string codeSink, string variableSink, string extension, string windowPath, string createPath, string subpath, bool keepComments)
         {
             foreach (var file in Directory.GetFiles(oldPath).Where(x => !Path.GetExtension(x).Equals(".meta")))
             {
@@ -128,6 +132,8 @@ public class EmbedLibraryWindow : EditorWindow
                         text = text.Replace(MSSConstants.DEFAULT_CODE_SINK, codeSink);
                         text = text.Replace(MSSConstants.DEFAULT_VARIABLES_SINK, variableSink);
                         text = text.Replace(MSSConstants.TEMPLATE_EXTENSION, extension);
+                        text = text.Replace(MSSConstants.WINDOW_PATH, windowPath);
+                        text = text.Replace(MSSConstants.CREATE_PATH, createPath);
                     }
 
                     string finalPath = file.Replace(oldPath, newPath + "/ModularShaderSystem" + subpath);
@@ -145,11 +151,9 @@ public class EmbedLibraryWindow : EditorWindow
 
             foreach (string directory in Directory.GetDirectories(oldPath))
             {
-                if (!Path.GetFileName(directory).Equals("Tools"))
-                {
-                    string newSubPath = subpath + directory.Replace(PATH + subpath, "");
-                    CopyDirectory(directory, newPath, customNamespace, codeSink, variableSink, extension, newSubPath, keepComments);
-                }
+                if (Path.GetFileName(directory).Equals("Tools")) continue;
+                string newSubPath = subpath + directory.Replace(PATH + subpath, "");
+                CopyDirectory(directory, newPath, customNamespace, codeSink, variableSink, extension, windowPath, createPath, newSubPath, keepComments);
             }
         }
 }

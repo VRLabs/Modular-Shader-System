@@ -7,5 +7,7 @@
     <ui:TextField picking-mode="Ignore" label="Default variable sink" value="VARIABLESINK" text="VARIABLESINK" name="VariableSinkField" />
     <ui:TextField picking-mode="Ignore" label="Default code sink" value="CODESINK" text="CODESINK" name="CodeSinkField" />
     <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplate" text="stemplate" name="ExtensionField" />
+    <ui:TextField picking-mode="Ignore" label="Editor window menu path" value="VRLabs/Modular Shader" text="VRLabs/Modular Shader" name="WindowPathField" />
+    <ui:TextField picking-mode="Ignore" label="Create assets menu path" value="VRLabs/Modular Shader" text="VRLabs/Modular Shader" name="CreatePathField" />
     <ui:Button text="Embed" name="EmbedButton" />
 </ui:UXML>

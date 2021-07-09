@@ -5,7 +5,7 @@ namespace VRLabs.ModularShaderSystem
 {
     public class ShaderModuleGenerationTest : EditorWindow
     {
-        [MenuItem("VRLabs/Modular Shader/Test generator")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Test generator")]
         private static void ShowWindow()
         {
             var window = GetWindow<ShaderModuleGenerationTest>();

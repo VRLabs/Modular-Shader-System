@@ -21,7 +21,7 @@ namespace VRLabs.ModularShaderSystem
         public override string ToString() => Template;
 
         //TODO: add preview icon
-        [MenuItem("Assets/Create/Modular Shader/Template", priority = 9)]
+        [MenuItem("Assets/Create/" + MSSConstants.CREATE_PATH + "/Template", priority = 9)]
         private static void CreateTemplate()
         {
             Type projectWindowUtilType = typeof(ProjectWindowUtil);

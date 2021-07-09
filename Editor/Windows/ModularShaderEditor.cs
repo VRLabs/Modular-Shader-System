@@ -20,6 +20,9 @@ namespace VRLabs.ModularShaderSystem
 
             //templateKeywordList.
             _root.Add(template);
+            
+            var objectField = _root.Q<ObjectField>("ShaderTemplate");
+            objectField.objectType = typeof(TemplateAsset);
 
             return _root;
         }

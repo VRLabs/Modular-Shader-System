@@ -10,7 +10,7 @@ namespace VRLabs.ModularShaderSystem
 {
     public class ModularShaderDataViewer : EditorWindow
     {
-        [MenuItem("VRLabs/Modular Shader/Modular shader data view")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Modular shader data view")]
         public static void ShowExample()
         {
             ModularShaderDataViewer wnd = GetWindow<ModularShaderDataViewer>();

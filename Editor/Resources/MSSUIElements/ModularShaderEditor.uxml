@@ -5,7 +5,7 @@
     <ui:TextField picking-mode="Ignore" label="Version" value="filler text" text="filler text" binding-path="Version" />
     <ui:TextField picking-mode="Ignore" label="Author" value="filler text" text="filler text" binding-path="Author" />
     <ui:Label text="Settings" style="-unity-font-style: bold; margin-top: 20px; margin-bottom: 4px;" />
-    <uie:ObjectField label="Shader Template" binding-path="ShaderTemplate" />
+    <uie:ObjectField label="Shader Template" binding-path="ShaderTemplate" name="ShaderTemplate" allow-scene-objects="false" />
     <ui:TextField picking-mode="Ignore" label="Shader Path" value="filler text" text="filler text" binding-path="ShaderPath" />
     <ui:TextField label="Custom Editor" binding-path="CustomEditor" />
     <VRLabs.ModularShaderSystem.InspectorList binding-path="TemplateKeywords" show-elements-text="false" />
