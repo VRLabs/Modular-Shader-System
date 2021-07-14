@@ -328,7 +328,7 @@ namespace VRLabs.ModularShaderSystem
         
         private void WriteModuleTemplates(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
         {
-            foreach (var module in _modules.Where(x => x != null && currentSettings.Select(y => y.Name).Contains(x.Enabled.Name)))
+            foreach (var module in _modules.Where(x => x != null && (string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name))))
             {
                 foreach (var template in module.Templates)
                 {
