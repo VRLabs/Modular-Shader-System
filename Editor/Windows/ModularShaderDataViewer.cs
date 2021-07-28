@@ -105,7 +105,7 @@ namespace VRLabs.ModularShaderSystem
         private void GetVariables(List<ShaderFunction> functions, string sink, bool isDefaultSink = false)
         {
             var variables = functions
-                .Where(x => (isDefaultSink && x.VariableSinkKeywords.Count > 0) || x.VariableSinkKeywords.Any(y => y.Equals(sink)))
+                .Where(x => (isDefaultSink && x.VariableSinkKeywords.Count == 0) || x.VariableSinkKeywords.Any(y => y.Equals(sink)))
                 .SelectMany(x => x.UsedVariables)
                 .Distinct()
                 .OrderBy(x => x.Type).ThenBy(x => x.Name).ToList();
