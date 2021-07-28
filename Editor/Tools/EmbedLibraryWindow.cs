@@ -27,6 +27,7 @@ public class EmbedLibraryWindow : EditorWindow
     private TextField _codeSinkField;
     private TextField _variableSinkField;
     private TextField _templateExtension;
+    private TextField _resourceFolderField;
     private TextField _windowPathField;
     private TextField _createPathField;
     private Label _namespaceLabel;
@@ -38,14 +39,15 @@ public class EmbedLibraryWindow : EditorWindow
         VisualElement root = rootVisualElement;
 
         // Import UXML
-        var visualTree =Resources.Load<VisualTreeAsset>("MSSUIElements/EmbedLibraryWindow");
+        var visualTree =Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER +"/MSSUIElements/EmbedLibraryWindow");
         VisualElement labelFromUxml = visualTree.CloneTree();
         root.Add(labelFromUxml);
         
         _namespaceField = root.Q<TextField>("NamespaceField");
-        _codeSinkField = root.Q<TextField>("VariableSinkField");
-        _variableSinkField = root.Q<TextField>("CodeSinkField");
+        _variableSinkField = root.Q<TextField>("VariableSinkField");
+        _codeSinkField = root.Q<TextField>("CodeSinkField");
         _templateExtension = root.Q<TextField>("ExtensionField");
+        _resourceFolderField = root.Q<TextField>("ResourceFolderField");
         _windowPathField = root.Q<TextField>("WindowPathField");
         _createPathField = root.Q<TextField>("CreatePathField");
         _namespaceLabel = root.Q<Label>("NamespacePreview");
@@ -87,16 +89,18 @@ public class EmbedLibraryWindow : EditorWindow
         if (Directory.Exists(path + "/ModularShaderSystem"))
             Directory.Delete(path + "/ModularShaderSystem", true);
             
-        CopyDirectory(PATH, path, _namespaceField.value, _codeSinkField.value, _variableSinkField.value, _templateExtension.value, _windowPathField.value, _createPathField.value, "", false);
+        CopyDirectory(PATH, path, _namespaceField.value, _codeSinkField.value, _variableSinkField.value, _templateExtension.value, _windowPathField.value, _createPathField.value, _resourceFolderField.value, "", false);
 
         AssetDatabase.Refresh();
     }
 
 
-    private static void CopyDirectory(string oldPath, string newPath, string customNamespace, string codeSink, string variableSink, string extension, string windowPath, string createPath, string subpath, bool keepComments)
+    private static void CopyDirectory(string oldPath, string newPath, string customNamespace, string codeSink, string variableSink, string extension, string windowPath, string createPath, string resourceFolder, string subpath, bool keepComments)
         {
             foreach (var file in Directory.GetFiles(oldPath).Where(x => !Path.GetExtension(x).Equals(".meta")))
             {
+                if (Path.GetFileName(file).Contains("EmbedLibraryWindow")) continue;
+                
                 if (Path.GetExtension(file).Equals(".cs") || Path.GetExtension(file).Equals(".uxml"))
                 {
                     var lines = new List<string>();
@@ -129,11 +133,12 @@ public class EmbedLibraryWindow : EditorWindow
 
                     if (Path.GetFileName(file).Equals("MSSConstants.cs"))
                     {
-                        text = text.Replace(MSSConstants.DEFAULT_CODE_SINK, codeSink);
-                        text = text.Replace(MSSConstants.DEFAULT_VARIABLES_SINK, variableSink);
-                        text = text.Replace(MSSConstants.TEMPLATE_EXTENSION, extension);
-                        text = text.Replace(MSSConstants.WINDOW_PATH, windowPath);
-                        text = text.Replace(MSSConstants.CREATE_PATH, createPath);
+                        text = text.Replace($"\"{MSSConstants.DEFAULT_CODE_SINK}\"", $"\"{codeSink}\"");
+                        text = text.Replace($"\"{MSSConstants.DEFAULT_VARIABLES_SINK}\"", $"\"{variableSink}\"");
+                        text = text.Replace($"\"{MSSConstants.TEMPLATE_EXTENSION}\"", $"\"{extension}\"");
+                        text = text.Replace($"\"{MSSConstants.WINDOW_PATH}\"", $"\"{windowPath}\"");
+                        text = text.Replace($"\"{MSSConstants.CREATE_PATH}\"", $"\"{createPath}\"");
+                        text = text.Replace($"\"{MSSConstants.RESOURCES_FOLDER}\"", $"\"{resourceFolder}\"");
                     }
 
                     string finalPath = file.Replace(oldPath, newPath + "/ModularShaderSystem" + subpath);
@@ -146,14 +151,24 @@ public class EmbedLibraryWindow : EditorWindow
                     Directory.CreateDirectory(Path.GetDirectoryName(finalPath) ?? string.Empty);
                     finalPath = finalPath.Substring(finalPath.IndexOf("Assets", StringComparison.Ordinal));
                     AssetDatabase.CopyAsset(file, finalPath);
+
+                    if (Path.GetExtension(finalPath).Equals(".uss"))
+                    {
+                        string text = File.ReadAllText(finalPath);
+                        text = text.Replace($"resource(\"{MSSConstants.RESOURCES_FOLDER}/", $"resource(\"{resourceFolder}/");
+                        File.WriteAllText(finalPath, text);
+                    }
                 }
             }
 
             foreach (string directory in Directory.GetDirectories(oldPath))
             {
                 if (Path.GetFileName(directory).Equals("Tools")) continue;
-                string newSubPath = subpath + directory.Replace(PATH + subpath, "");
-                CopyDirectory(directory, newPath, customNamespace, codeSink, variableSink, extension, windowPath, createPath, newSubPath, keepComments);
+
+                string newSubPath = subpath + "/" + Path.GetFileName(directory);
+                if (Path.GetFileName(directory).Equals(MSSConstants.RESOURCES_FOLDER) && Path.GetFileName(Path.GetDirectoryName(directory)).Equals("Resources"))
+                    newSubPath = subpath + "/" + resourceFolder;
+                CopyDirectory(directory, newPath, customNamespace, codeSink, variableSink, extension, windowPath, createPath, resourceFolder, newSubPath, keepComments);
             }
         }
 }

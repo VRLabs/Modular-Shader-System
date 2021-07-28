@@ -75,15 +75,15 @@
 }
 .inspector-list-up-button
 {
-    background-image: resource("MSSUpIcon");
+    background-image: resource("MSS/MSSUpIcon");
 }
 .inspector-list-down-button
 {
-    background-image: resource("MSSDownIcon");
+    background-image: resource("MSS/MSSDownIcon");
 }
 .inspector-list-remove-button
 {
-    background-image: resource("MSSDeleteIcon");
+    background-image: resource("MSS/MSSDeleteIcon");
 }
 
 .inspector-list-container

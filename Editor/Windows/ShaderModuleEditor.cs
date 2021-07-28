@@ -16,7 +16,7 @@ namespace VRLabs.ModularShaderSystem
             _root = new VisualElement();
 
             // Import UXML
-            var visualTree = Resources.Load<VisualTreeAsset>("MSSUIElements/ShaderModuleEditor");
+            var visualTree = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ShaderModuleEditor");
             VisualElement template = visualTree.CloneTree();
             _root.Add(template);
 

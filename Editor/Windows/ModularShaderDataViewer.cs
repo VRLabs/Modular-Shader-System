@@ -32,9 +32,9 @@ namespace VRLabs.ModularShaderSystem
             VisualElement root = rootVisualElement;
 
             // Import UXML
-            var visualTree = Resources.Load<VisualTreeAsset>("MSSUIElements/ModularShaderDataViewer");
-            _propertyViewUxml = Resources.Load<VisualTreeAsset>("MSSUIElements/PropertyView");
-            _functionViewUxml = Resources.Load<VisualTreeAsset>("MSSUIElements/FunctionView");
+            var visualTree = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ModularShaderDataViewer");
+            _propertyViewUxml = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/PropertyView");
+            _functionViewUxml = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/FunctionView");
             VisualElement uxmlBase = visualTree.CloneTree();
             root.Add(uxmlBase);
             
@@ -49,30 +49,23 @@ namespace VRLabs.ModularShaderSystem
             _modularShaderField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>
             {
                 if (_modularShaderField.value != null)
-                {
-                    // 4
                     _modularShader = (ModularShader)_modularShaderField.value;
-                    //_modularShaderSerialized = new SerializedObject(_modularShader);
-                }
                 else
-                {
                     _modularShader = null;
-                }
 
                 PopulateLists();
             
             });
             
             // Add stylesheet
-            var styleSheet = Resources.Load<StyleSheet>("MSSUIElements/ModularShaderDataViewer");
+            var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ModularShaderDataViewerStyle");
             root.styleSheets.Add(styleSheet);
         }
 
         private void PopulateLists()
         {
-            // Update Properties
             _propertiesFoldout.Clear();
-            var properties = ShaderGenerator.FindAllProperties(_modularShader);
+            var properties = ShaderGenerator.FindAllProperties(_modularShader).OrderBy(x => x.Type).ThenBy(x => x.Name);;
             foreach (Property property in properties)
             {
                 VisualElement p = _propertyViewUxml.CloneTree();
@@ -85,16 +78,13 @@ namespace VRLabs.ModularShaderSystem
                 
             }
             
-            // Fetch all functions
             var functions = ShaderGenerator.FindAllFunctions(_modularShader);
             
-            // Update variables
             _variablesFoldout.Clear();
             GetVariables(functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
+            foreach (var sink in functions.SelectMany(x => x.VariableSinkKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
                 GetVariables(functions, sink);
             
-            // Update Functions
             _functionsFoldout.Clear();
             foreach (var functionsGroup in functions.Where(x => x.AppendAfter.StartsWith("#K#")).GroupBy(x => x.AppendAfter))
             {
@@ -115,10 +105,10 @@ namespace VRLabs.ModularShaderSystem
         private void GetVariables(List<ShaderFunction> functions, string sink, bool isDefaultSink = false)
         {
             var variables = functions
-                .Where(x => x.VariableSinkKeyword.Equals(sink) || (isDefaultSink && string.IsNullOrWhiteSpace(x.VariableSinkKeyword)))
+                .Where(x => (isDefaultSink && x.VariableSinkKeywords.Count > 0) || x.VariableSinkKeywords.Any(y => y.Equals(sink)))
                 .SelectMany(x => x.UsedVariables)
                 .Distinct()
-                .OrderBy(x => x.Type).ToList();
+                .OrderBy(x => x.Type).ThenBy(x => x.Name).ToList();
             if (variables.Count == 0) return;
             var foldout = new Foldout{  text = $"#K#{sink}" };
             

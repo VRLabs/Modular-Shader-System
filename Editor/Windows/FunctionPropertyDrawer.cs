@@ -15,7 +15,7 @@ namespace VRLabs.ModularShaderSystem
             _root = new VisualElement();
 
             // Import UXML
-            var visualTree =  Resources.Load<VisualTreeAsset>("MSSUIElements/FunctionPropertyDrawer");
+            var visualTree =  Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/FunctionPropertyDrawer");
             VisualElement template = visualTree.CloneTree();
             var foldout = new Foldout();
             foldout.text = property.displayName;

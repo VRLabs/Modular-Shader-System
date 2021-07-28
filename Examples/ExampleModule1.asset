@@ -25,7 +25,7 @@ MonoBehaviour:
     Attributes: 
     EnableValue: 0
   Properties:
-  - Name: 
+  - Name: aaa
     DisplayName: 
     Type: 
     DefaultValue: 
@@ -37,9 +37,10 @@ MonoBehaviour:
     Attributes: 
   IncompatibleWith: []
   Templates:
-  - Keyword: 
-    Template: {fileID: 0}
-    IsCGOnly: 0
+  - Template: {fileID: 1413292532103889072, guid: 55a288a5a8d45a74e8bf3f0ee396c57c,
+      type: 3}
+    Keywords: []
+    NeedsVariant: 0
     TemplateKeywords: []
   Functions:
   - Name: DoSomething
@@ -50,5 +51,5 @@ MonoBehaviour:
     UsedVariables:
     - Name: availableVariable
       Type: float
-    VariableSinkKeyword: 
-    CodeSinkKeyword: 
+    VariableSinkKeywords: []
+    CodeSinkKeywords: []

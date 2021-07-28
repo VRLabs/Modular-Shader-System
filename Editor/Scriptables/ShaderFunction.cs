@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace VRLabs.ModularShaderSystem
 {
@@ -12,7 +13,7 @@ namespace VRLabs.ModularShaderSystem
         public short Priority = 100;
         public TemplateAsset ShaderFunctionCode;
         public List<Variable> UsedVariables;
-        public string VariableSinkKeyword;
-        public string CodeSinkKeyword;
+        [FormerlySerializedAs("VariableSinkKeyword")] public List<string> VariableSinkKeywords;
+        [FormerlySerializedAs("CodeSinkKeyword")] public List<string> CodeSinkKeywords;
     }
 }

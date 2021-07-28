@@ -12,8 +12,8 @@ namespace VRLabs.ModularShaderSystem
     {
         private ModularShader _shader;
         private List<ShaderModule> _modules;
-        private List<EnableProperty> _nonCgPropertyEnablers;
-        private List<string> _nonCgPropertyNames;
+        private List<EnableProperty> _variantPropertyEnablers;
+        private List<string> _variantEnablerNames;
         private List<Property> _properties;
 
         public void GenerateMainShader(string path, ModularShader shader, bool hideVariants = false)
@@ -21,17 +21,17 @@ namespace VRLabs.ModularShaderSystem
             _shader = shader;
             var shaderFile = new StringBuilder();
             _modules = FindAllModules(_shader);
-            _nonCgPropertyEnablers = _modules
-                .Where(x => x != null && x.Templates?.Count(y => !y.IsCGOnly) > 0 && (x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name)))
+            _variantPropertyEnablers = _modules
+                .Where(x => x != null && x.Templates?.Count(y => y.NeedsVariant) > 0 && (x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name)))
                 .Select(x => x.Enabled).ToList();
-            _nonCgPropertyNames = _nonCgPropertyEnablers.Select(x => x.Name).Distinct().OrderBy(x => x).ToList();
+            _variantEnablerNames = _variantPropertyEnablers.Select(x => x.Name).Distinct().OrderBy(x => x).ToList();
             _properties = FindAllProperties(_shader);
 
             WriteProperties(shaderFile);
             
             int currentlyIteratedObject = 0;
 
-            EnablePropertyValue[] currentSettings = new EnablePropertyValue[_nonCgPropertyNames.Count];
+            EnablePropertyValue[] currentSettings = new EnablePropertyValue[_variantEnablerNames.Count];
 
             var variants = GenerateVariantsRecursive(shaderFile, currentlyIteratedObject, currentSettings, hideVariants);
 
@@ -45,8 +45,8 @@ namespace VRLabs.ModularShaderSystem
             
             _shader = null;
             _modules = null;
-            _nonCgPropertyEnablers = null;
-            _nonCgPropertyNames = null;
+            _variantPropertyEnablers = null;
+            _variantEnablerNames = null;
             _properties = null;
         }
 
@@ -93,7 +93,7 @@ namespace VRLabs.ModularShaderSystem
             var files = new List<(string, StringBuilder)>();
 
             //In case this is the end of the tree call it will generate the finalized variant
-            if (currentlyIteratedObject >= _nonCgPropertyNames.Count)
+            if (currentlyIteratedObject >= _variantEnablerNames.Count)
             {
                 var variantShader = new StringBuilder(shaderFile.ToString());
                 files.Add(GenerateShaderVariant(variantShader, currentSettings, isVariantHidden));
@@ -101,7 +101,7 @@ namespace VRLabs.ModularShaderSystem
             }
 
             // Searches all possible values for the current property enabler
-            List<int> possibleValues = _nonCgPropertyEnablers.Where(x => x.Name.Equals(_nonCgPropertyNames[currentlyIteratedObject]))
+            List<int> possibleValues = _variantPropertyEnablers.Where(x => x.Name.Equals(_variantEnablerNames[currentlyIteratedObject]))
                 .Select(x => x.EnableValue)
                 .Append(0)
                 .Distinct()
@@ -112,9 +112,9 @@ namespace VRLabs.ModularShaderSystem
             // Then aggregates all the resulting variants from this branch of the tree call, to then return it to its root
             foreach (int value in possibleValues)
             {
-                var newSettings = new EnablePropertyValue[_nonCgPropertyNames.Count];
-                Array.Copy(currentSettings, newSettings, _nonCgPropertyNames.Count);
-                newSettings[currentlyIteratedObject] = new EnablePropertyValue { Name =_nonCgPropertyNames[currentlyIteratedObject], Value = value };
+                var newSettings = new EnablePropertyValue[_variantEnablerNames.Count];
+                Array.Copy(currentSettings, newSettings, _variantEnablerNames.Count);
+                newSettings[currentlyIteratedObject] = new EnablePropertyValue { Name =_variantEnablerNames[currentlyIteratedObject], Value = value };
                 List<(string, StringBuilder)> returnFiles = GenerateVariantsRecursive(shaderFile, currentlyIteratedObject + 1, newSettings, isVariantHidden);
 
                 files.AddRange(returnFiles);
@@ -161,8 +161,8 @@ namespace VRLabs.ModularShaderSystem
 
             
             MatchCollection m = Regex.Matches(shaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
-            foreach (Match match in m)
-                shaderFile.Replace(match.Value, "");
+            for(int i = m.Count - 1; i>=0; i--)
+                shaderFile.Replace(m[i].Value, "");
 
             shaderFile.Replace("\r\n", "\n");
             return (suffix, shaderFile);
@@ -171,7 +171,7 @@ namespace VRLabs.ModularShaderSystem
         private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
             WriteVariablesToSink(shaderFile, functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.Select(x => x.VariableSinkKeyword).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
+            foreach (var sink in functions.SelectMany(x => x.VariableSinkKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
                 WriteVariablesToSink(shaderFile, functions, sink);
         }
 
@@ -179,7 +179,7 @@ namespace VRLabs.ModularShaderSystem
         {
             var variablesDeclaration = new StringBuilder();
             foreach (var variable in functions
-                .Where(x => x.VariableSinkKeyword.Equals(sink) || (isDefaultSink && string.IsNullOrWhiteSpace(x.VariableSinkKeyword)))
+                .Where(x => x.VariableSinkKeywords.Any(y =>y.Equals(sink)) || (isDefaultSink && x.VariableSinkKeywords.Count == 0))
                 .SelectMany(x => x.UsedVariables)
                 .Distinct()
                 .OrderBy(x => x.Type))
@@ -190,8 +190,9 @@ namespace VRLabs.ModularShaderSystem
                     variablesDeclaration.AppendLine($"{variable.Type} {variable.Name};");
             }
 
-            variablesDeclaration.AppendLine("#K#" + sink);
-            shaderFile.Replace("#K#" + sink, variablesDeclaration.ToString());
+            MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{sink}\s", RegexOptions.Multiline);
+            for(int i = m.Count - 1; i>=0; i--)
+                shaderFile.Insert(m[i].Index, variablesDeclaration.ToString());
         }
 
         private void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
@@ -205,10 +206,12 @@ namespace VRLabs.ModularShaderSystem
                 StringBuilder functionCallSequence = new StringBuilder();
                 int tabs = 2;
                 tabs = WriteFunctionCallSequence(functions, function, module, functionCode, functionCallSequence, tabs);
-                string codeSink = string.IsNullOrWhiteSpace(function.CodeSinkKeyword) ? MSSConstants.DEFAULT_CODE_SINK : function.CodeSinkKeyword;
-
-                functionCode.AppendLine("#K#" + codeSink);
-                shaderFile.Replace("#K#" + codeSink, functionCode.ToString());
+                foreach(var codeSink in function.CodeSinkKeywords.Count == 0 ? new string[]{ MSSConstants.DEFAULT_CODE_SINK } : function.CodeSinkKeywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                {
+                    MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{codeSink}\s", RegexOptions.Multiline);
+                    for(int i = m.Count - 1; i>=0; i--)
+                        shaderFile.Insert(m[i].Index, functionCode.ToString());
+                }
 
                 functionCallSequence.AppendLine(function.AppendAfter);
                 shaderFile.Replace(function.AppendAfter, functionCallSequence.ToString());
@@ -249,6 +252,7 @@ namespace VRLabs.ModularShaderSystem
             shaderFile.AppendLine(_shader.ShaderTemplate.Template);
 
             WriteModuleTemplates(shaderFile, currentSettings);
+            shaderFile.AppendLine("}");
         }
 
         public static List<ShaderModule> FindAllModules(ModularShader shader)
@@ -328,18 +332,35 @@ namespace VRLabs.ModularShaderSystem
         
         private void WriteModuleTemplates(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
         {
-            foreach (var module in _modules.Where(x => x != null && (string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name))))
+            IEnumerable<EnablePropertyValue> enablePropertyValues = currentSettings as EnablePropertyValue[] ?? currentSettings.ToArray();
+            foreach (var module in _modules.Where(x => x != null /*&& (string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name))*/))
             {
                 foreach (var template in module.Templates)
                 {
+                    bool hasEnabler = !string.IsNullOrWhiteSpace(module.Enabled.Name);
+                    bool isEnablerVariant = _variantEnablerNames.Contains(module.Enabled.Name);
                     var tmp = new StringBuilder();
-                    tmp.AppendLine(template.Template.ToString());
-                    tmp.AppendLine("#K#" + template.Keyword);
-                    shaderFile.Replace("#K#" + template.Keyword, tmp.ToString());
+                    if (!hasEnabler || (isEnablerVariant && enablePropertyValues.FirstOrDefault(x => x.Name.Equals(module.Enabled.Name)).Value == module.Enabled.EnableValue))
+                    {
+                        tmp.AppendLine(template.Template.ToString());
+                    }
+                    else if (!isEnablerVariant)
+                    {
+                        tmp.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
+                        tmp.AppendLine("{");
+                        tmp.AppendLine(template.Template.ToString());
+                        tmp.AppendLine("}");
+                    }
+
+                    foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_SINK } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                    {
+                        MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
+                        for(int i = m.Count - 1; i>=0; i--)
+                            shaderFile.Insert(m[i].Index, tmp.ToString());
+                    }
                 }
             }
 
-            shaderFile.AppendLine("}");
         }
 
         private void WriteProperties(StringBuilder shaderFile)
@@ -349,6 +370,11 @@ namespace VRLabs.ModularShaderSystem
 
             foreach (var prop in _properties)
             {
+                if (string.IsNullOrWhiteSpace(prop.Type))
+                {
+                    prop.Type = "Float";
+                    prop.DefaultValue = "0.0";
+                }
                 shaderFile.AppendLine($"{prop.Attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
             }
             shaderFile.AppendLine("}");

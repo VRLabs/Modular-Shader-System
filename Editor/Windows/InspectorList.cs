@@ -26,7 +26,7 @@ namespace VRLabs.ModularShaderSystem
             Add(_listContainer);
             _listContainer.Add(_addButton);
             _listContainer.RegisterValueChangedCallback((e) => _array.isExpanded = e.newValue);
-            var styleSheet = Resources.Load<StyleSheet>("MSSUIElements/InspectorList");
+            var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/InspectorList");
             styleSheets.Add(styleSheet);
         }
      

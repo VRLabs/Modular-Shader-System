@@ -7,5 +7,6 @@
         public const string TEMPLATE_EXTENSION = "stemplate";
         public const string WINDOW_PATH = "VRLabs/Modular Shader";
         public const string CREATE_PATH = "VRLabs/Modular Shader";
+        public const string RESOURCES_FOLDER = "MSS";
     }
 }
