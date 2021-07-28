@@ -357,10 +357,16 @@ namespace VRLabs.ModularShaderSystem
                         MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
                         for(int i = m.Count - 1; i>=0; i--)
                             shaderFile.Insert(m[i].Index, tmp.ToString());
+                        
+                        m = Regex.Matches(shaderFile.ToString(), $@"#KI#{keyword}\s", RegexOptions.Multiline);
+                        for(int i = m.Count - 1; i>=0; i--)
+                            shaderFile.Insert(m[i].Index, tmp.ToString());
                     }
                 }
+                MatchCollection mki = Regex.Matches(shaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
+                for(int i = mki.Count - 1; i>=0; i--)
+                    shaderFile.Replace(mki[i].Value, "");
             }
-
         }
 
         private void WriteProperties(StringBuilder shaderFile)
