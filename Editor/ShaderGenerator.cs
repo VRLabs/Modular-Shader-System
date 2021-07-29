@@ -381,7 +381,9 @@ namespace VRLabs.ModularShaderSystem
                     prop.Type = "Float";
                     prop.DefaultValue = "0.0";
                 }
-                shaderFile.AppendLine($"{prop.Attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
+
+                string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
+                shaderFile.AppendLine($"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
             }
             shaderFile.AppendLine("}");
         }

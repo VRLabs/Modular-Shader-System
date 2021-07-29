@@ -28,22 +28,22 @@ MonoBehaviour:
     DisplayName: SrcBlend
     Type: Float
     DefaultValue: 0
-    Attributes: 
+    Attributes: []
   - Name: _DstBlend
     DisplayName: DstBlend
     Type: Float
     DefaultValue: 0
-    Attributes: 
+    Attributes: []
   - Name: _ZWrite
     DisplayName: ZWrite
     Type: Float
     DefaultValue: 0
-    Attributes: 
+    Attributes: []
   - Name: _Cull
     DisplayName: Cull
     Type: Float
     DefaultValue: 0
-    Attributes: 
+    Attributes: []
   BaseModules:
   - {fileID: 11400000, guid: ea60fcdab9fca4d43874eae997878848, type: 2}
   - {fileID: 11400000, guid: 5a456ab203c06e341bdbdf8d48c8c643, type: 2}

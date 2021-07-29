@@ -25,7 +25,7 @@ namespace VRLabs.ModularShaderSystem
         public string DisplayName;
         public string Type; //Check if the content is valid
         public string DefaultValue; //Check if the content is right for the type
-        public string Attributes;
+        public List<string> Attributes;
 
         public Variable ToVariable()
         {

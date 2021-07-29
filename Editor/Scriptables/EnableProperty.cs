@@ -22,7 +22,7 @@ namespace VRLabs.ModularShaderSystem
             DisplayName = displayName;
             Type = "Float";
             DefaultValue = "0.1";
-            Attributes = "";
+            Attributes = new List<string>();
 
             EnableValue = enableValue;
         }
