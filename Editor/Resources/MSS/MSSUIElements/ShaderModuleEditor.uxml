@@ -4,6 +4,9 @@
     <ui:TextField picking-mode="Ignore" label="Name" binding-path="Name" />
     <ui:TextField picking-mode="Ignore" label="Author" binding-path="Author" />
     <ui:TextField picking-mode="Ignore" label="Version" binding-path="Version" />
+    <VRLabs.ModularShaderSystem.InspectorList binding-path="ModuleDependencies" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.InspectorList binding-path="IncompatibleWith" show-elements-text="false" />
+    
     <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
     <uie:PropertyField binding-path="Enabled" label="Enable Property" focusable="true" />
     <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Properties" />

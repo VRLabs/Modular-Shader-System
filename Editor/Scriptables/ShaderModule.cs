@@ -13,6 +13,7 @@ namespace VRLabs.ModularShaderSystem
         public List<string> RequiredIncludes;
         public EnableProperty Enabled;
         public List<Property> Properties;
+        public List<string> ModuleDependencies;
         public List<string> IncompatibleWith;
         public List<ModuleTemplate> Templates;
         public List<ShaderFunction> Functions;

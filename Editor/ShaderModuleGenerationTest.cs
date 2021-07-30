@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
@@ -14,6 +15,7 @@ namespace VRLabs.ModularShaderSystem
         }
 
         private ModularShader shader;
+        private string message = "";
         
         private void OnGUI()
         {
@@ -22,8 +24,30 @@ namespace VRLabs.ModularShaderSystem
             if (GUILayout.Button("Generate") && shader != null)
             {
                 var g = new ShaderGenerator();
-                g.GenerateMainShader("Assets", shader);
+
+                var response = ShaderGenerator.VerifyShaderModules(shader);
+                
+                switch(response)
+                {
+                    case VerificationResponse.NoIssues:
+                        g.GenerateMainShader("Assets", shader);
+                        message = "";
+                        break;
+                    case VerificationResponse.DuplicateModule:
+                        message = "Error: Duplicate modules found";
+                        break;
+                    case VerificationResponse.MissingDependencies:
+                        message = "Error: Missing dependency modules";
+                        break;
+                    case VerificationResponse.IncompatibleModules:
+                        message = "Error: Some modules are incompatible with each other";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
+            
+            EditorGUILayout.LabelField(message);
             
         }
     }

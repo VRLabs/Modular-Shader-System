@@ -8,6 +8,13 @@ using UnityEditor;
 
 namespace VRLabs.ModularShaderSystem
 {
+    public enum VerificationResponse
+    {
+        NoIssues,
+        DuplicateModule,
+        MissingDependencies,
+        IncompatibleModules
+    }
     public class ShaderGenerator
     {
         private ModularShader _shader;
@@ -86,6 +93,29 @@ namespace VRLabs.ModularShaderSystem
 
             _modules = null;
             _properties = null;
+        }
+
+        public static VerificationResponse VerifyShaderModules(ModularShader shader)
+        {
+            var modules = FindAllModules(shader);
+            var incompatibilities = modules.SelectMany(x => x.IncompatibleWith).Distinct().ToList();
+            var dependencies = modules.SelectMany(x => x.ModuleDependencies).Distinct().ToList();
+
+            for (int i = 0; i < modules.Count; i++)
+            {
+                if (incompatibilities.Any(x => x.Equals(modules[i].Id))) return VerificationResponse.IncompatibleModules;
+
+                if (dependencies.Contains(modules[i].Id))
+                    dependencies.Remove(modules[i].Id);
+                
+                for (int j = i + 1; j < modules.Count; j++)
+                {
+                    if (modules[i].Id.Equals(modules[j].Id))
+                        return VerificationResponse.DuplicateModule;
+                }
+            }
+
+            return dependencies.Count > 0 ? VerificationResponse.MissingDependencies : VerificationResponse.NoIssues;
         }
 
         private List<(string, StringBuilder)> GenerateVariantsRecursive(StringBuilder shaderFile, int currentlyIteratedObject, EnablePropertyValue[] currentSettings, bool isVariantHidden)
