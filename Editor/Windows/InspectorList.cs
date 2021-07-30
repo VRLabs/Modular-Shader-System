@@ -14,6 +14,8 @@ namespace VRLabs.ModularShaderSystem
         SerializedProperty _array;
         private bool _showElementsButtons;
 
+        private bool _hasFoldingBeenForced;
+
         public InspectorList()
         {
             _listContainer = new Foldout();
@@ -24,7 +26,8 @@ namespace VRLabs.ModularShaderSystem
             _addButton.text = "Add";
             _addButton.AddToClassList("inspector-list-add-button");
             Add(_listContainer);
-            _listContainer.Add(_addButton);
+            if(enabledSelf)
+                _listContainer.Add(_addButton);
             _listContainer.RegisterValueChangedCallback((e) => _array.isExpanded = e.newValue);
             var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/InspectorList");
             styleSheets.Add(styleSheet);
@@ -38,7 +41,11 @@ namespace VRLabs.ModularShaderSystem
             {
                 var obj = type.GetProperty("bindProperty")?.GetValue(evt) as SerializedProperty;
                 _array = obj;
-                if (obj != null) _listContainer.value = obj.isExpanded;
+                if (obj != null)
+                {
+                    if (_hasFoldingBeenForced) obj.isExpanded = _listContainer.value;
+                    else _listContainer.value = obj.isExpanded;
+                }
                 // Updating it twice here doesn't cause an issue.
                 UpdateList();
             }
@@ -69,7 +76,8 @@ namespace VRLabs.ModularShaderSystem
                 });
                 _listContainer.Add(item);
             }
-            _listContainer.Add(_addButton);
+            if(enabledSelf)
+                _listContainer.Add(_addButton);
         }
      
         // Remove an item and refresh the list
@@ -125,6 +133,13 @@ namespace VRLabs.ModularShaderSystem
      
             UpdateList();
         }
+
+        public void SetFoldingState(bool open)
+        {
+            _listContainer.value = open;
+            if (_array != null) _array.isExpanded = open;
+            else _hasFoldingBeenForced = true;
+        }
      
         public new class UxmlFactory : UxmlFactory<InspectorList, UxmlTraits> { }
      
@@ -142,7 +157,9 @@ namespace VRLabs.ModularShaderSystem
         }
      
     }
-     
+    
+    
+    
     public class InspectorListItem : VisualElement {
         public Button removeButton;
         public Button upButton;
