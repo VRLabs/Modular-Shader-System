@@ -98,7 +98,7 @@
     background-color: rgba(255,0,0,0.5);
 }
 
-.inspector-list-container
+.inspector-list-item > Label
 {
-    
+    white-space: normal;
 }

@@ -93,7 +93,7 @@
     background-image: resource("MSS/MSSDeleteIcon");
 }
 
-.inspector-list-container
+.inspector-list-item > Label
 {
-    
+    white-space: normal;
 }
