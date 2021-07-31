@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,16 +9,17 @@ namespace VRLabs.ModularShaderSystem
 {
 
     // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
-    public class InspectorList : BindableElement
+    public class ModuleInspectorList : BindableElement
     {
         Foldout _listContainer;
         Button _addButton;
         SerializedProperty _array;
         private bool _showElementsButtons;
+        private List<string> _loadedModules;
 
         private bool _hasFoldingBeenForced;
 
-        public InspectorList()
+        public ModuleInspectorList()
         {
             _listContainer = new Foldout();
             _listContainer.text = "Unbound List";
@@ -29,7 +32,7 @@ namespace VRLabs.ModularShaderSystem
             if(enabledSelf)
                 _listContainer.Add(_addButton);
             _listContainer.RegisterValueChangedCallback((e) => _array.isExpanded = e.newValue);
-            var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/InspectorList");
+            var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ModuleInspectorList");
             styleSheets.Add(styleSheet);
         }
      
@@ -60,28 +63,102 @@ namespace VRLabs.ModularShaderSystem
             if (_array == null)
                 return;
             _listContainer.text = _array.displayName;
+
+            _loadedModules = new List<string>();
+            for (int i = 0; i < _array.arraySize; i++)
+            {
+                if(_array.GetArrayElementAtIndex(i).objectReferenceValue != null)
+                    _loadedModules.Add(((ShaderModule)_array.GetArrayElementAtIndex(i).objectReferenceValue)?.Id);
+            }
+                
+            
+
             for (int i = 0; i < _array.arraySize; i++)
             {
                 int index = i;
-                var element = new PropertyField(_array.GetArrayElementAtIndex(index));
-                element.Bind(_array.GetArrayElementAtIndex(index).serializedObject);
-                var item = new InspectorListItem(element, _array, index, _showElementsButtons);
-                item.removeButton.RegisterCallback<PointerUpEvent>((evt) => {
+
+                var moduleItem = new VisualElement();
+                var objectField = new ObjectField();//_array.GetArrayElementAtIndex(index));
+
+                SerializedProperty propertyValue = _array.GetArrayElementAtIndex(index);
+                
+                objectField.objectType = typeof(ShaderModule);
+                objectField.bindingPath = propertyValue.propertyPath;
+                objectField.Bind(propertyValue.serializedObject);
+                var infoLabel = new Label();
+                moduleItem.Add(objectField);
+                moduleItem.Add(infoLabel);
+
+                objectField.RegisterCallback<ChangeEvent<Object>>(x =>
+                {
+                    var newValue = (ShaderModule)x.newValue;
+                    var oldValue = (ShaderModule)x.previousValue;
+
+                    _loadedModules.Remove(oldValue.Id);
+                    _loadedModules.Add(newValue.Id);
+
+                    for (int j = 0; j < _array.arraySize; j++)
+                    {
+                        var field = ((ObjectField)x.target).parent.parent.parent.ElementAt(j).ElementAt(0);
+                        Label label = field.ElementAt(1) as Label; 
+                        if(index == j)
+                            CheckModuleValidity(newValue, label, field);
+                        else
+                            CheckModuleValidity((ShaderModule)_array.GetArrayElementAtIndex(j).objectReferenceValue, label, field);
+                    }
+                });
+                    
+                var item = new InspectorListItem(moduleItem, _array, index, _showElementsButtons);
+                item.removeButton.RegisterCallback<PointerUpEvent>((evt) => 
+                {
                     RemoveItem(index);
                 });
                 item.upButton.RegisterCallback<PointerUpEvent>((evt) =>
                 {
                     MoveUpItem(index);
                 });
-                item.downButton.RegisterCallback<PointerUpEvent>((evt) => {
+                item.downButton.RegisterCallback<PointerUpEvent>((evt) => 
+                {
                     MoveDownItem(index);
                 });
                 _listContainer.Add(item);
+                
+                CheckModuleValidity((ShaderModule)propertyValue.objectReferenceValue, infoLabel, moduleItem);
             }
             if(enabledSelf)
                 _listContainer.Add(_addButton);
         }
-     
+
+        private void CheckModuleValidity(ShaderModule newValue, Label infoLabel, VisualElement moduleItem)
+        {
+            List<string> problems = new List<string>();
+            var moduleId = newValue.Id;
+            if (_loadedModules.Count(y => y.Equals(moduleId)) > 1)
+                problems.Add("The module is duplicate");
+
+            List<string> missingDependencies = newValue.ModuleDependencies.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) == 0).ToList();
+            List<string> incompatibilities = newValue.IncompatibleWith.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) > 0).ToList();
+
+            if (missingDependencies.Count > 0)
+                problems.Add("Missing dependencies: " + string.Join(", ", missingDependencies));
+
+            if (incompatibilities.Count > 0)
+                problems.Add("These incompatible modules are installed: " + string.Join(", ", incompatibilities));
+
+            infoLabel.text = string.Join("\n",problems);
+
+            if (!string.IsNullOrWhiteSpace(infoLabel.text))
+            {
+                moduleItem.AddToClassList("error-background");
+                infoLabel.visible = true;
+            }
+            else
+            {
+                moduleItem.RemoveFromClassList("error-background");
+                infoLabel.visible = false;
+            }
+        }
+
         // Remove an item and refresh the list
         public void RemoveItem(int index)
         {
@@ -89,6 +166,9 @@ namespace VRLabs.ModularShaderSystem
             {
                 if(index < _array.arraySize - 1)
                     _array.GetArrayElementAtIndex(index).isExpanded = _array.GetArrayElementAtIndex(index + 1).isExpanded;
+                var elementProperty = _array.GetArrayElementAtIndex(index);
+                if (elementProperty.objectReferenceValue != null)
+                    elementProperty.objectReferenceValue = null;
                 _array.DeleteArrayElementAtIndex(index);
                 _array.serializedObject.ApplyModifiedProperties();
             }
@@ -143,7 +223,7 @@ namespace VRLabs.ModularShaderSystem
             else _hasFoldingBeenForced = true;
         }
      
-        public new class UxmlFactory : UxmlFactory<InspectorList, UxmlTraits> { }
+        public new class UxmlFactory : UxmlFactory<ModuleInspectorList, UxmlTraits> { }
      
         public new class UxmlTraits : BindableElement.UxmlTraits
         {
@@ -154,71 +234,8 @@ namespace VRLabs.ModularShaderSystem
             {
                 base.Init(ve, bag, cc);
 
-                if (ve is InspectorList ate) ate._showElementsButtons = showElements.GetValueFromBag(bag, cc);
+                if (ve is ModuleInspectorList ate) ate._showElementsButtons = showElements.GetValueFromBag(bag, cc);
             }
-        }
-     
-    }
-    
-    
-    
-    public class InspectorListItem : VisualElement {
-        public Button removeButton;
-        public Button upButton;
-        public Button downButton;
-        public InspectorListItem(VisualElement element, SerializedProperty array, int index, bool showButtonsText)
-        {
-            AddToClassList("inspector-list-item-container");
-            
-            VisualElement buttonsArea = new VisualElement();
-
-            this.RegisterCallback<UnityEngine.UIElements.GeometryChangedEvent>(e =>
-            {
-                buttonsArea.ClearClassList();
-                if (e.newRect.height > 60)
-                {
-                    buttonsArea.AddToClassList("inspector-list-buttons-container-vertical");
-                    buttonsArea.Add(removeButton);
-                    buttonsArea.Add(upButton);
-                    buttonsArea.Add(downButton);
-                }
-                else
-                {
-                    buttonsArea.AddToClassList("inspector-list-buttons-container-horizontal");
-                    buttonsArea.Add(upButton);
-                    buttonsArea.Add(downButton);
-                    buttonsArea.Add(removeButton);
-                }
-            });
-            
-            upButton = new Button();
-            upButton.name = "UpInspectorListItem";
-            upButton.AddToClassList("inspector-list-up-button");
-            if (index == 0)
-                upButton.SetEnabled(false);
-            downButton = new Button();
-            downButton.name = "DownInspectorListItem";
-            downButton.AddToClassList("inspector-list-down-button");
-            if (index >= array.arraySize - 1)
-                downButton.SetEnabled(false);
-            removeButton = new Button();
-            removeButton.name = "RemoveInspectorListItem";
-            removeButton.AddToClassList("inspector-list-remove-button");
-
-            if (showButtonsText)
-            {
-                upButton.text = "up";
-                downButton.text = "down";
-                removeButton.text = "-";
-            }
-            
-            var property = array.GetArrayElementAtIndex(index);
-            element.AddToClassList("inspector-list-item");
-            
-            Add(element);
-            Add(buttonsArea);
-           
-            
         }
     }
 }

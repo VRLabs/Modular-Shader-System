@@ -10,5 +10,5 @@
     <ui:TextField label="Custom Editor" binding-path="CustomEditor" />
     <VRLabs.ModularShaderSystem.InspectorList binding-path="TemplateKeywords" show-elements-text="false" />
     <VRLabs.ModularShaderSystem.InspectorList binding-path="Properties" show-elements-text="false" />
-    <VRLabs.ModularShaderSystem.InspectorList name="BaseModulesField" binding-path="BaseModules" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.ModuleInspectorList name="BaseModulesField" binding-path="BaseModules" show-elements-text="false" />
 </ui:UXML>

@@ -20,7 +20,7 @@ namespace VRLabs.ModularShaderSystem
             //templateKeywordList.
             _root.Add(template);
             
-            var baseModulesField = _root.Q<InspectorList>("BaseModulesField");
+            var baseModulesField = _root.Q<ModuleInspectorList>("BaseModulesField");
             bool areModulesEditable = !serializedObject.FindProperty("LockBaseModules").boolValue;
             if(!areModulesEditable)
                 baseModulesField.SetFoldingState(true);
