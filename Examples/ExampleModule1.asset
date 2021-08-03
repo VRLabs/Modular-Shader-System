@@ -22,19 +22,20 @@ MonoBehaviour:
     DisplayName: 
     Type: 
     DefaultValue: 
-    Attributes: 
+    Attributes: []
     EnableValue: 0
   Properties:
   - Name: aaa
     DisplayName: 
     Type: 
     DefaultValue: 
-    Attributes: 
+    Attributes: []
   - Name: 
     DisplayName: 
     Type: 
     DefaultValue: 
-    Attributes: 
+    Attributes: []
+  ModuleDependencies: []
   IncompatibleWith: []
   Templates:
   - Template: {fileID: 1413292532103889072, guid: 55a288a5a8d45a74e8bf3f0ee396c57c,

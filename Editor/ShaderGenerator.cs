@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 using UnityEditor;
 
 namespace VRLabs.ModularShaderSystem
@@ -324,18 +325,18 @@ namespace VRLabs.ModularShaderSystem
             List<Property> properties = new List<Property>();
             if (shader == null) return properties;
 
-            properties.AddRange(shader.Properties);
+            properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
 
             foreach (var module in shader.BaseModules.Where(x => x != null))
             {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
                 if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
                     properties.Add(module.Enabled);
             }
 
             foreach (var module in shader.AdditionalModules.Where(x => x != null))
             {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
                 if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
                     properties.Add(module.Enabled);
             }
@@ -406,14 +407,14 @@ namespace VRLabs.ModularShaderSystem
 
             foreach (var prop in _properties)
             {
-                if (string.IsNullOrWhiteSpace(prop.Type))
+                if (string.IsNullOrWhiteSpace(prop.Type) && !string.IsNullOrWhiteSpace(prop.Name))
                 {
                     prop.Type = "Float";
                     prop.DefaultValue = "0.0";
                 }
 
                 string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
-                shaderFile.AppendLine($"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
+                shaderFile.AppendLine(string.IsNullOrWhiteSpace(prop.Name) ? attributes : $"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
             }
             shaderFile.AppendLine("}");
         }
