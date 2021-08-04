@@ -325,18 +325,18 @@ namespace VRLabs.ModularShaderSystem
             List<Property> properties = new List<Property>();
             if (shader == null) return properties;
 
-            properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
+            properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
 
             foreach (var module in shader.BaseModules.Where(x => x != null))
             {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
                 if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
                     properties.Add(module.Enabled);
             }
 
             foreach (var module in shader.AdditionalModules.Where(x => x != null))
             {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Attributes.Count == 0));
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
                 if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
                     properties.Add(module.Enabled);
             }
