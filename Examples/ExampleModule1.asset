@@ -27,14 +27,15 @@ MonoBehaviour:
   Properties:
   - Name: aaa
     DisplayName: 
-    Type: 
-    DefaultValue: 
+    Type: Float
+    DefaultValue: 0.0
     Attributes: []
   - Name: 
     DisplayName: 
     Type: 
     DefaultValue: 
-    Attributes: []
+    Attributes:
+    - Header("hi")
   ModuleDependencies: []
   IncompatibleWith: []
   Templates:

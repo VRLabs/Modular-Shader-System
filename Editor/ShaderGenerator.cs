@@ -34,7 +34,7 @@ namespace VRLabs.ModularShaderSystem
                 .Select(x => x.Enabled).ToList();
             _variantEnablerNames = _variantPropertyEnablers.Select(x => x.Name).Distinct().OrderBy(x => x).ToList();
             _properties = FindAllProperties(_shader);
-
+            
             WriteProperties(shaderFile);
             
             int currentlyIteratedObject = 0;
@@ -405,19 +405,28 @@ namespace VRLabs.ModularShaderSystem
             shaderFile.AppendLine("Properties");
             shaderFile.AppendLine("{");
 
-            foreach (var prop in _properties)
+            if (_shader.UseTemplatesForProperties)
             {
-                if (string.IsNullOrWhiteSpace(prop.Type) && !string.IsNullOrWhiteSpace(prop.Name))
-                {
-                    prop.Type = "Float";
-                    prop.DefaultValue = "0.0";
-                }
-
-                string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
-                shaderFile.AppendLine(string.IsNullOrWhiteSpace(prop.Name) ? attributes : $"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
+                shaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
             }
+            else
+            {
+                foreach (var prop in _properties)
+                {
+                    if (string.IsNullOrWhiteSpace(prop.Type) && !string.IsNullOrWhiteSpace(prop.Name))
+                    {
+                        prop.Type = "Float";
+                        prop.DefaultValue = "0.0";
+                    }
+
+                    string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
+                    shaderFile.AppendLine(string.IsNullOrWhiteSpace(prop.Name) ? attributes : $"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
+                }
+            }
+
             shaderFile.AppendLine("}");
         }
+        
         
         private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
         {

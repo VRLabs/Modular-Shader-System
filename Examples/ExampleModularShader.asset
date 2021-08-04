@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Example Modular Shader
   Version: 1.0
   Author: VRLabs
+  UseTemplatesForProperties: 0
   ShaderPath: VRLabs/Examples/Example Modular Shader
   ShaderTemplate: {fileID: 1413292532103889072, guid: 8413fbf2aed995743a142e65863f1538,
     type: 3}
@@ -28,7 +29,8 @@ MonoBehaviour:
     DisplayName: SrcBlend
     Type: Float
     DefaultValue: 0
-    Attributes: []
+    Attributes:
+    - HDR
   - Name: _DstBlend
     DisplayName: DstBlend
     Type: Float
