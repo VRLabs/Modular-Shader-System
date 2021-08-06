@@ -94,8 +94,10 @@ namespace VRLabs.ModularShaderSystem
                     var newValue = (ShaderModule)x.newValue;
                     var oldValue = (ShaderModule)x.previousValue;
 
-                    _loadedModules.Remove(oldValue.Id);
-                    _loadedModules.Add(newValue.Id);
+                    if(oldValue != null)
+                        _loadedModules.Remove(oldValue.Id);
+                    if(newValue != null)
+                        _loadedModules.Add(newValue.Id);
 
                     for (int j = 0; j < _array.arraySize; j++)
                     {
@@ -131,21 +133,26 @@ namespace VRLabs.ModularShaderSystem
 
         private void CheckModuleValidity(ShaderModule newValue, Label infoLabel, VisualElement moduleItem)
         {
+            
             List<string> problems = new List<string>();
-            var moduleId = newValue.Id;
-            if (_loadedModules.Count(y => y.Equals(moduleId)) > 1)
-                problems.Add("The module is duplicate");
 
-            List<string> missingDependencies = newValue.ModuleDependencies.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) == 0).ToList();
-            List<string> incompatibilities = newValue.IncompatibleWith.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) > 0).ToList();
+            if (newValue != null)
+            {
+                var moduleId = newValue.Id;
+                if (_loadedModules.Count(y => y.Equals(moduleId)) > 1)
+                    problems.Add("The module is duplicate");
 
-            if (missingDependencies.Count > 0)
-                problems.Add("Missing dependencies: " + string.Join(", ", missingDependencies));
+                List<string> missingDependencies = newValue.ModuleDependencies.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) == 0).ToList();
+                List<string> incompatibilities = newValue.IncompatibleWith.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) > 0).ToList();
 
-            if (incompatibilities.Count > 0)
-                problems.Add("These incompatible modules are installed: " + string.Join(", ", incompatibilities));
+                if (missingDependencies.Count > 0)
+                    problems.Add("Missing dependencies: " + string.Join(", ", missingDependencies));
 
-            infoLabel.text = string.Join("\n",problems);
+                if (incompatibilities.Count > 0)
+                    problems.Add("These incompatible modules are installed: " + string.Join(", ", incompatibilities));
+            }
+            
+            infoLabel.text = string.Join("\n", problems);
 
             if (!string.IsNullOrWhiteSpace(infoLabel.text))
             {
