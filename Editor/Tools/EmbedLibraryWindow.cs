@@ -28,6 +28,7 @@ public class EmbedLibraryWindow : EditorWindow
     private TextField _variableSinkField;
     private TextField _propertiesKeyword;
     private TextField _templateExtension;
+    private TextField _templateCollectionExtension;
     private TextField _resourceFolderField;
     private TextField _windowPathField;
     private TextField _createPathField;
@@ -49,6 +50,7 @@ public class EmbedLibraryWindow : EditorWindow
         _codeSinkField = root.Q<TextField>("CodeSinkField");
         _propertiesKeyword = root.Q<TextField>("PropertiesKeywordField");
         _templateExtension = root.Q<TextField>("ExtensionField");
+        _templateCollectionExtension = root.Q<TextField>("CollectionExtensionField");
         _resourceFolderField = root.Q<TextField>("ResourceFolderField");
         _windowPathField = root.Q<TextField>("WindowPathField");
         _createPathField = root.Q<TextField>("CreatePathField");
@@ -139,6 +141,7 @@ public class EmbedLibraryWindow : EditorWindow
                         text = text.Replace($"\"{MSSConstants.DEFAULT_VARIABLES_SINK}\"", $"\"{_variableSinkField.value}\"");
                         text = text.Replace($"\"{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}\"", $"\"{_propertiesKeyword.value}\"");
                         text = text.Replace($"\"{MSSConstants.TEMPLATE_EXTENSION}\"", $"\"{_templateExtension.value}\"");
+                        text = text.Replace($"\"{MSSConstants.TEMPLATE_COLLECTION_EXTENSION}\"", $"\"{_templateCollectionExtension.value}\"");
                         text = text.Replace($"\"{MSSConstants.WINDOW_PATH}\"", $"\"{_windowPathField.value}\"");
                         text = text.Replace($"\"{MSSConstants.CREATE_PATH}\"", $"\"{_createPathField.value}\"");
                         text = text.Replace($"\"{MSSConstants.RESOURCES_FOLDER}\"", $"\"{_resourceFolderField.value}\"");

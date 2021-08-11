@@ -14,7 +14,7 @@ namespace VRLabs.ModularShaderSystem
             var subAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             subAsset.Template = File.ReadAllText(ctx.assetPath);
             //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
-            ctx.AddObjectToAsset(MSSConstants.TEMPLATE_EXTENSION, subAsset/*, icon*/);
+            ctx.AddObjectToAsset("Template", subAsset/*, icon*/);
             ctx.SetMainObject(subAsset);
         }
 
