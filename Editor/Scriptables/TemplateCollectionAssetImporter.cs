@@ -26,7 +26,7 @@ namespace VRLabs.ModularShaderSystem
                 {
                     if (line.Contains("#T#"))
                     {
-                        if (builder.Length > 0)
+                        if (builder.Length > 0 && !string.IsNullOrWhiteSpace(name))
                             SaveSubAsset(ctx, subAsset, builder, name);
                         
                         builder = new StringBuilder();
@@ -48,7 +48,7 @@ namespace VRLabs.ModularShaderSystem
                     builder.AppendLine(line);
                 }
                 
-                if (builder.Length > 0)
+                if (builder.Length > 0 && !string.IsNullOrWhiteSpace(name))
                     SaveSubAsset(ctx, subAsset, builder, name);
             }
             
