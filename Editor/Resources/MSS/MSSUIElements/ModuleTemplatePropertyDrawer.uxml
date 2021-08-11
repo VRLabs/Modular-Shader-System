@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <uie:PropertyField binding-path="Template" label="Template" focusable="true" />
+    <ui:Toggle binding-path="NeedsVariant" label="Generates variant" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Keywords" />
+</ui:UXML>
