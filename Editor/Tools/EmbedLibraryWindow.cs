@@ -17,6 +17,20 @@ public class EmbedLibraryWindow : EditorWindow
         EmbedLibraryWindow wnd = GetWindow<EmbedLibraryWindow>();
         wnd.titleContent = new GUIContent("Embed Library");
     }
+
+    [Serializable]
+    private class librarySettings
+    {
+        public string nmsc;
+        public string variableSink;
+        public string codeSink;
+        public string propKeyword;
+        public string tmpExtension;
+        public string tmpclExtension;
+        public string rscfName;
+        public string windowPath;
+        public string createPath;
+    }
     
     private const string PATH = "Assets/VRLabs/ModularShaderSystem/Editor";
     private const string NAMESPACE = "VRLabs.ModularShaderSystem";
@@ -34,6 +48,8 @@ public class EmbedLibraryWindow : EditorWindow
     private TextField _createPathField;
     private Label _namespaceLabel;
     private Button _embedButton;
+    private Button _loadButton;
+    private Button _saveButton;
 
     public void CreateGUI()
     {
@@ -56,8 +72,12 @@ public class EmbedLibraryWindow : EditorWindow
         _createPathField = root.Q<TextField>("CreatePathField");
         _namespaceLabel = root.Q<Label>("NamespacePreview");
         _embedButton = root.Q<Button>("EmbedButton");
+        _loadButton = root.Q<Button>("LoadButton");
+        _saveButton = root.Q<Button>("SaveButton");
         
         _embedButton.clicked += EmbedButtonOnclick;
+        _loadButton.clicked += LoadSettingsFromFile;
+        _saveButton.clicked += SaveSettingsOnFile;
 
         _namespaceField.RegisterValueChangedCallback(x =>
         {
@@ -96,6 +116,49 @@ public class EmbedLibraryWindow : EditorWindow
         CopyDirectory(PATH, path, "", false);
 
         AssetDatabase.Refresh();
+    }
+
+    public void SaveSettingsOnFile()
+    {
+        string path = EditorUtility.SaveFilePanel("Save settings to file", "Assets", "embedSettings.json", "json");
+        if (path.Length == 0)
+            return;
+        
+        librarySettings settings = new librarySettings
+        {
+            nmsc = _namespaceField.value,
+            variableSink = _variableSinkField.value,
+            codeSink = _codeSinkField.value,
+            propKeyword = _propertiesKeyword.value,
+            tmpExtension = _templateExtension.value,
+            tmpclExtension = _templateCollectionExtension.value,
+            rscfName = _resourceFolderField.value,
+            windowPath = _windowPathField.value,
+            createPath = _createPathField.value
+        };
+        
+        File.WriteAllText(path,JsonUtility.ToJson(settings));
+    }
+    
+    public void LoadSettingsFromFile()
+    {
+        string path = EditorUtility.OpenFilePanel("Load settings", "Assets", "json");
+        if (!File.Exists(path))
+        {
+            EditorUtility.DisplayDialog("Error", "File does not exist", "Ok");
+            return;
+        }
+
+        var settings = JsonUtility.FromJson<librarySettings>(File.ReadAllText(path));
+
+        _namespaceField.value = settings.nmsc;
+        _variableSinkField.value = settings.variableSink;
+        _codeSinkField.value = settings.codeSink;
+        _propertiesKeyword.value = settings.propKeyword;
+        _templateExtension.value = settings.tmpExtension;
+        _templateCollectionExtension.value = settings.tmpclExtension;
+        _resourceFolderField.value = settings.rscfName;
+        _windowPathField.value = settings.windowPath;
     }
 
 

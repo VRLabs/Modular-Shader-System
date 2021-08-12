@@ -1,4 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    
+    <ui:VisualElement style="flex-direction: row; flex-grow: 1; margin-bottom: 5px;">
+        <ui:Button text="Load Settings" name="LoadButton" style="flex-grow: 1;" />
+        <ui:Button text="Save Settings" name="SaveButton" style="flex-grow: 1;" />
+    </ui:VisualElement>
+    
     <ui:TextField picking-mode="Ignore" label="Namespace" value="VRLabs" text="VRLabs" name="NamespaceField" />
     <ui:VisualElement style="flex-direction: row; margin-bottom: 5px;">
         <ui:Label text="Preview:" style="margin-left: 15px;" />
@@ -6,7 +12,7 @@
     </ui:VisualElement>
     <ui:TextField picking-mode="Ignore" label="Default variable sink" value="VARIABLESINK" text="VARIABLESINK" name="VariableSinkField" />
     <ui:TextField picking-mode="Ignore" label="Default code sink" value="CODESINK" text="CODESINK" name="CodeSinkField" />
-    <ui:TextField picking-mode="Ignore" label="Default shader properties keyword" value="SHADERPROPERTIES" text="SHADERPROPERTIES" name="PropertiesKeywordField" />
+    <ui:TextField picking-mode="Ignore" label="Default properties sink" value="SHADERPROPERTIES" text="SHADERPROPERTIES" name="PropertiesKeywordField" />
     <ui:TextField picking-mode="Ignore" label="Resource folder" value="MSS" text="MSS" name="ResourceFolderField" />
     <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplate" text="stemplate" name="ExtensionField" />
     <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplatecollection" text="stemplatecollection" name="CollectionExtensionField" />
