@@ -11,6 +11,7 @@ namespace VRLabs.ModularShaderSystem
         public string Version;
         public string Author;
         public bool UseTemplatesForProperties;
+        public TemplateAsset ShaderPropertiesTemplate;
         public string ShaderPath;
         public TemplateAsset ShaderTemplate;
         public string CustomEditor;
