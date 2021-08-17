@@ -407,6 +407,9 @@ namespace VRLabs.ModularShaderSystem
 
             if (_shader.UseTemplatesForProperties)
             {
+                if(_shader.ShaderPropertiesTemplate != null)
+                    shaderFile.AppendLine(_shader.ShaderPropertiesTemplate.Template);
+                
                 shaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
             }
             else
