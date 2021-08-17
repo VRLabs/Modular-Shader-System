@@ -453,6 +453,37 @@ namespace VRLabs.ModularShaderSystem
                     {
                         deleteEmptyLine = false;
                     }
+                    
+                    // Special handling for the properties block, there should never be indentation inside here
+                    if (line.StartsWith("Properties"))
+                    {
+                        finalFile.AppendLineTabbed(tabs, line);
+                        string ln= sr.ReadLine()?.Trim();               // When the previous line is the one containing "Properties" we always know 
+                        finalFile.AppendLineTabbed(tabs, ln);   // that the next line is "{" so we just write it down before increasing the tabs
+                        tabs++;
+                        while ((ln = sr.ReadLine()) != null)    // we should be escaping this loop way before actually meeting the condition, but you never know
+                        {
+                            ln = ln.Trim();
+                            if (string.IsNullOrEmpty(ln))
+                            {
+                                if (deleteEmptyLine)
+                                    continue;
+                                deleteEmptyLine = true;
+                            }
+                            else
+                            {
+                                deleteEmptyLine = false;
+                            }
+                            
+                            if (ln.StartsWith("}"))
+                                tabs--;
+                            finalFile.AppendLineTabbed(tabs, ln);
+                            if (ln.StartsWith("}"))
+                                break;
+
+                        }
+                        continue;
+                    }
 
                     if (line.StartsWith("}"))
                         tabs--;
