@@ -4,11 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using NUnit.Framework;
 using UnityEditor;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Response given by <see cref="ShaderGenerator.VerifyShaderModules"/>.
+    /// It does not give a comprehensive list of issues the modular shader has, just the first one encountered.
+    /// For a more comprehensive list of issues you should check the modular shader asset itself.
+    /// </summary>
     public enum VerificationResponse
     {
         NoIssues,
@@ -16,15 +20,32 @@ namespace VRLabs.ModularShaderSystem
         MissingDependencies,
         IncompatibleModules
     }
-    public class ShaderGenerator
+    
+    /// <summary>
+    /// Class Containing the main generator system.
+    /// </summary>
+    /// <remarks>
+    /// This class contains all methods needed to generate both the full shader and the optimised shader
+    /// TODO: actually add the optimised shader generation algorithm
+    /// </remarks>
+    public static class ShaderGenerator
     {
-        private ModularShader _shader;
-        private List<ShaderModule> _modules;
-        private List<EnableProperty> _variantPropertyEnablers;
-        private List<string> _variantEnablerNames;
-        private List<Property> _properties;
+        private static ModularShader _shader;
+        private static List<ShaderModule> _modules;
+        private static List<EnableProperty> _variantPropertyEnablers;
+        private static List<string> _variantEnablerNames;
+        private static List<Property> _properties;
 
-        public void GenerateMainShader(string path, ModularShader shader, bool hideVariants = false)
+        /// <summary>
+        /// Generates the main shader containing all the modules.
+        /// </summary>
+        /// <remarks>
+        /// The system will generate a shader that contains all modules at once, if a module defines that a template in some cases should not be included based on some property value, it then creates both versions of the shader
+        /// </remarks>
+        /// <param name="path">Path to save the shader</param>
+        /// <param name="shader">Modular Shader to generate</param>
+        /// <param name="hideVariants">If the variant shaders should be not directly visible from the shader selector</param>
+        public static void GenerateMainShader(string path, ModularShader shader, bool hideVariants = false)
         {
             _shader = shader;
             var shaderFile = new StringBuilder();
@@ -58,7 +79,12 @@ namespace VRLabs.ModularShaderSystem
             _properties = null;
         }
 
-        public void GenerateOptimizedShader(ModularShader shader, List<EnablePropertyValue> enableProperties)
+        /// <summary>
+        /// Generates the optimised shader with only the active modules based on the material (Still highly WIP)
+        /// </summary>
+        /// <param name="shader"></param>
+        /// <param name="enableProperties"></param>
+        public static void GenerateOptimizedShader(ModularShader shader, List<EnablePropertyValue> enableProperties)
         {
             _shader = shader;
             var shaderFile = new StringBuilder();
@@ -96,6 +122,15 @@ namespace VRLabs.ModularShaderSystem
             _properties = null;
         }
 
+        /// <summary>
+        /// Verifies that the modular shader does not have errors that would cause issues when generating the shader file
+        /// </summary>
+        /// <remarks>
+        /// When you're making your own automatic generation system for your application, be sure to call this function before calling <see cref="GenerateMainShader"/> or <see cref="GenerateOptimizedShader"/> to be sure that there won't
+        /// be issues with the generation of the shader file.
+        /// </remarks>
+        /// <param name="shader">Shader to check</param>
+        /// <returns>A <see cref="VerificationResponse"/> containing the result of the check</returns>
         public static VerificationResponse VerifyShaderModules(ModularShader shader)
         {
             var modules = FindAllModules(shader);
@@ -118,8 +153,92 @@ namespace VRLabs.ModularShaderSystem
 
             return dependencies.Count > 0 ? VerificationResponse.MissingDependencies : VerificationResponse.NoIssues;
         }
+        
+        /// <summary>
+        /// Find all modules inside a specified shader.
+        /// </summary>
+        /// <param name="shader">Modular shader to check</param>
+        /// <returns>A list of <see cref="ShaderModule"/> inside this shader</returns>
+        public static List<ShaderModule> FindAllModules(ModularShader shader)
+        {
+            List<ShaderModule> modules = new List<ShaderModule>();
+            if (shader == null) return modules;
+            modules.AddRange(shader.BaseModules);
+            modules.AddRange(shader.AdditionalModules);
+            return modules;
+        }
 
-        private List<(string, StringBuilder)> GenerateVariantsRecursive(StringBuilder shaderFile, int currentlyIteratedObject, EnablePropertyValue[] currentSettings, bool isVariantHidden)
+        /// <summary>
+        /// Find all functions declared by all the modules inside a specified shader
+        /// </summary>
+        /// <param name="shader">Modular shader to check</param>
+        /// <returns>A list of <see cref="ShaderFunction"/> inside this shader</returns>
+        public static List<ShaderFunction> FindAllFunctions(ModularShader shader)
+        {
+            var functions = new List<ShaderFunction>();
+            if (shader == null) return functions;
+            foreach (var module in shader.BaseModules)
+                functions.AddRange(module.Functions);
+
+            foreach (var module in shader.AdditionalModules)
+                functions.AddRange(module.Functions);
+            return functions;
+        }
+
+        /// <summary>
+        /// Find all properties declared by the shader and its current modules
+        /// </summary>
+        /// <param name="shader">Modular shader to check</param>
+        /// <returns>A list of <see cref="Property"/> contained in this shader</returns>
+        public static List<Property> FindAllProperties(ModularShader shader)
+        {
+            List<Property> properties = new List<Property>();
+            if (shader == null) return properties;
+
+            properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
+
+            foreach (var module in shader.BaseModules.Where(x => x != null))
+            {
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
+                if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
+                    properties.Add(module.Enabled);
+            }
+
+            foreach (var module in shader.AdditionalModules.Where(x => x != null))
+            {
+                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
+                if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
+                    properties.Add(module.Enabled);
+            }
+
+            return properties.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// Find all properties that are currently used in this setup (still WIP)
+        /// </summary>
+        /// <param name="shader"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static List<Property> FindUsedProperties(ModularShader shader, IEnumerable<EnablePropertyValue> values)
+        {
+            List<Property> properties = new List<Property>();
+
+            properties.AddRange(shader.Properties);
+
+            foreach (var module in shader.BaseModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || 
+                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
+                properties.AddRange(module.Properties);
+
+            foreach (var module in shader.AdditionalModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || 
+                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
+                properties.AddRange(module.Properties);
+
+            return properties.Distinct().ToList();
+        }
+
+        // Recursively find and create variants based on the number of the enableProperties that need their own variant.
+        private static List<(string, StringBuilder)> GenerateVariantsRecursive(StringBuilder shaderFile, int currentlyIteratedObject, EnablePropertyValue[] currentSettings, bool isVariantHidden)
         {
             var files = new List<(string, StringBuilder)>();
 
@@ -154,11 +273,12 @@ namespace VRLabs.ModularShaderSystem
             return files;
         }
 
-        private (string, StringBuilder) GenerateShaderVariant(StringBuilder shaderFile, EnablePropertyValue[] currentSettings, bool isVariantHidden)
+        // Generate a single shader variant given the current settings
+        private static (string, StringBuilder) GenerateShaderVariant(StringBuilder shaderFile, EnablePropertyValue[] currentSettings, bool isVariantHidden)
         {
             string suffix = "";
             if (currentSettings.Any(x => x.Value != 0))
-                suffix = string.Join("", currentSettings.Select(x => x.Value));
+                suffix = string.Join("-", currentSettings.Select(x => x.Value));
 
             var variantEnabledModules = _modules
                 .Where(x => x != null)
@@ -199,18 +319,20 @@ namespace VRLabs.ModularShaderSystem
             return (suffix, shaderFile);
         }
 
+        // Write all variables to in their respective locations
         private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
-            WriteVariablesToSink(shaderFile, functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.SelectMany(x => x.VariableSinkKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
-                WriteVariablesToSink(shaderFile, functions, sink);
+            WriteVariablesToKeyword(shaderFile, functions, MSSConstants.DEFAULT_VARIABLES_KEYWORD, true);
+            foreach (var keyword in functions.SelectMany(x => x.VariableKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_KEYWORD)))
+                WriteVariablesToKeyword(shaderFile, functions, keyword);
         }
 
-        private static void WriteVariablesToSink(StringBuilder shaderFile, List<ShaderFunction> functions, string sink, bool isDefaultSink = false)
+        // Write variables to the specified keyword
+        private static void WriteVariablesToKeyword(StringBuilder shaderFile, List<ShaderFunction> functions, string keyword, bool isDefaultKeyword = false)
         {
             var variablesDeclaration = new StringBuilder();
             foreach (var variable in functions
-                .Where(x => x.VariableSinkKeywords.Any(y =>y.Equals(sink)) || (isDefaultSink && x.VariableSinkKeywords.Count == 0))
+                .Where(x => x.VariableKeywords.Any(y =>y.Equals(keyword)) || (isDefaultKeyword && x.VariableKeywords.Count == 0))
                 .SelectMany(x => x.UsedVariables)
                 .Distinct()
                 .OrderBy(x => x.Type))
@@ -221,12 +343,13 @@ namespace VRLabs.ModularShaderSystem
                     variablesDeclaration.AppendLine($"{variable.Type} {variable.Name};");
             }
 
-            MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{sink}\s", RegexOptions.Multiline);
+            MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
             for(int i = m.Count - 1; i>=0; i--)
                 shaderFile.Insert(m[i].Index, variablesDeclaration.ToString());
         }
 
-        private void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
+        // Write functions to the shader
+        private static void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
             foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")))
             {
@@ -237,9 +360,9 @@ namespace VRLabs.ModularShaderSystem
                 StringBuilder functionCallSequence = new StringBuilder();
                 int tabs = 2;
                 tabs = WriteFunctionCallSequence(functions, function, module, functionCode, functionCallSequence, tabs);
-                foreach(var codeSink in function.CodeSinkKeywords.Count == 0 ? new string[]{ MSSConstants.DEFAULT_CODE_SINK } : function.CodeSinkKeywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                foreach(var codeKeyword in function.CodeKeywords.Count == 0 ? new string[]{ MSSConstants.DEFAULT_CODE_KEYWORD } : function.CodeKeywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                 {
-                    MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{codeSink}\s", RegexOptions.Multiline);
+                    MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{codeKeyword}\s", RegexOptions.Multiline);
                     for(int i = m.Count - 1; i>=0; i--)
                         shaderFile.Insert(m[i].Index, functionCode.ToString());
                 }
@@ -248,7 +371,8 @@ namespace VRLabs.ModularShaderSystem
                 shaderFile.Replace(function.AppendAfter, functionCallSequence.ToString());
             }
         }
-
+        
+        // Write a call sequence. Recursive
         private static int WriteFunctionCallSequence(List<ShaderFunction> functions, ShaderFunction function, ShaderModule module, 
             StringBuilder functionCode, StringBuilder functionCallSequence, int tabs)
         {
@@ -275,7 +399,8 @@ namespace VRLabs.ModularShaderSystem
             return tabs;
         }
 
-        private void WriteShaderSkeleton(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
+        // Write down all templates to generate the initial keyworded skeleton of the shader
+        private static void WriteShaderSkeleton(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
         {
             shaderFile.AppendLine("SubShader");
             shaderFile.AppendLine("{");
@@ -286,82 +411,7 @@ namespace VRLabs.ModularShaderSystem
             shaderFile.AppendLine("}");
         }
 
-        public static List<ShaderModule> FindAllModules(ModularShader shader)
-        {
-            List<ShaderModule> modules = new List<ShaderModule>();
-            if (shader == null) return modules;
-            modules.AddRange(shader.BaseModules);
-            modules.AddRange(shader.AdditionalModules);
-            return modules;
-        }
-
-        public static List<ShaderFunction> FindAllFunctions(ModularShader shader)
-        {
-            var functions = new List<ShaderFunction>();
-            if (shader == null) return functions;
-            foreach (var module in shader.BaseModules)
-                functions.AddRange(module.Functions);
-
-            foreach (var module in shader.AdditionalModules)
-                functions.AddRange(module.Functions);
-            return functions;
-        }
-
-        public static List<ModuleTemplate> FindAllTemplates(ModularShader shader)
-        {
-            var templates = new List<ModuleTemplate>();
-            if (shader == null) return templates;
-            foreach (var module in shader.BaseModules)
-                templates.AddRange(module.Templates);
-
-            foreach (var module in shader.AdditionalModules)
-                templates.AddRange(module.Templates);
-            return templates;
-        }
-
-        public static List<Property> FindAllProperties(ModularShader shader)
-        {
-            
-            List<Property> properties = new List<Property>();
-            if (shader == null) return properties;
-
-            properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
-
-            foreach (var module in shader.BaseModules.Where(x => x != null))
-            {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
-                if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
-                    properties.Add(module.Enabled);
-            }
-
-            foreach (var module in shader.AdditionalModules.Where(x => x != null))
-            {
-                properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
-                if(!string.IsNullOrWhiteSpace(module.Enabled.Name))
-                    properties.Add(module.Enabled);
-            }
-
-            return properties.Distinct().ToList();
-        }
-
-        public static List<Property> FindUsedProperties(ModularShader shader, IEnumerable<EnablePropertyValue> values)
-        {
-            List<Property> properties = new List<Property>();
-
-            properties.AddRange(shader.Properties);
-
-            foreach (var module in shader.BaseModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || 
-                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
-                properties.AddRange(module.Properties);
-
-            foreach (var module in shader.AdditionalModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || 
-                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
-                properties.AddRange(module.Properties);
-
-            return properties.Distinct().ToList();
-        }
-        
-        private void WriteModuleTemplates(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
+        private static void WriteModuleTemplates(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
         {
             IEnumerable<EnablePropertyValue> enablePropertyValues = currentSettings as EnablePropertyValue[] ?? currentSettings.ToArray();
             foreach (var module in _modules.Where(x => x != null /*&& (string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name))*/))
@@ -383,7 +433,7 @@ namespace VRLabs.ModularShaderSystem
                         tmp.AppendLine("}");
                     }
 
-                    foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_SINK } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                    foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                     {
                         MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
                         for(int i = m.Count - 1; i>=0; i--)
@@ -400,7 +450,7 @@ namespace VRLabs.ModularShaderSystem
             }
         }
 
-        private void WriteProperties(StringBuilder shaderFile)
+        private static void WriteProperties(StringBuilder shaderFile)
         {
             shaderFile.AppendLine("Properties");
             shaderFile.AppendLine("{");
@@ -430,7 +480,7 @@ namespace VRLabs.ModularShaderSystem
             shaderFile.AppendLine("}");
         }
         
-        
+        // Cleanup the final shader file by indenting it decently
         private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
         {
             var finalFile = new StringBuilder(); ;

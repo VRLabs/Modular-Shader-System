@@ -38,8 +38,8 @@ public class EmbedLibraryWindow : EditorWindow
     private static readonly Regex NamespaceRegex = new Regex("^[a-zA-Z0-9.]*$");
 
     private TextField _namespaceField;
-    private TextField _codeSinkField;
-    private TextField _variableSinkField;
+    private TextField _codeKeywordField;
+    private TextField _variableKeywordField;
     private TextField _propertiesKeyword;
     private TextField _templateExtension;
     private TextField _templateCollectionExtension;
@@ -62,8 +62,8 @@ public class EmbedLibraryWindow : EditorWindow
         root.Add(labelFromUxml);
         
         _namespaceField = root.Q<TextField>("NamespaceField");
-        _variableSinkField = root.Q<TextField>("VariableSinkField");
-        _codeSinkField = root.Q<TextField>("CodeSinkField");
+        _variableKeywordField = root.Q<TextField>("VariableKeywordField");
+        _codeKeywordField = root.Q<TextField>("CodeKeywordField");
         _propertiesKeyword = root.Q<TextField>("PropertiesKeywordField");
         _templateExtension = root.Q<TextField>("ExtensionField");
         _templateCollectionExtension = root.Q<TextField>("CollectionExtensionField");
@@ -127,8 +127,8 @@ public class EmbedLibraryWindow : EditorWindow
         librarySettings settings = new librarySettings
         {
             nmsc = _namespaceField.value,
-            variableSink = _variableSinkField.value,
-            codeSink = _codeSinkField.value,
+            variableSink = _variableKeywordField.value,
+            codeSink = _codeKeywordField.value,
             propKeyword = _propertiesKeyword.value,
             tmpExtension = _templateExtension.value,
             tmpclExtension = _templateCollectionExtension.value,
@@ -152,8 +152,8 @@ public class EmbedLibraryWindow : EditorWindow
         var settings = JsonUtility.FromJson<librarySettings>(File.ReadAllText(path));
 
         _namespaceField.value = settings.nmsc;
-        _variableSinkField.value = settings.variableSink;
-        _codeSinkField.value = settings.codeSink;
+        _variableKeywordField.value = settings.variableSink;
+        _codeKeywordField.value = settings.codeSink;
         _propertiesKeyword.value = settings.propKeyword;
         _templateExtension.value = settings.tmpExtension;
         _templateCollectionExtension.value = settings.tmpclExtension;
@@ -200,8 +200,8 @@ public class EmbedLibraryWindow : EditorWindow
 
                     if (Path.GetFileName(file).Equals("MSSConstants.cs"))
                     {
-                        text = text.Replace($"\"{MSSConstants.DEFAULT_CODE_SINK}\"", $"\"{_codeSinkField.value}\"");
-                        text = text.Replace($"\"{MSSConstants.DEFAULT_VARIABLES_SINK}\"", $"\"{_variableSinkField.value}\"");
+                        text = text.Replace($"\"{MSSConstants.DEFAULT_CODE_KEYWORD}\"", $"\"{_codeKeywordField.value}\"");
+                        text = text.Replace($"\"{MSSConstants.DEFAULT_VARIABLES_KEYWORD}\"", $"\"{_variableKeywordField.value}\"");
                         text = text.Replace($"\"{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}\"", $"\"{_propertiesKeyword.value}\"");
                         text = text.Replace($"\"{MSSConstants.TEMPLATE_EXTENSION}\"", $"\"{_templateExtension.value}\"");
                         text = text.Replace($"\"{MSSConstants.TEMPLATE_COLLECTION_EXTENSION}\"", $"\"{_templateCollectionExtension.value}\"");

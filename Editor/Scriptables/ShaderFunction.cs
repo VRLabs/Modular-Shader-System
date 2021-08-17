@@ -13,7 +13,7 @@ namespace VRLabs.ModularShaderSystem
         public short Priority = 100;
         public TemplateAsset ShaderFunctionCode;
         public List<Variable> UsedVariables;
-        [FormerlySerializedAs("VariableSinkKeyword")] public List<string> VariableSinkKeywords;
-        [FormerlySerializedAs("CodeSinkKeyword")] public List<string> CodeSinkKeywords;
+        [FormerlySerializedAs("VariableSinkKeywords")] [FormerlySerializedAs("VariableSinkKeyword")] public List<string> VariableKeywords;
+        [FormerlySerializedAs("CodeSinkKeywords")] [FormerlySerializedAs("CodeSinkKeyword")] public List<string> CodeKeywords;
     }
 }

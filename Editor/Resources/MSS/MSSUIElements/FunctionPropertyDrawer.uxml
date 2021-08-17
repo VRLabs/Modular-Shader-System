@@ -4,6 +4,6 @@
     <uie:IntegerField label="Priority" value="100" binding-path="Priority" />
     <uie:PropertyField binding-path="ShaderFunctionCode" label="Function Code" focusable="true" />
     <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="UsedVariables" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="VariableSinkKeywords" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="CodeSinkKeywords" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="VariableKeywords" />
+    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="CodeKeywords" />
 </ui:UXML>

@@ -30,14 +30,12 @@ namespace VRLabs.ModularShaderSystem
 
             if (GUILayout.Button("Generate") && _shader != null)
             {
-                var g = new ShaderGenerator();
-
                 var response = ShaderGenerator.VerifyShaderModules(_shader);
                 
                 switch(response)
                 {
                     case VerificationResponse.NoIssues:
-                        g.GenerateMainShader("Assets", _shader);
+                        ShaderGenerator.GenerateMainShader("Assets", _shader);
                         _message = "";
                         break;
                     case VerificationResponse.DuplicateModule:

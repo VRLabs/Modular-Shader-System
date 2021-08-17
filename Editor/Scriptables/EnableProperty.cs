@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Property used to define if a module should be enabled or not.
+    /// </summary>
     [Serializable]
     public class EnableProperty : Property, IEquatable<EnableProperty>
     {

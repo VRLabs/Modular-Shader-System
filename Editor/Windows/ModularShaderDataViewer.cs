@@ -81,8 +81,8 @@ namespace VRLabs.ModularShaderSystem
             var functions = ShaderGenerator.FindAllFunctions(_modularShader);
             
             _variablesFoldout.Clear();
-            GetVariables(functions, MSSConstants.DEFAULT_VARIABLES_SINK, true);
-            foreach (var sink in functions.SelectMany(x => x.VariableSinkKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_SINK)))
+            GetVariables(functions, MSSConstants.DEFAULT_VARIABLES_KEYWORD, true);
+            foreach (var sink in functions.SelectMany(x => x.VariableKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_KEYWORD)))
                 GetVariables(functions, sink);
             
             _functionsFoldout.Clear();
@@ -105,7 +105,7 @@ namespace VRLabs.ModularShaderSystem
         private void GetVariables(List<ShaderFunction> functions, string sink, bool isDefaultSink = false)
         {
             var variables = functions
-                .Where(x => (isDefaultSink && x.VariableSinkKeywords.Count == 0) || x.VariableSinkKeywords.Any(y => y.Equals(sink)))
+                .Where(x => (isDefaultSink && x.VariableKeywords.Count == 0) || x.VariableKeywords.Any(y => y.Equals(sink)))
                 .SelectMany(x => x.UsedVariables)
                 .Distinct()
                 .OrderBy(x => x.Type).ThenBy(x => x.Name).ToList();

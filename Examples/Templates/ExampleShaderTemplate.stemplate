@@ -37,8 +37,8 @@ Pass
         UNITY_FOG_COORDS(1)
         float4 vertex : SV_POSITION;
     };
-    #K#VARIABLESINK
-    #K#CODESINK
+    #K#DEFAULT_VARIABLES
+    #K#DEFAULT_CODE
     v2f vert (appdata v)
     {
         v2f o;
