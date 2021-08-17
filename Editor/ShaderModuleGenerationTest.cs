@@ -10,54 +10,44 @@ namespace VRLabs.ModularShaderSystem
         private static void ShowWindow()
         {
             var window = GetWindow<ShaderModuleGenerationTest>();
-            window.titleContent = new GUIContent("Test Generator");
+            window.titleContent = new GUIContent("TITLE");
             window.Show();
         }
 
-        private ModularShader _shader;
-        private string _message = "";
-        private GUIStyle _style;
+        private ModularShader shader;
+        private string message = "";
         
         private void OnGUI()
         {
-            if (_style == null)
-            {
-                _style = new GUIStyle(EditorStyles.label);
-                _style.wordWrap = true;
-            }
-            
-            _shader = (ModularShader)EditorGUILayout.ObjectField("Modular shader", _shader, typeof(ModularShader), false);
+            shader = (ModularShader)EditorGUILayout.ObjectField("Modular shader", shader, typeof(ModularShader), false);
 
-            if (GUILayout.Button("Generate") && _shader != null)
+            if (GUILayout.Button("Generate") && shader != null)
             {
                 var g = new ShaderGenerator();
 
-                var response = ShaderGenerator.VerifyShaderModules(_shader);
+                var response = ShaderGenerator.VerifyShaderModules(shader);
                 
                 switch(response)
                 {
                     case VerificationResponse.NoIssues:
-                        g.GenerateMainShader("Assets", _shader);
-                        _message = "";
+                        g.GenerateMainShader("Assets", shader);
+                        message = "";
                         break;
                     case VerificationResponse.DuplicateModule:
-                        _message = "Error: Duplicate modules found";
+                        message = "Error: Duplicate modules found";
                         break;
                     case VerificationResponse.MissingDependencies:
-                        _message = "Error: Missing dependency modules";
+                        message = "Error: Missing dependency modules";
                         break;
                     case VerificationResponse.IncompatibleModules:
-                        _message = "Error: Some modules are incompatible with each other";
-                        break;
-                    case VerificationResponse.MissingPropertiesFromTemplates:
-                        _message = "Error: The modular shader or some of its modules do not declare some properties in their templates and the shader is set to require properties from templates";
+                        message = "Error: Some modules are incompatible with each other";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
             
-            GUILayout.Label(_message, _style);
+            EditorGUILayout.LabelField(message);
             
         }
     }

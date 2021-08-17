@@ -19,8 +19,6 @@ namespace VRLabs.ModularShaderSystem
 
         private bool _hasFoldingBeenForced;
 
-        public bool CheckForProperties;
-
         public ModuleInspectorList()
         {
             _listContainer = new Foldout();
@@ -72,6 +70,8 @@ namespace VRLabs.ModularShaderSystem
                 if(_array.GetArrayElementAtIndex(i).objectReferenceValue != null)
                     _loadedModules.Add(((ShaderModule)_array.GetArrayElementAtIndex(i).objectReferenceValue)?.Id);
             }
+                
+            
 
             for (int i = 0; i < _array.arraySize; i++)
             {
@@ -144,16 +144,12 @@ namespace VRLabs.ModularShaderSystem
 
                 List<string> missingDependencies = newValue.ModuleDependencies.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) == 0).ToList();
                 List<string> incompatibilities = newValue.IncompatibleWith.Where(dependency => _loadedModules.Count(y => y.Equals(dependency)) > 0).ToList();
-                List<string> missingProperties = ShaderGenerator.GetMissingPropertiesFromTemplates(newValue);
 
                 if (missingDependencies.Count > 0)
                     problems.Add("Missing dependencies: " + string.Join(", ", missingDependencies));
 
                 if (incompatibilities.Count > 0)
                     problems.Add("These incompatible modules are installed: " + string.Join(", ", incompatibilities));
-                
-                if(CheckForProperties && missingProperties.Count > 0)
-                    problems.Add("These properties are missing from the properties template: " + string.Join(", ",missingProperties));
             }
             
             infoLabel.text = string.Join("\n", problems);

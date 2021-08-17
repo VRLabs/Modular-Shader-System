@@ -14,8 +14,7 @@ namespace VRLabs.ModularShaderSystem
         NoIssues,
         DuplicateModule,
         MissingDependencies,
-        IncompatibleModules,
-        MissingPropertiesFromTemplates
+        IncompatibleModules
     }
     public class ShaderGenerator
     {
@@ -99,19 +98,12 @@ namespace VRLabs.ModularShaderSystem
 
         public static VerificationResponse VerifyShaderModules(ModularShader shader)
         {
-            
-            if(HasMissingPropertiesFromShaderTemplate(shader))
-                return VerificationResponse.MissingPropertiesFromTemplates;
-            
             var modules = FindAllModules(shader);
             var incompatibilities = modules.SelectMany(x => x.IncompatibleWith).Distinct().ToList();
             var dependencies = modules.SelectMany(x => x.ModuleDependencies).Distinct().ToList();
 
             for (int i = 0; i < modules.Count; i++)
             {
-                if (shader.UseTemplatesForProperties && HasMissingPropertiesFromTemplates(modules[i]))
-                    return VerificationResponse.MissingPropertiesFromTemplates;
-                    
                 if (incompatibilities.Any(x => x.Equals(modules[i].Id))) return VerificationResponse.IncompatibleModules;
 
                 if (dependencies.Contains(modules[i].Id))
@@ -125,51 +117,6 @@ namespace VRLabs.ModularShaderSystem
             }
 
             return dependencies.Count > 0 ? VerificationResponse.MissingDependencies : VerificationResponse.NoIssues;
-        }
-
-        public static bool HasMissingPropertiesFromTemplates(ShaderModule module)
-        {
-            return GetMissingPropertiesFromTemplates(module).Count > 0;
-        }
-
-        public static List<string> GetMissingPropertiesFromTemplates(ShaderModule module)
-        {
-            string mergedTemplates ="\n" + string.Join("/n", module.Templates.Where(x => x.Keywords.Any(y => y.Equals(MSSConstants.TEMPLATE_PROPERTIES_KEYWORD))).Select(x => x.Template.Template));
-            List<string> props = module.Properties.Select(x => x.Name).ToList();
-
-            MatchCollection m = Regex.Matches(mergedTemplates, @"(?<=\]|\n)[^\[\]\(\)\/]+(?=\()", RegexOptions.Singleline);
-            foreach (Match match in m)
-            {
-                string value = match.Value.Trim();
-                if (props.Contains(value))
-                    props.Remove(value);
-            }
-
-            return props;
-        }
-        
-        public static bool HasMissingPropertiesFromShaderTemplate(ModularShader shader)
-        {
-            return GetMissingPropertiesFromShaderTemplate(shader).Count > 0;
-        }
-
-        public static List<string> GetMissingPropertiesFromShaderTemplate(ModularShader shader, bool forceCheck = false)
-        {
-            if (!shader.UseTemplatesForProperties && !forceCheck)
-                return Enumerable.Empty<string>().ToList();
-            
-            string templateText = "\n" + (shader.ShaderPropertiesTemplate == null ? "" : shader.ShaderPropertiesTemplate.Template);
-            List<string> props = shader.Properties.Select(x => x.Name).ToList();
-
-            MatchCollection m = Regex.Matches(templateText, @"(?<=\]|\n)[^\[\]\(\)\/]+(?=\()", RegexOptions.Singleline);
-            foreach (Match match in m)
-            {
-                string value = match.Value.Trim();
-                if (props.Contains(value))
-                    props.Remove(value);
-            }
-
-            return props;
         }
 
         private List<(string, StringBuilder)> GenerateVariantsRecursive(StringBuilder shaderFile, int currentlyIteratedObject, EnablePropertyValue[] currentSettings, bool isVariantHidden)
@@ -460,9 +407,6 @@ namespace VRLabs.ModularShaderSystem
 
             if (_shader.UseTemplatesForProperties)
             {
-                if(_shader.ShaderPropertiesTemplate != null)
-                    shaderFile.AppendLine(_shader.ShaderPropertiesTemplate.Template);
-                
                 shaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
             }
             else
