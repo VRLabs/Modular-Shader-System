@@ -159,6 +159,7 @@ public class EmbedLibraryWindow : EditorWindow
         _templateCollectionExtension.value = settings.tmpclExtension;
         _resourceFolderField.value = settings.rscfName;
         _windowPathField.value = settings.windowPath;
+        _createPathField.value = settings.createPath;
     }
 
 

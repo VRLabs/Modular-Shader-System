@@ -17,8 +17,9 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   UseTemplatesForProperties: 0
+  ShaderPropertiesTemplate: {fileID: 0}
   ShaderPath: VRLabs/Examples/Example Modular Shader
-  ShaderTemplate: {fileID: 1413292532103889072, guid: 8413fbf2aed995743a142e65863f1538,
+  ShaderTemplate: {fileID: -544282384758852595, guid: 8413fbf2aed995743a142e65863f1538,
     type: 3}
   CustomEditor: 
   TemplateKeywords:
