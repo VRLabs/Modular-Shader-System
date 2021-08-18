@@ -237,7 +237,7 @@ public class EmbedLibraryWindow : EditorWindow
 
                 string newSubPath = subpath + "/" + Path.GetFileName(directory);
                 if (Path.GetFileName(directory).Equals(MSSConstants.RESOURCES_FOLDER) && Path.GetFileName(Path.GetDirectoryName(directory)).Equals("Resources"))
-                    newSubPath = subpath + "/" + _resourceFolderField;
+                    newSubPath = subpath + "/" + _resourceFolderField.value;
                 CopyDirectory(directory, newPath,  newSubPath, keepComments);
             }
         }

@@ -35,7 +35,7 @@ MonoBehaviour:
     Type: 
     DefaultValue: 0
     Attributes:
-    - Header("hi")
+    - Header(hi)
   ModuleDependencies: []
   IncompatibleWith: []
   Templates: []
