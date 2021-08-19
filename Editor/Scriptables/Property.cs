@@ -34,15 +34,15 @@ namespace VRLabs.ModularShaderSystem
 
             switch(Type)
             {
-                case "Float": variable.Name = "float"; break;
-                case "Int": variable.Name = "float"; break;
-                case "Color": variable.Name = "float4"; break;
-                case "Vector": variable.Name = "float4"; break;
-                case "2D": variable.Name = "Texture2D"; break;
-                case "3D": variable.Name = "Texture3D"; break;
-                case "Cube": variable.Name = "TextureCube"; break;
-                case "2DArray": variable.Name = "Texture2DArray"; break;
-                case "CubeArray": variable.Name = "TextureCubeArray "; break;
+                case "Float": variable.Type = "float"; break;
+                case "Int": variable.Type = "float"; break;
+                case "Color": variable.Type = "float4"; break;
+                case "Vector": variable.Type = "float4"; break;
+                case "2D": variable.Type = "Texture2D"; break;
+                case "3D": variable.Type = "Texture3D"; break;
+                case "Cube": variable.Type = "TextureCube"; break;
+                case "2DArray": variable.Type = "Texture2DArray"; break;
+                case "CubeArray": variable.Type = "TextureCubeArray "; break;
                 default: variable.Type = Type.StartsWith("Range") ? "float" : Type; break;
             }
 

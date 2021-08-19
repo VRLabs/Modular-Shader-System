@@ -92,7 +92,9 @@ namespace VRLabs.ModularShaderSystem
 
             _properties = FindUsedProperties(_shader, enableProperties);
 
-            var variantEnabledModules = _modules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || enableProperties.Select(y => y.Name).Contains(x.Enabled.Name));
+            List<ShaderModule> variantEnabledModules = _modules
+                .Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || enableProperties.Select(y => y.Name).Contains(x.Enabled.Name))
+                .ToList();
 
             string suffix = string.Join("", enableProperties.Select(x => x.Value));
 
@@ -109,7 +111,7 @@ namespace VRLabs.ModularShaderSystem
                 functions.AddRange(module.Functions);
 
             // Write module variables
-            WriteShaderVariables(shaderFile, functions);
+            WriteShaderVariables(shaderFile, variantEnabledModules, functions);
 
             // Write Functions to shader
             WriteShaderFunctions(shaderFile, functions);
@@ -280,9 +282,10 @@ namespace VRLabs.ModularShaderSystem
             if (currentSettings.Any(x => x.Value != 0))
                 suffix = string.Join("-", currentSettings.Select(x => x.Value));
 
-            var variantEnabledModules = _modules
+            List<ShaderModule> variantEnabledModules = _modules
                 .Where(x => x != null)
-                .Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name));
+                .Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || !x.Templates.Any(y => y.NeedsVariant) || currentSettings.Any(y => x.Enabled.Name.Equals(y.Name) && x.Enabled.EnableValue == y.Value))
+                .ToList();
 
             // Add Shader Location
             shaderFile.PrependLine("{");
@@ -301,7 +304,7 @@ namespace VRLabs.ModularShaderSystem
                 functions.AddRange(module.Functions);
 
             // Write module variables
-            WriteShaderVariables(shaderFile, functions);
+            WriteShaderVariables(shaderFile, variantEnabledModules, functions);
 
             // Write Functions to shader
             WriteShaderFunctions(shaderFile, functions);
@@ -320,20 +323,23 @@ namespace VRLabs.ModularShaderSystem
         }
 
         // Write all variables to in their respective locations
-        private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderFunction> functions)
+        private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderModule> variantEnabledModules, List<ShaderFunction> functions)
         {
-            WriteVariablesToKeyword(shaderFile, functions, MSSConstants.DEFAULT_VARIABLES_KEYWORD, true);
+            WriteVariablesToKeyword(shaderFile, variantEnabledModules, functions, MSSConstants.DEFAULT_VARIABLES_KEYWORD, true);
             foreach (var keyword in functions.SelectMany(x => x.VariableKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_KEYWORD)))
-                WriteVariablesToKeyword(shaderFile, functions, keyword);
+                WriteVariablesToKeyword(shaderFile, variantEnabledModules, functions, keyword);
         }
 
         // Write variables to the specified keyword
-        private static void WriteVariablesToKeyword(StringBuilder shaderFile, List<ShaderFunction> functions, string keyword, bool isDefaultKeyword = false)
+        private static void WriteVariablesToKeyword(StringBuilder shaderFile, List<ShaderModule> variantEnabledModules, List<ShaderFunction> functions, string keyword, bool isDefaultKeyword = false)
         {
             var variablesDeclaration = new StringBuilder();
             foreach (var variable in functions
                 .Where(x => x.VariableKeywords.Any(y =>y.Equals(keyword)) || (isDefaultKeyword && x.VariableKeywords.Count == 0))
                 .SelectMany(x => x.UsedVariables)
+                .Concat(variantEnabledModules
+                    .Where(x => x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name) && !x.Templates.Any(y => y.NeedsVariant))
+                    .Select(x => x.Enabled.ToVariable()))
                 .Distinct()
                 .OrderBy(x => x.Type))
             {
@@ -355,11 +361,10 @@ namespace VRLabs.ModularShaderSystem
             {
                 if (!shaderFile.Contains(function.AppendAfter)) continue;
 
-                ShaderModule module = _modules.Find(x => x.Functions.Contains(function));
                 StringBuilder functionCode = new StringBuilder();
                 StringBuilder functionCallSequence = new StringBuilder();
                 int tabs = 2;
-                tabs = WriteFunctionCallSequence(functions, function, module, functionCode, functionCallSequence, tabs);
+                tabs = WriteFunctionCallSequence(functions, function, functionCode, functionCallSequence, tabs);
                 foreach(var codeKeyword in function.CodeKeywords.Count == 0 ? new string[]{ MSSConstants.DEFAULT_CODE_KEYWORD } : function.CodeKeywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                 {
                     MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{codeKeyword}\s", RegexOptions.Multiline);
@@ -373,19 +378,20 @@ namespace VRLabs.ModularShaderSystem
         }
         
         // Write a call sequence. Recursive
-        private static int WriteFunctionCallSequence(List<ShaderFunction> functions, ShaderFunction function, ShaderModule module, 
-            StringBuilder functionCode, StringBuilder functionCallSequence, int tabs)
+        private static int WriteFunctionCallSequence(List<ShaderFunction> functions, ShaderFunction function, StringBuilder functionCode, StringBuilder functionCallSequence, int tabs)
         {
             functionCode.AppendLine(function.ShaderFunctionCode.Template);
 
-            if (module.Enabled != null && !string.IsNullOrWhiteSpace(module.Enabled.Name))
+            ShaderModule module = _modules.Find(x => x.Functions.Contains(function));
+
+            if (module.Enabled != null && !string.IsNullOrWhiteSpace(module.Enabled.Name) && !module.Templates.Any(x => x.NeedsVariant))
             {
                 functionCallSequence.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
                 functionCallSequence.AppendLine("{");
                 tabs++;
                 functionCallSequence.AppendLine($"{function.Name}();");
                 foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority))
-                    WriteFunctionCallSequence(functions, fn, module, functionCode, functionCallSequence, tabs);
+                    WriteFunctionCallSequence(functions, fn, functionCode, functionCallSequence, tabs);
 
                 functionCallSequence.AppendLine("}");
             }
@@ -393,7 +399,7 @@ namespace VRLabs.ModularShaderSystem
             {
                 functionCallSequence.AppendLine($"{function.Name}();");
                 foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority))
-                    WriteFunctionCallSequence(functions, fn, module, functionCode, functionCallSequence, tabs);
+                    WriteFunctionCallSequence(functions, fn, functionCode, functionCallSequence, tabs);
             }
 
             return tabs;
