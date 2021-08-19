@@ -485,6 +485,34 @@ namespace VRLabs.ModularShaderSystem
 
             shaderFile.AppendLine("}");
         }
+
+        private static bool CheckPropertyBlockLine(StringBuilder builder, StringReader reader, string line, ref int tabs, ref bool deleteEmptyLine)
+        {
+            string ln = null; 
+            line = line.Trim();
+            if (string.IsNullOrEmpty(line))
+            {
+                if (deleteEmptyLine)
+                    return false;
+                deleteEmptyLine = true;
+            }
+            else
+            {
+                deleteEmptyLine = false;
+            }
+            
+            if (line.StartsWith("}") && (ln = reader.ReadLine()) != null && ln.Trim().StartsWith("SubShader"))
+                tabs--;
+            builder.AppendLineTabbed(tabs, line);
+            
+            if(!string.IsNullOrWhiteSpace(ln))
+                if (CheckPropertyBlockLine(builder, reader, ln, ref tabs, ref deleteEmptyLine))
+                    return true;
+            
+            if (line.StartsWith("}") && ln != null && ln.Trim().StartsWith("SubShader"))
+                return true;
+            return false;
+        }
         
         // Cleanup the final shader file by indenting it decently
         private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
@@ -519,24 +547,8 @@ namespace VRLabs.ModularShaderSystem
                         tabs++;
                         while ((ln = sr.ReadLine()) != null)    // we should be escaping this loop way before actually meeting the condition, but you never know
                         {
-                            ln = ln.Trim();
-                            if (string.IsNullOrEmpty(ln))
-                            {
-                                if (deleteEmptyLine)
-                                    continue;
-                                deleteEmptyLine = true;
-                            }
-                            else
-                            {
-                                deleteEmptyLine = false;
-                            }
-                            
-                            if (ln.StartsWith("}"))
-                                tabs--;
-                            finalFile.AppendLineTabbed(tabs, ln);
-                            if (ln.StartsWith("}"))
+                            if (CheckPropertyBlockLine(finalFile, sr, ln, ref tabs, ref deleteEmptyLine))
                                 break;
-
                         }
                         continue;
                     }

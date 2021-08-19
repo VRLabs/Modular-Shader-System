@@ -96,6 +96,7 @@ namespace VRLabs.ModularShaderSystem
         /// <returns>string with the selected amount of tabs</returns>
         static string Tabs(int n)
         {
+            if (n < 0) n = 0;
             return new string('\t', n);
         }
 
