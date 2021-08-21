@@ -21,6 +21,7 @@ namespace VRLabs.ModularShaderSystem
         public List<ShaderModule> BaseModules;
         [HideInInspector]public List<ShaderModule> AdditionalModules;
         public bool LockBaseModules;
+        public List<Shader> LastGeneratedShaders;
 
     }
 }

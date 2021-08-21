@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEditor;
+using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
@@ -71,6 +72,13 @@ namespace VRLabs.ModularShaderSystem
             }
 
             AssetDatabase.Refresh();
+
+            _shader.LastGeneratedShaders = new List<Shader>();
+            
+            foreach ((string variantCode, StringBuilder _) in variants)
+            {
+                _shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/{_shader.Name}{variantCode}.shader"));
+            }
             
             _shader = null;
             _modules = null;
