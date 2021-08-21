@@ -1,9 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
     <ui:Label text="Base Information" style="-unity-font-style: bold; font-size: 12px; margin-bottom: 4px;" />
-    <ui:TextField picking-mode="Ignore" label="Id" value="filler text" text="filler text" binding-path="Id" />
-    <ui:TextField label="Name" value="filler text" text="filler text" binding-path="Name" />
-    <ui:TextField label="Version" value="filler text" text="filler text" binding-path="Version" />
-    <ui:TextField label="Author" value="filler text" text="filler text" binding-path="Author" />
+    <ui:TextField picking-mode="Ignore" label="Id" binding-path="Id" />
+    <ui:TextField label="Name" binding-path="Name" />
+    <ui:TextField label="Author" binding-path="Author" />
+    <ui:TextField label="Version" value="f" binding-path="Version" />
+    <ui:TextField label="Description" binding-path="Description" multiline="true" />
     <ui:Label text="Settings" style="-unity-font-style: bold; margin-top: 20px; margin-bottom: 4px;" />
     <uie:ObjectField label="Shader Template" binding-path="ShaderTemplate" name="ShaderTemplateField" allow-scene-objects="false" />
     <ui:TextField label="Shader Path" value="filler text" text="filler text" binding-path="ShaderPath" />
