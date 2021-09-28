@@ -6,7 +6,7 @@
 .inspector-list-buttons-container-horizontal
 {
     flex-direction: row;
-    background-color: rgba(93,93,93,0.3);
+    background-color: rgba(93,93,93,0.1);
     border-left-color: rgba(82,82,82,0.4);
     border-right-color: rgba(0,0,0,0.4);
     border-top-color: rgba(0,0,0,0.4);
@@ -27,7 +27,7 @@
 {
     flex-direction: column;
     height: 56px;
-    background-color: rgba(93,93,93,0.3);
+    background-color: rgba(93,93,93,0.1);
     border-left-color: rgba(82,82,82,0.4);
     border-right-color: rgba(0,0,0,0.4);
     border-top-color: rgba(0,0,0,0.4);
@@ -52,7 +52,7 @@
     margin-bottom: 1px;
     padding-left: 15px;
     padding-bottom: 0px;
-    background-color: rgba(93,93,93,0.3);
+    background-color: rgba(93,93,93,0.1);
     border-left-color: rgba(0,0,0,0.4);
     border-right-color: rgba(0,0,0,0.4);
     border-top-color: rgba(0,0,0,0.4);
@@ -91,6 +91,48 @@
 .inspector-list-remove-button
 {
     background-image: resource("MSS/MSSDeleteIcon");
+}
+
+.inspector-list-drag-handle
+{
+    width: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 17px;
+    padding-right: 2px;
+    background-color: rgba(150,150,150,0.2);
+    border-color: rgba(0,0,0,0.4);
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.inspector-list-drag-enabled
+{
+    background-color: rgba(100, 100, 150, 0.5);
+}
+
+.inspector-list-drop-area
+{
+    height: 0px;
+    
+    border-radius: 4px;
+}
+
+.inspector-list-drop-area-highlight
+{
+    height: 8px;
+    margin: 2px;
+    background-color: rgba(128, 128, 190, 0.5);
+}
+
+.inspector-list-drop-area-selected
+{
+    background-color: rgba(160, 160, 220, 0.5);
+}
+
+.error-background
+{
+    background-color: rgba(255,0,0,0.5);
 }
 
 .inspector-list-item > Label
