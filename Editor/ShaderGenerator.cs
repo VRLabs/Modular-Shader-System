@@ -432,6 +432,7 @@ namespace VRLabs.ModularShaderSystem
             {
                 foreach (var template in module.Templates)
                 {
+                    if (template.Template == null) continue;
                     bool hasEnabler = !string.IsNullOrWhiteSpace(module.Enabled.Name);
                     bool isEnablerVariant = _variantEnablerNames.Contains(module.Enabled.Name);
                     var tmp = new StringBuilder();
