@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Example Module
   Version: 1.0
   Author: VRLabs
+  Description: 
   RequiredIncludes: []
   Enabled:
     Name: 
@@ -47,6 +48,8 @@ MonoBehaviour:
       type: 3}
     UsedVariables:
     - Name: availableVariable
-      Type: float
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
+  AdditionalSerializedData: 

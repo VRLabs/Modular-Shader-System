@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -118,7 +119,7 @@ namespace VRLabs.ModularShaderSystem
                 var name = p.Q<Label>("PropertyLabel");
                 var type = p.Q<Label>("TypeLabel");
                 name.text = variable.Name;
-                type.text = variable.Type;
+                type.text = Enum.GetName(typeof(VariableType),variable.Type);
                 foldout.Add(p);
                 
                 if (variable.Type.Equals("sampler2D") || variable.Type.Equals("Texture2D"))

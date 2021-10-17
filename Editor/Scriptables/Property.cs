@@ -7,43 +7,29 @@ namespace VRLabs.ModularShaderSystem
     [Serializable]
     public class Property : IEquatable<Property>
     {
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hashCode = base.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DisplayName != null ? DisplayName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Type != null ? Type.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DefaultValue != null ? DefaultValue.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Attributes != null ? Attributes.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-
         public string Name;
         public string DisplayName;
         public string Type; //Check if the content is valid
         public string DefaultValue; //Check if the content is right for the type
         public List<string> Attributes;
 
-        public Variable ToVariable()
+        public virtual Variable ToVariable()
         {
             Variable variable = new Variable();
             variable.Name = Name;
 
             switch(Type)
             {
-                case "Float": variable.Type = "float"; break;
-                case "Int": variable.Type = "float"; break;
-                case "Color": variable.Type = "float4"; break;
-                case "Vector": variable.Type = "float4"; break;
-                case "2D": variable.Type = "Texture2D"; break;
-                case "3D": variable.Type = "Texture3D"; break;
-                case "Cube": variable.Type = "TextureCube"; break;
-                case "2DArray": variable.Type = "Texture2DArray"; break;
-                case "CubeArray": variable.Type = "TextureCubeArray "; break;
-                default: variable.Type = Type.StartsWith("Range") ? "float" : Type; break;
+                case "Float": variable.Type = VariableType.Float; break;
+                case "Int": variable.Type = VariableType.Float; break;
+                case "Color": variable.Type = VariableType.Float4; break;
+                case "Vector": variable.Type = VariableType.Float4; break;
+                case "2D": variable.Type = VariableType.Texture2D; break;
+                case "3D": variable.Type = VariableType.Texture3D; break;
+                case "Cube": variable.Type = VariableType.TextureCube; break;
+                case "2DArray": variable.Type = VariableType.Texture2DArray; break;
+                case "CubeArray": variable.Type = VariableType.TextureCubeArray; break;
+                default: variable.Type = Type.StartsWith("Range") ? VariableType.Float : VariableType.Custom; break;
             }
 
             return variable;
@@ -51,23 +37,31 @@ namespace VRLabs.ModularShaderSystem
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Property);
+            if (obj is Property other)
+                return Name == other.Name;
+
+            return false;
+        }
+        
+        bool IEquatable<Property>.Equals(Property other)
+        {
+            return Equals(other);
         }
 
-        public bool Equals(Property other)
+        public static bool operator == (Property left, Property right)
         {
-            return other != null &&
-                   Name == other.Name;
-        }
-
-        public static bool operator ==(Property left, Property right)
-        {
-            return EqualityComparer<Property>.Default.Equals(left, right);
+            return left?.Equals(right) ?? right is null;
         }
 
         public static bool operator !=(Property left, Property right)
         {
             return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = (Name != null ? Name.GetHashCode() : 0);
+            return hashCode;
         }
     }
 }

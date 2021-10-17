@@ -351,10 +351,7 @@ namespace VRLabs.ModularShaderSystem
                 .Distinct()
                 .OrderBy(x => x.Type))
             {
-                if (variable.Type.Equals("sampler2D") || variable.Type.Equals("Texture2D"))
-                    variablesDeclaration.AppendLine($"{variable.Type} {variable.Name}; float4 {variable.Name}_ST;");
-                else
-                    variablesDeclaration.AppendLine($"{variable.Type} {variable.Name};");
+                variablesDeclaration.AppendLine(variable.GetDefinition());
             }
 
             MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
@@ -365,7 +362,7 @@ namespace VRLabs.ModularShaderSystem
         // Write functions to the shader
         private static void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
-            foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")))
+            foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")).OrderBy(x => x.Priority))
             {
                 if (!shaderFile.Contains(function.AppendAfter)) continue;
 
@@ -565,7 +562,7 @@ namespace VRLabs.ModularShaderSystem
                     if (line.StartsWith("}"))
                         tabs--;
                     finalFile.AppendLineTabbed(tabs, line);
-                    if (line.StartsWith("{"))
+                    if (line.StartsWith("{") || line.EndsWith("{"))
                         tabs++;
                 }
             }

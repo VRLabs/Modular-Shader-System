@@ -9,14 +9,6 @@ namespace VRLabs.ModularShaderSystem
     [Serializable]
     public class EnableProperty : Property, IEquatable<EnableProperty>
     {
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (base.GetHashCode() * 397) ^ EnableValue;
-            }
-        }
-
         public int EnableValue;
 
         public EnableProperty(string name, string displayName, int enableValue)
@@ -29,29 +21,35 @@ namespace VRLabs.ModularShaderSystem
 
             EnableValue = enableValue;
         }
+        
+        public override Variable ToVariable()
+        {
+            Variable variable = new Variable();
+            variable.Name = Name;
+            variable.Type = VariableType.Float;
+            return variable;
+        }
 
         public EnableProperty(string name, int enableValue) : this(name, name, enableValue){}
 
-        public override bool Equals(object obj)
+        bool IEquatable<EnableProperty>.Equals(EnableProperty other)
         {
-            return Equals(obj as EnableProperty);
+            return Equals(other);
         }
 
-        public bool Equals(EnableProperty other)
+        public static bool operator == (EnableProperty left, EnableProperty right)
         {
-            return other != null &&
-                   base.Equals(other) &&
-                   Name == other.Name;
-        }
-
-        public static bool operator ==(EnableProperty left, EnableProperty right)
-        {
-            return EqualityComparer<EnableProperty>.Default.Equals(left, right);
+            return left?.Equals(right) ?? right is null;
         }
 
         public static bool operator !=(EnableProperty left, EnableProperty right)
         {
             return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
