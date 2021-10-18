@@ -35,13 +35,8 @@ namespace VRLabs.ModularShaderSystem
     {
         private VisualElement _root;
 
-        private SerializedProperty _prop;
-        private SerializedProperty _type;
-        private SerializedProperty _defaultValue;
-        
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            _prop = property;
             // Each editor window contains a root VisualElement object
             _root = new VisualElement();
 
@@ -56,43 +51,43 @@ namespace VRLabs.ModularShaderSystem
             var enumField = template.Q<EnumField>("TypeField");
             var valueContainer = template.Q<VisualElement>("ValueContainer");
 
-            _type = property.FindPropertyRelative("Type");
-            _defaultValue = property.FindPropertyRelative("DefaultValue");
+            var type = property.FindPropertyRelative("Type");
+            var defaultValue = property.FindPropertyRelative("DefaultValue");
             
    
 
             
-            var propType = GetPropertyTypeFromSerializedProperty(_type.stringValue);
+            var propType = GetPropertyTypeFromSerializedProperty(type.stringValue);
 
             enumField.value = propType;
             
             enumField.RegisterValueChangedCallback(e =>
             {
-                SetPropType((PropertyType)e.newValue);
-                SetPropDefaultValue("");
-                UpdateValueContainer((PropertyType)e.newValue, _type.stringValue, _defaultValue.stringValue, valueContainer);
+                SetPropType(type, (PropertyType)e.newValue);
+                SetPropDefaultValue(defaultValue,"");
+                UpdateValueContainer(defaultValue, type, (PropertyType)e.newValue, type.stringValue, defaultValue.stringValue, valueContainer);
             });
 
-            UpdateValueContainer(propType, _type.stringValue, _defaultValue.stringValue, valueContainer);
+            UpdateValueContainer(defaultValue, type, propType, type.stringValue, defaultValue.stringValue, valueContainer);
 
             foldout.Add(template);
             _root.Add(foldout);
             return _root;
         }
 
-        private void SetPropDefaultValue(string v)
+        private void SetPropDefaultValue(SerializedProperty defaultValue, string v)
         {
-            _defaultValue.stringValue = v;
-            _defaultValue.serializedObject.ApplyModifiedProperties();
+            defaultValue.stringValue = v;
+            defaultValue.serializedObject.ApplyModifiedProperties();
         }
         
-        private void SetPropType(string v)
+        private void SetPropType(SerializedProperty type, string v)
         {
-            _type.stringValue = v;
-            _type.serializedObject.ApplyModifiedProperties();
+            type.stringValue = v;
+            type.serializedObject.ApplyModifiedProperties();
         }
         
-        private void SetPropType(PropertyType type)
+        private void SetPropType(SerializedProperty propType, PropertyType type)
         {
             string typeString = "";
             switch (type)
@@ -109,11 +104,11 @@ namespace VRLabs.ModularShaderSystem
                 case PropertyType.Texture3D: typeString = "3d"; break;
             }
 
-            _type.stringValue = typeString;
-            _type.serializedObject.ApplyModifiedProperties();
+            propType.stringValue = typeString;
+            propType.serializedObject.ApplyModifiedProperties();
         }
 
-        private void UpdateValueContainer(PropertyType propType, string propTypeString, string propValue, VisualElement element)
+        private void UpdateValueContainer(SerializedProperty defaultValue, SerializedProperty type, PropertyType propType, string propTypeString, string propValue, VisualElement element)
         {
             VisualElement field = null;
             switch (propType)
@@ -121,9 +116,9 @@ namespace VRLabs.ModularShaderSystem
                 case PropertyType.Float:
                     float floatValue = 0;
                     if (float.TryParse(propValue, out float f)) floatValue = f;
-                    else SetPropDefaultValue("" + floatValue);
+                    else SetPropDefaultValue(defaultValue,"" + floatValue);
                     var flfield = new FloatField{ value = floatValue, label = "Default value"};
-                    flfield.RegisterValueChangedCallback(e => SetPropDefaultValue("" + e.newValue));
+                    flfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue, "" + e.newValue));
                     field = flfield;
                     break;
                 case PropertyType.Range:
@@ -148,12 +143,12 @@ namespace VRLabs.ModularShaderSystem
                         }
                     }
                     if (pfi) rangeLimits = new Vector2(prv[0], prv[1]);
-                    else SetPropType($"Range({prv[0]}, {prv[1]})");
+                    else SetPropType(type, $"Range({prv[0]}, {prv[1]})");
 
                     var limits = new Vector2Field { label = "Range limits", value = rangeLimits };
 
                     if (float.TryParse(propValue, out float r)) rangeValue = r;
-                    else SetPropDefaultValue("" + rangeValue);
+                    else SetPropDefaultValue(defaultValue,"" + rangeValue);
                     var horizontalElement = new VisualElement();
                     horizontalElement.style.flexDirection = FlexDirection.Row;
                     
@@ -173,7 +168,7 @@ namespace VRLabs.ModularShaderSystem
                     {
                         valueSlider.lowValue = Math.Min(e.newValue[0], e.newValue[1]);
                         valueSlider.highValue = Math.Max(e.newValue[0], e.newValue[1]);
-                        SetPropType($"Range({valueSlider.lowValue}, {valueSlider.highValue})");
+                        SetPropType(type,$"Range({valueSlider.lowValue}, {valueSlider.highValue})");
                     });
 
                     valueField.RegisterValueChangedCallback(e =>
@@ -186,12 +181,12 @@ namespace VRLabs.ModularShaderSystem
                             return;
                         }
                         valueSlider.SetValueWithoutNotify(e.newValue);
-                        SetPropDefaultValue("" + e.newValue);
+                        SetPropDefaultValue(defaultValue,"" + e.newValue);
                     });
                     valueSlider.RegisterValueChangedCallback(e =>
                     {
                         valueField.SetValueWithoutNotify(e.newValue);
-                        SetPropDefaultValue("" + e.newValue);
+                        SetPropDefaultValue(defaultValue,"" + e.newValue);
                     });
                     
                     field.Add(limits);
@@ -203,10 +198,10 @@ namespace VRLabs.ModularShaderSystem
                 case PropertyType.Int:
                     int intValue = 0;
                     if (int.TryParse(propValue, out int iv)) intValue = iv;
-                    else SetPropDefaultValue("" + intValue);
+                    else SetPropDefaultValue(defaultValue,"" + intValue);
                     var ivfield = new IntegerField{ value = intValue, label = "Default value"};
                     field = ivfield;
-                    ivfield.RegisterValueChangedCallback(e => SetPropDefaultValue("" + e.newValue));
+                    ivfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,"" + e.newValue));
                     break;
                 case PropertyType.Color:
                     Color colorValue = Color.white;
@@ -227,10 +222,10 @@ namespace VRLabs.ModularShaderSystem
                     }
 
                     if (vfi) colorValue = new Color(fv[0], fv[1], fv[2], fv[3]);
-                    else SetPropDefaultValue($"({fv[0]}, {fv[1]}, {fv[2]}, {fv[3]})");
+                    else SetPropDefaultValue(defaultValue,$"({fv[0]}, {fv[1]}, {fv[2]}, {fv[3]})");
                     var clfield = new ColorField { value = colorValue, label = "Default value" };
                     field = clfield;
-                    clfield.RegisterValueChangedCallback(e => SetPropDefaultValue($"({e.newValue[0]}, {e.newValue[1]}, {e.newValue[2]}, {e.newValue[3]})"));
+                    clfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"({e.newValue[0]}, {e.newValue[1]}, {e.newValue[2]}, {e.newValue[3]})"));
                     break;
                 case PropertyType.Vector:
                     Vector4 vectorValue = Vector4.zero;
@@ -250,10 +245,10 @@ namespace VRLabs.ModularShaderSystem
                         }
                     }
                     if (vvi) vectorValue = new Vector4(vv[0], vv[1], vv[2] ,vv[3]);
-                    else SetPropDefaultValue($"({vv[0]}, {vv[1]}, {vv[2]}, {vv[3]})");
+                    else SetPropDefaultValue(defaultValue,$"({vv[0]}, {vv[1]}, {vv[2]}, {vv[3]})");
                     var vlfield = new Vector4Field{ value = vectorValue, label = "Default value" };
                     field = vlfield;
-                    vlfield.RegisterValueChangedCallback(e => SetPropDefaultValue($"({e.newValue[0]}, {e.newValue[1]}, {e.newValue[2]}, {e.newValue[3]})"));
+                    vlfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"({e.newValue[0]}, {e.newValue[1]}, {e.newValue[2]}, {e.newValue[3]})"));
                     break;
                 case PropertyType.Texture2D:
                     var texValue = DefaultTextureValue.White;
@@ -261,17 +256,17 @@ namespace VRLabs.ModularShaderSystem
                     if (propValue.Contains("gray")) texValue = DefaultTextureValue.Gray;
                     if (propValue.Contains("black")) texValue = DefaultTextureValue.Black;
                     if (propValue.Contains("bump")) texValue = DefaultTextureValue.Bump;
-                    SetPropDefaultValue($"\"{Enum.GetName(typeof(DefaultTextureValue), texValue)?.ToLower()}\" {{}}");
+                    SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), texValue)?.ToLower()}\" {{}}");
                     var txfield = new EnumField { label = "Default value" };
                     txfield.Init(texValue);
                     field = txfield;
-                    txfield.RegisterValueChangedCallback(e => SetPropDefaultValue($"\"{Enum.GetName(typeof(DefaultTextureValue), e.newValue)?.ToLower()}\" {{}}"));
+                    txfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), e.newValue)?.ToLower()}\" {{}}"));
                     break;
                 case PropertyType.Texture2DArray:
                 case PropertyType.Cube:
                 case PropertyType.CubeArray:
                 case PropertyType.Texture3D:
-                    SetPropDefaultValue("\"\"{}");
+                    SetPropDefaultValue(defaultValue,"\"\"{}");
                     break;
             }
             
