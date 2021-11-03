@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,161 +8,585 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    /// <summary>
-    /// Response given by <see cref="ShaderGenerator.VerifyShaderModules"/>.
-    /// It does not give a comprehensive list of issues the modular shader has, just the first one encountered.
-    /// For a more comprehensive list of issues you should check the modular shader asset itself.
-    /// </summary>
-    public enum VerificationResponse
-    {
-        NoIssues,
-        DuplicateModule,
-        MissingDependencies,
-        IncompatibleModules
-    }
-
-    /// <summary>
-    /// Class Containing the main generator system.
-    /// </summary>
-    /// <remarks>
-    /// This class contains all methods needed to generate both the full shader and the optimised shader
-    /// TODO: actually add the optimised shader generation algorithm
-    /// </remarks>
     public static class ShaderGenerator
     {
-        private static ModularShader _shader;
-        private static List<ShaderModule> _modules;
-        private static List<EnableProperty> _variantPropertyEnablers;
-        private static List<string> _variantEnablerNames;
-        private static List<Property> _properties;
-
         /// <summary>
-        /// Generates the main shader containing all the modules.
+        /// Generates a shader with all shader variants
         /// </summary>
-        /// <remarks>
-        /// The system will generate a shader that contains all modules at once, if a module defines that a template in some cases should not be included based on some property value, it then creates both versions of the shader
-        /// </remarks>
-        /// <param name="path">Path to save the shader</param>
-        /// <param name="shader">Modular Shader to generate</param>
-        /// <param name="hideVariants">If the variant shaders should be not directly visible from the shader selector</param>
-        public static void GenerateMainShader(string path, ModularShader shader, bool hideVariants = false)
-        {
-            _shader = shader;
-            var shaderFile = new StringBuilder();
-            _modules = FindAllModules(_shader);
-            _variantPropertyEnablers = _modules
-                .Where(x => x != null && x.Templates?.Count(y => y.NeedsVariant) > 0 && (x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name)))
-                .Select(x => x.Enabled).ToList();
-            _variantEnablerNames = _variantPropertyEnablers.Select(x => x.Name).Distinct().OrderBy(x => x).ToList();
-            _properties = FindAllProperties(_shader);
-
-            WriteProperties(shaderFile);
-
-            int currentlyIteratedObject = 0;
-
-            EnablePropertyValue[] currentSettings = new EnablePropertyValue[_variantEnablerNames.Count];
-
-            var variants = GenerateVariantsRecursive(shaderFile, currentlyIteratedObject, currentSettings, hideVariants);
-
-            foreach ((string variantCode, StringBuilder shaderVariant) in variants)
-            {
-                StringBuilder finalFile = CleanupShaderFile(shaderVariant);
-                File.WriteAllText($"{path}/" + string.Join("_", $"{_shader.Name}{variantCode}.shader".Split(Path.GetInvalidFileNameChars())), finalFile.ToString());
-            }
-
-            AssetDatabase.Refresh();
-
-            _shader.LastGeneratedShaders = new List<Shader>();
-
-            foreach ((string variantCode, StringBuilder _) in variants)
-            {
-                _shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + string.Join("_", $"{_shader.Name}{variantCode}.shader".Split(Path.GetInvalidFileNameChars()))));
-            }
-
-            _shader = null;
-            _modules = null;
-            _variantPropertyEnablers = null;
-            _variantEnablerNames = null;
-            _properties = null;
-        }
-
-        /// <summary>
-        /// Generates the optimised shader with only the active modules based on the material (Still highly WIP)
-        /// </summary>
-        /// <param name="shader"></param>
-        /// <param name="enableProperties"></param>
-        public static void GenerateOptimizedShader(ModularShader shader, List<EnablePropertyValue> enableProperties)
-        {
-            _shader = shader;
-            var shaderFile = new StringBuilder();
-            _modules = FindAllModules(_shader);
-
-            _properties = FindUsedProperties(_shader, enableProperties);
-
-            List<ShaderModule> variantEnabledModules = _modules
-                .Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || enableProperties.Select(y => y.Name).Contains(x.Enabled.Name))
-                .ToList();
-
-            string suffix = string.Join("", enableProperties.Select(x => x.Value));
-
-            shaderFile.PrependLine("{");
-            shaderFile.PrependLine($"Shader \"Hidden/opt/{_shader.ShaderPath}{suffix}\"");
-
-            WriteProperties(shaderFile);
-
-            // Write shader skeleton from templates 
-            WriteShaderSkeleton(shaderFile, enableProperties);
-
-            var functions = new List<ShaderFunction>();
-            foreach (var module in variantEnabledModules)
-                functions.AddRange(module.Functions);
-
-            // Write module variables
-            WriteShaderVariables(shaderFile, variantEnabledModules, functions);
-
-            // Write Functions to shader
-            WriteShaderFunctions(shaderFile, functions);
-
-            shaderFile.AppendLine("}");
-
-            File.WriteAllText($"{_shader.Name}{suffix}.shader", shaderFile.ToString());
-
-            _modules = null;
-            _properties = null;
-        }
-
-        /// <summary>
-        /// Verifies that the modular shader does not have errors that would cause issues when generating the shader file
-        /// </summary>
-        /// <remarks>
-        /// When you're making your own automatic generation system for your application, be sure to call this function before calling <see cref="GenerateMainShader"/> or <see cref="GenerateOptimizedShader"/> to be sure that there won't
-        /// be issues with the generation of the shader file.
-        /// </remarks>
-        /// <param name="shader">Shader to check</param>
-        /// <returns>A <see cref="VerificationResponse"/> containing the result of the check</returns>
-        public static VerificationResponse VerifyShaderModules(ModularShader shader)
+        /// <param name="path">path for the shader files</param>
+        /// <param name="shader">Modular shader to use</param>
+        /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
+        public static void GenerateShader(string path, ModularShader shader, bool hideVariants = false)
         {
             var modules = FindAllModules(shader);
-            var incompatibilities = modules.SelectMany(x => x.IncompatibleWith).Distinct().ToList();
-            var dependencies = modules.SelectMany(x => x.ModuleDependencies).Distinct().ToList();
-
-            for (int i = 0; i < modules.Count; i++)
+            var possibleVariants = GetShaderVariants(modules);
+            var contexts = new List<ShaderContext>();
+            var completePropertiesBlock = GetPropertiesBlock(shader, modules);
+            
+            foreach (var variant in possibleVariants)
             {
-                if (incompatibilities.Any(x => x.Equals(modules[i].Id))) return VerificationResponse.IncompatibleModules;
-
-                if (dependencies.Contains(modules[i].Id))
-                    dependencies.Remove(modules[i].Id);
-
-                for (int j = i + 1; j < modules.Count; j++)
+                contexts.Add(new ShaderContext
                 {
-                    if (modules[i].Id.Equals(modules[j].Id))
-                        return VerificationResponse.DuplicateModule;
+                    Shader = shader,
+                    ActiveEnablers = variant,
+                    FilePath = path,
+                    PropertiesBlock = completePropertiesBlock,
+                    AreVariantsHidden = true
+                });
+            }
+            
+            contexts.AsParallel().ForAll(x => x.GenerateShader());
+            try
+            {
+                AssetDatabase.StartAssetEditing();
+                foreach (var context in contexts)
+                    File.WriteAllText($"{path}/" + context.VariantFileName, context.ShaderFile.ToString());
+            }
+            finally
+            {
+                // To make sure the AssetDatabase doesn't break out
+                AssetDatabase.StopAssetEditing();
+            }
+            
+            AssetDatabase.Refresh();
+            shader.LastGeneratedShaders = new List<Shader>();
+            foreach (var context in contexts)
+                shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + context.VariantFileName));
+        }
+        
+        /// <summary>
+        /// Generates a shader with all shader variants
+        /// </summary>
+        /// <param name="path">path for the shader files</param>
+        /// <param name="shader">Modular shader to use</param>
+        /// <param name="materials">List of materials given</param>
+        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            var modules = FindAllModules(shader);
+            var possibleVariants = GetMinimalVariants(modules, materials);
+            var contexts = new List<ShaderContext>();
+            
+            foreach (var (variant, material) in possibleVariants)
+            {
+                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(material, out string guid, out long  _);
+                contexts.Add(new ShaderContext
+                {
+                    Shader = shader,
+                    ActiveEnablers = variant,
+                    FilePath = path,
+                    OptimizedShader = true,
+                    Material = material,
+                    Guid = guid
+                });
+            }
+            
+            contexts.AsParallel().ForAll(x => x.GenerateShader());
+            try
+            {
+                AssetDatabase.StartAssetEditing();
+                foreach (var context in contexts)
+                    File.WriteAllText($"{path}/" + context.VariantFileName, context.ShaderFile.ToString());
+            }
+            finally
+            {
+                // To make sure the AssetDatabase doesn't break out
+                AssetDatabase.StopAssetEditing();
+            }
+
+            foreach (var context in contexts)
+            {
+                context.Material.shader = Shader.Find(context.ShaderName);
+            }
+            
+            AssetDatabase.Refresh();
+        }
+
+        // Gets a list of all possible variants
+        private static List<Dictionary<string, int>> GetShaderVariants(List<ShaderModule> modules)
+        {
+            var dictionary = new Dictionary<string, List<int>>();
+            foreach (ShaderModule module in modules)
+            {
+                if (module == null || module.Enabled == null || 
+                    string.IsNullOrWhiteSpace(module.Enabled.Name) || 
+                    !(module.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
+
+                if (dictionary.ContainsKey(module.Enabled.Name))
+                    dictionary[module.Enabled.Name].Add(module.Enabled.EnableValue);
+                else
+                    dictionary.Add(module.Enabled.Name, new List<int>(new []{module.Enabled.EnableValue}));
+            }
+
+            var keys = dictionary.Keys.ToList();
+
+            foreach (KeyValuePair<string,List<int>> keyValuePair in dictionary)
+                if(!keyValuePair.Value.Contains(0))
+                    keyValuePair.Value.Insert(0,0);
+
+            var states = new List<Dictionary<string, int>>();
+            UnrollVariants(states, new Dictionary<string, int>(), dictionary, keys);
+
+            return states;
+        }
+        
+        private static List<(Dictionary<string, int>, Material)> GetMinimalVariants(List<ShaderModule> modules, IEnumerable<Material> materials)
+        {
+            var enablers = new List<string>();
+            var dictionary = new Dictionary<string, int>();
+            foreach (ShaderModule module in modules)
+            {
+                if (module == null || module.Enabled == null || 
+                    string.IsNullOrWhiteSpace(module.Enabled.Name)) continue;
+
+                enablers.Add(module.Enabled.Name);
+            }
+
+            enablers = enablers.Distinct().ToList();
+
+            var states = new List<(Dictionary<string, int>, Material)>();
+            foreach (Material material in materials)
+            {
+                var state = new Dictionary<string, int>();
+                foreach (string enabler in enablers)
+                    state.Add(enabler, (int)material.GetFloat(enabler));
+                
+                states.Add((state, material));
+            }
+
+            return states;
+        }
+
+        // Unrolls all possible combinations of modules that need a separate variant.
+        private static void UnrollVariants(ICollection<Dictionary<string, int>> states, Dictionary<string, int> current, IReadOnlyDictionary<string, List<int>> dictionary, IReadOnlyList<string> keys)
+        {
+            if (current.Count == keys.Count)
+            {
+                states.Add(current);
+                return;
+            }
+            foreach (var value in dictionary[keys[current.Count]])
+            {
+                var next = new Dictionary<string, int>(current);
+                next[keys[current.Count]] = value;
+                UnrollVariants(states, next, dictionary, keys);
+            }
+        }
+
+        // Get code based on active enablers
+        public static string GetVariantCode(Dictionary<string, int> activeEnablers)
+        {
+            var keys = activeEnablers.Keys.OrderBy(x => x).ToList();
+            bool isAllZeroes = true;
+            var b = new StringBuilder();
+            foreach (string key in keys)
+            {
+                if (activeEnablers[key] != 0) isAllZeroes = false;
+                b.Append($"-{activeEnablers[key]}");
+            }
+
+            return isAllZeroes ? "" : b.ToString();
+        }
+
+        private class ShaderContext
+        {
+            public ModularShader Shader;
+            public Dictionary<string, int> ActiveEnablers;
+            private List<EnableProperty> _liveUpdateEnablers;
+            public string FilePath;
+            public string VariantFileName;
+            public string VariantName;
+            public string ShaderName;
+            public string PropertiesBlock;
+            public bool AreVariantsHidden;
+            public bool OptimizedShader;
+            public Material Material;
+            public StringBuilder ShaderFile;
+            private List<ShaderModule> _modules;
+            private List<ShaderFunction> _functions;
+            private List<ShaderFunction> _reorderedFunctions;
+            private Dictionary<ShaderFunction, ShaderModule> _modulesByFunctions;
+            public string Guid;
+
+            public void GenerateShader()
+            {
+                _modules = FindActiveModules(Shader, ActiveEnablers);
+                GetLiveUpdateEnablers();
+                ShaderFile = new StringBuilder();
+                VariantName = GetVariantCode(ActiveEnablers);
+                if (OptimizedShader)
+                {
+                    VariantFileName = $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-g-{Guid}")}.shader";
+                }
+                else
+                {
+                    VariantFileName = $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-v{VariantName}")}.shader";
+                }
+
+                VariantFileName = string.Join("_", VariantFileName.Split(Path.GetInvalidFileNameChars()));
+
+                if (OptimizedShader)
+                    ShaderName = $"Hidden/{Shader.ShaderPath}-g-{Guid}";
+                else if (AreVariantsHidden && !string.IsNullOrEmpty(VariantName))
+                    ShaderName = $"Hidden/{Shader.ShaderPath}-v{VariantName}";
+                else
+                    ShaderName = $"{Shader.ShaderPath}{VariantName}";
+                
+                ShaderFile.AppendLine($"Shader \"{ShaderName}\"");
+
+                ShaderFile.AppendLine("{");
+
+                // If the properties block value is empty, assume that the context is generating an optimised shader.
+                if (string.IsNullOrEmpty(PropertiesBlock))
+                    ShaderFile.Append(GetPropertiesBlock(Shader, _modules, false));
+                else
+                    ShaderFile.Append(PropertiesBlock);
+                    
+                WriteShaderSkeleton();
+                
+                // Get functions currently used in this variant.
+                _functions = new List<ShaderFunction>();
+                _reorderedFunctions = new List<ShaderFunction>();
+                _modulesByFunctions = new Dictionary<ShaderFunction, ShaderModule>();
+                foreach (var module in _modules)
+                {
+                    _functions.AddRange(module.Functions);
+                    foreach (ShaderFunction function in module.Functions)
+                    {
+                        _modulesByFunctions.Add(function, module);
+                    }
+                }
+
+                WriteVariablesToKeywords();
+                WriteFunctionCallsToKeywords();
+                WriteFunctionsToKeywords();
+
+                if (!string.IsNullOrWhiteSpace(Shader.CustomEditor))
+                    ShaderFile.AppendLine($"CustomEditor \"{Shader.CustomEditor}\"");
+                ShaderFile.AppendLine("}");
+
+
+                MatchCollection m = Regex.Matches(ShaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
+                for (int i = m.Count - 1; i >= 0; i--)
+                    ShaderFile.Replace(m[i].Value, "");
+
+                ShaderFile.Replace("\r\n", "\n");
+
+                if (OptimizedShader)
+                {
+                    ShaderFile = CleanupShaderFile(ShaderFile);
+                }
+                else
+                {
+                    ShaderFile = CleanupShaderFile(ShaderFile);
+                }
+            }
+            
+            private void GetLiveUpdateEnablers()
+            {
+                _liveUpdateEnablers = new List<EnableProperty>();
+                var staticEnablers = ActiveEnablers.Keys.ToList();
+                foreach (ShaderModule module in _modules)
+                {
+                    if(module.Enabled != null && !string.IsNullOrWhiteSpace(module.Enabled.Name) && !staticEnablers.Contains(module.Enabled.Name))
+                        _liveUpdateEnablers.Add(module.Enabled);
+                }
+
+                _liveUpdateEnablers = _liveUpdateEnablers.Distinct().ToList();
+            }
+
+            private void WriteFunctionCallsToKeywords()
+            {
+                foreach (var startKeyword in _functions.Where(x => x.AppendAfter?.StartsWith("#K#") ?? false).Select(x => x.AppendAfter).Distinct())
+                {
+                    if (!ShaderFile.Contains(startKeyword)) continue;
+
+                    var callSequence = new StringBuilder();
+                    WriteFunctionCallSequence(callSequence, startKeyword);
+                    callSequence.AppendLine(startKeyword);
+                    ShaderFile.Replace(startKeyword, callSequence.ToString());
                 }
             }
 
-            return dependencies.Count > 0 ? VerificationResponse.MissingDependencies : VerificationResponse.NoIssues;
+            // Write down all templates to generate the initial keyworded skeleton of the shader
+            private void WriteShaderSkeleton()
+            {
+                ShaderFile.AppendLine("SubShader");
+                ShaderFile.AppendLine("{");
+
+                ShaderFile.AppendLine(Shader.ShaderTemplate.Template);
+                
+                if (Shader.UseTemplatesForProperties)
+                {
+                    if (Shader.ShaderPropertiesTemplate != null)
+                        ShaderFile.AppendLine(Shader.ShaderPropertiesTemplate.Template);
+
+                    ShaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
+                }
+
+                foreach (var module in _modules)
+                {
+                    foreach (var template in module.Templates)
+                    {
+                        if (template.Template == null) continue;
+                        bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
+                        bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
+                        bool needsIf = hasEnabler && !isFilteredIn && !template.NeedsVariant;
+                        var tmp = new StringBuilder();
+
+                        if (!needsIf)
+                        {
+                            tmp.AppendLine(template.Template.ToString());
+                        }
+
+                        else
+                        {
+                            tmp.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
+                            tmp.AppendLine("{");
+                            tmp.AppendLine(template.Template.ToString());
+                            tmp.AppendLine("}");
+                        }
+
+                        foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                        {
+                            MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
+                            for (int i = m.Count - 1; i >= 0; i--)
+                                ShaderFile.Insert(m[i].Index, tmp.ToString());
+
+                            m = Regex.Matches(ShaderFile.ToString(), $@"#KI#{keyword}\s", RegexOptions.Multiline);
+                            for (int i = m.Count - 1; i >= 0; i--)
+                                ShaderFile.Insert(m[i].Index, tmp.ToString());
+                        }
+                    }
+                    MatchCollection mki = Regex.Matches(ShaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
+                    for (int i = mki.Count - 1; i >= 0; i--)
+                        ShaderFile.Replace(mki[i].Value, "");
+                }
+                
+                ShaderFile.AppendLine("}");
+            }
+            
+            // Writes variables to keywords
+            private void WriteVariablesToKeywords()
+            {
+                var variableDeclarations = new Dictionary<string,List<Variable>>();
+
+                foreach (ShaderFunction function in _functions)
+                {
+                    if (function.VariableKeywords.Count > 0)
+                    {
+                        foreach (string keyword in function.VariableKeywords)
+                        {
+                            if (!variableDeclarations.ContainsKey(keyword))
+                                variableDeclarations.Add(keyword, new List<Variable>());
+
+                            foreach (Variable variable in function.UsedVariables)
+                                variableDeclarations[keyword].Add(variable);
+                        }
+                    }
+                    else
+                    {
+                        if (!variableDeclarations.ContainsKey(MSSConstants.DEFAULT_VARIABLES_KEYWORD))
+                            variableDeclarations.Add(MSSConstants.DEFAULT_VARIABLES_KEYWORD, new List<Variable>());
+
+                        foreach (Variable variable in function.UsedVariables)
+                            variableDeclarations[MSSConstants.DEFAULT_VARIABLES_KEYWORD].Add(variable);
+                    }
+                }
+
+                foreach (var declaration in variableDeclarations)
+                {
+                    declaration.Value.AddRange(_liveUpdateEnablers.Select(x => x.ToVariable()));
+                    var decCode = string.Join("\n", declaration.Value.Distinct().OrderBy(x => x.Type).Select(x => x.GetDefinition())) + "\n\n";
+                    MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{declaration.Key}\s", RegexOptions.Multiline);
+                    for (int i = m.Count - 1; i >= 0; i--)
+                        ShaderFile.Insert(m[i].Index, decCode);   
+                }
+            }
+            
+            // Writes function declarations to keywords
+            private void WriteFunctionsToKeywords()
+            {
+                var keywordedCode = new Dictionary<string,StringBuilder>();
+
+                foreach (ShaderFunction function in _reorderedFunctions)
+                {
+                    if (function.CodeKeywords.Count > 0)
+                    {
+                        foreach (string keyword in function.CodeKeywords)
+                        {
+                            if (!keywordedCode.ContainsKey(keyword))
+                                keywordedCode.Add(keyword, new StringBuilder());
+
+                            keywordedCode[keyword].AppendLine(function.ShaderFunctionCode.Template);
+                        }
+                    }
+                    else
+                    {
+                        if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_VARIABLES_KEYWORD))
+                            keywordedCode.Add(MSSConstants.DEFAULT_VARIABLES_KEYWORD, new StringBuilder());
+                        
+                        keywordedCode[MSSConstants.DEFAULT_VARIABLES_KEYWORD].AppendLine(function.ShaderFunctionCode.Template);
+                    }
+                }
+
+                foreach (var code in keywordedCode)
+                {
+                    MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{code.Key}\s", RegexOptions.Multiline);
+                    for (int i = m.Count - 1; i >= 0; i--)
+                        ShaderFile.Insert(m[i].Index, code.Value.ToString());   
+                }
+            }
+
+            // Write sequence of functions.
+            private void WriteFunctionCallSequence(StringBuilder callSequence, string appendAfter)
+            {
+                foreach (var function in _functions.Where(x => x.AppendAfter.Equals(appendAfter)).OrderBy(x => x.Priority))
+                {
+                    _reorderedFunctions.Add(function);
+                    ShaderModule module = _modulesByFunctions[function];
+                    
+                    bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
+                    bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
+                    bool needsIf = hasEnabler && !isFilteredIn;
+
+                    if (needsIf)
+                    {
+                        callSequence.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
+                        callSequence.AppendLine("{");
+                    }
+                    
+                    callSequence.AppendLine($"{function.Name}();");
+                    WriteFunctionCallSequence(callSequence, function.Name);
+                    
+                    if (needsIf)
+                        callSequence.AppendLine("}");
+                }
+            }
+            
+            //check a line of the property block
+            private static bool CheckPropertyBlockLine(StringBuilder builder, StringReader reader, string line, ref int tabs, ref bool deleteEmptyLine)
+            {
+                string ln = null;
+                line = line.Trim();
+                if (string.IsNullOrEmpty(line))
+                {
+                    if (deleteEmptyLine)
+                        return false;
+                    deleteEmptyLine = true;
+                }
+                else
+                {
+                    deleteEmptyLine = false;
+                }
+
+                if (line.StartsWith("}") && (ln = reader.ReadLine()) != null && ln.Trim().StartsWith("SubShader"))
+                    tabs--;
+                builder.AppendLineTabbed(tabs, line);
+
+                if (!string.IsNullOrWhiteSpace(ln))
+                    if (CheckPropertyBlockLine(builder, reader, ln, ref tabs, ref deleteEmptyLine))
+                        return true;
+
+                if (line.StartsWith("}") && ln != null && ln.Trim().StartsWith("SubShader"))
+                    return true;
+                return false;
+            }
+            
+            // Cleanup the final shader file by indenting it decently
+            private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
+            {
+                var finalFile = new StringBuilder(); ;
+                using (var sr = new StringReader(shaderVariant.ToString()))
+                {
+                    string line;
+                    int tabs = 0;
+                    bool deleteEmptyLine = false;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        line = line.Trim();
+
+                        if (string.IsNullOrEmpty(line))
+                        {
+                            if (deleteEmptyLine)
+                                continue;
+                            deleteEmptyLine = true;
+                        }
+                        else
+                        {
+                            deleteEmptyLine = false;
+                        }
+
+                        // Special handling for the properties block, there should never be indentation inside here
+                        if (line.StartsWith("Properties"))
+                        {
+                            finalFile.AppendLineTabbed(tabs, line);
+                            string ln = sr.ReadLine()?.Trim();      // When the previous line is the one containing "Properties" we always know 
+                            finalFile.AppendLineTabbed(tabs, ln);   // that the next line is "{" so we just write it down before increasing the tabs
+                            tabs++;
+                            while ((ln = sr.ReadLine()) != null)    // we should be escaping this loop way before actually meeting the condition, but you never know
+                            {
+                                if (CheckPropertyBlockLine(finalFile, sr, ln, ref tabs, ref deleteEmptyLine))
+                                    break;
+                            }
+                            continue;
+                        }
+
+                        if (line.StartsWith("}"))
+                            tabs--;
+                        finalFile.AppendLineTabbed(tabs, line);
+                        if (line.StartsWith("{") || line.EndsWith("{"))
+                            tabs++;
+                    }
+                }
+
+                return finalFile;
+            }
         }
 
+        // Retrieves properties block based on given modules
+        private static string GetPropertiesBlock(ModularShader shader, List<ShaderModule> modules, bool includeEnablers = true)
+        {
+            var block = new StringBuilder();
+            block.AppendLine("Properties");
+            block.AppendLine("{");
+
+            if (shader.UseTemplatesForProperties)
+            {
+                if (shader.ShaderPropertiesTemplate != null)
+                    block.AppendLine(shader.ShaderPropertiesTemplate.Template);
+
+                block.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
+            }
+            else
+            {
+                List<Property> properties = new List<Property>();
+
+                properties.AddRange(shader.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count > 0));
+
+                foreach (var module in modules.Where(x => x != null))
+                {
+                    properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count > 0));
+                    if (!string.IsNullOrWhiteSpace(module.Enabled.Name) && includeEnablers)
+                        properties.Add(module.Enabled);
+                }
+
+                foreach (var prop in properties.Distinct())
+                {
+                    if (string.IsNullOrWhiteSpace(prop.Type) && !string.IsNullOrWhiteSpace(prop.Name))
+                    {
+                        prop.Type = "Float";
+                        prop.DefaultValue = "0.0";
+                    }
+
+                    string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
+                    block.AppendLine(string.IsNullOrWhiteSpace(prop.Name) ? attributes : $"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
+                }
+            }
+
+            block.AppendLine("}");
+            return block.ToString();
+        }
+        
         /// <summary>
         /// Find all modules inside a specified shader.
         /// </summary>
@@ -176,23 +599,6 @@ namespace VRLabs.ModularShaderSystem
             modules.AddRange(shader.BaseModules);
             modules.AddRange(shader.AdditionalModules);
             return modules;
-        }
-
-        /// <summary>
-        /// Find all functions declared by all the modules inside a specified shader
-        /// </summary>
-        /// <param name="shader">Modular shader to check</param>
-        /// <returns>A list of <see cref="ShaderFunction"/> inside this shader</returns>
-        public static List<ShaderFunction> FindAllFunctions(ModularShader shader)
-        {
-            var functions = new List<ShaderFunction>();
-            if (shader == null) return functions;
-            foreach (var module in shader.BaseModules)
-                functions.AddRange(module.Functions);
-
-            foreach (var module in shader.AdditionalModules)
-                functions.AddRange(module.Functions);
-            return functions;
         }
 
         /// <summary>
@@ -223,351 +629,121 @@ namespace VRLabs.ModularShaderSystem
 
             return properties.Distinct().ToList();
         }
-
+        
         /// <summary>
-        /// Find all properties that are currently used in this setup (still WIP)
+        /// Find all functions declared by all the modules inside a specified shader
         /// </summary>
-        /// <param name="shader"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
-        public static List<Property> FindUsedProperties(ModularShader shader, IEnumerable<EnablePropertyValue> values)
+        /// <param name="shader">Modular shader to check</param>
+        /// <returns>A list of <see cref="ShaderFunction"/> inside this shader</returns>
+        public static List<ShaderFunction> FindAllFunctions(ModularShader shader)
         {
-            List<Property> properties = new List<Property>();
-
-            properties.AddRange(shader.Properties);
-
-            foreach (var module in shader.BaseModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) ||
-                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
-                properties.AddRange(module.Properties);
-
-            foreach (var module in shader.AdditionalModules.Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) ||
-                values.Count(y => y.Name.Equals(x.Enabled.Name) && y.Value == x.Enabled.EnableValue) > 0))
-                properties.AddRange(module.Properties);
-
-            return properties.Distinct().ToList();
-        }
-
-        // Recursively find and create variants based on the number of the enableProperties that need their own variant.
-        private static List<(string, StringBuilder)> GenerateVariantsRecursive(StringBuilder shaderFile, int currentlyIteratedObject, EnablePropertyValue[] currentSettings, bool isVariantHidden)
-        {
-            var files = new List<(string, StringBuilder)>();
-
-            //In case this is the end of the tree call it will generate the finalized variant
-            if (currentlyIteratedObject >= _variantEnablerNames.Count)
-            {
-                var variantShader = new StringBuilder(shaderFile.ToString());
-                files.Add(GenerateShaderVariant(variantShader, currentSettings, isVariantHidden));
-                return files;
-            }
-
-            // Searches all possible values for the current property enabler
-            List<int> possibleValues = _variantPropertyEnablers.Where(x => x.Name.Equals(_variantEnablerNames[currentlyIteratedObject]))
-                .Select(x => x.EnableValue)
-                .Append(0)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-
-            // Recursively calls this function once for every possible branch referencing the next property to branch into.
-            // Then aggregates all the resulting variants from this branch of the tree call, to then return it to its root
-            foreach (int value in possibleValues)
-            {
-                var newSettings = new EnablePropertyValue[_variantEnablerNames.Count];
-                Array.Copy(currentSettings, newSettings, _variantEnablerNames.Count);
-                newSettings[currentlyIteratedObject] = new EnablePropertyValue { Name = _variantEnablerNames[currentlyIteratedObject], Value = value };
-                List<(string, StringBuilder)> returnFiles = GenerateVariantsRecursive(shaderFile, currentlyIteratedObject + 1, newSettings, isVariantHidden);
-
-                files.AddRange(returnFiles);
-            }
-
-            return files;
-        }
-
-        // Generate a single shader variant given the current settings
-        private static (string, StringBuilder) GenerateShaderVariant(StringBuilder shaderFile, EnablePropertyValue[] currentSettings, bool isVariantHidden)
-        {
-            string suffix = "";
-            if (currentSettings.Any(x => x.Value != 0))
-                suffix = string.Join("-", currentSettings.Select(x => x.Value));
-
-            List<ShaderModule> variantEnabledModules = _modules
-                .Where(x => x != null)
-                .Where(x => x.Enabled == null || string.IsNullOrWhiteSpace(x.Enabled.Name) || !x.Templates.Any(y => y.NeedsVariant) || currentSettings.Any(y => x.Enabled.Name.Equals(y.Name) && x.Enabled.EnableValue == y.Value))
-                .ToList();
-
-            // Add Shader Location
-            shaderFile.PrependLine("{");
-
-            if (isVariantHidden)
-                shaderFile.PrependLine($"Shader \"Hidden/{_shader.ShaderPath}{suffix}\"");
-            else
-                shaderFile.PrependLine($"Shader \"{_shader.ShaderPath}{suffix}\"");
-
-            // Write shader skeleton from templates 
-            WriteShaderSkeleton(shaderFile, currentSettings);
-
-            // Get functions currently used in this variant.
             var functions = new List<ShaderFunction>();
-            foreach (var module in variantEnabledModules)
+            if (shader == null) return functions;
+            foreach (var module in shader.BaseModules)
                 functions.AddRange(module.Functions);
 
-            // Write module variables
-            WriteShaderVariables(shaderFile, variantEnabledModules, functions);
-
-            // Write Functions to shader
-            WriteShaderFunctions(shaderFile, functions);
-
-            if (!string.IsNullOrWhiteSpace(_shader.CustomEditor))
-                shaderFile.AppendLine($"CustomEditor \"{_shader.CustomEditor}\"");
-            shaderFile.AppendLine("}");
-
-
-            MatchCollection m = Regex.Matches(shaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
-            for (int i = m.Count - 1; i >= 0; i--)
-                shaderFile.Replace(m[i].Value, "");
-
-            shaderFile.Replace("\r\n", "\n");
-            return (suffix, shaderFile);
+            foreach (var module in shader.AdditionalModules)
+                functions.AddRange(module.Functions);
+            return functions;
         }
-
-        // Write all variables to in their respective locations
-        private static void WriteShaderVariables(StringBuilder shaderFile, List<ShaderModule> variantEnabledModules, List<ShaderFunction> functions)
+        
+        /// <summary>
+        /// Find all active modules inside a specified shader.
+        /// </summary>
+        /// <param name="shader">Modular shader to check</param>
+        /// <param name="activeEnablers">Dictionary of active Property Enablers</param>
+        /// <returns>A list of active <see cref="ShaderModule"/> inside this shader</returns>
+        public static List<ShaderModule> FindActiveModules(ModularShader shader, Dictionary<string, int> activeEnablers)
         {
-            WriteVariablesToKeyword(shaderFile, variantEnabledModules, functions, MSSConstants.DEFAULT_VARIABLES_KEYWORD, true);
-            foreach (var keyword in functions.SelectMany(x => x.VariableKeywords).Distinct().Where(x => !string.IsNullOrEmpty(x) && !x.Equals(MSSConstants.DEFAULT_VARIABLES_KEYWORD)))
-                WriteVariablesToKeyword(shaderFile, variantEnabledModules, functions, keyword);
-        }
+            List<ShaderModule> modules = new List<ShaderModule>();
+            if (shader == null) return modules;
 
-        // Write variables to the specified keyword
-        private static void WriteVariablesToKeyword(StringBuilder shaderFile, List<ShaderModule> variantEnabledModules, List<ShaderFunction> functions, string keyword, bool isDefaultKeyword = false)
-        {
-            var variablesDeclaration = new StringBuilder();
-            foreach (var variable in functions
-                .Where(x => x.VariableKeywords.Any(y => y.Equals(keyword)) || (isDefaultKeyword && x.VariableKeywords.Count == 0))
-                .SelectMany(x => x.UsedVariables)
-                .Concat(variantEnabledModules
-                    .Where(x => x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name) && !x.Templates.Any(y => y.NeedsVariant))
-                    .Select(x => x.Enabled.ToVariable()))
-                .Distinct()
-                .OrderBy(x => x.Type))
+            foreach (var module in shader.BaseModules)
             {
-                variablesDeclaration.AppendLine(variable.GetDefinition());
+                int value = 0;
+                bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
+                bool hasKey = hasEnabler && activeEnablers.TryGetValue(module.Enabled.Name, out value);
+                if (!hasEnabler || ((hasKey && module.Enabled.EnableValue == value) || !hasKey))
+                    modules.Add(module);
             }
 
-            MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
-            for (int i = m.Count - 1; i >= 0; i--)
-                shaderFile.Insert(m[i].Index, variablesDeclaration.ToString());
+            foreach (var module in shader.AdditionalModules)
+            {
+                int value = 0;
+                bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
+                bool hasKey = hasEnabler && activeEnablers.TryGetValue(module.Enabled.Name, out value);
+                if (!hasEnabler || ((hasKey && module.Enabled.EnableValue == value) || !hasKey))
+                    modules.Add(module);
+            }
+
+            return modules;
         }
 
-        // Write functions to the shader
-        private static void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
+        /// <summary>
+        /// Checks for issues with the modular shader in its current state
+        /// </summary>
+        /// <remarks>
+        /// When you're making your own automatic generation system for your application, be sure to call this function before calling <see cref="GenerateShader"/> or <see cref="GenerateMinimalShader"/>
+        /// and check for errors to be sure that there won't be issues with the generation of the shader file.
+        /// </remarks>
+        /// <param name="shader">Shader to check</param>
+        /// <returns>A list of strings detailing all errors, or an empty list if there are no issues</returns>
+        public static List<string> CheckShaderIssues(ModularShader shader)
         {
-            foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")).OrderBy(x => x.Priority))
-            {
-                if (!shaderFile.Contains(function.AppendAfter)) continue;
+            List<string> errors = new List<string>();
+            var modules = FindAllModules(shader);
 
-                StringBuilder functionCode = new StringBuilder();
-                StringBuilder functionCallSequence = new StringBuilder();
-                int tabs = 2;
-                tabs = WriteFunctionCallSequence(functions, function, functionCode, functionCallSequence, tabs);
-                foreach (var codeKeyword in function.CodeKeywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : function.CodeKeywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+            for (int i = 0; i < modules.Count; i++)
+            {
+                var dependencies = new List<string>(modules[i].ModuleDependencies);
+                for (int j = 0; j < modules.Count; j++)
                 {
-                    MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{codeKeyword}\s", RegexOptions.Multiline);
-                    for (int i = m.Count - 1; i >= 0; i--)
-                        shaderFile.Insert(m[i].Index, functionCode.ToString());
+                    if (modules[j].IncompatibleWith.Any(x => x.Equals(modules[i].Id))) 
+                        errors.Add($"Module \"{modules[j].Name}\" is incompatible with module \"{modules[i].name}\".");
+                    
+                    if (i != j && modules[i].Id.Equals(modules[j].Id))
+                        errors.Add($"Module \"{modules[i].Name}\" is duplicate.");
+                    
+                    if (dependencies.Contains(modules[j].Id))
+                        dependencies.Remove(modules[j].Id);
                 }
-
-                functionCallSequence.AppendLine(function.AppendAfter);
-                shaderFile.Replace(function.AppendAfter, functionCallSequence.ToString());
+                for (int j = 0; j < dependencies.Count; j++)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
             }
+            return errors;
         }
-
-        // Write a call sequence. Recursive
-        private static int WriteFunctionCallSequence(List<ShaderFunction> functions, ShaderFunction function, StringBuilder functionCode, StringBuilder functionCallSequence, int tabs)
+        
+        /// <summary>
+        /// Checks for issues with the given list of modules
+        /// </summary>
+        /// <remarks>
+        /// When you're making your own automatic generation system for your application, be sure to call this function before calling <see cref="GenerateShader"/> or <see cref="GenerateMinimalShader"/>
+        /// and check for errors to be sure that there won't be issues with the generation of the shader file. 
+        /// </remarks>
+        /// <param name="modules">Modules to check</param>
+        /// <returns>A list of strings detailing all errors, or an empty list if there are no issues</returns>
+        public static List<string> CheckShaderIssues(List<ShaderModule> modules)
         {
-            functionCode.AppendLine(function.ShaderFunctionCode.Template);
+            List<string> errors = new List<string>();
 
-            ShaderModule module = _modules.Find(x => x.Functions.Contains(function));
-
-            if (module.Enabled != null && !string.IsNullOrWhiteSpace(module.Enabled.Name) && !module.Templates.Any(x => x.NeedsVariant))
+            for (int i = 0; i < modules.Count; i++)
             {
-                functionCallSequence.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
-                functionCallSequence.AppendLine("{");
-                tabs++;
-                functionCallSequence.AppendLine($"{function.Name}();");
-                foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority))
-                    WriteFunctionCallSequence(functions, fn, functionCode, functionCallSequence, tabs);
-
-                functionCallSequence.AppendLine("}");
-            }
-            else
-            {
-                functionCallSequence.AppendLine($"{function.Name}();");
-                foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority))
-                    WriteFunctionCallSequence(functions, fn, functionCode, functionCallSequence, tabs);
-            }
-
-            return tabs;
-        }
-
-        // Write down all templates to generate the initial keyworded skeleton of the shader
-        private static void WriteShaderSkeleton(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
-        {
-            shaderFile.AppendLine("SubShader");
-            shaderFile.AppendLine("{");
-
-            shaderFile.AppendLine(_shader.ShaderTemplate.Template);
-
-            WriteModuleTemplates(shaderFile, currentSettings);
-            shaderFile.AppendLine("}");
-        }
-
-        private static void WriteModuleTemplates(StringBuilder shaderFile, IEnumerable<EnablePropertyValue> currentSettings)
-        {
-            IEnumerable<EnablePropertyValue> enablePropertyValues = currentSettings as EnablePropertyValue[] ?? currentSettings.ToArray();
-            foreach (var module in _modules.Where(x => x != null /*&& (string.IsNullOrWhiteSpace(x.Enabled.Name) || currentSettings.Select(y => y.Name).Contains(x.Enabled.Name))*/))
-            {
-                foreach (var template in module.Templates)
+                var dependencies = new List<string>(modules[i].ModuleDependencies);
+                for (int j = 0; j < modules.Count; j++)
                 {
-                    if (template.Template == null) continue;
-                    bool hasEnabler = !string.IsNullOrWhiteSpace(module.Enabled.Name);
-                    bool isEnablerVariant = _variantEnablerNames.Contains(module.Enabled.Name);
-                    var tmp = new StringBuilder();
-                    if (!hasEnabler || (isEnablerVariant && enablePropertyValues.FirstOrDefault(x => x.Name.Equals(module.Enabled.Name)).Value == module.Enabled.EnableValue))
-                    {
-                        tmp.AppendLine(template.Template.ToString());
-                    }
-                    else if (!isEnablerVariant)
-                    {
-                        tmp.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
-                        tmp.AppendLine("{");
-                        tmp.AppendLine(template.Template.ToString());
-                        tmp.AppendLine("}");
-                    }
-
-                    foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
-                    {
-                        MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
-                        for (int i = m.Count - 1; i >= 0; i--)
-                            shaderFile.Insert(m[i].Index, tmp.ToString());
-
-                        m = Regex.Matches(shaderFile.ToString(), $@"#KI#{keyword}\s", RegexOptions.Multiline);
-                        for (int i = m.Count - 1; i >= 0; i--)
-                            shaderFile.Insert(m[i].Index, tmp.ToString());
-                    }
+                    if (modules[j].IncompatibleWith.Any(x => x.Equals(modules[i].Id))) 
+                        errors.Add($"Module \"{modules[j].Name}\" is incompatible with module \"{modules[i].name}\".");
+                    
+                    if (i != j && modules[i].Id.Equals(modules[j].Id))
+                        errors.Add($"Module \"{modules[i].Name}\" is duplicate.");
+                    
+                    if (dependencies.Contains(modules[j].Id))
+                        dependencies.Remove(modules[j].Id);
                 }
-                MatchCollection mki = Regex.Matches(shaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
-                for (int i = mki.Count - 1; i >= 0; i--)
-                    shaderFile.Replace(mki[i].Value, "");
+                for (int j = 0; j < dependencies.Count; j++)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
             }
-        }
-
-        private static void WriteProperties(StringBuilder shaderFile)
-        {
-            shaderFile.AppendLine("Properties");
-            shaderFile.AppendLine("{");
-
-            if (_shader.UseTemplatesForProperties)
-            {
-                if (_shader.ShaderPropertiesTemplate != null)
-                    shaderFile.AppendLine(_shader.ShaderPropertiesTemplate.Template);
-
-                shaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
-            }
-            else
-            {
-                foreach (var prop in _properties)
-                {
-                    if (string.IsNullOrWhiteSpace(prop.Type) && !string.IsNullOrWhiteSpace(prop.Name))
-                    {
-                        prop.Type = "Float";
-                        prop.DefaultValue = "0.0";
-                    }
-
-                    string attributes = prop.Attributes.Count == 0 ? "" : $"[{string.Join("][", prop.Attributes)}]";
-                    shaderFile.AppendLine(string.IsNullOrWhiteSpace(prop.Name) ? attributes : $"{attributes} {prop.Name}(\"{prop.DisplayName}\", {prop.Type}) = {prop.DefaultValue}");
-                }
-            }
-
-            shaderFile.AppendLine("}");
-        }
-
-        private static bool CheckPropertyBlockLine(StringBuilder builder, StringReader reader, string line, ref int tabs, ref bool deleteEmptyLine)
-        {
-            string ln = null;
-            line = line.Trim();
-            if (string.IsNullOrEmpty(line))
-            {
-                if (deleteEmptyLine)
-                    return false;
-                deleteEmptyLine = true;
-            }
-            else
-            {
-                deleteEmptyLine = false;
-            }
-
-            if (line.StartsWith("}") && (ln = reader.ReadLine()) != null && ln.Trim().StartsWith("SubShader"))
-                tabs--;
-            builder.AppendLineTabbed(tabs, line);
-
-            if (!string.IsNullOrWhiteSpace(ln))
-                if (CheckPropertyBlockLine(builder, reader, ln, ref tabs, ref deleteEmptyLine))
-                    return true;
-
-            if (line.StartsWith("}") && ln != null && ln.Trim().StartsWith("SubShader"))
-                return true;
-            return false;
-        }
-
-        // Cleanup the final shader file by indenting it decently
-        private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
-        {
-            var finalFile = new StringBuilder(); ;
-            using (var sr = new StringReader(shaderVariant.ToString()))
-            {
-                string line;
-                int tabs = 0;
-                bool deleteEmptyLine = false;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    line = line.Trim();
-
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        if (deleteEmptyLine)
-                            continue;
-                        deleteEmptyLine = true;
-                    }
-                    else
-                    {
-                        deleteEmptyLine = false;
-                    }
-
-                    // Special handling for the properties block, there should never be indentation inside here
-                    if (line.StartsWith("Properties"))
-                    {
-                        finalFile.AppendLineTabbed(tabs, line);
-                        string ln = sr.ReadLine()?.Trim();               // When the previous line is the one containing "Properties" we always know 
-                        finalFile.AppendLineTabbed(tabs, ln);   // that the next line is "{" so we just write it down before increasing the tabs
-                        tabs++;
-                        while ((ln = sr.ReadLine()) != null)    // we should be escaping this loop way before actually meeting the condition, but you never know
-                        {
-                            if (CheckPropertyBlockLine(finalFile, sr, ln, ref tabs, ref deleteEmptyLine))
-                                break;
-                        }
-                        continue;
-                    }
-
-                    if (line.StartsWith("}"))
-                        tabs--;
-                    finalFile.AppendLineTabbed(tabs, line);
-                    if (line.StartsWith("{") || line.EndsWith("{"))
-                        tabs++;
-                }
-            }
-
-            return finalFile;
+            return errors;
         }
     }
 }

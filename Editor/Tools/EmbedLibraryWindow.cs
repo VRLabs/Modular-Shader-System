@@ -229,6 +229,11 @@ public class EmbedLibraryWindow : EditorWindow
                         File.WriteAllText(finalPath, text);
                     }
                 }
+                else if (Path.GetFileName(file).Equals("LICENSE"))
+                {
+                    string finalPath = file.Replace(oldPath, newPath + "/ModularShaderSystem" + subpath);
+                    File.Copy(file, finalPath);
+                }
             }
 
             foreach (string directory in Directory.GetDirectories(oldPath))
