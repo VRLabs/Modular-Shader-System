@@ -472,10 +472,10 @@ namespace VRLabs.ModularShaderSystem
                     }
                     else
                     {
-                        if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_VARIABLES_KEYWORD))
-                            keywordedCode.Add(MSSConstants.DEFAULT_VARIABLES_KEYWORD, new StringBuilder());
+                        if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_CODE_KEYWORD))
+                            keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, new StringBuilder());
                         
-                        keywordedCode[MSSConstants.DEFAULT_VARIABLES_KEYWORD].AppendLine(function.ShaderFunctionCode.Template);
+                        keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(function.ShaderFunctionCode.Template);
                     }
                 }
 
