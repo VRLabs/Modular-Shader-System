@@ -32,6 +32,8 @@ namespace VRLabs.ModularShaderSystem
             if (GUILayout.Button("Generate") && _shader != null)
             {
                 _issues = ShaderGenerator.CheckShaderIssues(_shader);
+                if (_issues.Count == 0)
+                    ShaderGenerator.GenerateShader("Assets", _shader);
             }
 
             if (_issues.Count <= 0) return;
