@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION, 10)]
+    [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION, -1000)]
     public class TemplateColletionAssetImporter : ScriptedImporter
     {
         public override void OnImportAsset(AssetImportContext ctx)

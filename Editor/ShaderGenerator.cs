@@ -378,7 +378,7 @@ namespace VRLabs.ModularShaderSystem
                     foreach (var template in _modules.SelectMany(x => x.Templates).OrderBy(x => x.Queue))
                     {
                         var module = moduleByTemplate[template];
-                        if (template.Template == null) continue;
+                        if (template.Template is null) continue;
                         bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
                         bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
                         bool needsIf = hasEnabler && !isFilteredIn && !template.NeedsVariant;

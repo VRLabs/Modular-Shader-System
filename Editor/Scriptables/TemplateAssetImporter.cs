@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION, 10)]
+    [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION, -1000)]
     public class TemplateAssetImporter : ScriptedImporter
     { 
         //TODO: add icon
