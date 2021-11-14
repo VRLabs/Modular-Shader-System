@@ -12,7 +12,6 @@ namespace VRLabs.ModularShaderSystem
         public override void OnImportAsset(AssetImportContext ctx)
         {
             var subAsset = ScriptableObject.CreateInstance<TemplateAsset>();
-            subAsset.TemplateInstanceID = Guid.NewGuid().ToString();
             subAsset.Template = File.ReadAllText(ctx.assetPath);
             //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
             ctx.AddObjectToAsset("Template", subAsset/*, icon*/);

@@ -11,15 +11,12 @@ namespace VRLabs.ModularShaderSystem
     public class TemplateAsset : ScriptableObject
     {
         public string Template;
-        public string TemplateInstanceID;
 
         public TemplateAsset(string template)
         {
             Template = template;
         }
         public TemplateAsset() : this("") { }
-
-        public override string ToString() => TemplateInstanceID;
 
         //TODO: add preview icon
         [MenuItem("Assets/Create/" + MSSConstants.CREATE_PATH + "/Template", priority = 9)]
