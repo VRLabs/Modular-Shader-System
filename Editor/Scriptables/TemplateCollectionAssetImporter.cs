@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
-    [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION, -1000)]
+    [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION)]
     public class TemplateColletionAssetImporter : ScriptedImporter
     {
         public override void OnImportAsset(AssetImportContext ctx)
@@ -61,6 +61,7 @@ namespace VRLabs.ModularShaderSystem
         private static void SaveSubAsset(AssetImportContext ctx, TemplateCollectionAsset asset, StringBuilder builder, string name)
         {
             var templateAsset = ScriptableObject.CreateInstance<TemplateAsset>();
+            templateAsset.TemplateInstanceID = Guid.NewGuid().ToString();
             templateAsset.Template = builder.ToString();
             templateAsset.name = name;
             ctx.AddObjectToAsset(name, templateAsset /*, icon*/); //TODO: add asset icon here
