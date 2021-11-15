@@ -149,22 +149,14 @@ namespace VRLabs.ModularShaderSystem
                 var shader = context.Shader;
                 var modules = FindAllModules(shader);
                 
-                string assetPath = AssetDatabase.GetAssetPath(shader.ShaderTemplate);
-                freshAssets.Add(shader.ShaderTemplate, AssetDatabase.LoadAssetAtPath<TemplateAsset>(assetPath));
-                assetPath = AssetDatabase.GetAssetPath(shader.ShaderPropertiesTemplate);
-                freshAssets.Add(shader.ShaderPropertiesTemplate, AssetDatabase.LoadAssetAtPath<TemplateAsset>(assetPath));
+                freshAssets.AddFreshShaderToList(shader.ShaderTemplate);
+                freshAssets.AddFreshShaderToList(shader.ShaderPropertiesTemplate);
 
                 foreach (var template in modules.SelectMany(x => x.Templates))
-                {
-                    assetPath = AssetDatabase.GetAssetPath(template.Template);
-                    freshAssets.Add(template.Template, AssetDatabase.LoadAssetAtPath<TemplateAsset>(assetPath));
-                }
-            
+                    freshAssets.AddFreshShaderToList(template.Template);
+
                 foreach (var function in modules.SelectMany(x => x.Functions))
-                {
-                    assetPath = AssetDatabase.GetAssetPath(function.ShaderFunctionCode);
-                    freshAssets.Add(function.ShaderFunctionCode, AssetDatabase.LoadAssetAtPath<TemplateAsset>(assetPath));
-                }
+                    freshAssets.AddFreshShaderToList(function.ShaderFunctionCode);
                 
                 alreadyDoneShaders.Add(shader);
             }
