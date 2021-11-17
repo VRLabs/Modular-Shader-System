@@ -12,14 +12,14 @@ using VRLabs.ModularShaderSystem;
 public class EmbedLibraryWindow : EditorWindow
 {
     [MenuItem(MSSConstants.WINDOW_PATH + "/Embed Library")]
-    public static void ShowExample()
+    public static void CreateWindow()
     {
-        EmbedLibraryWindow wnd = GetWindow<EmbedLibraryWindow>();
-        wnd.titleContent = new GUIContent("Embed Library");
+        var window = GetWindow<EmbedLibraryWindow>();
+        window.titleContent = new GUIContent("Embed Library");
     }
 
     [Serializable]
-    private class librarySettings
+    private class LibrarySettings
     {
         public string nmsc;
         public string variableSink;
@@ -114,17 +114,21 @@ public class EmbedLibraryWindow : EditorWindow
             Directory.Delete(path + "/ModularShaderSystem", true);
             
         CopyDirectory(PATH, path, "", false);
+        
+        string licencePath = PATH.Replace("Editor", "LICENSE");
+        if (File.Exists(licencePath))
+            File.Copy(licencePath, path + "/ModularShaderSystem/LICENSE");
 
         AssetDatabase.Refresh();
     }
 
-    public void SaveSettingsOnFile()
+    private void SaveSettingsOnFile()
     {
         string path = EditorUtility.SaveFilePanel("Save settings to file", "Assets", "embedSettings.json", "json");
         if (path.Length == 0)
             return;
         
-        librarySettings settings = new librarySettings
+        LibrarySettings settings = new LibrarySettings
         {
             nmsc = _namespaceField.value,
             variableSink = _variableKeywordField.value,
@@ -140,7 +144,7 @@ public class EmbedLibraryWindow : EditorWindow
         File.WriteAllText(path,JsonUtility.ToJson(settings));
     }
     
-    public void LoadSettingsFromFile()
+    private void LoadSettingsFromFile()
     {
         string path = EditorUtility.OpenFilePanel("Load settings", "Assets", "json");
         if (!File.Exists(path))
@@ -149,7 +153,7 @@ public class EmbedLibraryWindow : EditorWindow
             return;
         }
 
-        var settings = JsonUtility.FromJson<librarySettings>(File.ReadAllText(path));
+        var settings = JsonUtility.FromJson<LibrarySettings>(File.ReadAllText(path));
 
         _namespaceField.value = settings.nmsc;
         _variableKeywordField.value = settings.variableSink;
@@ -171,31 +175,9 @@ public class EmbedLibraryWindow : EditorWindow
                 
                 if (Path.GetExtension(file).Equals(".cs") || Path.GetExtension(file).Equals(".uxml"))
                 {
-                    var lines = new List<string>();
-                    lines.AddRange(File.ReadAllLines(file));
-                    int i = 0;
-                    while (i < lines.Count && !keepComments)
-                    {
-                        int index = lines[i].IndexOf("//", StringComparison.Ordinal);
-                        if (index != -1)
-                        {
-                            if (!string.IsNullOrEmpty(lines[i].Substring(0, index).Trim()))
-                            {
-                                lines[i] = lines[i].Substring(0, index);
-                                i++;
-                            }
-                            else
-                            {
-                                lines.RemoveAt(i);
-                            }
-                        }
-                        else
-                        {
-                            i++;
-                        }
-                    }
-
-                    string text = string.Join(System.Environment.NewLine, lines);
+                    var lines = new List<string>(File.ReadAllLines(file));
+                    var newLines = lines.Where(line => !line.Trim().StartsWith("//")).ToList();
+                    string text = string.Join(System.Environment.NewLine, newLines);
 
                     text = text.Replace(NAMESPACE, _namespaceField.value + ".ModularShaderSystem");
 
