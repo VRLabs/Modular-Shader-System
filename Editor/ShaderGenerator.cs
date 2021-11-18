@@ -220,6 +220,7 @@ namespace VRLabs.ModularShaderSystem
                 EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "waiting for unity to compile shaders", contexts.Count - 2 / (contexts.Count + 3));
                 // To make sure the AssetDatabase doesn't break out
                 AssetDatabase.StopAssetEditing();
+                AssetDatabase.Refresh();
             }
 
             EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
@@ -228,7 +229,6 @@ namespace VRLabs.ModularShaderSystem
                 context.Material.shader = Shader.Find(context.ShaderName);
             }
             
-            AssetDatabase.Refresh();
             EditorUtility.ClearProgressBar();
         }
 
