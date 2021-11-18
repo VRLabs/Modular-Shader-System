@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,18 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="shader">Modular shader to use</param>
         /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
         public static void GenerateShader(string path, ModularShader shader, bool hideVariants = false)
+        {
+            GenerateShader(path, shader, null,hideVariants);
+        }
+
+        /// <summary>
+        /// Generates a shader with all shader variants, you can give a custom PostGeneration action to handle the shader result for some custom modifications (build keywords are still available at this stage)
+        /// </summary>
+        /// <param name="path">path for the shader files</param>
+        /// <param name="shader">Modular shader to use</param>
+        /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
+        /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
+        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = true)
         {
             var modules = FindAllModules(shader);
             
@@ -42,6 +55,7 @@ namespace VRLabs.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FreshAssets = freshAssets,
                     FilePath = path,
@@ -68,7 +82,7 @@ namespace VRLabs.ModularShaderSystem
             foreach (var context in contexts)
                 shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + context.VariantFileName));
         }
-        
+
         /// <summary>
         /// Generates a shader with all shader variants
         /// </summary>
@@ -76,6 +90,18 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="shader">Modular shader to use</param>
         /// <param name="materials">List of materials given</param>
         public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            GenerateMinimalShader(path, shader, materials, null);
+        }
+
+        /// <summary>
+        /// Generates a shader with all shader variants
+        /// </summary>
+        /// <param name="path">path for the shader files</param>
+        /// <param name="shader">Modular shader to use</param>
+        /// <param name="materials">List of materials given</param>
+        /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
+        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -87,6 +113,7 @@ namespace VRLabs.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
@@ -97,7 +124,7 @@ namespace VRLabs.ModularShaderSystem
 
             contexts.GenerateMinimalShaders();
         }
-        
+
         /// <summary>
         /// Enqueues shaders to generate
         /// </summary>
@@ -106,6 +133,19 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="materials">List of materials given</param>
         /// <returns>A list of the shaderContexts</returns>
         public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            return EnqueueShadersToGenerate(path, shader, materials, null);
+        }
+
+        /// <summary>
+        /// Enqueues shaders to generate
+        /// </summary>
+        /// <param name="path">path for the shader files</param>
+        /// <param name="shader">Modular shader to use</param>
+        /// <param name="materials">List of materials given</param>
+        /// <returns>A list of the shaderContexts</returns>
+        /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
+        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -117,6 +157,7 @@ namespace VRLabs.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
@@ -297,6 +338,7 @@ namespace VRLabs.ModularShaderSystem
             public ModularShader Shader;
             public Dictionary<string, int> ActiveEnablers;
             public Dictionary<TemplateAsset, TemplateAsset> FreshAssets;
+            public Action<StringBuilder, ShaderContext> PostGeneration;
             private List<EnableProperty> _liveUpdateEnablers;
             public string FilePath;
             public string VariantFileName;
@@ -370,6 +412,7 @@ namespace VRLabs.ModularShaderSystem
                     ShaderFile.AppendLine($"CustomEditor \"{Shader.CustomEditor}\"");
                 ShaderFile.AppendLine("}");
 
+                PostGeneration?.Invoke(ShaderFile, this);
 
                 MatchCollection m = Regex.Matches(ShaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
                 for (int i = m.Count - 1; i >= 0; i--)
@@ -545,7 +588,7 @@ namespace VRLabs.ModularShaderSystem
                             if (!keywordedCode.ContainsKey(keyword))
                                 keywordedCode.Add(keyword, new StringBuilder());
 
-                            keywordedCode[keyword].AppendLine(freshAsset.Template);
+                            if (freshAsset != null) keywordedCode[keyword].AppendLine(freshAsset.Template);
                         }
                     }
                     else
@@ -553,7 +596,7 @@ namespace VRLabs.ModularShaderSystem
                         if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_CODE_KEYWORD))
                             keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, new StringBuilder());
                         
-                        keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
+                        if (freshAsset != null) keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
                     }
                 }
 

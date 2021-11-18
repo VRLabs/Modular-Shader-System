@@ -157,12 +157,12 @@ namespace VRLabs.ModularShaderSystem
 
                     for (int j = 0; j < _array.arraySize; j++)
                     {
-                        var field = ((ObjectField)x.target).parent.parent.parent.ElementAt(j).ElementAt(0);
-                        Label label = field.ElementAt(1) as Label;
+                        var element = ((ObjectField)x.target).parent.parent.parent.ElementAt(j*2+1).ElementAt(1);
+                        Label label = element.ElementAt(1) as Label;
                         if (index == j)
-                            CheckModuleValidity(newValue, label, field);
+                            CheckModuleValidity(newValue, label, element);
                         else
-                            CheckModuleValidity((ShaderModule)_array.GetArrayElementAtIndex(j).objectReferenceValue, label, field);
+                            CheckModuleValidity((ShaderModule)_array.GetArrayElementAtIndex(j).objectReferenceValue, label, element);
                     }
                 });
 
