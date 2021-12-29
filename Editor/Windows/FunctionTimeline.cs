@@ -619,10 +619,16 @@ namespace VRLabs.ModularShaderSystem
                 };
                 _roots.Add(root);
             }
-
+            
+            if (_roots.Count == 0)
+            {
+                Label label = new Label("No roots found");
+                left.Add(label);
+                return;
+            }
             var timelineContent = new VisualElement();
-            if(_roots.Count > 0) 
-                timelineContent.Add(_roots[0]);
+            
+            timelineContent.Add(_roots[0]);
             
             var timelineScroll = new ScrollView(ScrollViewMode.Vertical);
             timelineScroll.AddToClassList("timeline");

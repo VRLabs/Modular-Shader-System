@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -52,6 +53,7 @@ namespace VRLabs.ModularShaderSystem
             
             foreach (var template in  shader.BaseModules.Concat(shader.AdditionalModules).SelectMany(x => x.Templates).OrderBy(x => x.Queue))
             {
+                if (template.Template == null) continue;
                 var module = moduleByTemplate[template];
                 _pairs.AddRange(_column.AddTemplate(module.Id, template));
             }
@@ -78,6 +80,7 @@ namespace VRLabs.ModularShaderSystem
     
     public class TemplateItemElement : VisualElement
     {
+        public float Height => Math.Max(_asset.Keywords.Length, 1) * 15 + 59;
         private ModuleTemplate _template;
         public TemplateAsset _asset;
         public string ModuleId;
@@ -360,22 +363,40 @@ namespace VRLabs.ModularShaderSystem
         {
             foreach (var item in _items)
             {
-                int i = 0;
-                float counter = 0;
-                foreach (TemplatePair pair in pairs.Where(x => x.Left == item))
-                {
-                    _bezierContainer.Add(new BezierElement(pair));
-                    counter += _child?.GetTotalStackHeight(i) ?? 1;
-                    i++;
-                }
+                AddChildrenToHierarchy(item, pairs);
+            }
+        }
+        
+        public void AddChildrenToHierarchy(TemplateItemElement item, List<TemplatePair> pairs)
+        {
+            if (!_items.Contains(item)) return;
+            int i = 0;
+            float counter = 0;
+            var relevantPairs = pairs.Where(x => x.Left == item).ToList();
+            foreach (TemplatePair pair in relevantPairs)
+            {
+                _bezierContainer.Add(new BezierElement(pair));
+                counter += _child?.GetTotalStackHeight(pair.Right) ?? 0;
+                _child?.AddChildrenToHierarchy(pair.Right, pairs);
+                i++;
+            }
 
-                if (_child == null)
-                {
-                    _container.Add(item);
-                    continue;
-                }
+            if (_child == null)
+            {
+                _container.Add(item);
+                return;
+            }
 
-                float height = (counter - ((item._asset.Keywords.Length - 1) * 15 + 89)) / 2;
+            if (relevantPairs.Count == 0)
+            {
+                var space = new VisualElement();
+                space.style.height = item.Height;
+                _child._container.Add(space);
+                _container.Add(item);
+            }
+            else
+            {
+                float height = (counter - (item.Height)) / 2;
                 var space = new VisualElement();
                 space.style.height = height;
                 _container.Add(space);
@@ -384,18 +405,19 @@ namespace VRLabs.ModularShaderSystem
                 space.style.height = height;
                 _container.Add(space);
             }
-            
-            _child?.AddItemsToElementsHierarchy(pairs);
+
         }
 
-        public float GetTotalStackHeight(int c)
+        public float GetTotalStackHeight(TemplateItemElement c)
         {
-            if (_child == null) return (_items[c]._asset.Keywords.Length - 1) * 15 + 89;
-
+            if (_child == null) return c.Height;
+            
+            int index = _items.IndexOf(c);
+            if (_itemsChildren[index].Length == 0) return c.Height;
             float counter = 0;
-            for (int i = 0; i < _itemsChildren[c].Length; i++)
+            for (int i = 0; i < _itemsChildren[index].Length; i++)
             {
-                counter += _child.GetTotalStackHeight(i);
+                counter += _child.GetTotalStackHeight(_itemsChildren[index][i]);
             }
 
             return counter;
