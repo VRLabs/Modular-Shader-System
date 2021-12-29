@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 
@@ -63,6 +65,18 @@ namespace VRLabs.ModularShaderSystem
             var templateAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             templateAsset.Template = builder.ToString();
             templateAsset.name = name;
+            
+            MatchCollection mk = Regex.Matches(templateAsset.Template, @"#K#\w*", RegexOptions.Multiline);
+            MatchCollection mki = Regex.Matches(templateAsset.Template, @"#KI#\w*", RegexOptions.Multiline);
+
+            var mkr = new string[mk.Count + mki.Count]; 
+            for (var i = 0; i < mk.Count; i++)
+                mkr[i] = mk[i].Value;
+            for (var i = 0; i < mki.Count; i++)
+                mkr[mk.Count + i] = mki[i].Value;
+
+            templateAsset.Keywords = mkr.Distinct().ToArray();
+            
             ctx.AddObjectToAsset(name, templateAsset /*, icon*/); //TODO: add asset icon here
             asset.Templates.Add(templateAsset);
         }

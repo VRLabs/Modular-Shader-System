@@ -1,0 +1,20 @@
+.button-tab-area
+{
+    flex-direction: row;
+    margin: 0;
+}
+.button-tab
+{
+    flex-grow: 1;
+    height: 24px;
+    margin: 4px 0 0 0;
+    border-radius: 0;
+    border-width: 1px 1px 0 1px;
+    background-color: #484848;
+}
+
+.button-tab-selected
+{
+    background-color: #303030;
+}
+
