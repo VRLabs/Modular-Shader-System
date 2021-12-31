@@ -69,10 +69,11 @@ namespace VRLabs.ModularShaderSystem
         public void CreateGUI()
         {
             VisualElement root = rootVisualElement;
-            
             var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ModularShaderDebuggerStyle");
+            var darkThemeStyleSheet = EditorGUIUtility.Load("StyleSheets/Generated/DefaultCommonDark_inter.uss.asset") as StyleSheet;
+            root.styleSheets.Add(darkThemeStyleSheet);
             root.styleSheets.Add(styleSheet);
-
+            root.style.backgroundColor = new Color(0.2196079f, 0.2196079f, 0.2196079f, 1);
             _modularShaderField = new ObjectField("Shader");
             _modularShaderField.objectType = typeof(ModularShader);
             _modularShaderField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>

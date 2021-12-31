@@ -272,6 +272,8 @@ namespace VRLabs.ModularShaderSystem
             var viewer = new CodeViewElement();
             viewer.Text = Text;
             viewer.StretchToParentSize();
+            var darkThemeStyleSheet = EditorGUIUtility.Load("StyleSheets/Generated/DefaultCommonDark_inter.uss.asset") as StyleSheet;
+            rootVisualElement.styleSheets.Add(darkThemeStyleSheet);
             rootVisualElement.Add(viewer);
         }
     }
