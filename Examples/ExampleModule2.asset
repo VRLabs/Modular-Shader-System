@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: 
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -32,9 +31,8 @@ MonoBehaviour:
   Functions:
   - Name: DoSomething2
     AppendAfter: '#K#MAINPASSENTRY'
-    Priority: 100
-    ShaderFunctionCode: {fileID: 1413292532103889072, guid: 35e466f48e6f22d43b3f8730de2b17d7,
-      type: 3}
+    Queue: 100
+    ShaderFunctionCode: {fileID: 0}
     UsedVariables:
     - Name: availableVariable
       Type: 4
