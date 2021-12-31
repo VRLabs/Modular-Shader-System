@@ -1,94 +1,15 @@
-TemplateItemElement
-{
-    margin: 3px;
-    
-    flex-shrink: 0;
-    flex-grow: 0;
-}
-.graph
-{
-    background-color: #202020;
-}
-
 .node-header-queue
 {
     -unity-font-style: italic;
     color: grey;
     -unity-text-align: middle-right;
     flex-grow: 1;
+    margin-right: 6px;
 }
-
-.node-header
-{
-    background-color: #383838;
-    flex-direction: row;
-    padding: 8px;
-    border-color: black;
-    border-width: 2px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-
-.node-header-name
-{
-    color: #C4C4C4;
-}
-
 .node-header-id
 {
-    color: #C4C4C4;
-    font-size: 9px;
+    font-size: 8px;
     -unity-font-style: italic;
     align-self: center;
-}
-
-.node-body
-{
-    background-color: #383838;
-    flex-direction: row;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-color: black;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    
-}
-.node-body>VisualElement
-{
-    padding: 8px;
-    flex-grow: 1;
-}
-
-.node-body.divider>VisualElement
-{
-    border-color: black;
-    border-left-width: 2px;
-}
-
-.node-body>Label
-{
-    padding: 8px;
-    margin-right: 20px;
-    -unity-text-align: middle-left;
-    color: #C4C4C4;
-}
-
-.node-body>VisualElement>Label
-{
-    color: #C4C4C4;
-    flex-grow: 1;
-    -unity-text-align: middle-right;
-}
-
-TemplateRow
-{
-    margin-left: 50px;
-}
-
-PopupField
-{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 500px;
+    margin-left: 2px;
 }

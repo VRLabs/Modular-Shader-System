@@ -513,27 +513,22 @@ namespace VRLabs.ModularShaderSystem
             set
             {
                 _selectedItem = value;
-                _templateLabel.text = _selectedItem;
+                _viewer.Text = _selectedItem;
             }
         }
 
-        private Label _templateLabel;
+        private CodeViewElement _viewer;
         private string _selectedItem;
 
         public FunctionTemplateViewer()
         {
-            ScrollView s = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
-            _templateLabel = new Label(SelectedItem);
-            s.AddToClassList("unity-base-text-field__input");
-            s.AddToClassList("unity-text-field__input");
-            s.AddToClassList("unity-base-field__input");
-            s.Add(_templateLabel);
+            _viewer = new CodeViewElement();
             
             var title = new Label("Function code template");
             title.AddToClassList("area-title");
             
             Add(title);
-            Add(s);
+            Add(_viewer);
         }
     }
 
@@ -619,15 +614,14 @@ namespace VRLabs.ModularShaderSystem
                 };
                 _roots.Add(root);
             }
-            
+
+            var timelineContent = new VisualElement();
             if (_roots.Count == 0)
             {
                 Label label = new Label("No roots found");
                 left.Add(label);
                 return;
             }
-            var timelineContent = new VisualElement();
-            
             timelineContent.Add(_roots[0]);
             
             var timelineScroll = new ScrollView(ScrollViewMode.Vertical);
@@ -661,5 +655,4 @@ namespace VRLabs.ModularShaderSystem
             bot.Add(moduleViewer);
         }
     }
-
 }
