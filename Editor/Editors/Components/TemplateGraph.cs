@@ -175,6 +175,7 @@ namespace VRLabs.ModularShaderSystem
             
             edge.input.Connect(edge);
             edge.output.Connect(edge);
+            edge.SetEnabled(false);
             Add(edge);
         }
     }
@@ -213,6 +214,7 @@ namespace VRLabs.ModularShaderSystem
                 Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(string));
                 Input.portName = key;
                 Input.portColor = Color.cyan;
+                Input.edgeConnector.activators.Clear();
                 inputContainer.Add(Input);
             }
 
@@ -223,6 +225,7 @@ namespace VRLabs.ModularShaderSystem
                 string sanitizedKeyword = keyword.Replace("#K#", "").Replace("#KI#", "");
                 port.portName = sanitizedKeyword;
                 port.portColor = Color.cyan;
+                port.edgeConnector.activators.Clear();
                 Outputs.Add(sanitizedKeyword, port);
                 outputContainer.Add(port);
             }

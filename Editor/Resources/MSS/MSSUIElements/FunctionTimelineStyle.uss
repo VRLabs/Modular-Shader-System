@@ -31,6 +31,11 @@ FunctionItem
     align-content: stretch;
 }
 
+CodeViewElement
+{
+    margin: 6px;
+}
+
 .function-header-queue
 {
     -unity-font-style: italic;
@@ -78,7 +83,7 @@ FunctionViewer
 {
     width: 50%;
     border-width: 2px;
-    border-color: #202020;
+    border-color: #282828;
     margin: 2px;
 }
 
@@ -86,7 +91,7 @@ FunctionTemplateViewer
 {
     flex-grow: 1;
     border-width: 2px;
-    border-color: #202020;
+    border-color: #282828;
     margin: 2px;
 }
 
@@ -94,7 +99,7 @@ ModuleViewer
 {
     width: 50%;
     border-width: 2px;
-    border-color: #202020;
+    border-color: #282828;
     margin: 2px;
 }
 
@@ -110,8 +115,9 @@ ModuleViewer
 
 .area-title
 {
-    margin: 4px;
-    
+    margin: 0;
+    padding: 4px;
+    background-color: #282828;
     -unity-font-style: bold;
 }
 

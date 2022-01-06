@@ -103,7 +103,6 @@ namespace VRLabs.ModularShaderSystem
             _content.Clear();
             _contentChilden.Clear();
             
-            int maxCounter = 0;
             for (int index = Functions.Count - 1; index >= 0; index--)
             {
                 FunctionItem function = Functions[index];
