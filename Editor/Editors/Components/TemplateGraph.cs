@@ -223,7 +223,8 @@ namespace VRLabs.ModularShaderSystem
                 var port = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(string));
                 
                 string sanitizedKeyword = keyword.Replace("#K#", "").Replace("#KI#", "");
-                port.portName = sanitizedKeyword;
+                bool isInternal = keyword.StartsWith("#KI#");
+                port.portName = sanitizedKeyword + (isInternal ? "(i)" : "");
                 port.portColor = Color.cyan;
                 port.edgeConnector.activators.Clear();
                 Outputs.Add(sanitizedKeyword, port);
