@@ -16,6 +16,7 @@ MonoBehaviour:
   Name: Example Modular Shader
   Version: 1.0
   Author: VRLabs
+  Description: 
   UseTemplatesForProperties: 0
   ShaderPropertiesTemplate: {fileID: 0}
   ShaderPath: VRLabs/Examples/Example Modular Shader
@@ -52,3 +53,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a456ab203c06e341bdbdf8d48c8c643, type: 2}
   AdditionalModules: []
   LockBaseModules: 0
+  LastGeneratedShaders: []
+  AdditionalSerializedData: 

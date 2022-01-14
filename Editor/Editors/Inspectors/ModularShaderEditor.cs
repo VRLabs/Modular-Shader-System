@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -41,6 +42,27 @@ namespace VRLabs.ModularShaderSystem
             {
                 propertiesTemplateField.style.display = x.newValue ? DisplayStyle.Flex : DisplayStyle.None;
             });
+            
+            var generateButton = _root.Q<Button>("RegenerateShaderButton");
+
+            generateButton.clicked += () =>
+            {
+                var _issues = ShaderGenerator.CheckShaderIssues(_shader);
+                if (_issues.Count > 0)
+                {
+                    EditorUtility.DisplayDialog("Error", $"The modular shader has issues that must be resolved before generating the shader:\n  {string.Join("\n  ", _issues)}", "Ok");
+                    return;
+                }
+
+                string path = EditorUtility.OpenFolderPanel("Select folder", "Assets", "");
+                if (path.Length == 0)
+                    return;
+
+                string localPath = Environment.CurrentDirectory;
+                localPath = localPath.Replace('\\', '/');
+                path = path.Replace(localPath + "/", "");
+                ShaderGenerator.GenerateShader(path, _shader);
+            };
 
             return _root;
         }

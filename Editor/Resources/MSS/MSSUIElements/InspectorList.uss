@@ -113,15 +113,13 @@
 
 .inspector-list-drop-area
 {
-    height: 0px;
-    
+    height: 5px;
     border-radius: 4px;
+
 }
 
 .inspector-list-drop-area-highlight
 {
-    height: 8px;
-    margin: 2px;
     background-color: rgba(128, 128, 190, 0.5);
 }
 
