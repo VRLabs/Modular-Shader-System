@@ -22,6 +22,7 @@ namespace VRLabs.ModularShaderSystem
             foldout.text = property.displayName;
             foldout.RegisterValueChangedCallback((e) => property.isExpanded = e.newValue);
             foldout.value = property.isExpanded;
+
             foldout.Add(template);
             _root.Add(foldout);
 

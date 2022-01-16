@@ -330,7 +330,7 @@ namespace VRLabs.ModularShaderSystem
         {
             var title = new Label("Selected function information");
             title.AddToClassList("area-title");
-            var content = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
+            var content = new ScrollView(ScrollViewMode.Vertical);
             content.AddToClassList("area-content");
 
             _name = new LabelField("Name", "");
@@ -401,6 +401,8 @@ namespace VRLabs.ModularShaderSystem
             _labelField.AddToClassList("unity-base-field__label");
             _labelField.AddToClassList("unity-base-text-field__label");
             _labelField.AddToClassList("unity-text-field__label");
+            _labelField.AddToClassList("label-field-title");
+            _valueField.AddToClassList("label-field-value");
             
             Add(_labelField);
             Add(_valueField);
@@ -475,7 +477,7 @@ namespace VRLabs.ModularShaderSystem
         {
             var title = new Label("Function's module base info");
             title.AddToClassList("area-title");
-            var content = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
+            var content = new ScrollView(ScrollViewMode.Vertical);
             _content = content;
             _content.AddToClassList("area-content");
             

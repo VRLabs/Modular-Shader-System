@@ -26,6 +26,8 @@ namespace VRLabs.ModularShaderSystem
             foldout.Add(template);
             _root.Add(foldout);
             
+            var nameField = template.Q<TextField>("Name");
+            nameField.RegisterValueChangedCallback(evt => foldout.text = evt.newValue);
             var typeField = template.Q<EnumField>("Type");
             var customTypeField = template.Q<VisualElement>("CustomType");
             

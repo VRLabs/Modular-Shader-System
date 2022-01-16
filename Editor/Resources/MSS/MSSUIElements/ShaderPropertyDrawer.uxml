@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:TextField label="Name" binding-path="Name" />
+    <ui:TextField name="Name" label="Name" binding-path="Name" />
     <ui:TextField label="Display Name" binding-path="DisplayName" />
     <uie:EnumField name="TypeField" label="Type" type="VRLabs.ModularShaderSystem.PropertyType, Assembly-CSharp-Editor" />
     <ui:VisualElement name="ValueContainer" />
