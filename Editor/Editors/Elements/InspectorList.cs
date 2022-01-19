@@ -4,8 +4,11 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// Interface for an inspector list used for drag reorder.
+    /// </summary>
     public interface IInspectorList
     {
         InspectorListItem draggedElement { get; set; }
@@ -13,6 +16,9 @@ namespace VRLabs.ModularShaderSystem
         void DeHighlightDrops();
     }
 
+    /// <summary>
+    /// Visual element used to show a list from a Serialized property containing a list
+    /// </summary>
     // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
     public class InspectorList : BindableElement, IInspectorList
     {
@@ -242,8 +248,9 @@ namespace VRLabs.ModularShaderSystem
 
     }
 
-
-
+    /// <summary>
+    /// Item for <see cref="InspectorList"/>
+    /// </summary>
     public class InspectorListItem : VisualElement
     {
         public Button removeButton;

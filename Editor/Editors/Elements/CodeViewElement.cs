@@ -3,8 +3,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// VisualElement used to show a piece of code
+    /// </summary>
     public class CodeViewElement : VisualElement
     {
         private class LineItem : VisualElement
@@ -76,6 +79,9 @@ namespace VRLabs.ModularShaderSystem
         private ListView _listView;
         private int _digits;
 
+        /// <summary>
+        /// Default constructor of <see cref="CodeViewElement"/>
+        /// </summary>
         public CodeViewElement()
         {
             ScrollView s = new ScrollView(ScrollViewMode.Horizontal);

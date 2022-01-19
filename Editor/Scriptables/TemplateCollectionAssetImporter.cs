@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Scripted importer for the template collection.
+    /// </summary>
     [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION)]
     public class TemplateColletionAssetImporter : ScriptedImporter
     {

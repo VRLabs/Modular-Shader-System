@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.Debug
 {
     /// <summary>
     /// Interface indicating a tab for the Modular Shader Debugger.

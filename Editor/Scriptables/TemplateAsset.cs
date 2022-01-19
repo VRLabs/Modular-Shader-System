@@ -8,9 +8,19 @@ using Object = UnityEngine.Object;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Asset containing shader code that is used around the modular shader system.
+    /// </summary>
     public class TemplateAsset : ScriptableObject
     {
+        /// <summary>
+        /// Template string.
+        /// </summary>
         public string Template;
+        
+        /// <summary>
+        /// Keywords found in the template
+        /// </summary>
         public string[] Keywords;
 
         public TemplateAsset(string template)

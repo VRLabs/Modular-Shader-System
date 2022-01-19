@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
+    
+    /// <summary>
+    /// Scripted importer for the template asset 
+    /// </summary>
     [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
     public class TemplateAssetImporter : ScriptedImporter
     { 

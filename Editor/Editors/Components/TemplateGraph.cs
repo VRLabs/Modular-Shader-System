@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VRLabs.ModularShaderSystem.UI;
 
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.Debug
 {
+    /// <summary>
+    /// Modular Shader Debugger tab used show the current template tree of the modular shader.
+    /// </summary>
     public class TemplateGraph : IModularShaderDebuggerTab
     {
         public VisualElement TabContainer { get; set; }
         public string TabName { get; set; }
 
-        public TemplateGraphView _graph;
+        internal TemplateGraphView _graph;
 
         public TemplateGraph()
         {
@@ -23,7 +26,6 @@ namespace VRLabs.ModularShaderSystem
             TabContainer.StretchToParentSize();
             var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/TemplateGraphStyle");
             TabContainer.styleSheets.Add(styleSheet);
-
         }
         
         public void UpdateTab(ModularShader shader)
@@ -60,7 +62,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class TemplateGraphView : GraphView
+    internal class TemplateGraphView : GraphView
     {
         public List<TemplateNode> Nodes;
         public List<TemplateNode> BaseNodes;
@@ -180,7 +182,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public sealed class TemplateNode : Node
+    internal sealed class TemplateNode : Node
     {
         public TemplateAsset TemplateAsset { get; set; }
         public string ModuleId { get; set; }
@@ -265,20 +267,6 @@ namespace VRLabs.ModularShaderSystem
         public bool ContainsKeyword(string keyword)
         {
             return TemplateAsset.Keywords.Contains(keyword);
-        }
-    }
-
-    public class TextPopup : EditorWindow
-    {
-        public string Text;
-        private void CreateGUI()
-        {
-            var viewer = new CodeViewElement();
-            viewer.Text = Text;
-            viewer.StretchToParentSize();
-            var darkThemeStyleSheet = EditorGUIUtility.Load("StyleSheets/Generated/DefaultCommonDark_inter.uss.asset") as StyleSheet;
-            rootVisualElement.styleSheets.Add(darkThemeStyleSheet);
-            rootVisualElement.Add(viewer);
         }
     }
 }

@@ -6,22 +6,11 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEngine.Analytics;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
-    public enum PropertyType
-    {
-        Float,
-        Int,
-        Range,
-        Vector,
-        Color,
-        Texture2D,
-        Texture2DArray,
-        Cube,
-        CubeArray,
-        Texture3D
-    }
-
+    /// <summary>
+    /// Default values for texture properties
+    /// </summary>
     public enum DefaultTextureValue
     {
         White,
@@ -30,6 +19,9 @@ namespace VRLabs.ModularShaderSystem
         Bump,
     }
     
+    /// <summary>
+    /// Inspector drawer for <see cref="Property"/>.
+    /// </summary>
     [CustomPropertyDrawer(typeof(Property))]
     public class ShaderPropertyDrawer : PropertyDrawer
     {

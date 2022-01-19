@@ -9,170 +9,175 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using VRLabs.ModularShaderSystem;
 
-public class EmbedLibraryWindow : EditorWindow
+namespace VRLabs.ModularShaderSystem.Tools
 {
-    [MenuItem(MSSConstants.WINDOW_PATH + "/Embed Library")]
-    public static void CreateWindow()
+    /// <summary>
+    /// Editor window to let users embed the modular shader system into another library.
+    /// </summary>
+    public class EmbedLibraryWindow : EditorWindow
     {
-        var window = GetWindow<EmbedLibraryWindow>();
-        window.titleContent = new GUIContent("Embed Library");
-    }
-
-    [Serializable]
-    private class LibrarySettings
-    {
-        public string nmsc;
-        public string variableSink;
-        public string codeSink;
-        public string propKeyword;
-        public string tmpExtension;
-        public string tmpclExtension;
-        public string rscfName;
-        public string windowPath;
-        public string createPath;
-    }
-    
-    private const string PATH = "Assets/VRLabs/ModularShaderSystem/Editor";
-    private const string NAMESPACE = "VRLabs.ModularShaderSystem";
-    
-    private static readonly Regex NamespaceRegex = new Regex("^[a-zA-Z0-9.]*$");
-
-    private TextField _namespaceField;
-    private TextField _codeKeywordField;
-    private TextField _variableKeywordField;
-    private TextField _propertiesKeyword;
-    private TextField _templateExtension;
-    private TextField _templateCollectionExtension;
-    private TextField _resourceFolderField;
-    private TextField _windowPathField;
-    private TextField _createPathField;
-    private Label _namespaceLabel;
-    private Button _embedButton;
-    private Button _loadButton;
-    private Button _saveButton;
-
-    public void CreateGUI()
-    {
-        // Each editor window contains a root VisualElement object
-        VisualElement root = rootVisualElement;
-
-        // Import UXML
-        var visualTree =Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER +"/MSSUIElements/EmbedLibraryWindow");
-        VisualElement labelFromUxml = visualTree.CloneTree();
-        root.Add(labelFromUxml);
-        
-        _namespaceField = root.Q<TextField>("NamespaceField");
-        _variableKeywordField = root.Q<TextField>("VariableKeywordField");
-        _codeKeywordField = root.Q<TextField>("CodeKeywordField");
-        _propertiesKeyword = root.Q<TextField>("PropertiesKeywordField");
-        _templateExtension = root.Q<TextField>("ExtensionField");
-        _templateCollectionExtension = root.Q<TextField>("CollectionExtensionField");
-        _resourceFolderField = root.Q<TextField>("ResourceFolderField");
-        _windowPathField = root.Q<TextField>("WindowPathField");
-        _createPathField = root.Q<TextField>("CreatePathField");
-        _namespaceLabel = root.Q<Label>("NamespacePreview");
-        _embedButton = root.Q<Button>("EmbedButton");
-        _loadButton = root.Q<Button>("LoadButton");
-        _saveButton = root.Q<Button>("SaveButton");
-        
-        _embedButton.clicked += EmbedButtonOnclick;
-        _loadButton.clicked += LoadSettingsFromFile;
-        _saveButton.clicked += SaveSettingsOnFile;
-
-        _namespaceField.RegisterValueChangedCallback(x =>
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Embed Library")]
+        public static void CreateWindow()
         {
-            if (NamespaceRegex.IsMatch(x.newValue))
-                _namespaceLabel.text = x.newValue + ".ModularShaderSystem";
-            else
-                _namespaceField.value = x.previousValue;
-        });
-
-        // A stylesheet can be added to a VisualElement.
-        // The style will be applied to the VisualElement and all of its children.
-        //var styleSheet = Resources.Load<StyleSheet>("MSSUIElements/EmberLibraryWindow");
-        //VisualElement labelWithStyle = new Label("Hello World! With Style");
-        //labelWithStyle.styleSheets.Add(styleSheet);
-        //root.Add(labelWithStyle);
-    }
-
-    private void EmbedButtonOnclick()
-    {
-        if (!Directory.Exists(PATH))
-            EditorUtility.DisplayDialog("Error", "Modular shader system has not been found in its default location, consider deleting it and reinstalling it using the official UnityPackage.", "Ok");
-        
-        string path = EditorUtility.OpenFolderPanel("Select editor folder to use", "Assets", "Editor");
-        if (path.Length == 0)
-            return;
-
-        if (!Path.GetFileName(path).Equals("Editor"))
-        {
-            EditorUtility.DisplayDialog("Error", "The folder must be an \"Editor\" folder", "Ok");
-            return;
+            var window = GetWindow<EmbedLibraryWindow>();
+            window.titleContent = new GUIContent("Embed Library");
         }
 
-        if (Directory.Exists(path + "/ModularShaderSystem"))
-            Directory.Delete(path + "/ModularShaderSystem", true);
-            
-        CopyDirectory(PATH, path, "", false);
-        
-        string licencePath = PATH.Replace("Editor", "LICENSE");
-        if (File.Exists(licencePath))
-            File.Copy(licencePath, path + "/ModularShaderSystem/LICENSE");
-
-        AssetDatabase.Refresh();
-    }
-
-    private void SaveSettingsOnFile()
-    {
-        string path = EditorUtility.SaveFilePanel("Save settings to file", "Assets", "embedSettings.json", "json");
-        if (path.Length == 0)
-            return;
-        
-        LibrarySettings settings = new LibrarySettings
+        [Serializable]
+        private class LibrarySettings
         {
-            nmsc = _namespaceField.value,
-            variableSink = _variableKeywordField.value,
-            codeSink = _codeKeywordField.value,
-            propKeyword = _propertiesKeyword.value,
-            tmpExtension = _templateExtension.value,
-            tmpclExtension = _templateCollectionExtension.value,
-            rscfName = _resourceFolderField.value,
-            windowPath = _windowPathField.value,
-            createPath = _createPathField.value
-        };
-        
-        File.WriteAllText(path,JsonUtility.ToJson(settings));
-    }
-    
-    private void LoadSettingsFromFile()
-    {
-        string path = EditorUtility.OpenFilePanel("Load settings", "Assets", "json");
-        if (!File.Exists(path))
-        {
-            EditorUtility.DisplayDialog("Error", "File does not exist", "Ok");
-            return;
+            public string nmsc;
+            public string variableSink;
+            public string codeSink;
+            public string propKeyword;
+            public string tmpExtension;
+            public string tmpclExtension;
+            public string rscfName;
+            public string windowPath;
+            public string createPath;
         }
 
-        var settings = JsonUtility.FromJson<LibrarySettings>(File.ReadAllText(path));
+        private const string PATH = "Assets/VRLabs/ModularShaderSystem/Editor";
+        private const string NAMESPACE = "VRLabs.ModularShaderSystem";
 
-        _namespaceField.value = settings.nmsc;
-        _variableKeywordField.value = settings.variableSink;
-        _codeKeywordField.value = settings.codeSink;
-        _propertiesKeyword.value = settings.propKeyword;
-        _templateExtension.value = settings.tmpExtension;
-        _templateCollectionExtension.value = settings.tmpclExtension;
-        _resourceFolderField.value = settings.rscfName;
-        _windowPathField.value = settings.windowPath;
-        _createPathField.value = settings.createPath;
-    }
+        private static readonly Regex NamespaceRegex = new Regex("^[a-zA-Z0-9.]*$");
+
+        private TextField _namespaceField;
+        private TextField _codeKeywordField;
+        private TextField _variableKeywordField;
+        private TextField _propertiesKeyword;
+        private TextField _templateExtension;
+        private TextField _templateCollectionExtension;
+        private TextField _resourceFolderField;
+        private TextField _windowPathField;
+        private TextField _createPathField;
+        private Label _namespaceLabel;
+        private Button _embedButton;
+        private Button _loadButton;
+        private Button _saveButton;
+
+        public void CreateGUI()
+        {
+            // Each editor window contains a root VisualElement object
+            VisualElement root = rootVisualElement;
+
+            // Import UXML
+            var visualTree = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/EmbedLibraryWindow");
+            VisualElement labelFromUxml = visualTree.CloneTree();
+            root.Add(labelFromUxml);
+
+            _namespaceField = root.Q<TextField>("NamespaceField");
+            _variableKeywordField = root.Q<TextField>("VariableKeywordField");
+            _codeKeywordField = root.Q<TextField>("CodeKeywordField");
+            _propertiesKeyword = root.Q<TextField>("PropertiesKeywordField");
+            _templateExtension = root.Q<TextField>("ExtensionField");
+            _templateCollectionExtension = root.Q<TextField>("CollectionExtensionField");
+            _resourceFolderField = root.Q<TextField>("ResourceFolderField");
+            _windowPathField = root.Q<TextField>("WindowPathField");
+            _createPathField = root.Q<TextField>("CreatePathField");
+            _namespaceLabel = root.Q<Label>("NamespacePreview");
+            _embedButton = root.Q<Button>("EmbedButton");
+            _loadButton = root.Q<Button>("LoadButton");
+            _saveButton = root.Q<Button>("SaveButton");
+
+            _embedButton.clicked += EmbedButtonOnclick;
+            _loadButton.clicked += LoadSettingsFromFile;
+            _saveButton.clicked += SaveSettingsOnFile;
+
+            _namespaceField.RegisterValueChangedCallback(x =>
+            {
+                if (NamespaceRegex.IsMatch(x.newValue))
+                    _namespaceLabel.text = x.newValue + ".ModularShaderSystem";
+                else
+                    _namespaceField.value = x.previousValue;
+            });
+
+            // A stylesheet can be added to a VisualElement.
+            // The style will be applied to the VisualElement and all of its children.
+            //var styleSheet = Resources.Load<StyleSheet>("MSSUIElements/EmberLibraryWindow");
+            //VisualElement labelWithStyle = new Label("Hello World! With Style");
+            //labelWithStyle.styleSheets.Add(styleSheet);
+            //root.Add(labelWithStyle);
+        }
+
+        private void EmbedButtonOnclick()
+        {
+            if (!Directory.Exists(PATH))
+                EditorUtility.DisplayDialog("Error", "Modular shader system has not been found in its default location, consider deleting it and reinstalling it using the official UnityPackage.", "Ok");
+
+            string path = EditorUtility.OpenFolderPanel("Select editor folder to use", "Assets", "Editor");
+            if (path.Length == 0)
+                return;
+
+            if (!Path.GetFileName(path).Equals("Editor"))
+            {
+                EditorUtility.DisplayDialog("Error", "The folder must be an \"Editor\" folder", "Ok");
+                return;
+            }
+
+            if (Directory.Exists(path + "/ModularShaderSystem"))
+                Directory.Delete(path + "/ModularShaderSystem", true);
+
+            CopyDirectory(PATH, path, "", false);
+
+            string licencePath = PATH.Replace("Editor", "LICENSE");
+            if (File.Exists(licencePath))
+                File.Copy(licencePath, path + "/ModularShaderSystem/LICENSE");
+
+            AssetDatabase.Refresh();
+        }
+
+        private void SaveSettingsOnFile()
+        {
+            string path = EditorUtility.SaveFilePanel("Save settings to file", "Assets", "embedSettings.json", "json");
+            if (path.Length == 0)
+                return;
+
+            LibrarySettings settings = new LibrarySettings
+            {
+                nmsc = _namespaceField.value,
+                variableSink = _variableKeywordField.value,
+                codeSink = _codeKeywordField.value,
+                propKeyword = _propertiesKeyword.value,
+                tmpExtension = _templateExtension.value,
+                tmpclExtension = _templateCollectionExtension.value,
+                rscfName = _resourceFolderField.value,
+                windowPath = _windowPathField.value,
+                createPath = _createPathField.value
+            };
+
+            File.WriteAllText(path, JsonUtility.ToJson(settings));
+        }
+
+        private void LoadSettingsFromFile()
+        {
+            string path = EditorUtility.OpenFilePanel("Load settings", "Assets", "json");
+            if (!File.Exists(path))
+            {
+                EditorUtility.DisplayDialog("Error", "File does not exist", "Ok");
+                return;
+            }
+
+            var settings = JsonUtility.FromJson<LibrarySettings>(File.ReadAllText(path));
+
+            _namespaceField.value = settings.nmsc;
+            _variableKeywordField.value = settings.variableSink;
+            _codeKeywordField.value = settings.codeSink;
+            _propertiesKeyword.value = settings.propKeyword;
+            _templateExtension.value = settings.tmpExtension;
+            _templateCollectionExtension.value = settings.tmpclExtension;
+            _resourceFolderField.value = settings.rscfName;
+            _windowPathField.value = settings.windowPath;
+            _createPathField.value = settings.createPath;
+        }
 
 
-    private void CopyDirectory(string oldPath, string newPath, string subpath, bool keepComments)
+        private void CopyDirectory(string oldPath, string newPath, string subpath, bool keepComments)
         {
             foreach (var file in Directory.GetFiles(oldPath).Where(x => !Path.GetExtension(x).Equals(".meta")))
             {
                 if (Path.GetFileName(file).Contains("EmbedLibraryWindow")) continue;
-                
+
                 if (Path.GetExtension(file).Equals(".cs") || Path.GetExtension(file).Equals(".uxml"))
                 {
                     var lines = new List<string>(File.ReadAllLines(file));
@@ -225,7 +230,8 @@ public class EmbedLibraryWindow : EditorWindow
                 string newSubPath = subpath + "/" + Path.GetFileName(directory);
                 if (Path.GetFileName(directory).Equals(MSSConstants.RESOURCES_FOLDER) && Path.GetFileName(Path.GetDirectoryName(directory)).Equals("Resources"))
                     newSubPath = subpath + "/" + _resourceFolderField.value;
-                CopyDirectory(directory, newPath,  newSubPath, keepComments);
+                CopyDirectory(directory, newPath, newSubPath, keepComments);
             }
         }
+    }
 }

@@ -5,7 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
 
     // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    

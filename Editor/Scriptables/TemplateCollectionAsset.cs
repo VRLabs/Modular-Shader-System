@@ -9,8 +9,17 @@ using Object = UnityEngine.Object;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Asset containing multiple templates separated by special keywords.
+    /// </summary>
+    /// <remarks>
+    /// Each template is marked by starting a "#T#TEMPLATE_NAME" and ends whenever a new template keyword is declared or the end of the file.
+    /// </remarks>
     public class TemplateCollectionAsset : ScriptableObject
     {
+        /// <summary>
+        /// List of templates contained in this collection.
+        /// </summary>
         public List<TemplateAsset> Templates;
 
         public TemplateCollectionAsset()

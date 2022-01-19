@@ -2,8 +2,11 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// Inspector for the <see cref="TemplateAsset"/> asset
+    /// </summary>
     [CustomEditor(typeof(TemplateAsset))]
     public class TemplateAssetEditor : Editor
     {

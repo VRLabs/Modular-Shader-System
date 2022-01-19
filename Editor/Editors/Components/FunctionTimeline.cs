@@ -5,9 +5,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using VRLabs.ModularShaderSystem.UI;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.Debug
 {
+    /// <summary>
+    /// Modular Shader Debugger tab used to show the functions flow in the modular shader
+    /// </summary>
     public class FunctionTimeline : IModularShaderDebuggerTab
     {
         public VisualElement TabContainer { get; set; }
@@ -30,8 +34,8 @@ namespace VRLabs.ModularShaderSystem
             TabContainer.Add(new TimelineContainer(shader));
         }
     }
-    
-     public class FunctionItem : VisualElement
+
+    internal class FunctionItem : VisualElement
     {
         public ShaderFunction Function { get; }
         public TimelineRow Row { get; set; }
@@ -65,7 +69,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class TimelineRow : VisualElement
+    internal class TimelineRow : VisualElement
     {
         public ShaderModule Module { get; }
         
@@ -143,7 +147,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class TimelineRoot : VisualElement
+    internal class TimelineRoot : VisualElement
     {
         public List<TimelineRow> Rows { get; set; }
         public List<FunctionItem> Functions { get; set; }
@@ -260,7 +264,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class FunctionViewer : VisualElement
+    internal class FunctionViewer : VisualElement
     {
         public ShaderFunction SelectedItem
         {
@@ -358,85 +362,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class LabelField : VisualElement
-    {
-        public string Label
-        {
-            get => _label;
-            set
-            {
-                _label = value;
-                _labelField.text = _label;
-            }
-        }
-
-        public string Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                _valueField.text = _value;
-            }
-        }
-
-        private Label _labelField;
-        private Label _valueField;
-        private string _label;
-        private string _value;
-
-        public LabelField(string label, string value)
-        {
-            _label = label;
-            _value = value;
-            _labelField = new Label(label);
-            _valueField = new Label(value);
-            
-            AddToClassList("unity-base-field");
-            AddToClassList("unity-base-text-field");
-            AddToClassList("unity-text-field");
-            
-            _labelField.AddToClassList("unity-text-element");
-            _labelField.AddToClassList("unity-label");
-            _labelField.AddToClassList("unity-base-field__label");
-            _labelField.AddToClassList("unity-base-text-field__label");
-            _labelField.AddToClassList("unity-text-field__label");
-            _labelField.AddToClassList("label-field-title");
-            _valueField.AddToClassList("label-field-value");
-            
-            Add(_labelField);
-            Add(_valueField);
-            
-        }
-    }
-    
-    public class VariableField : VisualElement
-    {
-        public Variable Variable { get; set; }
-        
-        private string _type;
-
-        public VariableField(Variable variable)
-        {
-            Variable = variable;
-            if(variable.Type == VariableType.Custom)
-                _type = variable.CustomType;
-            else
-                _type = variable.Type.ToString();
-            var nameField = new Label(variable.Name);
-            var typeField = new Label(_type);
-
-            nameField.style.flexGrow = 1;
-            typeField.AddToClassList("variable-type-text");
-            Add(nameField);
-            Add(typeField);
-
-            style.flexDirection = FlexDirection.Row;
-
-        }
-    }
-
-    public class ModuleViewer : VisualElement
+    internal class ModuleViewer : VisualElement
     {
         public ShaderModule SelectedItem
         {
@@ -506,7 +432,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class FunctionTemplateViewer : VisualElement
+    internal class FunctionTemplateViewer : VisualElement
     {
         public string SelectedItem
         {
@@ -533,7 +459,7 @@ namespace VRLabs.ModularShaderSystem
         }
     }
 
-    public class TimelineContainer : VisualElement
+    internal class TimelineContainer : VisualElement
     {
         private List<TimelineRoot> _roots;
         private PopupField<TimelineRoot> _popup;

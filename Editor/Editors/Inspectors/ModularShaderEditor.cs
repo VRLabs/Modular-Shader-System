@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// Inspector for the <see cref="ModularShader"/> asset.
+    /// </summary>
     [CustomEditor(typeof(ModularShader))]
     public class ModularShaderEditor : Editor
     {

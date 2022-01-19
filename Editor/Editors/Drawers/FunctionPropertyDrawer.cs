@@ -2,8 +2,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// Inspector drawer for <see cref="ShaderFunction"/>.
+    /// </summary>
     [CustomPropertyDrawer(typeof(ShaderFunction))]
     public class FunctionPropertyDrawer : PropertyDrawer
     {

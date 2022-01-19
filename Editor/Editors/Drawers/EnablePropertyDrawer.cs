@@ -3,8 +3,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ModularShaderSystem
+namespace VRLabs.ModularShaderSystem.UI
 {
+    /// <summary>
+    /// Inspector drawer for <see cref="EnableProperty"/>.
+    /// </summary>
     [CustomPropertyDrawer(typeof(EnableProperty))]
     public class EnablePropertyDrawer : PropertyDrawer
     {

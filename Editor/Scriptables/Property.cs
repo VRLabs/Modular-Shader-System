@@ -4,18 +4,61 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Typed of shader properties.
+    /// </summary>
+    public enum PropertyType
+    {
+        Float,
+        Int,
+        Range,
+        Vector,
+        Color,
+        Texture2D,
+        Texture2DArray,
+        Cube,
+        CubeArray,
+        Texture3D
+    }
+    
+    /// <summary>
+    /// Shader property information.
+    /// </summary>
     [Serializable]
     public class Property : IEquatable<Property>
     {
+        /// <summary>
+        /// Name of the shader property.
+        /// </summary>
         public string Name;
+        
+        /// <summary>
+        /// Display name of the shader property.
+        /// </summary>
         public string DisplayName;
-        public string Type; //Check if the content is valid
-        public string DefaultValue; //Check if the content is right for the type
+        
+        /// <summary>
+        /// Type of the shader property.
+        /// </summary>
+        public string Type;
+        
+        /// <summary>
+        /// Default value of the shader property.
+        /// </summary>
+        public string DefaultValue;
+        
+        /// <summary>
+        /// List of attributes for the shader property.
+        /// </summary>
         public List<string> Attributes;
 
+        /// <summary>
+        /// Convert the property to a shader variable.
+        /// </summary>
+        /// <returns>A variable representing the the property in shader code.</returns>
         public virtual Variable ToVariable()
         {
-            Variable variable = new Variable();
+            var variable = new Variable();
             variable.Name = Name;
 
             switch(Type)

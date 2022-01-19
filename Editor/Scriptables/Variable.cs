@@ -4,23 +4,27 @@ using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
 {
+    /// <summary>
+    /// Object defining a shader variable. It's used mainly for defining used variables in a module's function.
+    /// </summary>
     [Serializable]
     public class Variable : IEquatable<Variable>
     {
         public override int GetHashCode()
         {
-            unchecked
-            {
-                //int hashCode = base.GetHashCode();
-                int hashCode =  (Name != null ? Name.GetHashCode() : 0);
-                return hashCode;
-            }
+            //int hashCode = base.GetHashCode();
+            int hashCode =  (Name != null ? Name.GetHashCode() : 0);
+            return hashCode;
         }
 
         public string Name;
         public VariableType Type;
         public string CustomType;
 
+        /// <summary>
+        /// Gets a string definition of the variable.
+        /// </summary>
+        /// <returns>a string containing the variable definition.</returns>
         public string GetDefinition()
         {
             switch (Type)
@@ -108,6 +112,9 @@ namespace VRLabs.ModularShaderSystem
         }
     }
     
+    /// <summary>
+    /// Possible types of variables.
+    /// </summary>
     public enum VariableType
     {
         Half,

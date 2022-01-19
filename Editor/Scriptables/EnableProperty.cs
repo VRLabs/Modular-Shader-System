@@ -9,8 +9,17 @@ namespace VRLabs.ModularShaderSystem
     [Serializable]
     public class EnableProperty : Property, IEquatable<EnableProperty>
     {
+        /// <summary>
+        /// Value to enable the module that uses this enable property.
+        /// </summary>
         public int EnableValue;
 
+        /// <summary>
+        /// Main constructor.
+        /// </summary>
+        /// <param name="name">name of the property.</param>
+        /// <param name="displayName">Display name of the property.</param>
+        /// <param name="enableValue">Value to enable the module that uses this enable property.</param>
         public EnableProperty(string name, string displayName, int enableValue)
         {
             Name = name;
@@ -22,6 +31,10 @@ namespace VRLabs.ModularShaderSystem
             EnableValue = enableValue;
         }
         
+        /// <summary>
+        /// Convert the property to its variable implementation.
+        /// </summary>
+        /// <returns>Shader variable referring to this property.</returns>
         public override Variable ToVariable()
         {
             Variable variable = new Variable();
@@ -30,6 +43,11 @@ namespace VRLabs.ModularShaderSystem
             return variable;
         }
 
+        /// <summary>
+        /// Simpler constructor where the name and display name are the same.
+        /// </summary>
+        /// <param name="name">Name of the property, used also as display name.</param>
+        /// <param name="enableValue">Value to enable the module that uses this enable property.</param>
         public EnableProperty(string name, int enableValue) : this(name, name, enableValue){}
 
         bool IEquatable<EnableProperty>.Equals(EnableProperty other)
