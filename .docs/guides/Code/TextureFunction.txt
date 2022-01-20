@@ -1,0 +1,4 @@
+﻿void ApplyTexture()
+{
+    FinalColor *= UNITY_SAMPLE_TEX2D(_MyTexture, TRANSFORM_TEX(FragData.uv, _MyTexture));
+}

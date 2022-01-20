@@ -1,0 +1,4 @@
+﻿i.pos        = UnityObjectToClipPos(v.vertex);
+i.normal     = UnityObjectToWorldNormal(v.normal);
+i.worldPos   = mul(unity_ObjectToWorld, v.vertex);		
+i.uv         = v.uv;

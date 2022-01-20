@@ -1,0 +1,34 @@
+- name: Getting Started
+  href: GettingStarted.md
+  
+- name: Create a Module for Third Parties
+  href: ThirdpartyModule.md
+  
+- name: Modular Shader Structure
+  items:
+  - name: Modular Shader
+    href: ModularShaderComponents/ModularShader.md
+  - name: Shader Module
+    href: ModularShaderComponents/ShaderModule.md
+  - name: Template Asset
+    href: ModularShaderComponents/TemplateAssets.md
+  - name: Template Collection Asset
+    href: ModularShaderComponents/TemplateCollectionAssets.md
+  - name: Keywords
+    href: ModularShaderComponents/Keywords.md
+    
+- name: Modular Shader Debugger
+  items:
+    - name: Modular Shader Debugger 
+      href: ModularShaderDebugger/ModularShaderDebugger.md
+    - name: Template Graph
+      href: ModularShaderDebugger/TemplateGraph.md
+    - name: Function Timeline
+      href: ModularShaderDebugger/FunctionTimeline.md
+      
+- name: Advanced Topics
+  items:
+    - name: Modular Shader Generator Deep Dive
+      href: AdvancedTopics/ModularShaderDive.md
+    - name: Embedding The Library
+        href: AdvancedTopics/EmbeddingLibrary.md

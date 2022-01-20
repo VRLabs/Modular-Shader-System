@@ -15,7 +15,7 @@
     <ui:TextField picking-mode="Ignore" label="Default properties Keyword" value="SHADER_PROPERTIES" text="SHADER_PROPERTIES" name="PropertiesKeywordField" />
     <ui:TextField picking-mode="Ignore" label="Resource folder" value="MSS" text="MSS" name="ResourceFolderField" />
     <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplate" text="stemplate" name="ExtensionField" />
-    <ui:TextField picking-mode="Ignore" label="Template extension" value="stemplatecollection" text="stemplatecollection" name="CollectionExtensionField" />
+    <ui:TextField picking-mode="Ignore" label="Collection extension" value="stemplatecollection" text="stemplatecollection" name="CollectionExtensionField" />
     <ui:TextField picking-mode="Ignore" label="Editor window menu path" value="VRLabs/Modular Shader" text="VRLabs/Modular Shader" name="WindowPathField" />
     <ui:TextField picking-mode="Ignore" label="Create assets menu path" value="VRLabs/Modular Shader" text="VRLabs/Modular Shader" name="CreatePathField" />
     <ui:Button text="Embed" name="EmbedButton" />

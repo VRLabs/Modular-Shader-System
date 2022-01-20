@@ -14,22 +14,22 @@ namespace VRLabs.ModularShaderSystem
         /// <summary>
         /// Generates a shader with all shader variants
         /// </summary>
-        /// <param name="path">path for the shader files</param>
+        /// <param name="path">path of the folder to put the shader files</param>
         /// <param name="shader">Modular shader to use</param>
         /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
         public static void GenerateShader(string path, ModularShader shader, bool hideVariants = false)
         {
-            GenerateShader(path, shader, null,hideVariants);
+            GenerateShader(path, shader, null, hideVariants);
         }
 
         /// <summary>
         /// Generates a shader with all shader variants, you can give a custom PostGeneration action to handle the shader result for some custom modifications (build keywords are still available at this stage)
         /// </summary>
-        /// <param name="path">path for the shader files</param>
+        /// <param name="path">path of the folder to put the shader files</param>
         /// <param name="shader">Modular shader to use</param>
         /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
         /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
-        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = true)
+        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = false)
         {
             var modules = FindAllModules(shader);
             
@@ -60,7 +60,7 @@ namespace VRLabs.ModularShaderSystem
                     FreshAssets = freshAssets,
                     FilePath = path,
                     PropertiesBlock = completePropertiesBlock,
-                    AreVariantsHidden = true
+                    AreVariantsHidden = hideVariants
                 });
             }
             
@@ -588,7 +588,7 @@ namespace VRLabs.ModularShaderSystem
             // Writes function declarations to keywords
             private void WriteFunctionsToKeywords()
             {
-                var keywordedCode = new Dictionary<string,StringBuilder>();
+                var keywordedCode = new Dictionary<string,(StringBuilder, List<TemplateAsset>)>();
 
                 foreach (ShaderFunction function in _reorderedFunctions)
                 {
@@ -598,17 +598,25 @@ namespace VRLabs.ModularShaderSystem
                         foreach (string keyword in function.CodeKeywords)
                         {
                             if (!keywordedCode.ContainsKey(keyword))
-                                keywordedCode.Add(keyword, new StringBuilder());
+                                keywordedCode.Add(keyword, (new StringBuilder(), new List<TemplateAsset>()));
 
-                            if (freshAsset != null) keywordedCode[keyword].AppendLine(freshAsset.Template);
+                            if (freshAsset == null) continue;
+                            (StringBuilder builder, List<TemplateAsset> assets) = keywordedCode[keyword];
+                            if (assets.Contains(freshAsset)) continue;
+                            builder.AppendLine(freshAsset.Template);
+                            assets.Add(freshAsset);
                         }
                     }
                     else
                     {
                         if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_CODE_KEYWORD))
-                            keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, new StringBuilder());
+                            keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, (new StringBuilder(), new List<TemplateAsset>()));
                         
-                        if (freshAsset != null) keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
+                        if (freshAsset == null) continue;
+                        (StringBuilder builder, List<TemplateAsset> assets) = keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD];
+                        if (assets.Contains(freshAsset)) continue;
+                        builder.AppendLine(freshAsset.Template);
+                        assets.Add(freshAsset);
                     }
                 }
 
@@ -616,7 +624,7 @@ namespace VRLabs.ModularShaderSystem
                 {
                     MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{code.Key}\s", RegexOptions.Multiline);
                     for (int i = m.Count - 1; i >= 0; i--)
-                        ShaderFile.Insert(m[i].Index, code.Value.ToString());   
+                        ShaderFile.Insert(m[i].Index, code.Value.Item1.ToString());   
                 }
             }
 
@@ -714,10 +722,10 @@ namespace VRLabs.ModularShaderSystem
                             continue;
                         }
 
-                        if (line.StartsWith("}"))
+                        if (!line.StartsWith("//") && (line.StartsWith("}") || line.EndsWith("}") && !line.Contains("{")))
                             tabs--;
                         finalFile.AppendLineTabbed(tabs, line);
-                        if (line.StartsWith("{") || line.EndsWith("{"))
+                        if (!line.StartsWith("//") && (line.StartsWith("{") || line.EndsWith("{")))
                             tabs++;
                     }
                 }
