@@ -2,5 +2,5 @@
     <uie:PropertyField binding-path="Template" label="Template" focusable="true" />
     <uie:PropertyField binding-path="Queue" label="Queue" focusable="true" />
     <ui:Toggle binding-path="NeedsVariant" label="Generates variant" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Keywords" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Keywords" />
 </ui:UXML>

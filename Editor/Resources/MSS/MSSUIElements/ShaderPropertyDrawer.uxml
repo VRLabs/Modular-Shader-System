@@ -5,5 +5,5 @@
     <ui:VisualElement name="ValueContainer" />
     <!--<ui:TextField label="Type" binding-path="Type" readonly="true" focusable="false" />
     <ui:TextField label="Default Value" binding-path="DefaultValue" readonly="true" focusable="false" />-->
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Attributes" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Attributes" />
 </ui:UXML>

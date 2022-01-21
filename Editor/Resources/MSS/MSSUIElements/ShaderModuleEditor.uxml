@@ -5,12 +5,12 @@
     <ui:TextField label="Author" binding-path="Author" />
     <ui:TextField label="Version" binding-path="Version" />
     <ui:TextField label="Description" binding-path="Description" multiline="true" />
-    <VRLabs.ModularShaderSystem.InspectorList binding-path="ModuleDependencies" show-elements-text="false" />
-    <VRLabs.ModularShaderSystem.InspectorList binding-path="IncompatibleWith" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList binding-path="ModuleDependencies" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList binding-path="IncompatibleWith" show-elements-text="false" />
     
     <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
     <uie:PropertyField binding-path="Enabled" label="Enable Property" focusable="true" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Properties" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Functions" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Templates" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Properties" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Functions" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Templates" />
 </ui:UXML>

@@ -2,5 +2,5 @@
     <ui:TextField picking-mode="Ignore" label="Name" binding-path="Name" />
     <ui:TextField picking-mode="Ignore" label="Display Name" binding-path="DisplayName" />
     <uie:IntegerField label="Enable Value" value="0" binding-path="EnableValue" />
-    <VRLabs.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Attributes" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Attributes" />
 </ui:UXML>
