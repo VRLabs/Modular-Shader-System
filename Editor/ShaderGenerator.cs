@@ -426,9 +426,7 @@ namespace VRLabs.ModularShaderSystem
 
                 PostGeneration?.Invoke(ShaderFile, this);
 
-                MatchCollection m = Regex.Matches(ShaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
-                for (int i = m.Count - 1; i >= 0; i--)
-                    ShaderFile.Replace(m[i].Value, "");
+                RemoveKeywords();
 
                 ShaderFile.Replace("\r\n", "\n");
 
@@ -539,7 +537,7 @@ namespace VRLabs.ModularShaderSystem
                             }
                         }
                     }
-                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#\S*", RegexOptions.Multiline);
+                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
                     for (int i = mkr.Count - 1; i >= 0; i--)
                         ShaderFile.Replace(mkr[i].Value, "");
                 //}
@@ -654,7 +652,38 @@ namespace VRLabs.ModularShaderSystem
                 }
             }
             
-            //check a line of the property block
+            // Remove keywords from string
+            private void RemoveKeywords()
+            {
+                int current = 0;
+
+                while (current < ShaderFile.Length)
+                {
+                    if (ShaderFile.Length >= current + 3 && ShaderFile[current] == '#' && ShaderFile[current + 1] == 'K' && 
+                        ShaderFile[current + 2] == '#')
+                    {
+                        int end = current+3;
+                        bool stillToRemove = true;
+                        while (end < ShaderFile.Length)
+                        {
+                            if (char.IsWhiteSpace(ShaderFile[end]))
+                            {
+                                ShaderFile.Remove(current, end - current);
+                                stillToRemove = false;
+                                break;
+                            }
+
+                            end++;
+                        }
+                        if(stillToRemove)
+                            ShaderFile.Remove(current, end - current);
+                    }
+                    
+                    current++;
+                }
+            }
+            
+            // Check a line of the property block
             private static bool CheckPropertyBlockLine(StringBuilder builder, StringReader reader, string line, ref int tabs, ref bool deleteEmptyLine)
             {
                 string ln = null;
