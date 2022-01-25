@@ -96,7 +96,7 @@ namespace VRLabs.ModularShaderSystem.Debug
         {
             
             var tempList = new List<TemplateNode>();
-            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, template.Keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            foreach ((TemplateNode parent, string key) in Nodes.SelectMany(item =>  template.Keywords.Where(y => IsKeywordValid(moduleId, item, y)).Select(y => (item, y))).Where(x => !string.IsNullOrEmpty(x.Item2)))
             {
                 var node = new TemplateNode(moduleId, template, key);
                 AddElement(node);
@@ -109,7 +109,7 @@ namespace VRLabs.ModularShaderSystem.Debug
         public void AddTemplateNode(string moduleId, TemplateAsset template, string[] keywords)
         {
             var tempList = new List<TemplateNode>();
-            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            foreach ((TemplateNode parent, string key) in Nodes.SelectMany(item =>  keywords.Where(y => IsKeywordValid(moduleId, item, y)).Select(y => (item, y))).Where(x => !string.IsNullOrEmpty(x.Item2)))
             {
                 var node = new TemplateNode(moduleId, template, key);
                 AddElement(node);
