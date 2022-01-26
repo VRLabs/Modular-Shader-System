@@ -17,11 +17,6 @@ namespace VRLabs.ModularShaderSystem
         /// Template string.
         /// </summary>
         public string Template;
-
-        /// <summary>
-        /// Name of the template.
-        /// </summary>
-        public string Name;
         
         /// <summary>
         /// Keywords found in the template
