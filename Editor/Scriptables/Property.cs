@@ -46,6 +46,11 @@ namespace VRLabs.ModularShaderSystem
         /// Default value of the shader property.
         /// </summary>
         public string DefaultValue;
+
+        /// <summary>
+        /// Default texture asset assigned to the property if it's a Texture2D or Texture3D;
+        /// </summary>
+        public Texture DefaultTextureAsset;
         
         /// <summary>
         /// List of attributes for the shader property.

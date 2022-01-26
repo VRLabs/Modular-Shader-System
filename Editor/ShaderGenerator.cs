@@ -78,13 +78,16 @@ namespace VRLabs.ModularShaderSystem
             }
             
             AssetDatabase.Refresh();
+            ApplyDefaultTextures(contexts);
+            
             shader.LastGeneratedShaders = new List<Shader>();
             foreach (var context in contexts)
                 shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + context.VariantFileName));
+            AssetDatabase.Refresh();
         }
 
         /// <summary>
-        /// Generates a shader with all shader variants
+        /// Generates a shader for selected materials
         /// </summary>
         /// <param name="path">path for the shader files</param>
         /// <param name="shader">Modular shader to use</param>
@@ -95,7 +98,7 @@ namespace VRLabs.ModularShaderSystem
         }
 
         /// <summary>
-        /// Generates a shader with all shader variants
+        /// Generates a shader for selected materials
         /// </summary>
         /// <param name="path">path for the shader files</param>
         /// <param name="shader">Modular shader to use</param>
@@ -222,6 +225,8 @@ namespace VRLabs.ModularShaderSystem
                 AssetDatabase.StopAssetEditing();
                 AssetDatabase.Refresh();
             }
+            
+            ApplyDefaultTextures(contexts);
 
             EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
             foreach (var context in contexts)
@@ -366,6 +371,8 @@ namespace VRLabs.ModularShaderSystem
             private List<ShaderFunction> _reorderedFunctions;
             private Dictionary<ShaderFunction, ShaderModule> _modulesByFunctions;
             public string Guid;
+
+            public List<ShaderModule> Modules => _modules;
 
             public void GenerateShader()
             {
@@ -806,6 +813,17 @@ namespace VRLabs.ModularShaderSystem
 
             block.AppendLine("}");
             return block.ToString();
+        }
+        
+        private static void ApplyDefaultTextures(List<ShaderContext> contexts)
+        {
+            foreach (var context in contexts)
+            {
+                var importedShader = AssetImporter.GetAtPath($"{context.FilePath}/" + context.VariantFileName) as ShaderImporter;
+                var customTextures = context.Modules.SelectMany(x => x.Properties).Where(x => x.DefaultTextureAsset != null).ToList();
+                if (importedShader != null) importedShader.SetDefaultTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                AssetDatabase.ImportAsset($"{context.FilePath}/" + context.VariantFileName);
+            }
         }
         
         /// <summary>

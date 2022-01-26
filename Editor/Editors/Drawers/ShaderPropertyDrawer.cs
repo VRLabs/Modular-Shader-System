@@ -56,10 +56,10 @@ namespace VRLabs.ModularShaderSystem.UI
             {
                 SetPropType(type, (PropertyType)e.newValue);
                 SetPropDefaultValue(defaultValue,"");
-                UpdateValueContainer(defaultValue, type, (PropertyType)e.newValue, type.stringValue, defaultValue.stringValue, valueContainer);
+                UpdateValueContainer(property, defaultValue, type, (PropertyType)e.newValue, type.stringValue, defaultValue.stringValue, valueContainer);
             });
 
-            UpdateValueContainer(defaultValue, type, propType, type.stringValue, defaultValue.stringValue, valueContainer);
+            UpdateValueContainer(property, defaultValue, type, propType, type.stringValue, defaultValue.stringValue, valueContainer);
 
             foldout.Add(template);
             _root.Add(foldout);
@@ -99,7 +99,7 @@ namespace VRLabs.ModularShaderSystem.UI
             propType.serializedObject.ApplyModifiedProperties();
         }
 
-        private void UpdateValueContainer(SerializedProperty defaultValue, SerializedProperty type, PropertyType propType, string propTypeString, string propValue, VisualElement element)
+        private void UpdateValueContainer(SerializedProperty property, SerializedProperty defaultValue, SerializedProperty type, PropertyType propType, string propTypeString, string propValue, VisualElement element)
         {
             VisualElement field = null;
             switch (propType)
@@ -250,14 +250,24 @@ namespace VRLabs.ModularShaderSystem.UI
                     SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), texValue)?.ToLower()}\" {{}}");
                     var txfield = new EnumField { label = "Default value" };
                     txfield.Init(texValue);
-                    field = txfield;
+                    var textureAsset = new PropertyField(property.FindPropertyRelative("DefaultTextureAsset"), "Texture Override");
+                    textureAsset.Bind(property.serializedObject);
+                    var vl = new VisualElement();
+                    vl.Add(txfield);
+                    vl.Add(textureAsset);
+                    field = vl;
                     txfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), e.newValue)?.ToLower()}\" {{}}"));
                     break;
                 case PropertyType.Texture2DArray:
-                case PropertyType.Cube:
                 case PropertyType.CubeArray:
                 case PropertyType.Texture3D:
                     SetPropDefaultValue(defaultValue,"\"\"{}");
+                    break;
+                case PropertyType.Cube:
+                    SetPropDefaultValue(defaultValue,"\"\"{}");
+                    var textureCubeAsset = new PropertyField(property.FindPropertyRelative("DefaultTextureAsset"), "Texture Override");
+                    textureCubeAsset.Bind(property.serializedObject);
+                    field = textureCubeAsset; 
                     break;
             }
             

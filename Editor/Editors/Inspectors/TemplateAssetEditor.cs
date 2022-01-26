@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace VRLabs.ModularShaderSystem.UI
 {
@@ -10,19 +11,13 @@ namespace VRLabs.ModularShaderSystem.UI
     [CustomEditor(typeof(TemplateAsset))]
     public class TemplateAssetEditor : Editor
     {
-        private string _templateText;
-        private GUIStyle _style;
-
-        public void OnEnable()
+        public override VisualElement CreateInspectorGUI()
         {
-            _templateText = serializedObject.FindProperty("Template").stringValue;
-            _style = new GUIStyle(EditorStyles.label);
-            _style.wordWrap = true;
+            CodeViewElement element = new CodeViewElement();
+            element.Text = serializedObject.FindProperty("Template").stringValue;
+            element.style.minHeight = 600;
+            return element;
         }
-
-        public override void OnInspectorGUI()
-        {
-            GUILayout.Label(_templateText, _style);
-        }
+        
     }
 }
