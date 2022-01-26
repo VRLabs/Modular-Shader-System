@@ -40,7 +40,7 @@ For more informations on how to use it, check the official [Documentation](https
 
 ## License
 
-Simple Shader Inspectors is available as-is under MIT. For more information see [LICENSE](https://github.com/VRLabs/Modular-Shader-System/blob/master/LICENSE).
+The modular Shader System is available as-is under MIT. For more information see [LICENSE](https://github.com/VRLabs/Modular-Shader-System/blob/master/LICENSE).
 
 ## Download
 
