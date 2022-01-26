@@ -468,8 +468,11 @@ namespace VRLabs.ModularShaderSystem
 
                     var callSequence = new StringBuilder();
                     WriteFunctionCallSequence(callSequence, startKeyword);
-                    callSequence.AppendLine(startKeyword);
-                    ShaderFile.Replace(startKeyword, callSequence.ToString());
+                    //callSequence.AppendLine(startKeyword);
+                    var m = Regex.Matches(ShaderFile.ToString(), $@"{startKeyword}(\s|$)", RegexOptions.Multiline);
+                    for (int i = m.Count - 1; i >= 0; i--)
+                        ShaderFile.Insert(m[i].Index, callSequence.ToString()); 
+                    //ShaderFile.Replace(startKeyword, callSequence.ToString());
                 }
             }
 
@@ -544,9 +547,9 @@ namespace VRLabs.ModularShaderSystem
                             }
                         }
                     }
-                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
+                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#\S*", RegexOptions.Multiline);
                     for (int i = mkr.Count - 1; i >= 0; i--)
-                        ShaderFile.Replace(mkr[i].Value, "");
+                        ShaderFile.Remove(mkr[i].Index, mkr[i].Length);
                 //}
                 
                 ShaderFile.AppendLine("}");
