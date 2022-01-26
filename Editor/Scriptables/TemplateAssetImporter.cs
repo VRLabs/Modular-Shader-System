@@ -30,6 +30,7 @@ namespace VRLabs.ModularShaderSystem
                 mkr[mk.Count + i] = mki[i].Value;
 
             subAsset.Keywords = mkr.Distinct().ToArray();
+            subAsset.Name = Path.GetFileNameWithoutExtension(ctx.assetPath);
             
             //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
             ctx.AddObjectToAsset("Template", subAsset/*, icon*/);

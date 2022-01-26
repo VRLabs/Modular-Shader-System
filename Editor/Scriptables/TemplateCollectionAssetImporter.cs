@@ -68,6 +68,7 @@ namespace VRLabs.ModularShaderSystem
             var templateAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             templateAsset.Template = builder.ToString();
             templateAsset.name = name;
+            templateAsset.Name = name;
             
             MatchCollection mk = Regex.Matches(templateAsset.Template, @"#K#\w*", RegexOptions.Multiline);
             MatchCollection mki = Regex.Matches(templateAsset.Template, @"#KI#\w*", RegexOptions.Multiline);
