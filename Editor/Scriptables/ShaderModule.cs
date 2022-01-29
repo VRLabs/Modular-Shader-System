@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace VRLabs.ModularShaderSystem
@@ -33,11 +34,11 @@ namespace VRLabs.ModularShaderSystem
         /// Description of the shader model.
         /// </summary>
         public string Description;
-        
+
         /// <summary>
-        /// Property used to toggle on and off the module in the generated shader.
+        /// List of properties declared by the module.
         /// </summary>
-        public EnableProperty Enabled;
+        public List<EnableProperty> EnableProperties;
         
         /// <summary>
         /// List of properties declared by the module.

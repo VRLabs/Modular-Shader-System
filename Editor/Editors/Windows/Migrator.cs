@@ -52,7 +52,7 @@ namespace VRLabs.ModularShaderSystem
         public string version;
         public string author;
         public string description;
-        public EnableProperty enabled;
+        public List<EnableProperty> enableProperties;
         public List<Property> properties;
         public List<string> moduleDependencies;
         public List<string> incompatibleWith;
@@ -312,7 +312,7 @@ namespace VRLabs.ModularShaderSystem
                 module.ModuleDependencies = new List<string>(asset.moduleDependencies);
                 module.IncompatibleWith = new List<string>(asset.incompatibleWith);
                 module.AdditionalSerializedData = asset.additionalSerializedData;
-                module.Enabled = asset.enabled;
+                module.EnableProperties = new List<EnableProperty>(asset.enableProperties);
                 module.Properties = new List<Property>(asset.properties);
                 module.Templates = asset.templates.Select(x =>
                 {
@@ -582,7 +582,7 @@ namespace VRLabs.ModularShaderSystem
                     version = asset.Version,
                     author = asset.Author,
                     description = asset.Description,
-                    enabled = asset.Enabled,
+                    enableProperties = asset.EnableProperties,
                     properties = new List<Property>(asset.Properties),
                     moduleDependencies = new List<string>(asset.ModuleDependencies),
                     incompatibleWith = new List<string>(asset.IncompatibleWith),

@@ -9,7 +9,7 @@
     <VRLabs.ModularShaderSystem.UI.InspectorList binding-path="IncompatibleWith" show-elements-text="false" />
     
     <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
-    <uie:PropertyField binding-path="Enabled" label="Enable Property" focusable="true" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="EnableProperties" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Properties" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Functions" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Templates" />

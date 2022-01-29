@@ -1,7 +1,6 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 
 namespace VRLabs.ModularShaderSystem.UI
 {
