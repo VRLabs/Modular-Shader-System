@@ -16,11 +16,12 @@ namespace VRLabs.ModularShaderSystem.Tools
     /// </summary>
     public class EmbedLibraryWindow : EditorWindow
     {
-        [MenuItem(MSSConstants.WINDOW_PATH + "/Embed Library")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Tools/Embed Library")]
         public static void CreateWindow()
         {
             var window = GetWindow<EmbedLibraryWindow>();
             window.titleContent = new GUIContent("Embed Library");
+            window.Show();
         }
 
         [Serializable]
@@ -103,7 +104,10 @@ namespace VRLabs.ModularShaderSystem.Tools
         private void EmbedButtonOnclick()
         {
             if (!Directory.Exists(PATH))
+            {
                 EditorUtility.DisplayDialog("Error", "Modular shader system has not been found in its default location, consider deleting it and reinstalling it using the official UnityPackage.", "Ok");
+                return;
+            }
 
             string path = EditorUtility.OpenFolderPanel("Select editor folder to use", "Assets", "Editor");
             if (path.Length == 0)

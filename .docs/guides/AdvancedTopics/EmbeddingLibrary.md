@@ -9,7 +9,7 @@ Embedding the library is the process of making a functional copy of the library 
 
 If you're planning to make a shader to publish it's important to do this as fist step, since there are going to be some differences applied to the embedded library compared to the base one.
 
-Luckily for you there's an editor window dedicated to this, and can be found in `VRLabs > Modular Shader > Embed Library`.
+Luckily for you there's an editor window dedicated to this, and can be found in `VRLabs > Modular Shader > Tools     > Embed Library`.
 
 ## Embed Library Window
 

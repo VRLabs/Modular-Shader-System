@@ -31,4 +31,6 @@
     - name: Modular Shader Generator Deep Dive
       href: AdvancedTopics/ModularShaderDive.md
     - name: Embedding The Library
-        href: AdvancedTopics/EmbeddingLibrary.md
+      href: AdvancedTopics/EmbeddingLibrary.md
+    - name: Migrating Assets
+      href: AdvancedTopics/MigratingAssets.md

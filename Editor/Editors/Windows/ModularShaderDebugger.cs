@@ -58,6 +58,8 @@ namespace VRLabs.ModularShaderSystem.Debug
                 size.height = 720;
                 wnd.position = size;
             }
+            
+            wnd.Show();
         }
         
         private ObjectField _modularShaderField;
