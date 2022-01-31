@@ -817,8 +817,8 @@ namespace VRLabs.ModularShaderSystem
         {
             List<ShaderModule> modules = new List<ShaderModule>();
             if (shader == null) return modules;
-            modules.AddRange(shader.BaseModules);
-            modules.AddRange(shader.AdditionalModules);
+            modules.AddRange(shader.BaseModules.Where(x => x != null));
+            modules.AddRange(shader.AdditionalModules.Where(x => x != null));
             return modules;
         }
 
@@ -881,6 +881,7 @@ namespace VRLabs.ModularShaderSystem
 
             foreach (var module in shader.BaseModules)
             {
+                if (module == null) continue;
                 bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
                 bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
                 if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>
@@ -894,6 +895,7 @@ namespace VRLabs.ModularShaderSystem
 
             foreach (var module in shader.AdditionalModules)
             {
+                if (module == null) continue;
                 bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
                 bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
                 if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>
