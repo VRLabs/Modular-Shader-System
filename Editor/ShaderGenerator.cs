@@ -31,6 +31,9 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="hideVariants">Hide variants from the shader selector on the material, showing only the shader with all variants disabled from the menu</param>
         public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = false)
         {
+            
+            path = GetPathRelativeToProject(path);
+
             var modules = FindAllModules(shader);
             
             // Countermeasure for unity dogshit scriptedImporter assets reimport/update system
@@ -95,6 +98,20 @@ namespace VRLabs.ModularShaderSystem
             AssetDatabase.Refresh();
         }
 
+        private static string GetPathRelativeToProject(string path)
+        {
+            if (!Directory.Exists(path))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not found");
+
+            if (!path.Contains(Application.dataPath) && !path.StartsWith("Assets"))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not part of the unity project");
+
+            if(!path.StartsWith("Assets"))
+                path = path.Replace(Application.dataPath, "");
+            
+            return path;
+        }
+
         /// <summary>
         /// Generates a shader for selected materials
         /// </summary>
@@ -104,6 +121,8 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
         public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
+            path = GetPathRelativeToProject(path);
+            
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();
@@ -136,6 +155,8 @@ namespace VRLabs.ModularShaderSystem
         /// <param name="postGeneration">Actions to performs post generation and before cleanup </param>
         public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
+            path = GetPathRelativeToProject(path);
+            
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();
