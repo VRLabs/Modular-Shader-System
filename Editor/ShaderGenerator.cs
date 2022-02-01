@@ -11,6 +11,8 @@ namespace VRLabs.ModularShaderSystem
 {
     public static class ShaderGenerator
     {
+        private static string assetPath;
+
         /// <summary>
         /// Generates a shader with all shader variants
         /// </summary>
@@ -69,8 +71,13 @@ namespace VRLabs.ModularShaderSystem
             {
                 AssetDatabase.StartAssetEditing();
                 
-                foreach (Shader generatedShader in shader.LastGeneratedShaders)
-                    File.Delete(AssetDatabase.GetAssetPath(generatedShader));
+                foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                {
+                    assetPath = AssetDatabase.GetAssetPath(generatedShader);
+                    if(string.IsNullOrWhiteSpace(assetPath))
+                        File.Delete(assetPath);
+                }
+
                 shader.LastGeneratedShaders = new List<Shader>();
                 
                 foreach (var context in contexts)
