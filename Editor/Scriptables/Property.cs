@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VRLabs.ModularShaderSystem.UI;
 
 namespace VRLabs.ModularShaderSystem
 {
@@ -55,6 +56,7 @@ namespace VRLabs.ModularShaderSystem
         /// <summary>
         /// List of attributes for the shader property.
         /// </summary>
+        [PropertyAttribute]
         public List<string> Attributes;
 
         /// <summary>
