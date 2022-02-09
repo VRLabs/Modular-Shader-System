@@ -263,6 +263,48 @@ namespace VRLabs.ModularShaderSystem.Debug
             }
         }
     }
+    
+    internal class VariablesViewer : VisualElement
+    {
+        public Action<Variable> OnVariableSelected { get; set; }
+        
+        private List<VariableField> _variables;
+
+        public VariablesViewer(ModularShader shader)
+        {
+            var variables = shader.BaseModules.Concat(shader.AdditionalModules).SelectMany(x => x.Functions).SelectMany(x => x.UsedVariables).Distinct().OrderBy(x => x.Type).ThenBy(x => x.Name);
+            
+            var title = new Label("Variables List");
+            title.AddToClassList("area-title");
+            var content = new ScrollView(ScrollViewMode.Vertical);
+            content.AddToClassList("area-content");
+
+            _variables = new List<VariableField>();
+
+            foreach (Variable variable in variables)
+            {
+                var element = new VariableField(variable);
+                _variables.Add(element);
+                content.Add(element);
+
+                element.RegisterCallback<MouseUpEvent>(evt =>
+                {
+                    if (evt.button != 0) return;
+                    foreach (VariableField field in _variables)
+                    {
+                        if (field.ClassListContains("selected-variable-global"))
+                            field.RemoveFromClassList("selected-variable-global");
+                    }
+
+                    element.AddToClassList("selected-variable-global");
+                    OnVariableSelected?.Invoke(element.Variable);
+                });
+            }
+            
+            Add(title);
+            Add(content);
+        }
+    }
 
     internal class FunctionViewer : VisualElement
     {
@@ -326,7 +368,6 @@ namespace VRLabs.ModularShaderSystem.Debug
         private ShaderFunction _selectedItem;
         private Foldout _variablesFoldout;
         private List<VariableField> _variables;
-        private VariableField _selectedVariable;
         private readonly Foldout _variableKeywordsFoldout;
         private readonly Foldout _codeKeywordsFoldout;
 
@@ -470,6 +511,7 @@ namespace VRLabs.ModularShaderSystem.Debug
             var right = new VisualElement();
             var bot = new VisualElement();
             var templateViewer = new FunctionTemplateViewer();
+            var variablesViewer = new VariablesViewer(shader);
             var functionViewer = new FunctionViewer();
             var moduleViewer = new ModuleViewer();
             
@@ -516,6 +558,19 @@ namespace VRLabs.ModularShaderSystem.Debug
                     moduleViewer.SelectedItem = item.Row.Module;
                     templateViewer.SelectedItem = item.Function.ShaderFunctionCode == null ? null : item.Function.ShaderFunctionCode.Template;
 
+                    variablesViewer.OnVariableSelected = variable =>
+                    {
+                        foreach (FunctionItem f in root.Functions)
+                        {
+                            bool toHighlight = f.Function.UsedVariables.Any(x => x == variable);
+                            
+                            if(toHighlight && !f.ClassListContains("contains-variable-global"))
+                                f.AddToClassList("contains-variable-global");
+                            if(!toHighlight && f.ClassListContains("contains-variable-global"))
+                                f.RemoveFromClassList("contains-variable-global");
+                        }
+                    };
+                    
                     functionViewer.OnVariableSelected = variable =>
                     {
                         foreach (FunctionItem f in root.Functions)
@@ -551,6 +606,19 @@ namespace VRLabs.ModularShaderSystem.Debug
             }
             timelineContent.Add(_roots[0]);
             
+            variablesViewer.OnVariableSelected = variable =>
+            {
+                foreach (FunctionItem f in _roots[0].Functions)
+                {
+                    bool toHighlight = f.Function.UsedVariables.Any(x => x == variable);
+                            
+                    if(toHighlight && !f.ClassListContains("contains-variable-global"))
+                        f.AddToClassList("contains-variable-global");
+                    if(!toHighlight && f.ClassListContains("contains-variable-global"))
+                        f.RemoveFromClassList("contains-variable-global");
+                }
+            };
+            
             var timelineScroll = new ScrollView(ScrollViewMode.Vertical);
             timelineScroll.AddToClassList("timeline");
             timelineScroll.style.flexGrow = 1;
@@ -578,6 +646,7 @@ namespace VRLabs.ModularShaderSystem.Debug
             left.Add(scroller);
             left.Add(bot);
             right.Add(templateViewer);
+            bot.Add(variablesViewer);
             bot.Add(functionViewer);
             bot.Add(moduleViewer);
         }

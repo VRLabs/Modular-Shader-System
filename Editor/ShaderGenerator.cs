@@ -127,9 +127,9 @@ namespace VRLabs.ModularShaderSystem
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();
             
-            foreach (var (variant, material) in possibleVariants)
+            foreach (var (variant, variantMaterials) in possibleVariants)
             {
-                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(material, out string guid, out long  _);
+                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(variantMaterials[0], out string guid, out long  _);
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
@@ -137,7 +137,7 @@ namespace VRLabs.ModularShaderSystem
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
-                    Material = material,
+                    Materials = variantMaterials,
                     Guid = guid
                 });
             }
@@ -161,9 +161,9 @@ namespace VRLabs.ModularShaderSystem
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();
             
-            foreach (var (variant, material) in possibleVariants)
+            foreach (var (variant, variantMaterials) in possibleVariants)
             {
-                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(material, out string guid, out long  _);
+                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(variantMaterials[0], out string guid, out long  _);
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
@@ -171,7 +171,7 @@ namespace VRLabs.ModularShaderSystem
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
-                    Material = material,
+                    Materials = variantMaterials,
                     Guid = guid
                 });
             }
@@ -239,7 +239,11 @@ namespace VRLabs.ModularShaderSystem
             EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
             foreach (var context in contexts)
             {
-                context.Material.shader = Shader.Find(context.ShaderName);
+                var shader = Shader.Find(context.ShaderName);
+                foreach (var material in context.Materials)
+                {
+                    material.shader = shader;
+                }
             }
             
             EditorUtility.ClearProgressBar();
@@ -276,7 +280,7 @@ namespace VRLabs.ModularShaderSystem
             return states;
         }
         
-        private static List<(Dictionary<string, int>, Material)> GetMinimalVariants(List<ShaderModule> modules, IEnumerable<Material> materials)
+        private static List<(Dictionary<string, int>, List<Material>)> GetMinimalVariants(List<ShaderModule> modules, IEnumerable<Material> materials)
         {
             var enablers = new List<string>();
             foreach (ShaderModule module in modules)
@@ -292,14 +296,27 @@ namespace VRLabs.ModularShaderSystem
 
             enablers = enablers.Distinct().ToList();
 
-            var states = new List<(Dictionary<string, int>, Material)>();
+            var states = new List<(Dictionary<string, int>, List<Material>)>();
             foreach (Material material in materials)
             {
                 var state = new Dictionary<string, int>();
                 foreach (string enabler in enablers)
                     state.Add(enabler, (int)material.GetFloat(enabler));
+
+                var equalState = states.Where(x =>
+                {
+                    var keys = state.Keys;
+                    foreach (string key in keys)
+                        if (x.Item1[key] != state[key])
+                            return false;
+
+                    return true;
+                }).FirstOrDefault();
                 
-                states.Add((state, material));
+                if(equalState == (null, null))
+                    states.Add((state, new List<Material>(new [] {material})));
+                else
+                    equalState.Item2.Add(material);
             }
 
             return states;
@@ -377,7 +394,7 @@ namespace VRLabs.ModularShaderSystem
             public string PropertiesBlock;
             public bool AreVariantsHidden;
             public bool OptimizedShader;
-            public Material Material;
+            public List<Material> Materials;
             public StringBuilder ShaderFile;
             private List<ShaderModule> _modules;
             private List<ShaderFunction> _functions;

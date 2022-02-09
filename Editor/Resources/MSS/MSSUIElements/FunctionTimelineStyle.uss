@@ -23,7 +23,7 @@ FunctionItem
 {
     border-color: black;
     border-width: 1px;
-    border-radius: 5px;
+    border-radius: 7px;
     margin: 4px;
     background-color: darkslategrey;
     position: absolute;
@@ -79,9 +79,17 @@ CodeViewElement
     flex-direction: row;
 }
 
+VariablesViewer
+{
+    width: 30%;
+    border-width: 2px;
+    border-color: #282828;
+    margin: 2px;
+}
+
 FunctionViewer
 {
-    width: 50%;
+    width: 35%;
     border-width: 2px;
     border-color: #282828;
     margin: 2px;
@@ -97,7 +105,7 @@ FunctionTemplateViewer
 
 ModuleViewer
 {
-    width: 50%;
+    width: 35%;
     border-width: 2px;
     border-color: #282828;
     margin: 2px;
@@ -106,6 +114,11 @@ ModuleViewer
 .contains-variable
 {
     border-color: yellow;
+}
+
+.contains-variable-global
+{
+    border-color: #ff002f;
 }
 
 .selected-function
@@ -146,6 +159,11 @@ Foldout > Toggle
 .selected-variable
 {
     background-color: rgba(255,255,0,0.2);
+}
+
+.selected-variable-global
+{
+    background-color: rgba(255, 0, 0, 0.2);
 }
 
 .label-field-value
