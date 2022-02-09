@@ -182,7 +182,7 @@ namespace VRLabs.ModularShaderSystem.Tools
             {
                 if (Path.GetFileName(file).Contains("EmbedLibraryWindow")) continue;
 
-                if (Path.GetExtension(file).Equals(".cs") || Path.GetExtension(file).Equals(".uxml"))
+                if (new [] {".cs", ".uxml", ".asmdef"}.Contains(Path.GetExtension(file)))
                 {
                     var lines = new List<string>(File.ReadAllLines(file));
                     var newLines = lines.Where(line => !line.Trim().StartsWith("//")).ToList();
