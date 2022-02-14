@@ -107,7 +107,7 @@ namespace VRLabs.ModularShaderSystem
                 throw new DirectoryNotFoundException($"The folder \"{path}\" is not part of the unity project");
 
             if(!path.StartsWith("Assets"))
-                path = path.Replace(Application.dataPath, "");
+                path = path.Replace(Application.dataPath, "Assets");
             
             return path;
         }
