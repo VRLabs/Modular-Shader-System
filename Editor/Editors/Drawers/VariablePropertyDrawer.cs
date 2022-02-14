@@ -33,6 +33,8 @@ namespace VRLabs.ModularShaderSystem.UI
             nameField.RegisterValueChangedCallback(evt => foldout.text = evt.newValue);
             var typeField = template.Q<EnumField>("Type");
             var customTypeField = template.Q<VisualElement>("CustomType");
+
+            typeField.Init(VariableType.Float);
             
             customTypeField.style.display = ((VariableType)typeField.value) == VariableType.Custom ? DisplayStyle.Flex : DisplayStyle.None;
             
