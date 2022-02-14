@@ -22,7 +22,6 @@ namespace VRLabs.ModularShaderSystem.UI
             var visualTree = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/VariablePropertyDrawer");
             VisualElement template = visualTree.CloneTree();
             var foldout = new Foldout();
-            //TODO: Live updated the text value
             foldout.text = property.displayName;
             foldout.RegisterValueChangedCallback((e) => property.isExpanded = e.newValue);
             foldout.value = property.isExpanded;

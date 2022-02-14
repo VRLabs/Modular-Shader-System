@@ -57,9 +57,7 @@ namespace VRLabs.ModularShaderSystem
                     SaveSubAsset(ctx, subAsset, builder, name);
             }
             
-            
-            //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
-            ctx.AddObjectToAsset("Collection", subAsset/*, icon*/); //TODO: add asset icon here
+            ctx.AddObjectToAsset("Collection", subAsset);
             ctx.SetMainObject(subAsset);
         }
 
@@ -80,7 +78,7 @@ namespace VRLabs.ModularShaderSystem
 
             templateAsset.Keywords = mkr.Distinct().ToArray();
             
-            ctx.AddObjectToAsset(name, templateAsset /*, icon*/); //TODO: add asset icon here
+            ctx.AddObjectToAsset(name, templateAsset);
             asset.Templates.Add(templateAsset);
         }
 

@@ -13,8 +13,7 @@ namespace VRLabs.ModularShaderSystem
     /// </summary>
     [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
     public class TemplateAssetImporter : ScriptedImporter
-    { 
-        //TODO: add icon
+    {
         public override void OnImportAsset(AssetImportContext ctx)
         {
             var subAsset = ScriptableObject.CreateInstance<TemplateAsset>();
@@ -31,7 +30,7 @@ namespace VRLabs.ModularShaderSystem
 
             subAsset.Keywords = mkr.Distinct().ToArray();
             
-            //Texture2D icon = Resources.Load<Texture2D>("Editor/Icons/Icon");
+            //Texture2D icon = Resources.Load<Texture2D>(MSSConstants.RESOURCES_FOLDER + "/ShaderModuleIconDark");
             ctx.AddObjectToAsset("Template", subAsset/*, icon*/);
             ctx.SetMainObject(subAsset);
         }

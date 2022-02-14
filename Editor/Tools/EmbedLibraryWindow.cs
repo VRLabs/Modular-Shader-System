@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -119,6 +120,8 @@ namespace VRLabs.ModularShaderSystem.Tools
                 return;
             }
 
+            path = GetPathRelativeToProject(path);
+
             if (Directory.Exists(path + "/ModularShaderSystem"))
                 Directory.Delete(path + "/ModularShaderSystem", true);
 
@@ -129,6 +132,22 @@ namespace VRLabs.ModularShaderSystem.Tools
                 File.Copy(licencePath, path + "/ModularShaderSystem/LICENSE");
 
             AssetDatabase.Refresh();
+            
+            MethodInfo SetIconForObject = typeof(EditorGUIUtility).GetMethod("SetIconForObject", BindingFlags.Static | BindingFlags.NonPublic);
+            MethodInfo CopyMonoScriptIconToImporters = typeof(MonoImporter).GetMethod("CopyMonoScriptIconToImporters", BindingFlags.Static | BindingFlags.NonPublic);
+
+            SetIconToScript(SetIconForObject, CopyMonoScriptIconToImporters, $"{path}/ModularShaderSystem/Scriptables/ModularShader.cs", $"{_resourceFolderField.value}/ModularShaderIcon");
+            SetIconToScript(SetIconForObject, CopyMonoScriptIconToImporters, $"{path}/ModularShaderSystem/Scriptables/ShaderModule.cs", $"{_resourceFolderField.value}/ShaderModuleIcon");
+            SetIconToScript(SetIconForObject, CopyMonoScriptIconToImporters, $"{path}/ModularShaderSystem/Scriptables/TemplateAsset.cs", $"{_resourceFolderField.value}/TemplateIcon");
+            SetIconToScript(SetIconForObject, CopyMonoScriptIconToImporters, $"{path}/ModularShaderSystem/Scriptables/TemplateCollectionAsset.cs", $"{_resourceFolderField.value}/TemplateCollectionIcon");
+        }
+
+        private void SetIconToScript(MethodInfo SetIconForObject, MethodInfo CopyMonoScriptIconToImporters, string scriptPath, string iconResourcePath)
+        {
+            MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(scriptPath);
+            Texture2D icon = Resources.Load<Texture2D>(iconResourcePath);
+            SetIconForObject.Invoke(null, new object[] { script, icon });
+            CopyMonoScriptIconToImporters.Invoke(null, new object[] { script });
         }
 
         private void SaveSettingsOnFile()
@@ -210,7 +229,7 @@ namespace VRLabs.ModularShaderSystem.Tools
                 {
                     string finalPath = file.Replace(oldPath, newPath + "/ModularShaderSystem" + subpath);
                     Directory.CreateDirectory(Path.GetDirectoryName(finalPath) ?? string.Empty);
-                    finalPath = finalPath.Substring(finalPath.IndexOf("Assets", StringComparison.Ordinal));
+                    //finalPath = finalPath.Substring(finalPath.IndexOf("Assets", StringComparison.Ordinal));
                     AssetDatabase.CopyAsset(file, finalPath);
 
                     if (Path.GetExtension(finalPath).Equals(".uss"))
@@ -236,6 +255,20 @@ namespace VRLabs.ModularShaderSystem.Tools
                     newSubPath = subpath + "/" + _resourceFolderField.value;
                 CopyDirectory(directory, newPath, newSubPath, keepComments);
             }
+        }
+        
+        private static string GetPathRelativeToProject(string path)
+        {
+            if (!Directory.Exists(path))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not found");
+
+            if (!path.Contains(Application.dataPath) && !path.StartsWith("Assets"))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not part of the unity project");
+
+            if(!path.StartsWith("Assets"))
+                path = path.Replace(Application.dataPath, "Assets");
+            
+            return path;
         }
     }
 }
