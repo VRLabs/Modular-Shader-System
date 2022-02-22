@@ -72,11 +72,14 @@ namespace VRLabs.ModularShaderSystem
             {
                 AssetDatabase.StartAssetEditing();
                 
-                foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                if (shader.LastGeneratedShaders != null)
                 {
-                    string assetPath = AssetDatabase.GetAssetPath(generatedShader);
-                    if(string.IsNullOrWhiteSpace(assetPath))
-                        File.Delete(assetPath);
+                    foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                    {
+                        string assetPath = AssetDatabase.GetAssetPath(generatedShader);
+                        if (string.IsNullOrWhiteSpace(assetPath))
+                            File.Delete(assetPath);
+                    }
                 }
 
                 shader.LastGeneratedShaders = new List<Shader>();
