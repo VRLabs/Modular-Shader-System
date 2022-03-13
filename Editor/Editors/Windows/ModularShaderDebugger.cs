@@ -45,7 +45,7 @@ namespace VRLabs.ModularShaderSystem.Debug
     /// </remarks>
     public class ModularShaderDebugger : EditorWindow
     {
-        [MenuItem(MSSConstants.WINDOW_PATH + "/Modular Shader Debugger")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Modular Shader Debugger", priority = 5)]
         public static void ShowExample()
         {
             ModularShaderDebugger wnd = GetWindow<ModularShaderDebugger>();

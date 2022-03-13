@@ -33,7 +33,7 @@ namespace VRLabs.ModularShaderSystem.UI
             var typeField = template.Q<EnumField>("Type");
             var customTypeField = template.Q<VisualElement>("CustomType");
 
-            typeField.Init(VariableType.Float);
+            typeField.Init((VariableType)property.FindPropertyRelative("Type").intValue);
             
             customTypeField.style.display = ((VariableType)typeField.value) == VariableType.Custom ? DisplayStyle.Flex : DisplayStyle.None;
             

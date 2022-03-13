@@ -17,7 +17,7 @@ namespace VRLabs.ModularShaderSystem.Tools
     /// </summary>
     public class EmbedLibraryWindow : EditorWindow
     {
-        [MenuItem(MSSConstants.WINDOW_PATH + "/Tools/Embed Library")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Tools/Embed Library", priority = 102)]
         public static void CreateWindow()
         {
             var window = GetWindow<EmbedLibraryWindow>();

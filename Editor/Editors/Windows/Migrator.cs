@@ -150,7 +150,7 @@ namespace VRLabs.ModularShaderSystem
     
     public class Migrator : EditorWindow
     {
-        [MenuItem(MSSConstants.WINDOW_PATH + "/Tools/Migrator")]
+        [MenuItem(MSSConstants.WINDOW_PATH + "/Tools/Migrator", priority = 101)]
         private static void ShowWindow()
         {
             var window = GetWindow<Migrator>();
