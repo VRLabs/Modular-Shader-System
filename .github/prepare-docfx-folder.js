@@ -65,7 +65,7 @@ if (isSingleFolder) {
 }
 else {
     console.log('Retrieving Tags');
-    exec('git -C "' + destinationMasterFolder + '" tag -l --sort=-version:refname v* > "' + destinationTagsFolder + '/tags.txt"');
+    exec('git -C "' + destinationMasterFolder + '" tag -l --sort=-version:refname * > "' + destinationTagsFolder + '/tags.txt"');
     tags = fs.readFileSync(destinationTagsFolder + '/tags.txt', "utf-8").split("\n");
     tags.unshift("master");
 }
