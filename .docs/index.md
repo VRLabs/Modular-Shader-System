@@ -57,7 +57,7 @@ documentType: index
 <div class="titleArea">
   <div class="wrap">
     <div class="text">
-      <img alt="Modular Shader System" width="200" src="logo.png" />
+      <img alt="Modular Shader System" height="128" src="logo-full.png" />
     </div>
     <div class="buttons-unit-small">
       <br/>

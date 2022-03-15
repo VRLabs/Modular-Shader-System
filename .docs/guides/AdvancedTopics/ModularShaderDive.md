@@ -5,16 +5,16 @@ title: Modular Shader Generator Deep Dive
 
 # Modular Shader Generator Deep Dive
 
-The modular shader generator is fairly simple to use, you just call the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader) method, pass in the destination folder path, the modular shader, and you're done.
+The modular shader generator is fairly simple to use, you just call the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader(System.String,VRLabs.ModularShaderSystem.ModularShader,System.Boolean)) method, pass in the destination folder path, the modular shader, and you're done.
 
 But it may be useful to know what happens underneath and talk about the generation steps.
 
-First of all, the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader) is a wrapper that sets up one or more [ShaderContext](xref:VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext) objects, and these objects are what actually generate the shader.
+First of all, the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader(System.String,VRLabs.ModularShaderSystem.ModularShader,System.Boolean)) is a wrapper that sets up one or more [ShaderContext](xref:VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext) objects, and these objects are what actually generate the shader.
 This separation is done so that the generator is unified in all use cases, for example in the library it's used for both generating the shader and generating optimised shaders.
 
 ## GenerateShader method
 
-In the case of the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader) method, it first retrieves and reloads all the used template assets,
+In the case of the [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader(System.String,VRLabs.ModularShaderSystem.ModularShader,System.Boolean)) method, it first retrieves and reloads all the used template assets,
 then it evaluates all the possible variants combinations the modular shader has (as a reminder, variants are those templates that to be able to have the module toggled on and off, need to have the code actually removed, ending up with multiple shader files), 
 after that it generates the PropertyBlock string, which contains all properties declared in all modules (if you have the shader setup to use templates for properties, only the ones in the dedicated template in the modular shader asset is included here, the rest will be handled later with the other templates).
 
@@ -34,7 +34,7 @@ To finish it off, we load all the newly generated shaders and add a reference to
 
 ## The ShaderContext 
 
-As we previously said, a [ShaderContext](xref:VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext) takes care of generating a single shader file using the informations it has been given by calling its [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.GenerateShader) method.
+As we previously said, a [ShaderContext](xref:VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext) takes care of generating a single shader file using the informations it has been given by calling its [GenerateShader](xref:VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader(System.String,VRLabs.ModularShaderSystem.ModularShader,System.Boolean)) method.
 
 First it generates the name for both the file and the shader path in the material's shader selector, after that it generates the property section of the shader by using the provided property block or by generating its own if it's empty (in this case it makes the assumption that it's doing it for optimised shaders and does not include module's Enable properties).
 
