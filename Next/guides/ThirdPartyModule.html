@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Create a Module for Third Parties | Modular Shader System Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Create a Module for Third Parties | Modular Shader System Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="png" src="../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ThirdpartyModule">
+<h1 id="create-a-module-for-third-parties">Create a Module for Third Parties</h1>
+
+<p>Up until now we assumed that you've been working on your own modular shader where you know what each piece does and how it's designed already.</p>
+<p>But if you're making a module to add a specific functionality to someone else's shader, you won't have the luxury of knowing exactly how it works, unless the creator of that shader made ample documentation for it.</p>
+<p>Luckily we have the means to get at least enough informations to try and add some functionality of our own.</p>
+<p>In this example we will use the modular shader built in <a class="xref" href="GettingStarted.html">Getting Started</a> as a reference modular shader, but we will act like we didn't make it and we know nothing about it.</p>
+<h2 id="the-modular-shader-debugger">The Modular Shader Debugger</h2>
+<p>Before starting doing anything, we probably need to look on the modular shader first. We could open the modular shader and shader module assets, but there's a better way to get a quick look: the Modular Shader Debugger.</p>
+<p>Go to the menu <code>VRLabs &gt; Modular Shader &gt; Modular Shader Debugger</code>. A window will open with an object field and 2 (or more) tabs. put the modular shader you want to look a into that field.</p>
+<h3 id="template-graph">Template Graph</h3>
+<p><img src="/images/docs/ThirdpartyModule/1.png" alt="inspector"></p>
+<p>This first tab, called <code>Template Graph</code> is a node graph where all the template hierarchy is shown.
+From here you can look at all the templates the modular shader uses with its current module setup.</p>
+<p>Each node is a template, and on the left side it shows the keyword used to add it, while the right side contains all the keywords it declares.
+Each connection indicates that the template on the right of the connection has been placed inside the the template on the left of the connection, by the keyword indicated by the port.</p>
+<p>Our case is fairly simple, it's just the base template and an extra template.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>In the case a template had multiple keywords to be placed on, in the graph there would be a number of copies of said template for each different keyword.
+So if for example the template had been defined to be placed in both the <code>VERTEX_FUNCTION</code> and <code>FRAGMENT_FUNCTION</code> keywords we would have seen 2 different notes indicating the same template.</p>
+<p>This is because the template graph is solving the template tree like it the shader generator would, so multiple uses of a template in different keywords will be instanced multiple times (multiple instances on the same keyword in different places of the same parent template are not duplicated).</p>
+<p>Since it solves the template tree like the shader generator, it will also not include templates that are in the assets but are set up wrong and wouldn't end up inside the final shader, like templates with the queue set up wrong or similar.</p>
+<p>The tree is an image of what is actually used in the final result</p>
+</div>
+<p>By right clicking a node you have the possibility to preview its code and get a quick idea on what it does.</p>
+<p><img src="/images/docs/ThirdpartyModule/2.png" alt="inspector"></p>
+<p>We have a general idea about the templates used by this modular shader, let's now go and look at the functions it may use.</p>
+<h3 id="function-timeline">Function Timeline</h3>
+<p><img src="/images/docs/ThirdpartyModule/3.png" alt="inspector"></p>
+<p>The <code>Function Timeline</code> is a busier tab where you can see the order of the functions being called from a root keyword. you can select which keyword to select from the dropdown in the top, and clicking any function will show up its informations, as well as info about the module it is declared on and the template it uses.
+In our case we only have one function in the <code>FRAGMENT_FUNCTION</code> keyword.</p>
+<p><img src="/images/docs/ThirdpartyModule/4.png" alt="inspector"></p>
+<p>We can see that there's a <code>_MyColor</code> variable, and that there's a <code>FinalColor</code> variable being used in the implementation, despite not being in the variables list.
+The author of this shader has either forgot to include <code>FinalColor</code> in the list or the variable is already statically defined in a template.</p>
+<p>By looking at the templates we can see that the <code>FRAGMENT_FUNCTION</code> keyword is only on the base template, let's check the code quickly and see what's going on there.</p>
+<p><img src="/images/docs/ThirdpartyModule/5.png" alt="inspector"></p>
+<p>Bingo! The <code>FinalColor</code> variable is here, and is initialized with 0, means that it's handled by the templates and we can use it as we please in our modules without declaring its usage.</p>
+<p>Now we have a rough idea of how the area we want to hook in works, and we can start build our own module.</p>
+<h2 id="create-the-module">Create the module</h2>
+<p>So, we've already done this before, so let's go through this quickly.</p>
+<p>We want to create a module that adds a texture to the output of the material, tinted by the already available color.</p>
+<p>So we create the asset, fill in the informations, add a property for our texture, and add a function that uses said texture to multiply the final color with it.</p>
+<p><img src="/images/docs/ThirdpartyModule/6.png" alt="inspector"></p>
+<pre><code name="Main">void ApplyTexture()
+{
+    FinalColor *= UNITY_SAMPLE_TEX2D(_MyTexture, TRANSFORM_TEX(FragData.uv, _MyTexture));
+}
+</code></pre>
+<p>Now just add the module to the modular shader and generate the shader.
+If everything went well, you can now use the newly generated shader with the texture slot.</p>
+<h2 id="toggle-the-module">Toggle The Module</h2>
+<p>Texture samples can be expensive, and we don't want to use it always, so we want to do a toggle for it.</p>
+<p>We could do it manually in the function code, but since the texture sample is everything the shader does to begin with, we can just toggle the entire module on and off.</p>
+<p>This is fairly simple to do with the modular shader system, since each module can define an <code>Enabled</code> property, which will become a float property used to check if the module should be enabled or not.</p>
+<p>Let's fill the data in and regenerate the shader.</p>
+<p><img src="/images/docs/ThirdpartyModule/7.png" alt="inspector"></p>
+<p>We can now toggle on and off the texture without doing anything extra.
+This is due to the generator encapsulating the function call into an <code>if</code> statement to check if the value of toggle property is the value we've given to to the module as a condition.</p>
+<p>While generally branching in shaders is a bad idea, the compiler generally optimises where he can, and on top of this, if the shader you added the module in came with some editor scripts that use the capability of the generator to generate shaders optimized for their current material settings, whenever you disable the module and then run said script, the entire module code will not be included in the generated shader at all.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The modular shader system doesn't come with a 1 click script that optimizes the material for you, instead comes with an api to let you do that in your own setup,</p>
+<p>We decided to go this way cause we think it gives more flexibility to shader creators to integrate the library in their own workflow.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

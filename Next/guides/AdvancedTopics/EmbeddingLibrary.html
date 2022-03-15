@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Embedding The Library | Modular Shader System Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Embedding The Library | Modular Shader System Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="png" src="../../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="adv-EmbeddingLibrary">
+<h1 id="embedding-the-library">Embedding The Library</h1>
+
+<p>Embedding the library is the process of making a functional copy of the library for your exclusive use, making you able to export a unity package of your modular shader without worrying about the end user having to download the modular shader system by themselves, and also gives you control over what version of the modular shader system the shader is shipped with.</p>
+<p>If you're planning to make a shader to publish it's important to do this as fist step, since there are going to be some differences applied to the embedded library compared to the base one.</p>
+<p>Luckily for you there's an editor window dedicated to this, and can be found in <code>VRLabs &gt; Modular Shader &gt; Tools     &gt; Embed Library</code>.</p>
+<h2 id="embed-library-window">Embed Library Window</h2>
+<p><img src="/images/docs/AdvancedTopics/1.png" alt="window"></p>
+<p>The window contains some fields that are filled with the default values. Most of these values need to be changed based on your needs.</p>
+<ul>
+<li><strong>Namespace:</strong> this will be the namespace of the embedded library, it has to differ from <code>VRLabs</code> since this one is already there, and it would cause compilation errors. The end namespace will always be <code>*YourInput*.ModularShaderSystem</code> (a preview is visible in the window)</li>
+<li><strong>Default variable keyword:</strong> is the keyword used by default when no keywords are provided for variables. You can change it to whatever you want, or keep it like that.</li>
+<li><strong>Default code keyword:</strong> is the keyword used by default when no keywords are provided for function code implementation. You can change it to whatever you want, or keep it like that.</li>
+<li><strong>Default properties keyword:</strong> is the keyword used as an entry point for templates that target the property block when that option is enabled. You can change it to whatever you want, or keep it like that.</li>
+<li><strong>Resource folder:</strong> it will be the name used for the resource folder of the library, it has to be different from the default value to avoid having collisions with the default library resources, since otherwise when those resources are used the default library ones may be loaded instead if both the embedded and original library are in the project, which could cause issues if the 2 libraries are of different versions with breaking changes between the 2 of them.</li>
+<li><strong>Template extension:</strong> extension for the template file. It has to be different from the default value, to avoid collisions with the scripted importer of the 2 versions.</li>
+<li><strong>Collection extension:</strong> extension for the template collection file. It has to be different from the default value, to avoid collisions with the scripted importer of the 2 versions.</li>
+<li><strong>Editor window menu path:</strong> path to the editor windows in the menu, has to be different from the default one to avoid collisions with the base library, which would end up to being able to only have the options for 1 of the 2 libraries.</li>
+<li><strong>Create asset menu path:</strong> path to the create asset menu in the menu, has to be different from the default one to avoid collisions with the base library, which would end up to being able to only have the options for 1 of the 2 libraries.</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You should keep an eye to what public shaders using the system use for these options, since you also have to not collide with them.</p>
+</div>
+<p>After setting all those options for the first time, it's a good idea to save them to a file, so that the next times you have to update the embedded library you can just load the options from the file.</p>
+<p>Now it's time to embed the library by clicking <code>Embed</code>. It will prompt you to select a folder to where to put the library. The folder must be a folder called <code>Editor</code> since everything needs to be an editor script. Once done the editor will copy the library with the modifications declared and save it under a folder called <code>ModularShaderSystem</code> inside the selected editor folder.</p>
+<p>From here you can use the embedded library directly to make your own shader. This has also the advantage that since you now have your own file extensions for templates and collections, they won't get mixed up with other's people modular shader templates.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

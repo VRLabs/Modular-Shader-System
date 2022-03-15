@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Template Graph | Modular Shader System Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Template Graph | Modular Shader System Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="png" src="../../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="dbg-TemplateGraph">
+<h1 id="template-graph">Template Graph</h1>
+
+<p>The template graph is a default tab of the <a class="xref" href="ModularShaderDebugger.html">Modular Shader Debugger</a> that aims at providing a general view of how the templates are going to be linked together when generating the shader.</p>
+<p><img src="/images/docs/ModularShaderDebugger/2.png" alt="Example template graph, thanks Poiyomi"></p>
+<p>The template tree starts from the left with a root node representing the main template defined in the modular shader asset (and another one to define the root of templates used for properties when the <code>Properties from templates</code> toggle of the modular shader is on).
+From then templates are parsed like they would during shader generation and their relative nodes appended and connected with the keyword they defined. If a templated declares to be attached to multiple keywords, this is reflected in the graph by having multiple nodes attached, each to its keyword.</p>
+<p>This process may end up not showing some templates that are declared in the asset, if that happens it usually is indicative of errors in some settings of those templates, since they would never be used when generating the shader to begin with.
+This way the graph is representative of the structure of the generated shader.</p>
+<h2 id="template-node">Template Node</h2>
+<p><img src="/images/docs/ModularShaderDebugger/3.png" alt="Template node, thanks Poiyomi"></p>
+<p>The template node is divided in 3 sections: the top bar, the used keyword on the left, and the declared keywords on the right.</p>
+<p>There can be exceptions where either the left of right area is missing due to the node being the root (in the former case) or a template that doesn't declare keywords (the latter case).</p>
+<p><img src="/images/docs/ModularShaderDebugger/4.png" alt="Template root node, thanks Poiyomi">
+<img src="/images/docs/ModularShaderDebugger/5.png" alt="Template leaf node, thanks Poiyomi"></p>
+<p>The top bar includes 3 elements:</p>
+<ul>
+<li>The template name</li>
+<li>The module it comes from (in the form of the id of the module)</li>
+<li>Its queue value (on the right)</li>
+</ul>
+<p>The left area will always contain the keyword that is used to place this template (with the exception of root nodes that don't have this area).</p>
+<p>The right area contains all the keywords contained, regardless of if they're used for other templates or not. Internal keywords are indicated with an <code>(i)</code> at the end.</p>
+<p>Right clicking the node will give you a popup menu with the option of showing off the content of the template, so you can quickly check what the template does.</p>
+<p><img src="/images/docs/ModularShaderDebugger/6.png" alt="Template code view, thanks Poiyomi"></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

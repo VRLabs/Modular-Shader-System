@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Template Graph | Modular Shader System Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Template Graph | Modular Shader System Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="png" src="../../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="dbg-FunctionTimeline">
+<h1 id="function-timeline">Function Timeline</h1>
+
+<p>The function timeline is a default tab of the <a class="xref" href="ModularShaderDebugger.html">Modular Shader Debugger</a> that shows the functions flow inside a modular shader, divided by root keyword.</p>
+<p><img src="/images/docs/ModularShaderDebugger/7.png" alt="tab"></p>
+<p>The is composed of the following areas:</p>
+<ul>
+<li>The timeline in the central area</li>
+<li>Selected function information</li>
+<li>Module information of the selected function</li>
+<li>Function's template code view</li>
+</ul>
+<h2 id="timeline">Timeline</h2>
+<p><img src="/images/docs/ModularShaderDebugger/11.png" alt="Timeline"></p>
+<p>The main timeline shows the order in which each function will be placed inside the selected root keyword.</p>
+<p>The order reflects the order in which the functions will be called in the shader, from left to right.</p>
+<p>If multiple function elements have some overlap it means that there is a direct dependency between them, with the smaller one usually being the one that has the <code>AppendAfter</code> value set to the bigger one, this information can be shown by looking at the function's information after selecting the element.</p>
+<p>You can select which timeline to show by selecting the root you want to see in the dropdown above the timeline.</p>
+<h3 id="timeline-element">Timeline element</h3>
+<p>A single element contains the name of the function on the left, and it's queue on the right (the queue is always relative to its parent <code>AppendAfter</code>)</p>
+<p>The selected element will have a cyan border, while elements with a yellow borders indicate a function that contains the variable selected in the <code>Selected Function information</code> area.</p>
+<p><img src="/images/docs/ModularShaderDebugger/8.png" alt="unselected item"></p>
+<p><img src="/images/docs/ModularShaderDebugger/9.png" alt="selected item"></p>
+<p><img src="/images/docs/ModularShaderDebugger/10.png" alt="item with selected variable"></p>
+<h2 id="selected-function-information">Selected function information</h2>
+<p><img src="/images/docs/ModularShaderDebugger/12.png" alt="Selected function info"></p>
+<p>This area shows informations relative to the function, such as the name, queue, and where it's appended.</p>
+<p>It also shows its variables and in which keywords variables and implementation are put on.</p>
+<p>Selecting a variable will show which other functions in the timeline that use the same variable, giving you the possibility to check where it's used and for what.</p>
+<h2 id="functions-module-base-info">Function's module base info</h2>
+<p><img src="/images/docs/ModularShaderDebugger/13.png" alt="Module info"></p>
+<p>This area shows some basic informations about the module where the selected function is defines, and give you a quick way to select the module asset for further inspection if needed.</p>
+<h2 id="function-code-template">Function code template</h2>
+<p><img src="/images/docs/ModularShaderDebugger/14.png" alt="Module info"></p>
+<p>This area shows the template containing the implementation of the selected function.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
