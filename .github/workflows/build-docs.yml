@@ -1,0 +1,53 @@
+name: build-docs
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare Docs folder
+        run: |
+          mkdir -p docsOutput
+          mkdir -p /usr/share/dotnet/sdk/NuGetFallbackFolder
+          remote=$(git config --get remote.origin.url)
+          node .github/prepare-docfx-folder.js "$remote.git" docsOutput
+        shell: bash
+
+      - name: Build DocFX
+        run: |
+          choco install docfx -y --version 2.58.2
+          docfx docsOutput/docs/docfx.json
+
+      - name: Upload Site Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: site
+          path: docsOutput/docs/_site
+          retention-days: 1
+  
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: site
+          path: site
+
+      - name: Deploy to GitHub Pages
+        uses: Cecilapp/GitHub-Pages-deploy@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          email: 41898282+github-actions[bot]@users.noreply.github.com
+          build_dir: site
+          cname: mss.vrlabs.dev

@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/VRLabs/Modular-Shader-System">
-    <img alt="Modular Shader System" width="200" src="https://github.com/VRLabs/Modular-Shader-System/blob/master/Editor/Resources/MSS/Textures/Logo.png">
+    <img alt="Modular Shader System" height="128" src="Editor/Resources/MSS/MSSLogoFull.png">
   </a>
   <h1>Modular Shader System</h1>
   <p>

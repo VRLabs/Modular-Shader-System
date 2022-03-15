@@ -1,0 +1,4 @@
+void ApplyColor()
+{
+    FinalColor = _MyColor;
+}

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a91c3f0a774b378bb3eac45aac7d62, type: 3}
+  m_Name: ExampleModularShader
+  m_EditorClassIdentifier: 
+  Id: VRLabs.ExampleShader
+  Name: Example Shader
+  Version: 1.0
+  Author: VRLabs
+  Description: 'An example shader to showcase the modular shader system.
+
+
+    The
+    shader itself is fairly basic.'
+  UseTemplatesForProperties: 0
+  ShaderPropertiesTemplate: {fileID: 0}
+  ShaderPath: Example/ExampleShader
+  ShaderTemplate: {fileID: -544282384758852595, guid: b97807ca6bd4c334496940762af16e87,
+    type: 3}
+  CustomEditor: 
+  Properties:
+  - Name: _ZTest
+    DisplayName: Depth test
+    Type: Float
+    DefaultValue: 4
+    DefaultTextureAsset: {fileID: 0}
+    Attributes:
+    - Enum(UnityEngine.Rendering.CompareFunction)
+    - Enum(UnityEngine.Rendering.CompareFunction)
+  - Name: _ZWrite
+    DisplayName: Depth write
+    Type: Float
+    DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
+    Attributes: []
+  - Name: _Cull
+    DisplayName: Cull Mode
+    Type: Float
+    DefaultValue: 2
+    DefaultTextureAsset: {fileID: 0}
+    Attributes:
+    - Enum(UnityEngine.Rendering.CullMode)
+  BaseModules:
+  - {fileID: 11400000, guid: 6fbb1c41401bb4b4c84d67efeb04d81b, type: 2}
+  - {fileID: 11400000, guid: e66e8b6aedcdedb42bb05d1dbbf89761, type: 2}
+  AdditionalModules: []
+  LockBaseModules: 0
+  LastGeneratedShaders: []
+  AdditionalSerializedData: 

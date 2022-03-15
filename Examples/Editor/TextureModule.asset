@@ -10,38 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5840f604c0b741a885a95bca592d1c23, type: 3}
-  m_Name: ExampleModule1
+  m_Name: TextureModule
   m_EditorClassIdentifier: 
-  Id: ExampleModule
-  Name: Example Module
+  Id: VRLabs.TextureModule
+  Name: Texture Module
   Version: 1.0
   Author: VRLabs
-  Description: 
-  Enabled:
-    Name: 
-    DisplayName: 
-    Type: 
-    DefaultValue: 
-    Attributes: []
-    EnableValue: 0
+  Description: Add a texture to the final color
+  EnableProperties: []
   Properties:
-  - Name: aaa
-    DisplayName: 
-    Type: Float
-    DefaultValue: 0.0
+  - Name: _MyTexture
+    DisplayName: My Texture
+    Type: 2D
+    DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []
   Templates: []
   Functions:
-  - Name: DoSomething
-    AppendAfter: '#K#MAINPASSENTRY'
-    Queue: 99
-    ShaderFunctionCode: {fileID: 1413292532103889072, guid: 55a288a5a8d45a74e8bf3f0ee396c57c,
+  - Name: ApplyTexture
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Queue: 120
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: b68ce822c7333ca448d4c06ba82c1cb5,
       type: 3}
     UsedVariables:
-    - Name: availableVariable
-      Type: 4
+    - Name: _MyTexture
+      Type: 17
+      CustomType: 
+    - Name: _MyTexture_ST
+      Type: 7
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []

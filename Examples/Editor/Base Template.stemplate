@@ -1,0 +1,63 @@
+ZTest[_ZTest]
+ZWrite[_ZWrite]
+Cull[_CullMode]
+
+Pass
+{
+    Tags 
+    {
+        "LightMode" = "ForwardBase" 
+    }
+
+    CGPROGRAM
+    #pragma target 3.0
+    #pragma vertex Vertex
+    #pragma fragment Fragment
+    
+    #include "UnityStandardUtils.cginc"
+
+    struct VertexData 
+    {
+        float4 vertex     : POSITION;
+        float2 uv         : TEXCOORD0;
+        float3 normal     : NORMAL;
+    };
+    
+    struct FragmentData 
+    {
+        float4 pos        : SV_POSITION;
+        float3 normal     : NORMAL;
+        float2 uv         : TEXCOORD0;
+        float3 worldPos   : TEXCOORD1;
+    };
+    
+    FragmentData FragData;
+    float4 FinalColor;
+    
+    #K#DEFAULT_VARIABLES
+    
+    #K#DEFAULT_CODE
+    
+    FragmentData Vertex (VertexData v)
+    {
+        FragmentData i;
+        UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+        
+        #K#VERTEX_FUNCTION
+        
+        return i;
+    }
+    
+    float4 Fragment (FragmentData i) : SV_TARGET
+    {	
+        FragData = i;
+        FinalColor = float4(0,0,0,0);
+        
+        #K#FRAGMENT_FUNCTION
+        
+        return FinalColor;
+    }
+
+    ENDCG
+}
+

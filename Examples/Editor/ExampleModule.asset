@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5840f604c0b741a885a95bca592d1c23, type: 3}
+  m_Name: ExampleModule
+  m_EditorClassIdentifier: 
+  Id: VRLabs.ExampleModule
+  Name: Example module
+  Version: 1.0
+  Author: VRLabs
+  Description: Example module to include in the example shader
+  EnableProperties: []
+  Properties:
+  - Name: _MyColor
+    DisplayName: My Color
+    Type: Color
+    DefaultValue: (1, 1, 1, 1)
+    DefaultTextureAsset: {fileID: 0}
+    Attributes: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates:
+  - Template: {fileID: -544282384758852595, guid: 75292ffc490edb94d93aed53b56759e5,
+      type: 3}
+    Keywords:
+    - VERTEX_FUNCTION
+    NeedsVariant: 0
+    Queue: 100
+  Functions:
+  - Name: ApplyColor
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Queue: 100
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: d32b37502c5604b428788d58c92c96f5,
+      type: 3}
+    UsedVariables:
+    - Name: _MyColor
+      Type: 7
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  AdditionalSerializedData: 
