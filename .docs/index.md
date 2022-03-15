@@ -67,7 +67,7 @@ documentType: index
      Unity Editor library for creating shaders composed by modular components.
     </div>
     <div class="buttons-unit">
-      <a href="guides/InspectorDevelopment/GettingStarted.md" class="button"><i class="glyphicon glyphicon-play-circle"></i> Get Started</a>
+      <a href="guides/GettingStarted.md" class="button"><i class="glyphicon glyphicon-play-circle"></i> Get Started</a>
       <a href="https://github.com/VRLabs/Modular-Shader-System/releases" class="button"><i class="glyphicon glyphicon-download"></i> Download</a>
     </div>
   </div>
