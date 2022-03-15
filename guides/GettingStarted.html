@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting started | Modular Shader System Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting started | Modular Shader System Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="png" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="GettingStarted">
+<h1 id="getting-started">Getting Started</h1>
+
+<p>First of all, we need to import the unity package with the asset, if you haven't downloaded yet go <a href="https://github.com/VRLabs/Modular-Shader-System/releases/latest">here</a> and grab the latest version.</p>
+<p>Once everything is imported let's start creating our first modular shader!</p>
+<h2 id="creating-the-modular-shader">Creating the Modular Shader</h2>
+<p>Everything starts with a <code>Modular shader</code> asset. This Asset contains all the basic information about the shader.</p>
+<p>Create a new asset file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Modular Shader</code> (alternative you can bring up the <code>Assets</code> menu by right clicking in the project tab).</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>All assets specific for the Modular Shader System like Modular Shader, Shader module and Template assets should always go inside an <code>Editor</code> folder, since they're used only in editor to generate the shaders.</p>
+</div>
+<p>Now fill out the basic informations with the proper data (for more details about it, check <a class="xref" href="ModularShaderComponents/ModularShader.html#basic-informations">this page</a>).</p>
+<p><img src="/images/docs/GettingStarted/1.png" alt="inspector"></p>
+<p>After that, it's time to fill out some settings, let's start with the shader path. The shader path is just what you would fill in in the first line of the shader file and that defines the path of the shader when searching in the shader selector of the material.</p>
+<p>After that there's the Custom editor value. If you're using a custom inspector you would fill it out with the <code>Namespace.ClassName</code> of the shader inspector you're going to use. In this example we'll keep it empty to let the shader use the default inspector.</p>
+<p><img src="/images/docs/GettingStarted/2.png" alt="inspector"></p>
+<p>Now, let's get into the meat and let's make the base skeleton for our shader.
+This skeleton will be in the <code>template asset</code> that will be placed in the <code>shader template</code> field.</p>
+<p>Create the new template file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Template</code>, open the file in any text editor and paste the following code:</p>
+<pre><code name="Main">ZTest[_ZTest]
+ZWrite[_ZWrite]
+Cull[_CullMode]
+
+Pass
+{
+    Tags 
+    {
+        &quot;LightMode&quot; = &quot;ForwardBase&quot; 
+    }
+
+    CGPROGRAM
+    #pragma target 3.0
+    #pragma vertex Vertex
+    #pragma fragment Fragment
+    
+    #include &quot;UnityStandardUtils.cginc&quot;
+
+    struct VertexData 
+    {
+        float4 vertex     : POSITION;
+        float2 uv         : TEXCOORD0;
+        float3 normal     : NORMAL;
+    };
+    
+    struct FragmentData 
+    {
+        float4 pos        : SV_POSITION;
+        float3 normal     : NORMAL;
+        float2 uv         : TEXCOORD0;
+        float3 worldPos   : TEXCOORD1;
+    };
+    
+    FragmentData FragData;
+    float4 FinalColor;
+    
+    #K#DEFAULT_VARIABLES
+    
+    #K#DEFAULT_CODE
+    
+    FragmentData Vertex (VertexData v)
+    {
+        FragmentData i;
+        UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+        
+        #K#VERTEX_FUNCTION
+        
+        return i;
+    }
+    
+    float4 Fragment (FragmentData i) : SV_TARGET
+    {	
+        FragData = i;
+        FinalColor = float4(0,0,0,0);
+        
+        #K#FRAGMENT_FUNCTION
+        
+        return FinalColor;
+    }
+
+    ENDCG
+}
+</code></pre>
+<p>In this template we set a couple of keywords for hooking up code for vertex and fragment functions, as well as function implementations and properties declarations.
+To get more details about keywords in modular shader system, check out <a class="xref" href="ModularShaderComponents/Keywords.html">this page</a> (we really encourage you to check it right now, as we're gonna talk about them more here).</p>
+<p>After that just put the template into the <code>shader template</code> field.</p>
+<p><img src="/images/docs/GettingStarted/3.png" alt="inspector"></p>
+<p>Now try to generate the shader to see what the system does (you will be prompted to select in which folder to put the generated shader).</p>
+<pre><code name="Main">Shader &quot;Example/ExampleShader&quot;
+{
+    Properties
+    {
+    }
+    SubShader
+    {
+        ZTest[_ZTest]
+        ZWrite[_ZWrite]
+        Cull[_CullMode]
+        
+        Pass
+        {
+            Tags
+            {
+                &quot;LightMode&quot; = &quot;ForwardBase&quot;
+            }
+            
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma vertex Vertex
+            #pragma fragment Fragment
+            
+            #include &quot;UnityStandardUtils.cginc&quot;
+            
+            struct VertexData
+            {
+                float4 vertex     : POSITION;
+                float2 uv         : TEXCOORD0;
+                float3 normal     : NORMAL;
+            };
+            
+            struct FragmentData
+            {
+                float4 pos        : SV_POSITION;
+                float3 normal     : NORMAL;
+                float2 uv         : TEXCOORD0;
+                float3 worldPos   : TEXCOORD1;
+            };
+            
+            FragmentData FragData;
+            float4 FinalColor;
+            
+            FragmentData Vertex (VertexData v)
+            {
+                FragmentData i;
+                UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+                
+                return i;
+            }
+            
+            float4 Fragment (FragmentData i) : SV_TARGET
+            {
+                FragData = i;
+                FinalColor = float4(0,0,0,0);
+                
+                return FinalColor;
+            }
+            
+            ENDCG
+        }
+        
+    }
+}
+</code></pre>
+<p>Main notable thing: all keywords defined have disappeared.
+This is because keywords defined are only used to generate the final shader, once that is done they get remove to avoid shader compilation error that would happen otherwise.</p>
+<p>Other than that you can see that the shader has the correct name and does not implement a custom inspector since we did not set that field.</p>
+<p>Also it currently uses properties ZTest, ZWrite and Cull that are not yet defined, let's fix that by filling out the parameters info.</p>
+<p><img src="/images/docs/GettingStarted/4.png" alt="inspector"></p>
+<p>Now if we try to generate the shader again (if you reselect the same folder you will override the shader) you will see the shader now also has properties generated.</p>
+<pre><code name="Main" highlight-lines="5-7">Shader &quot;Example/ExampleShader&quot;
+{
+    Properties
+    {
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest(&quot;Depth test&quot;, Float) = 4
+        _ZWrite(&quot;Depth write&quot;, Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull(&quot;Cull Mode&quot;, Float) = 2
+    }
+    SubShader
+    {
+        ZTest[_ZTest]
+        ZWrite[_ZWrite]
+        Cull[_CullMode]
+        
+        Pass
+        {
+            Tags
+            {
+                &quot;LightMode&quot; = &quot;ForwardBase&quot;
+            }
+            
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma vertex Vertex
+            #pragma fragment Fragment
+            
+            #include &quot;UnityStandardUtils.cginc&quot;
+            
+            struct VertexData
+            {
+                float4 vertex     : POSITION;
+                float2 uv         : TEXCOORD0;
+                float3 normal     : NORMAL;
+            };
+            
+            struct FragmentData
+            {
+                float4 pos        : SV_POSITION;
+                float3 normal     : NORMAL;
+                float2 uv         : TEXCOORD0;
+                float3 worldPos   : TEXCOORD1;
+            };
+            
+            FragmentData FragData;
+            float4 FinalColor;
+            
+            FragmentData Vertex (VertexData v)
+            {
+                FragmentData i;
+                UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+                
+                return i;
+            }
+            
+            float4 Fragment (FragmentData i) : SV_TARGET
+            {
+                FragData = i;
+                FinalColor = float4(0,0,0,0);
+                
+                return FinalColor;
+            }
+            
+            ENDCG
+        }
+        
+    }
+}
+</code></pre>
+<p>Perfect, now the shader has all the properties it uses. But it still doesn't output much since both the vertex and fragment shaders don't really anything at the moment. Now it's the time to make a module that will give some functionality to this shader.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Theoretically you could create a fully working shader just in the main template, and just leave the keywords as entry points for additional features.</p>
+<p>The main downside for that is that the main hooks have to be inside the main template somewhere, meaning that all the relevant code (like the vertex and fragment function) will have to be there and not enclosed inside some <code>cginc</code> file, since the system doesn't really crawl into includes when it generates the shader, and therefore can't really know if inside one of them there's some keyword.</p>
+<p>Using <code>cginc</code> file to put your shader code is not advised with the modular shader system, we instead promote the usage of templates in modules to obtain a similar result. (you are still able to use default includes just fine)</p>
+</div>
+<h2 id="creating-a-module">Creating a Module</h2>
+<p>Time to create a module to give life to this shader, first create the module asset file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Shader Module</code>.</p>
+<p>The informations area of the asset is similar to the modular shader assets, but with some key differences:</p>
+<ul>
+<li>The id <strong>needs</strong> to be filled in since it's going to be used by the system to check for duplicate modules, incompatibilities, and dependencies.</li>
+<li>There's a list of dependencies.</li>
+<li>There's a list of incompatibilities.</li>
+</ul>
+<p>In our case we won't need to add any dependency or incompatibility, so we will just fill everything else with the proper information.</p>
+<p><img src="/images/docs/GettingStarted/5.png" alt="inspector"></p>
+<p>Now time for the interesting bits, first of all, we need to make the vertex shader set the proper output. This is a good time to add a template and hook it to the <code>VERTEX_FUNCTION</code> keyword.</p>
+<p>First let's create a new template to contain the vertex function implementation:</p>
+<pre><code name="Main">i.pos        = UnityObjectToClipPos(v.vertex);
+i.normal     = UnityObjectToWorldNormal(v.normal);
+i.worldPos   = mul(unity_ObjectToWorld, v.vertex);		
+i.uv         = v.uv;
+</code></pre>
+<p>And after that add a new template in the list and set the asset slot with the newly created template asset, and add some other data.</p>
+<p><img src="/images/docs/GettingStarted/6.png" alt="inspector"></p>
+<p>The queue value is used to decide the order in which the templates are used to generate the shader.
+This is very important since a template is placed inside every keyword found at the <em>moment</em> the template is placed in, meaning that if templates that are added in a later stage have that same keywords, the template won't be added to those cause they're not there yet.
+The order in which templates are evaluated and added is from lower queue to higher queue ones, if 2 templates are on the same queue, the first one will be based on the order of the relative modules in the shader, and in case 2 templates are in the same module and have the same queue, the one higher in the list goes first.</p>
+<p>The <code>generate variant</code> toggle is used to define if the system has to generate different shaders to have the module this template is be enabled or disabled (we will talk more about enabling and disabling modules <a class="xref" href="ThirdPartyModule.html#toggle-the-module">in this page</a>), this module will always be enabled so this setting is not used and should be left untoggled.
+In our case even if the module was able to be enabled and disabled, this toggle would still be left unchecked, since the code in this template is inside a function and can be enabled and disabled by doing an conditional check, so there's no need to create multiple shaders.</p>
+<p>The keywords list contains all the keywords this template will be hooked to, in our case it will be added only on the <code>VERTEX_FUNCTION</code> keyword.</p>
+<p>Nice, now let's test it by adding the module in the modules list of the modular shader and generate the shader again.</p>
+<p><img src="/images/docs/GettingStarted/7.png" alt="inspector"></p>
+<pre><code name="Main" highlight-lines="52-55">Shader &quot;Example/ExampleShader&quot;
+{
+    Properties
+    {
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest(&quot;Depth test&quot;, Float) = 4
+        _ZWrite(&quot;Depth write&quot;, Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull(&quot;Cull Mode&quot;, Float) = 2
+    }
+    SubShader
+    {
+        ZTest[_ZTest]
+        ZWrite[_ZWrite]
+        Cull[_CullMode]
+        
+        Pass
+        {
+            Tags
+            {
+                &quot;LightMode&quot; = &quot;ForwardBase&quot;
+            }
+            
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma vertex Vertex
+            #pragma fragment Fragment
+            
+            #include &quot;UnityStandardUtils.cginc&quot;
+            
+            struct VertexData
+            {
+                float4 vertex     : POSITION;
+                float2 uv         : TEXCOORD0;
+                float3 normal     : NORMAL;
+            };
+            
+            struct FragmentData
+            {
+                float4 pos        : SV_POSITION;
+                float3 normal     : NORMAL;
+                float2 uv         : TEXCOORD0;
+                float3 worldPos   : TEXCOORD1;
+            };
+            
+            FragmentData FragData;
+            float4 FinalColor;
+            
+            FragmentData Vertex (VertexData v)
+            {
+                FragmentData i;
+                UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+                
+                i.pos        = UnityObjectToClipPos(v.vertex);
+                i.normal     = UnityObjectToWorldNormal(v.normal);
+                i.worldPos   = mul(unity_ObjectToWorld, v.vertex);
+                i.uv         = v.uv;
+                
+                return i;
+            }
+            
+            float4 Fragment (FragmentData i) : SV_TARGET
+            {
+                FragData = i;
+                FinalColor = float4(0,0,0,0);
+                
+                return FinalColor;
+            }
+            
+            ENDCG
+        }
+        
+    }
+}
+</code></pre>
+<p>Now the shader outputs something! It's pitch black, but don't worry, we're going to give it some more color soon, by adding a function to the fragment function.</p>
+<p>But first, we need a color property so that we can set a color from the inspector, so let's add it to the properties list of this module.</p>
+<p><img src="/images/docs/GettingStarted/8.png" alt="inspector"></p>
+<p>Now time to create a function. Let's start that by creating another template asset (yes, functions need template assets as well, to get the function implementation).</p>
+<pre><code name="Main">void ApplyColor()
+{
+    FinalColor = _MyColor;
+}
+</code></pre>
+<p>Template assets used for functions always need to have a void function with no parameters, in this case <code>ApplyColor</code>.</p>
+<p>Now that we have the asset, let's fill the function data</p>
+<p><img src="/images/docs/GettingStarted/9.png" alt="inspector"></p>
+<p>The name has to be the same as the name of the void function with no parameters mentioned before.</p>
+<p>the <code>Append After</code> field contains the hook for the function.
+Unlike just templates this hook can be either keywords or other function declared in this or other modules. For this reason unlike other fields if you want to target a keyword here you have to keep the <code>#K#</code> prefix.</p>
+<p>The <code>Queue</code> field works the same as in templates, with the difference being that everything is in the context of the same <code>Append After</code>.</p>
+<p>The <code>Used Variables</code> list, just like the title suggests, contains all the variables that are going to be used in this function. in our case the only variable we need to put is the <code>_MyColor</code> variable (since the property is a <code>Color</code> property, it translated to a <code>float4</code> in shader).</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>While we do use the <code>FinalColor</code> variable in the function, you should not put it in the variables list because it is already declared by the template itself.
+in the variables list of functions you should never put variables that for some reason are already available to be used in that place of the shader.</p>
+</div>
+<p>The <code>Variable Keywords</code> and <code>Code Keywords</code> lists are used to tell where the function template code and the variables declarations should be placed.
+By default if the lists are empty the generator will try to put them in some default keywords, respectively being <code>DEFAULT_VARIABLES</code> and <code>DEFAULT_CODE</code>.
+In our case those keywords are exactly where we need them to be, so we leave the lists empty.</p>
+<p>Now, let's generate the shader again and see the result.</p>
+<pre><code name="Main" highlight-lines="8,48,50-53,73">Shader &quot;Example/ExampleShader&quot;
+{
+    Properties
+    {
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest(&quot;Depth test&quot;, Float) = 4
+        _ZWrite(&quot;Depth write&quot;, Float) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull(&quot;Cull Mode&quot;, Float) = 2
+        _MyColor(&quot;My Color&quot;, Color) = (1, 1, 1, 1)
+    }
+    SubShader
+    {
+        ZTest[_ZTest]
+        ZWrite[_ZWrite]
+        Cull[_CullMode]
+        
+        Pass
+        {
+            Tags
+            {
+                &quot;LightMode&quot; = &quot;ForwardBase&quot;
+            }
+            
+            CGPROGRAM
+            #pragma target 3.0
+            #pragma vertex Vertex
+            #pragma fragment Fragment
+            
+            #include &quot;UnityStandardUtils.cginc&quot;
+            
+            struct VertexData
+            {
+                float4 vertex     : POSITION;
+                float2 uv         : TEXCOORD0;
+                float3 normal     : NORMAL;
+            };
+            
+            struct FragmentData
+            {
+                float4 pos        : SV_POSITION;
+                float3 normal     : NORMAL;
+                float2 uv         : TEXCOORD0;
+                float3 worldPos   : TEXCOORD1;
+            };
+            
+            FragmentData FragData;
+            float4 FinalColor;
+            
+            float4 _MyColor;
+            
+            void ApplyColor()
+            {
+                FinalColor = _MyColor;
+            }
+            
+            FragmentData Vertex (VertexData v)
+            {
+                FragmentData i;
+                UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+                
+                i.pos        = UnityObjectToClipPos(v.vertex);
+                i.normal     = UnityObjectToWorldNormal(v.normal);
+                i.worldPos   = mul(unity_ObjectToWorld, v.vertex);
+                i.uv         = v.uv;
+                
+                return i;
+            }
+            
+            float4 Fragment (FragmentData i) : SV_TARGET
+            {
+                FragData = i;
+                FinalColor = float4(0,0,0,0);
+                
+                ApplyColor();
+                
+                return FinalColor;
+            }
+            
+            ENDCG
+        }
+        
+    }
+}
+</code></pre>
+<p>Now the shader is a fully functional shader that outputs the color we select with the property!</p>
+<p>If you check the code you can see it added the _MyColor property, and placed its variable declaration and function definition in the place of the standard keywords, and created call to said function in the fragment shader.</p>
+<p>From here you can add templates and features to this module to add features, or make a separate module for other features, the possibilities are endless.</p>
+<h2 id="templates-vs-functions">Templates vs Functions</h2>
+<p>Not the big question rises: when do you use templates and when do you use functions? don't they do the same thing by stitching code around?</p>
+<p>Well, depends, they both do more or less the same thing, but in slightly different ways.</p>
+<p>Templates are just a dumb &quot;place code here now&quot;, so they're conceptually really simple and you can theoretically generate an entire shader with just that concept alone (some big VRChat shader developer is doing just that...).
+But being simple also means having to manually deal with some issues like &quot;is this function available in this bit of code?&quot; &quot;do i have to define the variable here or if i do it i'll get an error cause it's already defined?&quot;.</p>
+<p>Functions on the other hand are a bit more complex to setup since they require you to tell them used variables, where to put them, where to put the code etc., but this also gives the system more power to handle some stuff, like variables being available without making duplicated.
+Another big advantage is the possibility to use other functions as hook points for your functions, which means that the more functions are used, the more hooks are available to add more functions, giving you great flexibility, especially in big shader projects.</p>
+<p>Also the debugging tools available for viewing functions are inherently better due the bigger amount of data available, which makes way easier to add functionality to someone else's modular shader with a custom module without too much prior knowledge of the shader design.</p>
+<p>Of course functions also have some disadvantages outside of the longer initial setup. The main issue is that due to how they work, they can only be added to keywords inside a function implementation (like the fragment function in the example above).</p>
+<p>Our initial intent with this subdivision was to have templates becoming the base skeleton of the final shader, with hook points inside the main functions to start adding modules with your own functions to add features.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
