@@ -95,7 +95,7 @@ The queue value is used to decide the order in which the templates are used to g
 This is very important since a template is placed inside every keyword found at the *moment* the template is placed in, meaning that if templates that are added in a later stage have that same keywords, the template won't be added to those cause they're not there yet.
 The order in which templates are evaluated and added is from lower queue to higher queue ones, if 2 templates are on the same queue, the first one will be based on the order of the relative modules in the shader, and in case 2 templates are in the same module and have the same queue, the one higher in the list goes first.
 
-The `generate variant` toggle is used to define if the system has to generate different shaders to have the module this template is be enabled or disabled (we will talk more about enabling and disabling modules [in this page](xref:ThirdpartyModule#toggle-the-module)), this module will always be enabled so this setting is not used and should be left untoggled.
+The `generate variant` toggle is used to tell the system to generate different shaders for cases when the parent module is enabled or disabled (we will talk more about enabling and disabling modules [in this page](xref:ThirdpartyModule#toggle-the-module)), this module will always be enabled so this setting is not used and should be left untoggled.
 In our case even if the module was able to be enabled and disabled, this toggle would still be left unchecked, since the code in this template is inside a function and can be enabled and disabled by doing an conditional check, so there's no need to create multiple shaders.
 
 The keywords list contains all the keywords this template will be hooked to, in our case it will be added only on the `VERTEX_FUNCTION` keyword.
@@ -151,19 +151,19 @@ From here you can add templates and features to this module to add features, or 
 
 ## Templates vs Functions
 
-Not the big question rises: when do you use templates and when do you use functions? don't they do the same thing by stitching code around?
+Now the big question rises: when do you use templates and when do you use functions? don't they do the same thing by stitching code around?
 
 Well, depends, they both do more or less the same thing, but in slightly different ways.
 
 Templates are just a dumb "place code here now", so they're conceptually really simple and you can theoretically generate an entire shader with just that concept alone (some big VRChat shader developer is doing just that...).
 But being simple also means having to manually deal with some issues like "is this function available in this bit of code?" "do i have to define the variable here or if i do it i'll get an error cause it's already defined?".
 
-Functions on the other hand are a bit more complex to setup since they require you to tell them used variables, where to put them, where to put the code etc., but this also gives the system more power to handle some stuff, like variables being available without making duplicated.
+Functions on the other hand are a bit more complex to setup since they require you to tell them used variables, where to put them, where to put the code etc., but this also gives the system more power to handle some stuff, like variables being available without making duplicates.
 Another big advantage is the possibility to use other functions as hook points for your functions, which means that the more functions are used, the more hooks are available to add more functions, giving you great flexibility, especially in big shader projects.
 
-Also the debugging tools available for viewing functions are inherently better due the bigger amount of data available, which makes way easier to add functionality to someone else's modular shader with a custom module without too much prior knowledge of the shader design.
+Also the debugging tools available for viewing functions are inherently better due the bigger amount of data available, which makes it way easier to add functionality to someone else's modular shader with a custom module without too much prior knowledge of the shader design.
 
 Of course functions also have some disadvantages outside of the longer initial setup. The main issue is that due to how they work, they can only be added to keywords inside a function implementation (like the fragment function in the example above).
 
-Our initial intent with this subdivision was to have templates becoming the base skeleton of the final shader, with hook points inside the main functions to start adding modules with your own functions to add features.
+Our initial intent with this subdivision was to have templates be the base skeleton of the final shader, with hook points inside the main functions to add modules with your own functions which add features.
 
