@@ -9,7 +9,7 @@ This Asset contains all the basic information about the shader, divided in the f
 - **Base Informations:** this part is mainly informational, but could be used by systems made to work with the modular shader system.
 - **Settings:** data here will be used to generate the shader.
 
-You can create a modular shader asset by selecting the menu `Assets > Create > VRLabs > Modular Shader > Modular Shader`.
+You can create a modular shader asset by selecting the menu `Assets > Create > Shader > VRLabs > Modular Shader > Modular Shader`.
 
 ## Basic Informations
 
