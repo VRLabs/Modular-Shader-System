@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -57,10 +58,20 @@ namespace VRLabs.ModularShaderSystem.UI
                     return;
                 }
 
-                string path = EditorUtility.OpenFolderPanel("Select folder", "Assets", "");
-                if (path.Length == 0)
-                    return;
+                string path = "";
+                if (_shader.LastGeneratedShaders != null &&_shader.LastGeneratedShaders.Count > 0 && _shader.LastGeneratedShaders[0] != null)
+                {
+                    path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(_shader.LastGeneratedShaders[0]));
+                }
 
+                if (string.IsNullOrWhiteSpace(path))
+                {
+
+                    path = EditorUtility.OpenFolderPanel("Select folder", "Assets", "");
+                    if (string.IsNullOrWhiteSpace(path))
+                        return;
+
+                }
                 string localPath = Environment.CurrentDirectory;
                 localPath = localPath.Replace('\\', '/');
                 path = path.Replace(localPath + "/", "");
