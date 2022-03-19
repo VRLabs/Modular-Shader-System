@@ -59,7 +59,7 @@ namespace VRLabs.ModularShaderSystem.UI
                 }
 
                 string path = "";
-                if (_shader.LastGeneratedShaders.Count > 0 && _shader.LastGeneratedShaders[0] != null)
+                if (_shader.LastGeneratedShaders != null &&_shader.LastGeneratedShaders.Count > 0 && _shader.LastGeneratedShaders[0] != null)
                 {
                     path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(_shader.LastGeneratedShaders[0]));
                 }
