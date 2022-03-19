@@ -232,10 +232,14 @@ namespace VRLabs.ModularShaderSystem
             
             var importButton = new Button();
             importButton.text = "Import";
+            importButton.style.minHeight = 22;
+            importButton.style.height = 22;
             importButton.SetEnabled(false);
             importButton.clicked += () => Import(assets);
             
             var loadButton = new Button();
+            loadButton.style.minHeight = 22;
+            loadButton.style.height = 22;
             loadButton.text = "Load file";
             loadButton.clicked += () =>
             {
@@ -489,6 +493,8 @@ namespace VRLabs.ModularShaderSystem
             }
 
             var bottomRow = new VisualElement();
+            bottomRow.style.minHeight = 26;
+            bottomRow.style.height = 26;
             bottomRow.style.flexDirection = FlexDirection.Row;
 
             var b = new Button();
