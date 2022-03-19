@@ -20,15 +20,15 @@ jobs:
         run: |
           mkdir -p "Assets/VRLabs/ModularShaderSystem"
           ls | grep -v "Assets" | xargs mv -t "Assets/VRLabs/ModularShaderSystem"
-          echo "Assets/VRLabs.meta" > mssFullPackage
-          echo "Assets/VRLabs/ModularShaderSystem.meta" >> mssFullPackage
           echo -e "fileFormatVersion: 2\nguid: 652a1ba5b00554143bc9a76307dbc4e8\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs.meta"
           echo -e "fileFormatVersion: 2\nguid: 433bedcd0ded4bcf993b0088e99f493c\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs/ModularShaderSystem.meta"
           mkdir -p "Main"
+          mkdir -p "Examples"
           cp -r "Assets" "Main"
           cp -r "Assets" "Examples"
-          rm -r "Examples/Assets/VRLabs/ModularShaderSystem/Examples"
-          find "Examples/Assets/VRLabs/ModularShaderSystem" -mindepth 1 ! -regex '^Examples/Assets/VRLabs/ModularShaderSystem\(/.*\)?' -delete
+          rm -r "Main/Assets/VRLabs/ModularShaderSystem/Examples"
+          rm -r "Main/Assets/VRLabs/ModularShaderSystem/Examples.meta"
+          find "Examples/Assets/VRLabs/ModularShaderSystem" -mindepth 1 ! -regex '^Examples/Assets/VRLabs/ModularShaderSystem/Examples.*' -delete
       - name: Create UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
