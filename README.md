@@ -2,7 +2,6 @@
   <a href="https://github.com/VRLabs/Modular-Shader-System">
     <img alt="Modular Shader System" height="128" src="Editor/Resources/MSS/MSSLogoFull.png">
   </a>
-  <h1>Modular Shader System</h1>
   <p>
      <i>Can i add a module in there?</i>
   </p>
