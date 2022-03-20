@@ -9,7 +9,7 @@
   "xrefmap": [
     "xrefmap.yml",
     "Next.xrefmap.yml",
-    "1.0.0.xrefmap.yml",
+    "1.0.1.xrefmap.yml",
     "0.0.0.xrefmap.yml"
   ],
   "files": [
@@ -378,6 +378,19 @@
       "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.yml",
       "output": {
         ".html": {
+          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.html",
+          "hash": "CxOdeFQXfoJW6TGJt0elrLZJ7h1hoYSx6VGbjpqoYD0="
+        }
+      },
+      "is_incremental": false,
+      "version": "0.0.0",
+      "group": "0.0.0"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.yml",
+      "output": {
+        ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.GetHashCode.html",
           "hash": "I1cWUdyYwD6C57Jb+imWHb3bDLhpLc5G5UnQciFjyG0="
         }
@@ -497,19 +510,6 @@
         ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.op_Inequality.html",
           "hash": "mCUgviaY3C1gDz4RWy4i9ZtBq2IgZp+lfNTQgMXwu8s="
-        }
-      },
-      "is_incremental": false,
-      "version": "0.0.0",
-      "group": "0.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.yml",
-      "output": {
-        ".html": {
-          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.Property.html",
-          "hash": "CxOdeFQXfoJW6TGJt0elrLZJ7h1hoYSx6VGbjpqoYD0="
         }
       },
       "is_incremental": false,
@@ -1201,7 +1201,7 @@
       "output": {
         ".html": {
           "relative_path": "0.0.0/toc.html",
-          "hash": "Qua2jbrcDNJaCBnjX6MA1MAX/QkqYs6TSyVIKhTk4jE="
+          "hash": "weObRpW84cksbwwBQuU9fBgVzT0mYFKjGR5COMGqNfE="
         }
       },
       "is_incremental": false,
@@ -1330,19 +1330,6 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.html",
-          "hash": "Pzc80U4tdKYsO4+x7s6xiqo4v7yvJADK7tuTqTisDCk="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.yml",
-      "output": {
-        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.ShowExample.html",
           "hash": "2Fe8aqYp+iGA3cQnpv5NZiTKyWHXf0Ey3mKzb9D9iZs="
         }
@@ -1358,6 +1345,19 @@
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.CreateGUI.html",
           "hash": "PmfPbOVPauS8hUFRVRW2IFi6ikJd98AY9OQdqMsvA4U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.ModularShaderDebugger.html",
+          "hash": "Pzc80U4tdKYsO4+x7s6xiqo4v7yvJADK7tuTqTisDCk="
         }
       },
       "is_incremental": false,
@@ -1643,7 +1643,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.MSSConstants.CREATE_PATH.html",
-          "hash": "+axi20DyH0FKQAoPfZGXdZ4n588NhGAid65gIcVJWX0="
+          "hash": "t3akqCRP9kA1PoAKAkjyvu7ic+O+V2cieK/SHhGLURs="
         }
       },
       "is_incremental": false,
@@ -2800,7 +2800,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.html",
-          "hash": "2sGwyGg/RyDV64LfI/zOoz1dM8FSYsP2BhZirKGvoZs="
+          "hash": "xf1IzF2dVB94nOs4yUMhpW71jNdSFaefCavgvkEj8tw="
         }
       },
       "is_incremental": false,
@@ -3163,6 +3163,71 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.ShaderFile.html",
+          "hash": "catE/0HvS4wUUtNspmbLYRDWbLduY1W1AJthFlq/M5w="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Guid.html",
+          "hash": "we9QqL1DfjJc77HEOugfz8fwipxwSsHyIEUn0w8Hn3E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Modules.html",
+          "hash": "EOPn/KpcrjEOntcszZngo2DSIJ6kYzO/sGdaDSv3gDo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.GenerateShader.html",
+          "hash": "oV2a43r4W40Pm4TavN7Zfa3aWnL938bTbKzTn1psjGA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.html",
+          "hash": "SDBxmHtC3KjpvKjpr1901cpaB62Hu1Ti3PBzXmWWXcc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Shader.html",
           "hash": "Ze3+ct5v/vJbs3VYT78ex6R1I/29mBOC/uu+oCYBaPQ="
         }
@@ -3267,6 +3332,19 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Materials.html",
+          "hash": "RhzrwbjxhLvJvquZktpLzP2y5J1+w2Fc6KndMtYORxc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.PropertiesBlock.html",
           "hash": "FgEvsBKpHwPn9BfcPYsZd3hPsdzb8dYzNRJvI7Z30lk="
         }
@@ -3295,123 +3373,6 @@
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.OptimizedShader.html",
           "hash": "2W9mY2IgckSPeUlz9+7fQslNGHXF4liZ3PhhfyNAOgg="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Materials.html",
-          "hash": "RhzrwbjxhLvJvquZktpLzP2y5J1+w2Fc6KndMtYORxc="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.ShaderFile.html",
-          "hash": "catE/0HvS4wUUtNspmbLYRDWbLduY1W1AJthFlq/M5w="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Guid.html",
-          "hash": "we9QqL1DfjJc77HEOugfz8fwipxwSsHyIEUn0w8Hn3E="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Modules.html",
-          "hash": "EOPn/KpcrjEOntcszZngo2DSIJ6kYzO/sGdaDSv3gDo="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.GenerateShader.html",
-          "hash": "oV2a43r4W40Pm4TavN7Zfa3aWnL938bTbKzTn1psjGA="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.html",
-          "hash": "SDBxmHtC3KjpvKjpr1901cpaB62Hu1Ti3PBzXmWWXcc="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader.html",
-          "hash": "iaSxy0QQbahUhcu12pFPIHpUvYWEbBtXBkHeLpo628E="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateMinimalShader.html",
-          "hash": "ZW48Dou9U3oAK0kFCQKs7xFQBH/RxA9SLQFtcHiL5fg="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.EnqueueShadersToGenerate.html",
-          "hash": "PInFwYMPcAbVngbTCyliEkPFh/uog2yUiCGXilrYWGI="
         }
       },
       "is_incremental": false,
@@ -3516,6 +3477,45 @@
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.html",
           "hash": "CuIVGsoTIvxvVaxSvdA9DNZlYl6OvN3PdJsGlhHd+Cs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader.html",
+          "hash": "iaSxy0QQbahUhcu12pFPIHpUvYWEbBtXBkHeLpo628E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateMinimalShader.html",
+          "hash": "ZW48Dou9U3oAK0kFCQKs7xFQBH/RxA9SLQFtcHiL5fg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.EnqueueShadersToGenerate.html",
+          "hash": "PInFwYMPcAbVngbTCyliEkPFh/uog2yUiCGXilrYWGI="
         }
       },
       "is_incremental": false,
@@ -3684,7 +3684,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.html",
-          "hash": "1Pb0G4naHb+2w3FgbrHnis1CuUAH3k1uG64MjRXLotI="
+          "hash": "bR4LtsTBoYRmcKu2wcxvI4YU3Sr9YpngMSoEWO9Nm78="
         }
       },
       "is_incremental": false,
@@ -5179,7 +5179,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.VariableType.html",
-          "hash": "oSaJt1BaeiltQ+NvXHsd/Umgg8UX+HPcDN6EA5fWREo="
+          "hash": "C/dzpZpDxmRTdFrd3lPcO8VF/wGRusiJ07ou0stwzuk="
         }
       },
       "is_incremental": false,
@@ -5270,7 +5270,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/GettingStarted.html",
-          "hash": "DrB/Fj3TzV65gCzVgeeK3qrbJca/xZQF8SdKumHY2Ko="
+          "hash": "gywUXivIxASxDbdedGWqnkBobXIxHwmDJt2rApcXZCA="
         }
       },
       "is_incremental": false,
@@ -5296,7 +5296,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/ModularShaderComponents/ModularShader.html",
-          "hash": "0p9CZXGkbPC0WOk4Ojg5Bf76KwXQMZhN7KXawQ0FDCo="
+          "hash": "jrKXkMVRb3o/GjtD1pjfD9Isv0y7Mw/Eqvjo27k3euo="
         }
       },
       "is_incremental": false,
@@ -5309,7 +5309,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/ModularShaderComponents/ShaderModule.html",
-          "hash": "b+B0H6afE4rF7kAHxy6Z6vO7gqwJzlxnoqbLsbzleoo="
+          "hash": "bYuyxVfw/prbBete0dQ4b3JFJY90rBzcYsjrSC02cGY="
         }
       },
       "is_incremental": false,
@@ -5322,7 +5322,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/ModularShaderComponents/TemplateAssets.html",
-          "hash": "LdZV5Z5E8h04ZQrvWkRQGygfrnK6zCiwOHxrviL0b9E="
+          "hash": "y0yTPWTi4F+3vKVVuTz4dLU1XwPs9/a+82ZhsXFEVyM="
         }
       },
       "is_incremental": false,
@@ -5335,7 +5335,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/ModularShaderComponents/TemplateCollectionAssets.html",
-          "hash": "gQzpxJRtSC0VxGELkJ2VwdQpcdlfn1z4Ke/LwmZSE/0="
+          "hash": "3Mz+pfSdTMGdJRhWkAKCeJ6kkaZZ5IMrw6lWj/EiV5Y="
         }
       },
       "is_incremental": false,
@@ -5348,7 +5348,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/guides/ModularShaderDebugger/FunctionTimeline.html",
-          "hash": "fOASFwJVV54+0Heyt7/vegjACmc9JYpPOY+fK2MMxFA="
+          "hash": "hlFgkmE3lvln3NJNF/1dtmC4NnN/hQmqVvupcZQJfFY="
         }
       },
       "is_incremental": false,
@@ -5429,7 +5429,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/toc.html",
-          "hash": "QbFxmyzZ0vOV9GaniG2bVoFzM2JjP4AY6REX47J/5Kg="
+          "hash": "bmFaHEXlFYqVKxQb4FtOpBkrd7dkRNzdsXRSupLKcx4="
         }
       },
       "is_incremental": false,
@@ -5446,8 +5446,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5459,8 +5459,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5472,8 +5472,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5485,8 +5485,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5498,8 +5498,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5511,8 +5511,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5524,8 +5524,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5537,8 +5537,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5550,8 +5550,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5563,8 +5563,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5576,8 +5576,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5589,8 +5589,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5602,8 +5602,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5615,8 +5615,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5628,8 +5628,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5641,8 +5641,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5654,8 +5654,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5667,21 +5667,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.EnableProperty.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.EnableProperty.EnableValue.html",
-          "hash": "oV7KsV/3qAYvTDFLmvT7RHTqFcGho6LwnPsaJUMtpZ4="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5693,8 +5680,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5706,8 +5693,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5719,8 +5706,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5732,8 +5719,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5745,8 +5732,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5758,8 +5745,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5771,8 +5758,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5784,8 +5771,21 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.EnableProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.EnableProperty.EnableValue.html",
+          "hash": "oV7KsV/3qAYvTDFLmvT7RHTqFcGho6LwnPsaJUMtpZ4="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5797,8 +5797,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5810,8 +5810,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5823,8 +5823,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5836,8 +5836,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5849,8 +5849,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5862,8 +5862,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5871,12 +5871,12 @@
       "output": {
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.CREATE_PATH.html",
-          "hash": "C65a7hTv9YQcmIu5gg5INy3UlQzPGfVXNya6T0dmHuc="
+          "hash": "rhzhfx8OG0k63ufLSMBG5/83Y3p6SrKD3rPHTtlxi4U="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5888,8 +5888,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5901,8 +5901,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5914,8 +5914,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5927,8 +5927,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5940,8 +5940,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5953,8 +5953,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5966,8 +5966,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5979,8 +5979,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -5992,8 +5992,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6005,8 +6005,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6018,8 +6018,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6031,8 +6031,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6044,8 +6044,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6057,8 +6057,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6070,8 +6070,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6083,8 +6083,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6096,8 +6096,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6109,8 +6109,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6122,8 +6122,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6135,8 +6135,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6148,8 +6148,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6161,8 +6161,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6174,8 +6174,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6187,8 +6187,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6200,8 +6200,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6213,8 +6213,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6226,8 +6226,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6239,8 +6239,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6252,8 +6252,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6265,8 +6265,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6278,8 +6278,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6291,8 +6291,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6304,8 +6304,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6317,8 +6317,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6330,8 +6330,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6343,8 +6343,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6356,8 +6356,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6369,8 +6369,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6382,8 +6382,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6395,8 +6395,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6408,8 +6408,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6421,8 +6421,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6434,8 +6434,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6447,8 +6447,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6460,8 +6460,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6473,8 +6473,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6486,8 +6486,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6499,8 +6499,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6512,8 +6512,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6525,8 +6525,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6538,8 +6538,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6551,8 +6551,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6564,8 +6564,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6577,8 +6577,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6590,8 +6590,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6603,8 +6603,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6616,8 +6616,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6629,8 +6629,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6642,8 +6642,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6655,8 +6655,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6668,8 +6668,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6681,8 +6681,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6694,8 +6694,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6707,8 +6707,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6720,8 +6720,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6733,8 +6733,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6746,8 +6746,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6759,8 +6759,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6772,8 +6772,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6785,8 +6785,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6798,8 +6798,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6811,8 +6811,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6824,8 +6824,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6837,8 +6837,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6850,8 +6850,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6863,8 +6863,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6876,8 +6876,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6889,8 +6889,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6902,8 +6902,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6915,8 +6915,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6928,8 +6928,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6941,8 +6941,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6954,8 +6954,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6967,8 +6967,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6980,8 +6980,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -6993,8 +6993,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7006,8 +7006,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7019,8 +7019,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7028,25 +7028,12 @@
       "output": {
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.html",
-          "hash": "ttnixDiWXcNXHy4OAL/8504ZyVE88OgST6YLiOo6SO4="
+          "hash": "9nOyheAQNE8PBgHXumZFqYDGv8HuycyofFQSc4Dk57g="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.Template.html",
-          "hash": "8rv/V8byWNoh2YdX3+QsIcMq/yE9MZ6xJ51VX1qlukI="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7058,8 +7045,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7071,8 +7058,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7084,8 +7071,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7097,8 +7084,21 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.Template.html",
+          "hash": "8rv/V8byWNoh2YdX3+QsIcMq/yE9MZ6xJ51VX1qlukI="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7110,8 +7110,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7123,8 +7123,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7136,8 +7136,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7149,8 +7149,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7162,8 +7162,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7175,8 +7175,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7188,8 +7188,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7201,8 +7201,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7214,8 +7214,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7227,8 +7227,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7240,8 +7240,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7253,8 +7253,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7266,8 +7266,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7279,8 +7279,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7292,8 +7292,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7305,8 +7305,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7318,8 +7318,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7331,8 +7331,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7344,8 +7344,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7357,8 +7357,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7370,8 +7370,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7383,8 +7383,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7396,8 +7396,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7409,8 +7409,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7422,8 +7422,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7435,8 +7435,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7448,8 +7448,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7461,8 +7461,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7474,8 +7474,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7487,8 +7487,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7500,8 +7500,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7513,8 +7513,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7526,8 +7526,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7539,8 +7539,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7552,8 +7552,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7565,8 +7565,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7578,8 +7578,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7591,8 +7591,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7604,8 +7604,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7617,8 +7617,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7630,8 +7630,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7643,8 +7643,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7656,8 +7656,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7669,8 +7669,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7682,8 +7682,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7695,8 +7695,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7708,8 +7708,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7721,8 +7721,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7734,8 +7734,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7747,8 +7747,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7760,8 +7760,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7773,8 +7773,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7786,8 +7786,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7799,8 +7799,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7812,8 +7812,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7825,8 +7825,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7838,8 +7838,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7851,8 +7851,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7864,8 +7864,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7877,8 +7877,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7890,8 +7890,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7903,8 +7903,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7912,12 +7912,12 @@
       "output": {
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ShaderModule.html",
-          "hash": "jXp0PhDGkwowYLitTlMeCsxOCnoR0utdDH4b4r6UaNE="
+          "hash": "CvLCudgPYFc+YD/TfP4b7JPuKCfgLL5fpS9samSOiP4="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7929,8 +7929,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7942,8 +7942,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7955,8 +7955,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7968,8 +7968,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7981,8 +7981,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -7994,8 +7994,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8007,8 +8007,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8020,8 +8020,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8033,8 +8033,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8046,8 +8046,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8059,8 +8059,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8072,8 +8072,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8085,8 +8085,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8098,8 +8098,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8111,8 +8111,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8124,8 +8124,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8137,8 +8137,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8150,8 +8150,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8163,8 +8163,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8176,8 +8176,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8189,8 +8189,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8202,8 +8202,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8215,8 +8215,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8228,8 +8228,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8241,8 +8241,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8254,8 +8254,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8267,8 +8267,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8280,8 +8280,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8293,8 +8293,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8306,8 +8306,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8319,8 +8319,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8332,8 +8332,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8345,8 +8345,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8358,8 +8358,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8371,8 +8371,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8384,8 +8384,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8397,8 +8397,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8410,8 +8410,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8423,8 +8423,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8436,8 +8436,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8449,8 +8449,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8462,8 +8462,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8475,8 +8475,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8488,8 +8488,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8501,8 +8501,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8514,8 +8514,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8527,8 +8527,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8540,8 +8540,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8553,8 +8553,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8566,8 +8566,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8579,8 +8579,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8592,8 +8592,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8605,8 +8605,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8618,8 +8618,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8631,8 +8631,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8644,8 +8644,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8657,8 +8657,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8670,8 +8670,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8683,8 +8683,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8696,8 +8696,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8709,8 +8709,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8722,8 +8722,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8735,8 +8735,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8748,8 +8748,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8761,8 +8761,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8774,8 +8774,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8787,8 +8787,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8800,8 +8800,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8813,8 +8813,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8826,8 +8826,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8839,8 +8839,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8852,8 +8852,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8865,8 +8865,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8878,8 +8878,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8891,8 +8891,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8904,8 +8904,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8917,8 +8917,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8930,8 +8930,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8943,8 +8943,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8956,8 +8956,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8969,8 +8969,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8982,8 +8982,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -8995,8 +8995,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9008,8 +9008,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9021,8 +9021,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9034,8 +9034,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9047,8 +9047,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9060,8 +9060,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9073,21 +9073,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.UI.PropertyAttributeDrawer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.UI.PropertyAttributeDrawer.CreatePropertyGUI.html",
-          "hash": "+Y9kIgt+0goHNYtqUEcypE4tjwWiqe/vBTtO21XKNPs="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9099,8 +9086,21 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.UI.PropertyAttributeDrawer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.UI.PropertyAttributeDrawer.CreatePropertyGUI.html",
+          "hash": "+Y9kIgt+0goHNYtqUEcypE4tjwWiqe/vBTtO21XKNPs="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9112,8 +9112,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9125,8 +9125,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9138,8 +9138,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9151,8 +9151,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9164,8 +9164,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9177,8 +9177,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9190,8 +9190,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9203,8 +9203,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9216,8 +9216,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9229,8 +9229,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9242,8 +9242,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9255,8 +9255,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9268,8 +9268,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9281,8 +9281,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9294,8 +9294,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9307,8 +9307,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9320,8 +9320,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9333,8 +9333,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9346,8 +9346,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9359,8 +9359,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9372,8 +9372,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9385,8 +9385,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9398,8 +9398,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9407,12 +9407,12 @@
       "output": {
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.VariableType.html",
-          "hash": "Nxauz+ezO4SCpAD8T06v1TNAw71Tyf0KgaOhtGw5C5E="
+          "hash": "euQIkOZKFX9UYgRZ+IpMZT+j3SCf0E6tpzHF/pWUJ48="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "ManagedReference",
@@ -9424,8 +9424,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9437,8 +9437,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Toc",
@@ -9450,8 +9450,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9463,8 +9463,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9476,8 +9476,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9489,8 +9489,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9498,12 +9498,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/GettingStarted.html",
-          "hash": "eDsf0t5emRMfY3RHYBGvYtoaWxWyDKd9g3BXkOYrv4Y="
+          "hash": "0N05wRLvjiHCK0jFy1ZDWQrlEg4+zAjzvI1veIY8NKM="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9515,8 +9515,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9524,12 +9524,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/ModularShaderComponents/ModularShader.html",
-          "hash": "TvEPLWA9QUUy+8XTvat6qRZ33QkFQrQbucODeK2XqNI="
+          "hash": "35RZ5T5J5xWOW6vt8xj9LlQVZ9LILwTMcjex9+gZrks="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9537,12 +9537,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/ModularShaderComponents/ShaderModule.html",
-          "hash": "bo9CZ8d9M+vFOCd2LMqjR9u8ZpehuNhqv9h8xKl3y28="
+          "hash": "5PB+0NzVL14wzduTWR6lqUugUwaS7FEwqcR7Ql43bx4="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9550,12 +9550,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/ModularShaderComponents/TemplateAssets.html",
-          "hash": "+w1KL+67Tjby//9x8HOHA9uTEJGJ0kcwLUeP+lByOMI="
+          "hash": "D98WYHiz4/IJc6esVzjAEwBIPxWxmoe/AwybqhTX51M="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9563,12 +9563,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/ModularShaderComponents/TemplateCollectionAssets.html",
-          "hash": "fk/nC/hH0BmFNRP0Sd+mSeknj0+PJxaXY4MCLOANGXo="
+          "hash": "8NuS9s9wF97hGj0RZWW3Ee8plOkRJkMacl3xGA+JFBQ="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9576,12 +9576,12 @@
       "output": {
         ".html": {
           "relative_path": "guides/ModularShaderDebugger/FunctionTimeline.html",
-          "hash": "ET5/wiTN7gjL4vm2rDCu+zPNqEnHmMb/YwdduUJWtFE="
+          "hash": "TzD9MGWR06u76ccaSDafXk6Ajf5GWa0e6InZbdtcOf8="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9593,8 +9593,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9606,8 +9606,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9619,8 +9619,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Conceptual",
@@ -9632,8 +9632,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Toc",
@@ -9645,8 +9645,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Resource",
@@ -9654,6 +9654,28 @@
       "output": {
         "resource": {
           "relative_path": "images/docs/AdvancedTopics/1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/AdvancedTopics/2.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/AdvancedTopics/2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/AdvancedTopics/3.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/AdvancedTopics/3.png"
         }
       },
       "is_incremental": false,
@@ -9771,6 +9793,17 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/docs/ModularShaderDebugger/10-2.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/ModularShaderDebugger/10-2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/docs/ModularShaderDebugger/10.png",
       "output": {
         "resource": {
@@ -9819,6 +9852,17 @@
       "output": {
         "resource": {
           "relative_path": "images/docs/ModularShaderDebugger/14.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/ModularShaderDebugger/15.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/ModularShaderDebugger/15.png"
         }
       },
       "is_incremental": false,
@@ -10002,8 +10046,8 @@
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     },
     {
       "type": "Resource",
@@ -10036,12 +10080,12 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "p1PNokCvV48ZBwFVpG1DdWuINzH0JMvBswPHTfewkQE="
+          "hash": "lA7qgRSPz6BjFmUCxSbC3Qb2UPSruc8K7fl5B2AeLng="
         }
       },
       "is_incremental": false,
-      "version": "1.0.0",
-      "group": "1.0.0"
+      "version": "1.0.1",
+      "group": "1.0.1"
     }
   ],
   "incremental_info": [
@@ -10170,7 +10214,7 @@
   ],
   "version_info": {
     "Next": {},
-    "1.0.0": {},
+    "1.0.1": {},
     "0.0.0": {}
   },
   "groups": [
@@ -10182,8 +10226,8 @@
       "xrefmap": "Next.xrefmap.yml"
     },
     {
-      "name": "1.0.0",
-      "xrefmap": "1.0.0.xrefmap.yml"
+      "name": "1.0.1",
+      "xrefmap": "1.0.1.xrefmap.yml"
     },
     {
       "name": "0.0.0",

@@ -94,15 +94,20 @@
 <p>You can select which timeline to show by selecting the root you want to see in the dropdown above the timeline.</p>
 <h3 id="timeline-element">Timeline element</h3>
 <p>A single element contains the name of the function on the left, and it's queue on the right (the queue is always relative to its parent <code>AppendAfter</code>)</p>
-<p>The selected element will have a cyan border, while elements with a yellow borders indicate a function that contains the variable selected in the <code>Selected Function information</code> area.</p>
+<p>The selected element will have a cyan border, elements with a yellow borders indicate a function that contains the variable selected in the <code>Selected Function information</code> area, and elements with a red border indicate a function that contains the variable selected in the <code>Variables List</code> area.</p>
 <p><img src="/images/docs/ModularShaderDebugger/8.png" alt="unselected item"></p>
 <p><img src="/images/docs/ModularShaderDebugger/9.png" alt="selected item"></p>
 <p><img src="/images/docs/ModularShaderDebugger/10.png" alt="item with selected variable"></p>
+<p><img src="/images/docs/ModularShaderDebugger/10-2.png" alt="item with selected variable from variables list"></p>
+<h2 id="variables-list">Variables List</h2>
+<p><img src="/images/docs/ModularShaderDebugger/16.png" alt="Variables List"></p>
+<p>This area shows a list containing all the variables available in the modular shader.</p>
+<p>Selecting a variable will show which functions in the timeline use that variable, giving you the possibility to check where it's used and for what.</p>
 <h2 id="selected-function-information">Selected function information</h2>
 <p><img src="/images/docs/ModularShaderDebugger/12.png" alt="Selected function info"></p>
 <p>This area shows informations relative to the function, such as the name, queue, and where it's appended.</p>
 <p>It also shows its variables and in which keywords variables and implementation are put on.</p>
-<p>Selecting a variable will show which other functions in the timeline that use the same variable, giving you the possibility to check where it's used and for what.</p>
+<p>Selecting a variable will show which other functions in the timeline use the same variable, giving you the possibility to check where it's used and for what.</p>
 <h2 id="functions-module-base-info">Function's module base info</h2>
 <p><img src="/images/docs/ModularShaderDebugger/13.png" alt="Module info"></p>
 <p>This area shows some basic informations about the module where the selected function is defines, and give you a quick way to select the module asset for further inspection if needed.</p>

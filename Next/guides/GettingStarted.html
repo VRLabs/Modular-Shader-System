@@ -81,7 +81,7 @@
 <p>Once everything is imported let's start creating our first modular shader!</p>
 <h2 id="creating-the-modular-shader">Creating the Modular Shader</h2>
 <p>Everything starts with a <code>Modular shader</code> asset. This Asset contains all the basic information about the shader.</p>
-<p>Create a new asset file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Modular Shader</code> (alternative you can bring up the <code>Assets</code> menu by right clicking in the project tab).</p>
+<p>Create a new asset file by selecting <code>Assets &gt; Create &gt; Shader &gt; VRLabs &gt; Modular Shader &gt; Modular Shader</code> (alternative you can bring up the <code>Assets</code> menu by right clicking in the project tab).</p>
 <div class="WARNING">
 <h5>Warning</h5>
 <p>All assets specific for the Modular Shader System like Modular Shader, Shader module and Template assets should always go inside an <code>Editor</code> folder, since they're used only in editor to generate the shaders.</p>
@@ -93,7 +93,7 @@
 <p><img src="/images/docs/GettingStarted/2.png" alt="inspector"></p>
 <p>Now, let's get into the meat and let's make the base skeleton for our shader.
 This skeleton will be in the <code>template asset</code> that will be placed in the <code>shader template</code> field.</p>
-<p>Create the new template file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Template</code>, open the file in any text editor and paste the following code:</p>
+<p>Create the new template file by selecting <code>Assets &gt; Create &gt; Shader &gt; VRLabs &gt; Modular Shader &gt; Template</code>, open the file in any text editor and paste the following code:</p>
 <pre><code name="Main">ZTest[_ZTest]
 ZWrite[_ZWrite]
 Cull[_CullMode]
@@ -309,7 +309,7 @@ This is because keywords defined are only used to generate the final shader, onc
 <p>Using <code>cginc</code> file to put your shader code is not advised with the modular shader system, we instead promote the usage of templates in modules to obtain a similar result. (you are still able to use default includes just fine)</p>
 </div>
 <h2 id="creating-a-module">Creating a Module</h2>
-<p>Time to create a module to give life to this shader, first create the module asset file by selecting <code>Assets &gt; Create &gt; VRLabs &gt; Modular Shader &gt; Shader Module</code>.</p>
+<p>Time to create a module to give life to this shader, first create the module asset file by selecting <code>Assets &gt; Create &gt; Shader &gt; VRLabs &gt; Modular Shader &gt; Shader Module</code>.</p>
 <p>The informations area of the asset is similar to the modular shader assets, but with some key differences:</p>
 <ul>
 <li>The id <strong>needs</strong> to be filled in since it's going to be used by the system to check for duplicate modules, incompatibilities, and dependencies.</li>

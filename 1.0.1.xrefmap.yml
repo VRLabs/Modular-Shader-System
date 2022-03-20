@@ -2740,6 +2740,12 @@ references:
   commentId: F:VRLabs.ModularShaderSystem.VariableType.Half4
   fullName: VRLabs.ModularShaderSystem.VariableType.Half4
   nameWithType: VariableType.Half4
+- uid: VRLabs.ModularShaderSystem.VariableType.Int
+  name: Int
+  href: api/VRLabs.ModularShaderSystem.VariableType.html#VRLabs_ModularShaderSystem_VariableType_Int
+  commentId: F:VRLabs.ModularShaderSystem.VariableType.Int
+  fullName: VRLabs.ModularShaderSystem.VariableType.Int
+  nameWithType: VariableType.Int
 - uid: VRLabs.ModularShaderSystem.VariableType.Sampler2D
   name: Sampler2D
   href: api/VRLabs.ModularShaderSystem.VariableType.html#VRLabs_ModularShaderSystem_VariableType_Sampler2D
