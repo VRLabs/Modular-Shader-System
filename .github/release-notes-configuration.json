@@ -3,13 +3,14 @@
     {
       "title": "## New",
       "labels": [
-        "new feature"
+        "new"
       ]
     },
     {
       "title": "## Changed",
       "labels": [
-        "feature enhancement"
+        "enhancement",
+        "change"
       ]
     },
     {
@@ -26,7 +27,8 @@
     }
   ],
   "ignore_labels": [
-    "ignore"
+    "ignore",
+    "documentation"
   ],
   "sort": "ASC",
   "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",

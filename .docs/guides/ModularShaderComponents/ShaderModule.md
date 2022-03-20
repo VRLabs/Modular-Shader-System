@@ -7,7 +7,7 @@ title: Shader Module
 
 A module is a component that can be added and removed from a modular shader. Like the modular shader asset it has a `Base Information` and `Settings` sections, but unlike in the modular shader, you actually need to set at least some of the `Base Information` settings, since they're used for checking module compatibility inside a modular shader.
 
-You can create a shader module asset by selecting the menu `Assets > Create > VRLabs > Modular Shader > Shader Module`.
+You can create a shader module asset by selecting the menu `Assets > Create > Shader > VRLabs > Modular Shader > Shader Module`.
 
 ## Basic Informations
 

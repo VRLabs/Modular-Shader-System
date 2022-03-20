@@ -83,6 +83,8 @@ namespace VRLabs.ModularShaderSystem
                     return $"UNITY_DECLARE_TEXCUBEARRAY({Name});";
                 case VariableType.UnityTexCubeArrayNoSampler:
                     return $"UNITY_DECLARE_TEXCUBEARRAY_NOSAMPLER({Name});";
+                case VariableType.Int:
+                    return $"int {Name};";
                 case VariableType.Custom:
                     return $"{CustomType} {Name};";
             }
@@ -144,6 +146,7 @@ namespace VRLabs.ModularShaderSystem
         UnityTex2DArrayNoSampler,
         UnityTexCubeArray,
         UnityTexCubeArrayNoSampler,
+        Int,
         Custom = 999
     }
 }

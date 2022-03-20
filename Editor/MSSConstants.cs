@@ -41,7 +41,7 @@
         /// <summary>
         /// Default path in the create menu to place all options related to asset creation (new templates, template collections, modules, modular shaders).
         /// </summary>
-        public const string CREATE_PATH = "VRLabs/Modular Shader";
+        public const string CREATE_PATH = "Shader/VRLabs/Modular Shader";
         
         /// <summary>
         /// Default name of the subfolder of the Resources folder containing all the resources needed for the library.

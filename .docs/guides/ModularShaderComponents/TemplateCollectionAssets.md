@@ -11,4 +11,4 @@ Like the template asset it is just a text file where you can write shader code, 
 
 You can have multiple template keywords like the above, and every new one ends the previous template and starts the new one. The template name will be the name of that template keyword.
 
-You can create a template collection asset by selecting the menu `Assets > Create > VRLabs > Modular Shader > Template Collection`.
+You can create a template collection asset by selecting the menu `Assets > Create > Shader > VRLabs > Modular Shader > Template Collection`.
