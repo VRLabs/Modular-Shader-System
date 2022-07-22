@@ -368,7 +368,7 @@ namespace VRLabs.ModularShaderSystem
             switch (genericAsset)
             {
                 case TemplateCollectionAsset collection:
-                    template = collection.Templates.FirstOrDefault(x => assetName.Equals(asset.name));
+                    template = collection.Templates.FirstOrDefault(x => x.name.Equals(assetName));
                     break;
                 case TemplateAsset t:
                     template = t;
