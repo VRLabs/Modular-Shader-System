@@ -25,14 +25,15 @@ jobs:
           mkdir -p "Main"
           mkdir -p "Examples"
           cp -r "Assets" "Main"
-          cp -r "Assets" "Examples"
-          rm -r "Main/Assets/VRLabs/ModularShaderSystem/Examples"
-          rm -r "Main/Assets/VRLabs/ModularShaderSystem/Examples.meta"
-          find "Examples/Assets/VRLabs/ModularShaderSystem" -mindepth 1 ! -regex '^Examples/Assets/VRLabs/ModularShaderSystem/Examples.*' -delete
+          mkdir -p "Examples/Assets/VRLabs/ModularShaderSystem"
+          echo -e "fileFormatVersion: 2\nguid: 652a1ba5b00554143bc9a76307dbc4e8\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Examples/Assets/VRLabs.meta"
+          echo -e "fileFormatVersion: 2\nguid: 433bedcd0ded4bcf993b0088e99f493c\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Examples/Assets/VRLabs/ModularShaderSystem.meta"
+          mv "Main/Assets/VRLabs/ModularShaderSystem/Examples" "Examples/Assets/VRLabs/ModularShaderSystem"
+          mv "Main/Assets/VRLabs/ModularShaderSystem/Examples.meta" "Examples/Assets/VRLabs/ModularShaderSystem"
       - name: Create UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-        uses: FrostBanditTeam/extract-unity-package-action@1
+        uses: VRLabs/extract-unity-package-action@v1.2.1
         with:
           outputPackagePath: 'Modular.Shader.System.${{ env.SOURCE_TAG }}.unitypackage'
           unityProjectPath: 'Main'
@@ -40,7 +41,7 @@ jobs:
       - name: Create Examples UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-        uses: FrostBanditTeam/extract-unity-package-action@1
+        uses: VRLabs/extract-unity-package-action@v1.2.1
         with:
           outputPackagePath: 'Modular.Shader.System.Examples.${{ env.SOURCE_TAG }}.unitypackage'
           unityProjectPath: 'Examples'
