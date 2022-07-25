@@ -46,6 +46,11 @@ namespace VRLabs.ModularShaderSystem
         public List<Property> Properties;
         
         /// <summary>
+        /// List of default Textures;
+        /// </summary>
+        public List<DefaultTexture> DefaultTextures;
+        
+        /// <summary>
         /// List of ids of shader modules this shader module depends on.
         /// </summary>
         public List<string> ModuleDependencies;
@@ -64,7 +69,7 @@ namespace VRLabs.ModularShaderSystem
         /// List functions this shader module uses.
         /// </summary>
         public List<ShaderFunction> Functions;
-        
+
         /// <summary>
         /// string that can contain whatever you want, it is originally intended to contain serialized data that you may need for your own custom system based on the modular shader system.
         /// </summary>

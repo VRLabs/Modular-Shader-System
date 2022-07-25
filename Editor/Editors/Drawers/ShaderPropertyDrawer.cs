@@ -252,11 +252,8 @@ namespace VRLabs.ModularShaderSystem.UI
                     SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), texValue)?.ToLower()}\" {{}}");
                     var txfield = new EnumField { label = "Default value" };
                     txfield.Init(texValue);
-                    var textureAsset = new PropertyField(property.FindPropertyRelative("DefaultTextureAsset"), "Texture Override");
-                    textureAsset.Bind(property.serializedObject);
                     var vl = new VisualElement();
                     vl.Add(txfield);
-                    vl.Add(textureAsset);
                     field = vl;
                     txfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"\"{Enum.GetName(typeof(DefaultTextureValue), e.newValue)?.ToLower()}\" {{}}"));
                     break;

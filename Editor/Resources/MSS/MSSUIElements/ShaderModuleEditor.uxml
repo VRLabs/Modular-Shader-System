@@ -11,6 +11,7 @@
     <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="EnableProperties" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Properties" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="DefaultTextures" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Functions" />
     <VRLabs.ModularShaderSystem.UI.InspectorList show-elements-text="false" binding-path="Templates" />
 </ui:UXML>

@@ -10,6 +10,7 @@
     <ui:TextField label="Shader Path" value="filler text" text="filler text" binding-path="ShaderPath" />
     <ui:TextField label="Custom Editor" binding-path="CustomEditor" />
     <VRLabs.ModularShaderSystem.UI.InspectorList binding-path="Properties" show-elements-text="false" />
+    <VRLabs.ModularShaderSystem.UI.InspectorList binding-path="DefaultTextures" show-elements-text="false" />
     <ui:Toggle binding-path="UseTemplatesForProperties" label="Properties from templates" name="UseTemplatesForPropertiesField" />
     <uie:ObjectField label="Shader Properties Template" binding-path="ShaderPropertiesTemplate" name="ShaderPropertiesTemplateField" allow-scene-objects="false" />
     <VRLabs.ModularShaderSystem.UI.ModuleInspectorList name="BaseModulesField" binding-path="BaseModules" show-elements-text="false" />
