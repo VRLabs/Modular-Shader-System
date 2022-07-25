@@ -232,6 +232,78 @@ references:
   commentId: Overload:VRLabs.ModularShaderSystem.Debug.TemplateGraph.UpdateTab
   fullName: VRLabs.ModularShaderSystem.Debug.TemplateGraph.UpdateTab
   nameWithType: TemplateGraph.UpdateTab
+- uid: VRLabs.ModularShaderSystem.DefaultTexture
+  name: DefaultTexture
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.html
+  commentId: T:VRLabs.ModularShaderSystem.DefaultTexture
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture
+  nameWithType: DefaultTexture
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.Equals(System.Object)
+  name: Equals(Object)
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html#VRLabs_ModularShaderSystem_DefaultTexture_Equals_System_Object_
+  commentId: M:VRLabs.ModularShaderSystem.DefaultTexture.Equals(System.Object)
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Equals(System.Object)
+  nameWithType: DefaultTexture.Equals(Object)
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.Equals(VRLabs.ModularShaderSystem.DefaultTexture)
+  name: Equals(DefaultTexture)
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html#VRLabs_ModularShaderSystem_DefaultTexture_Equals_VRLabs_ModularShaderSystem_DefaultTexture_
+  commentId: M:VRLabs.ModularShaderSystem.DefaultTexture.Equals(VRLabs.ModularShaderSystem.DefaultTexture)
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Equals(VRLabs.ModularShaderSystem.DefaultTexture)
+  nameWithType: DefaultTexture.Equals(DefaultTexture)
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.Equals*
+  name: Equals
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html
+  commentId: Overload:VRLabs.ModularShaderSystem.DefaultTexture.Equals
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Equals
+  nameWithType: DefaultTexture.Equals
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode
+  name: GetHashCode()
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode.html#VRLabs_ModularShaderSystem_DefaultTexture_GetHashCode
+  commentId: M:VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode()
+  nameWithType: DefaultTexture.GetHashCode()
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode*
+  name: GetHashCode
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode.html
+  commentId: Overload:VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode
+  nameWithType: DefaultTexture.GetHashCode
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.op_Equality(VRLabs.ModularShaderSystem.DefaultTexture,VRLabs.ModularShaderSystem.DefaultTexture)
+  name: Equality(DefaultTexture, DefaultTexture)
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Equality.html#VRLabs_ModularShaderSystem_DefaultTexture_op_Equality_VRLabs_ModularShaderSystem_DefaultTexture_VRLabs_ModularShaderSystem_DefaultTexture_
+  commentId: M:VRLabs.ModularShaderSystem.DefaultTexture.op_Equality(VRLabs.ModularShaderSystem.DefaultTexture,VRLabs.ModularShaderSystem.DefaultTexture)
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Equality(VRLabs.ModularShaderSystem.DefaultTexture, VRLabs.ModularShaderSystem.DefaultTexture)
+  nameWithType: DefaultTexture.Equality(DefaultTexture, DefaultTexture)
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.op_Equality*
+  name: Equality
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Equality.html
+  commentId: Overload:VRLabs.ModularShaderSystem.DefaultTexture.op_Equality
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Equality
+  nameWithType: DefaultTexture.Equality
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality(VRLabs.ModularShaderSystem.DefaultTexture,VRLabs.ModularShaderSystem.DefaultTexture)
+  name: Inequality(DefaultTexture, DefaultTexture)
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality.html#VRLabs_ModularShaderSystem_DefaultTexture_op_Inequality_VRLabs_ModularShaderSystem_DefaultTexture_VRLabs_ModularShaderSystem_DefaultTexture_
+  commentId: M:VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality(VRLabs.ModularShaderSystem.DefaultTexture,VRLabs.ModularShaderSystem.DefaultTexture)
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Inequality(VRLabs.ModularShaderSystem.DefaultTexture, VRLabs.ModularShaderSystem.DefaultTexture)
+  nameWithType: DefaultTexture.Inequality(DefaultTexture, DefaultTexture)
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality*
+  name: Inequality
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality.html
+  commentId: Overload:VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Inequality
+  nameWithType: DefaultTexture.Inequality
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.PropertyName
+  name: PropertyName
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.PropertyName.html
+  commentId: F:VRLabs.ModularShaderSystem.DefaultTexture.PropertyName
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.PropertyName
+  nameWithType: DefaultTexture.PropertyName
+- uid: VRLabs.ModularShaderSystem.DefaultTexture.Texture
+  name: Texture
+  href: Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Texture.html
+  commentId: F:VRLabs.ModularShaderSystem.DefaultTexture.Texture
+  fullName: VRLabs.ModularShaderSystem.DefaultTexture.Texture
+  nameWithType: DefaultTexture.Texture
 - uid: VRLabs.ModularShaderSystem.EnableProperty
   name: EnableProperty
   href: Next/api/VRLabs.ModularShaderSystem.EnableProperty.html
@@ -825,6 +897,12 @@ references:
   commentId: F:VRLabs.ModularShaderSystem.ModularShader.CustomEditor
   fullName: VRLabs.ModularShaderSystem.ModularShader.CustomEditor
   nameWithType: ModularShader.CustomEditor
+- uid: VRLabs.ModularShaderSystem.ModularShader.DefaultTextures
+  name: DefaultTextures
+  href: Next/api/VRLabs.ModularShaderSystem.ModularShader.DefaultTextures.html
+  commentId: F:VRLabs.ModularShaderSystem.ModularShader.DefaultTextures
+  fullName: VRLabs.ModularShaderSystem.ModularShader.DefaultTextures
+  nameWithType: ModularShader.DefaultTextures
 - uid: VRLabs.ModularShaderSystem.ModularShader.Description
   name: Description
   href: Next/api/VRLabs.ModularShaderSystem.ModularShader.Description.html
@@ -1498,6 +1576,12 @@ references:
   commentId: F:VRLabs.ModularShaderSystem.ShaderModule.Author
   fullName: VRLabs.ModularShaderSystem.ShaderModule.Author
   nameWithType: ShaderModule.Author
+- uid: VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures
+  name: DefaultTextures
+  href: Next/api/VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures.html
+  commentId: F:VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures
+  fullName: VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures
+  nameWithType: ShaderModule.DefaultTextures
 - uid: VRLabs.ModularShaderSystem.ShaderModule.Description
   name: Description
   href: Next/api/VRLabs.ModularShaderSystem.ShaderModule.Description.html

@@ -521,6 +521,45 @@
       "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
       "output": {
         ".html": {
+          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.Name.html",
+          "hash": "pOUADoy6prP+YsdgO97hWmcMoNo2qQtRwAzp/UF8NVM="
+        }
+      },
+      "is_incremental": false,
+      "version": "0.0.0",
+      "group": "0.0.0"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.AppendAfter.html",
+          "hash": "UyXfimhlbLlyGucUTMF49dUzUonmmuMZbui38Xhs+/Q="
+        }
+      },
+      "is_incremental": false,
+      "version": "0.0.0",
+      "group": "0.0.0"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.Priority.html",
+          "hash": "Rc4PQXOk/nD5PMveGN91Ufrgr7WqMsZUBGYwsvvyPX8="
+        }
+      },
+      "is_incremental": false,
+      "version": "0.0.0",
+      "group": "0.0.0"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
+      "output": {
+        ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.ShaderFunctionCode.html",
           "hash": "PPYqcFyuucFnnfEXVmEixiH09Iv61nQm8eX++GO/lxI="
         }
@@ -575,45 +614,6 @@
         ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.html",
           "hash": "HLf2aoYbkA4f5bmBQ13DnX5Zt0bCZdJ3vi/2QYjMdk4="
-        }
-      },
-      "is_incremental": false,
-      "version": "0.0.0",
-      "group": "0.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.Name.html",
-          "hash": "pOUADoy6prP+YsdgO97hWmcMoNo2qQtRwAzp/UF8NVM="
-        }
-      },
-      "is_incremental": false,
-      "version": "0.0.0",
-      "group": "0.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.AppendAfter.html",
-          "hash": "UyXfimhlbLlyGucUTMF49dUzUonmmuMZbui38Xhs+/Q="
-        }
-      },
-      "is_incremental": false,
-      "version": "0.0.0",
-      "group": "0.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.yml",
-      "output": {
-        ".html": {
-          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderFunction.Priority.html",
-          "hash": "Rc4PQXOk/nD5PMveGN91Ufrgr7WqMsZUBGYwsvvyPX8="
         }
       },
       "is_incremental": false,
@@ -846,19 +846,6 @@
       "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.AppendLineTabbed.html",
-          "hash": "c8L4E4blTe+ILJ4K1OAT7ktIgcpbr05MBTOk17IgN5A="
-        }
-      },
-      "is_incremental": false,
-      "version": "0.0.0",
-      "group": "0.0.0"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
-      "output": {
-        ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.PrependLineTabbed.html",
           "hash": "mcvIgdn6ddJr5qXfe+8owMrSxAK7yhUGc21Xr4AV4Ac="
         }
@@ -965,6 +952,19 @@
         ".html": {
           "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.html",
           "hash": "jXk/bvedJmHub4aG0OaSYqX8F5C1RgzuITgytD0JaZk="
+        }
+      },
+      "is_incremental": false,
+      "version": "0.0.0",
+      "group": "0.0.0"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "0.0.0/api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.AppendLineTabbed.html",
+          "hash": "c8L4E4blTe+ILJ4K1OAT7ktIgcpbr05MBTOk17IgN5A="
         }
       },
       "is_incremental": false,
@@ -1436,6 +1436,97 @@
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.Debug.html",
           "hash": "30T7M7PcJYtFzFIU8hzL4qEVHM/FqE2MVnDwhXA1+Nk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.PropertyName.html",
+          "hash": "+cFowI67uv0AeDl7VQPXdcpz38xc0iQj+9pbjbGPXpY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Texture.html",
+          "hash": "iTLe9Id2qhXxNlZ8pkWG41F3tsN3I4gcZpPphiscJpw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html",
+          "hash": "CV90QCYGOiuLokEx+XVOAKY/RBP6WYjjES6J5KmQEJQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Equality.html",
+          "hash": "lxIRb3J9hIhMxqKr3nNXQiTh0YSkafelriiqzKxJg6k="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality.html",
+          "hash": "1dRP3u4qysao45091GUIlmZRrRe71WDNjjpmpSOAWWQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode.html",
+          "hash": "3qaXRxQx0kuW16xfB4ahX/aV5VVOw5AOYEd2balDPTo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.html",
+          "hash": "3bljeJBVKY/hDindUb5ZFnWe8x792GkNUUond14oIm4="
         }
       },
       "is_incremental": false,
@@ -2734,6 +2825,19 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.DefaultTextures.html",
+          "hash": "Q3Qdgg5XEx/0t4Qns3k1xg5bszU0HZp3lzc7EJwHlq0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.BaseModules.html",
           "hash": "+hLZu67eFOvYpJEUwwIEFY/QwN5ndM/tym8g5gDJmLI="
         }
@@ -2800,7 +2904,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ModularShader.html",
-          "hash": "xf1IzF2dVB94nOs4yUMhpW71jNdSFaefCavgvkEj8tw="
+          "hash": "77axQYb0B9NDrE3lPcerb17LdSKXm8l8ZDHUZ1v/liw="
         }
       },
       "is_incremental": false,
@@ -2930,7 +3034,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.Property.DefaultTextureAsset.html",
-          "hash": "TXvGEFQdi0czrVcU5xcjSvQm5EzzlRmoTgSjGjGgG5Y="
+          "hash": "7IQbtZ6Yy++xGuWpRry+rj/tYi8uwNmAEbaE/ApMJmw="
         }
       },
       "is_incremental": false,
@@ -3034,7 +3138,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.Property.html",
-          "hash": "gv69lOVTlv/VZOuwDAr+ZqtYRnYPwzbcxC71ZReqepE="
+          "hash": "NvRlOVNg+uZjgG+5XqKFZMHIqOWY2IpAKlHPkOn5N0E="
         }
       },
       "is_incremental": false,
@@ -3267,6 +3371,45 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.PropertiesBlock.html",
+          "hash": "FgEvsBKpHwPn9BfcPYsZd3hPsdzb8dYzNRJvI7Z30lk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.AreVariantsHidden.html",
+          "hash": "gd4h2WBhiWhWv977BaEpsLDlObddOfPJR4kZEab+Cn0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.OptimizedShader.html",
+          "hash": "2W9mY2IgckSPeUlz9+7fQslNGHXF4liZ3PhhfyNAOgg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Materials.html",
           "hash": "RhzrwbjxhLvJvquZktpLzP2y5J1+w2Fc6KndMtYORxc="
         }
@@ -3342,11 +3485,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.PropertiesBlock.html",
-          "hash": "FgEvsBKpHwPn9BfcPYsZd3hPsdzb8dYzNRJvI7Z30lk="
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader.html",
+          "hash": "iaSxy0QQbahUhcu12pFPIHpUvYWEbBtXBkHeLpo628E="
         }
       },
       "is_incremental": false,
@@ -3355,11 +3498,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.AreVariantsHidden.html",
-          "hash": "gd4h2WBhiWhWv977BaEpsLDlObddOfPJR4kZEab+Cn0="
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateMinimalShader.html",
+          "hash": "ZW48Dou9U3oAK0kFCQKs7xFQBH/RxA9SLQFtcHiL5fg="
         }
       },
       "is_incremental": false,
@@ -3368,11 +3511,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.OptimizedShader.html",
-          "hash": "2W9mY2IgckSPeUlz9+7fQslNGHXF4liZ3PhhfyNAOgg="
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.EnqueueShadersToGenerate.html",
+          "hash": "PInFwYMPcAbVngbTCyliEkPFh/uog2yUiCGXilrYWGI="
         }
       },
       "is_incremental": false,
@@ -3485,45 +3628,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateShader.html",
-          "hash": "iaSxy0QQbahUhcu12pFPIHpUvYWEbBtXBkHeLpo628E="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.GenerateMinimalShader.html",
-          "hash": "ZW48Dou9U3oAK0kFCQKs7xFQBH/RxA9SLQFtcHiL5fg="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderGenerator.EnqueueShadersToGenerate.html",
-          "hash": "PInFwYMPcAbVngbTCyliEkPFh/uog2yUiCGXilrYWGI="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.yml",
       "output": {
         ".html": {
@@ -3618,6 +3722,19 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures.html",
+          "hash": "3qYUxSG7X3HdnSX+sw6j3kv5UcKdWHGE0dt71kibMWk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.ModuleDependencies.html",
           "hash": "/WEEoaAjzZicsv+be4hzFQ47se15DVcyBwcVqX4kdxw="
         }
@@ -3684,7 +3801,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.html",
-          "hash": "bR4LtsTBoYRmcKu2wcxvI4YU3Sr9YpngMSoEWO9Nm78="
+          "hash": "UsJqwF6MQiF0cAy/7KFWXVHjYSPwY2Ezqvelt6Y2CA8="
         }
       },
       "is_incremental": false,
@@ -3956,6 +4073,19 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.yml",
       "output": {
         ".html": {
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.OnImportAsset.html",
+          "hash": "Kxc81y8dMmy1c/nO+eGfDwPmqp/KOUI6vHpV2YMCVT8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.yml",
+      "output": {
+        ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.SupportsRemappedAssetType.html",
           "hash": "brwtbx0ZsOojNWkoqhZ64mHOewkWCK/9QOJQkZWAZGM="
         }
@@ -3971,19 +4101,6 @@
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.html",
           "hash": "bJaCwRlJZhpP2/mK8s4YPXP07vpfM4mNwo7XiSILM8E="
-        }
-      },
-      "is_incremental": false,
-      "version": "Next",
-      "group": "Next"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.TemplateColletionAssetImporter.OnImportAsset.html",
-          "hash": "Kxc81y8dMmy1c/nO+eGfDwPmqp/KOUI6vHpV2YMCVT8="
         }
       },
       "is_incremental": false,
@@ -4112,8 +4229,8 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.CreatePropertyGUI.html",
-          "hash": "Z9SIWQu8bDR2NhtTtUNFxBQ746s3NxiOflVOeEAhi+s="
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.html",
+          "hash": "AZZofXER2D5bstw7cMt+rzxzM3SZUD8NZfOodvDVyJg="
         }
       },
       "is_incremental": false,
@@ -4125,8 +4242,8 @@
       "source_relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.yml",
       "output": {
         ".html": {
-          "relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.html",
-          "hash": "AZZofXER2D5bstw7cMt+rzxzM3SZUD8NZfOodvDVyJg="
+          "relative_path": "Next/api/VRLabs.ModularShaderSystem.UI.EnablePropertyDrawer.CreatePropertyGUI.html",
+          "hash": "Z9SIWQu8bDR2NhtTtUNFxBQ746s3NxiOflVOeEAhi+s="
         }
       },
       "is_incremental": false,
@@ -5192,7 +5309,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/VRLabs.ModularShaderSystem.html",
-          "hash": "ynJjrxE6xb/D+YXLdONY2fyDrKchNeE8y9st4mvW4OI="
+          "hash": "SSjuclmH5vwKz8fZF7SfD30r5Qn88oAiaVOdMARirG4="
         }
       },
       "is_incremental": false,
@@ -5218,7 +5335,7 @@
       "output": {
         ".html": {
           "relative_path": "Next/api/toc.html",
-          "hash": "5oRyox3N4e2VCWZsWEhGqxz3YWncNkfSg/WfHApDGCQ="
+          "hash": "bZHSqBnU/XtA0WYPZAccBPBzo1Iuqzj9BNCGSGh8CSY="
         }
       },
       "is_incremental": false,
@@ -5792,32 +5909,6 @@
       "source_relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.yml",
       "output": {
         ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.DEFAULT_VARIABLES_KEYWORD.html",
-          "hash": "S3h3Gyk9vEPfduO5qwBaDoUEXQLTh0Vrm9NTXChGAjM="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.DEFAULT_CODE_KEYWORD.html",
-          "hash": "LZeAkFvYy0Jnhyi8XvG7QbBdwcDQ65pIhNLIBQGutow="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.yml",
-      "output": {
-        ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.TEMPLATE_PROPERTIES_KEYWORD.html",
           "hash": "RHKNEtUTASOj0emwORJfFyeHwgDWWxd6qVmXWUCVkGM="
         }
@@ -5898,6 +5989,32 @@
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.html",
           "hash": "KuGVnT1uJDDnJLGgG5mJOyI1okn6ZfMn6JrVYEHEG+c="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.DEFAULT_VARIABLES_KEYWORD.html",
+          "hash": "S3h3Gyk9vEPfduO5qwBaDoUEXQLTh0Vrm9NTXChGAjM="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.MSSConstants.DEFAULT_CODE_KEYWORD.html",
+          "hash": "LZeAkFvYy0Jnhyi8XvG7QbBdwcDQ65pIhNLIBQGutow="
         }
       },
       "is_incremental": false,
@@ -6819,32 +6936,6 @@
       "source_relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.yml",
       "output": {
         ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.AdditionalSerializedData.html",
-          "hash": "1Sq5JUo4g6esUJ95+lNI9N5yLSLlsvMAiBmPhI41P5M="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.html",
-          "hash": "9nOyheAQNE8PBgHXumZFqYDGv8HuycyofFQSc4Dk57g="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.yml",
-      "output": {
-        ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.Id.html",
           "hash": "wYutVpT6oK3lsf/sumXDIm+0BwPg7KpeT3w1A0FppRQ="
         }
@@ -7037,6 +7128,32 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.AdditionalSerializedData.html",
+          "hash": "1Sq5JUo4g6esUJ95+lNI9N5yLSLlsvMAiBmPhI41P5M="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ModularShader.html",
+          "hash": "9nOyheAQNE8PBgHXumZFqYDGv8HuycyofFQSc4Dk57g="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.yml",
       "output": {
         ".html": {
@@ -7094,45 +7211,6 @@
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ModuleTemplate.html",
           "hash": "sGzaDVAZC5qP5tjKQSso9X6/SqozBbdv4ufkCmE1vy0="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.Property.op_Inequality.html",
-          "hash": "tA7J69ntLY8+zfRF/SZyDxuPzI7krdJ2kpNBTAcABAs="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.Property.GetHashCode.html",
-          "hash": "pg6TBCNDMZNl4MCzZ+Jc+mkYYpPQo/7WaO6rA9sY+b8="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.Property.html",
-          "hash": "aG/CxjydX0fdvoH4zBXBy12PQyh4I+5u5pEz2STTrBg="
         }
       },
       "is_incremental": false,
@@ -7271,6 +7349,45 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.Property.op_Inequality.html",
+          "hash": "tA7J69ntLY8+zfRF/SZyDxuPzI7krdJ2kpNBTAcABAs="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.Property.GetHashCode.html",
+          "hash": "pg6TBCNDMZNl4MCzZ+Jc+mkYYpPQo/7WaO6rA9sY+b8="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.Property.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.Property.html",
+          "hash": "aG/CxjydX0fdvoH4zBXBy12PQyh4I+5u5pEz2STTrBg="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/VRLabs.ModularShaderSystem.PropertyType.yml",
       "output": {
         ".html": {
@@ -7380,6 +7497,58 @@
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ShaderFunction.html",
           "hash": "BqDkF2OfHWTTj7VMqwIW1UbiMMQSvTEef4IBJLB4EKo="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Shader.html",
+          "hash": "koplXcC5sWGV9jq7rWFqiG4jvSGHhRFU3uwpmypj26o="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.ActiveEnablers.html",
+          "hash": "+SkRT4Sw/KnbjOOWrlnd80fHlOHMpqIFlD9y750UZ5o="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.FreshAssets.html",
+          "hash": "FHO3yJ8ZGKHgkKnBL5t5FrDyICOu6L2ARFOdyDNLNtc="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.PostGeneration.html",
+          "hash": "49hQZtlE/IJ9wHi6y+4i0pB8kK5QHaFUAv9r8UlRFw4="
         }
       },
       "is_incremental": false,
@@ -7549,58 +7718,6 @@
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.html",
           "hash": "hUbI+E1WDJ7p+PnqY+AU/YfhJ+kCo06BxuzcF9x/LXg="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.Shader.html",
-          "hash": "koplXcC5sWGV9jq7rWFqiG4jvSGHhRFU3uwpmypj26o="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.ActiveEnablers.html",
-          "hash": "+SkRT4Sw/KnbjOOWrlnd80fHlOHMpqIFlD9y750UZ5o="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.FreshAssets.html",
-          "hash": "FHO3yJ8ZGKHgkKnBL5t5FrDyICOu6L2ARFOdyDNLNtc="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderGenerator.ShaderContext.PostGeneration.html",
-          "hash": "49hQZtlE/IJ9wHi6y+4i0pB8kK5QHaFUAv9r8UlRFw4="
         }
       },
       "is_incremental": false,
@@ -7924,6 +8041,32 @@
       "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
       "output": {
         ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.IndexOf.html",
+          "hash": "ca+vdJuWTiXOElZkkcls7op7ihd2elwTbhUE6wy+lEk="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.html",
+          "hash": "aMIX8hBGf3F7Mjhbn+lpibTI61lGvapQ5sBY6TnAh4A="
+        }
+      },
+      "is_incremental": false,
+      "version": "1.0.3",
+      "group": "1.0.3"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
+      "output": {
+        ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.Prepend.html",
           "hash": "3OFxrCzZ0kH+RS0hyt/NDF6YwMD6ZS7HNo1zintAqy4="
         }
@@ -8017,32 +8160,6 @@
         ".html": {
           "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.Contains.html",
           "hash": "D9MaAqZN7+MakexX0rlTRHQ7c5YCgfrmHmMaiJUiIOo="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.IndexOf.html",
-          "hash": "ca+vdJuWTiXOElZkkcls7op7ihd2elwTbhUE6wy+lEk="
-        }
-      },
-      "is_incremental": false,
-      "version": "1.0.3",
-      "group": "1.0.3"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/VRLabs.ModularShaderSystem.ShaderStringBuilderExtensions.html",
-          "hash": "aMIX8hBGf3F7Mjhbn+lpibTI61lGvapQ5sBY6TnAh4A="
         }
       },
       "is_incremental": false,
@@ -10127,7 +10244,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 58,
+          "total_file_count": 59,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {

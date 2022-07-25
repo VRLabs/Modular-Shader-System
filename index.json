@@ -2154,6 +2154,41 @@
     "title": "Method UpdateTab | Modular Shader System Documentation",
     "keywords": "Method UpdateTab UpdateTab(ModularShader) Declaration public void UpdateTab(ModularShader shader) Parameters Type Name Description ModularShader shader Implements IModularShaderDebuggerTab.UpdateTab(ModularShader)"
   },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Equals.html",
+    "title": "Method Equals | Modular Shader System Documentation",
+    "keywords": "Method Equals Equals(DefaultTexture) Declaration public bool Equals(DefaultTexture other) Parameters Type Name Description DefaultTexture other Returns Type Description Boolean Implements IEquatable<T>.Equals(T) Equals(Object) Declaration public override bool Equals(object obj) Parameters Type Name Description Object obj Returns Type Description Boolean Overrides Object.Equals(Object)"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.GetHashCode.html",
+    "title": "Method GetHashCode | Modular Shader System Documentation",
+    "keywords": "Method GetHashCode GetHashCode() Declaration public override int GetHashCode() Returns Type Description Int32 Overrides Object.GetHashCode()"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.html",
+    "title": "Class DefaultTexture | Modular Shader System Documentation",
+    "keywords": "Class DefaultTexture Object that represents a default texture for a texture property. Inheritance Object DefaultTexture Implements IEquatable < DefaultTexture > Namespace : VRLabs.ModularShaderSystem Syntax [Serializable] public class DefaultTexture : IEquatable<DefaultTexture> Fields Name Description PropertyName Name of the property. Texture Default texture value. Methods Name Description Equals(Object) Equals(DefaultTexture) GetHashCode() Operators Name Description Equality(DefaultTexture, DefaultTexture) Inequality(DefaultTexture, DefaultTexture)"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Equality.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Equality.html",
+    "title": "Operator Equality | Modular Shader System Documentation",
+    "keywords": "Operator Equality Equality(DefaultTexture, DefaultTexture) Declaration public static bool operator ==(DefaultTexture left, DefaultTexture right) Parameters Type Name Description DefaultTexture left DefaultTexture right Returns Type Description Boolean"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.op_Inequality.html",
+    "title": "Operator Inequality | Modular Shader System Documentation",
+    "keywords": "Operator Inequality Inequality(DefaultTexture, DefaultTexture) Declaration public static bool operator !=(DefaultTexture left, DefaultTexture right) Parameters Type Name Description DefaultTexture left DefaultTexture right Returns Type Description Boolean"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.PropertyName.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.PropertyName.html",
+    "title": "Field PropertyName | Modular Shader System Documentation",
+    "keywords": "Field PropertyName Name of the property. Namespace : VRLabs.ModularShaderSystem Syntax public string PropertyName Returns String"
+  },
+  "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Texture.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.DefaultTexture.Texture.html",
+    "title": "Field Texture | Modular Shader System Documentation",
+    "keywords": "Field Texture Default texture value. Namespace : VRLabs.ModularShaderSystem Syntax public Texture Texture Returns Texture"
+  },
   "Next/api/VRLabs.ModularShaderSystem.EnableProperty.-ctor.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.EnableProperty.-ctor.html",
     "title": "Constructor EnableProperty | Modular Shader System Documentation",
@@ -2202,7 +2237,7 @@
   "Next/api/VRLabs.ModularShaderSystem.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.html",
     "title": "Namespace VRLabs.ModularShaderSystem | Modular Shader System Documentation",
-    "keywords": "Namespace VRLabs.ModularShaderSystem Classes EnableProperty Property used to define if a module should be enabled or not. MigratedAssets MigratedCollection MigratedItemElement<T> MigratedModularShader MigratedModuleTemplate MigratedShaderFunction MigratedShaderModule MigratedTemplate Migrator ModularShader The main asset used for the modular shader system, containing informations to generate a shader from modules declared here. ModuleTemplate Object indicating a template contained in a module that indicate what asset to use, in which keywords to add it to, and when to add it. MSSConstants Constants used across the library. Property Shader property information. ShaderFunction Function information for a shader module. ShaderGenerator ShaderGenerator.ShaderContext ShaderModule Asset containing a module to add features to a shader. ShaderStringBuilderExtensions Static class that adds extension methods for the StringBuilder, used mainly in the shader generator for writing down the shader file TemplateAsset Asset containing shader code that is used around the modular shader system. TemplateAssetImporter Scripted importer for the template asset TemplateCollectionAsset Asset containing multiple templates separated by special keywords. TemplateColletionAssetImporter Scripted importer for the template collection. Variable Object defining a shader variable. It's used mainly for defining used variables in a module's function. Enums PropertyType Typed of shader properties. VariableType Possible types of variables."
+    "keywords": "Namespace VRLabs.ModularShaderSystem Classes DefaultTexture Object that represents a default texture for a texture property. EnableProperty Property used to define if a module should be enabled or not. MigratedAssets MigratedCollection MigratedItemElement<T> MigratedModularShader MigratedModuleTemplate MigratedShaderFunction MigratedShaderModule MigratedTemplate Migrator ModularShader The main asset used for the modular shader system, containing informations to generate a shader from modules declared here. ModuleTemplate Object indicating a template contained in a module that indicate what asset to use, in which keywords to add it to, and when to add it. MSSConstants Constants used across the library. Property Shader property information. ShaderFunction Function information for a shader module. ShaderGenerator ShaderGenerator.ShaderContext ShaderModule Asset containing a module to add features to a shader. ShaderStringBuilderExtensions Static class that adds extension methods for the StringBuilder, used mainly in the shader generator for writing down the shader file TemplateAsset Asset containing shader code that is used around the modular shader system. TemplateAssetImporter Scripted importer for the template asset TemplateCollectionAsset Asset containing multiple templates separated by special keywords. TemplateColletionAssetImporter Scripted importer for the template collection. Variable Object defining a shader variable. It's used mainly for defining used variables in a module's function. Enums PropertyType Typed of shader properties. VariableType Possible types of variables."
   },
   "Next/api/VRLabs.ModularShaderSystem.MigratedAssets.-ctor.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.MigratedAssets.-ctor.html",
@@ -2579,6 +2614,11 @@
     "title": "Field CustomEditor | Modular Shader System Documentation",
     "keywords": "Field CustomEditor Custom editor definition. Namespace : VRLabs.ModularShaderSystem Syntax public string CustomEditor Returns String"
   },
+  "Next/api/VRLabs.ModularShaderSystem.ModularShader.DefaultTextures.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.ModularShader.DefaultTextures.html",
+    "title": "Field DefaultTextures | Modular Shader System Documentation",
+    "keywords": "Field DefaultTextures List of default Textures; Namespace : VRLabs.ModularShaderSystem Syntax public List<DefaultTexture> DefaultTextures Returns List < DefaultTexture >"
+  },
   "Next/api/VRLabs.ModularShaderSystem.ModularShader.Description.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ModularShader.Description.html",
     "title": "Field Description | Modular Shader System Documentation",
@@ -2587,7 +2627,7 @@
   "Next/api/VRLabs.ModularShaderSystem.ModularShader.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ModularShader.html",
     "title": "Class ModularShader | Modular Shader System Documentation",
-    "keywords": "Class ModularShader The main asset used for the modular shader system, containing informations to generate a shader from modules declared here. Inheritance Object Object ScriptableObject ModularShader Namespace : VRLabs.ModularShaderSystem Syntax [CreateAssetMenu(fileName = \"ModularShader\", menuName = \"Shader/VRLabs/Modular Shader/Modular Shader\", order = 0)] public class ModularShader : ScriptableObject Fields Name Description AdditionalModules List of additional modules. AdditionalSerializedData string that can contain whatever you want, it is originally intended to contain serialized data that you may need for your own custom system based on the modular shader system. Author Author of the modular shader. BaseModules List of base modules. CustomEditor Custom editor definition. Description Description of the modular shader. Id Id of the modular shader. LastGeneratedShaders List of shaders that have been last generated by this modular shader. Useful to backtrack from which modular shader a specific shader comes. LockBaseModules Boolean to disable the base modules list edit. Can be edited by either scripts or the debug inspector. Name Name of the modular shader. Properties List of properties defined. ShaderPath Path for the shader in the shader selector. ShaderPropertiesTemplate Template asset for defining properties. ShaderTemplate Main template asset for the shader. UseTemplatesForProperties Toggle to define if the modular shader can use templates to declare properties. Version Version of the modular shader."
+    "keywords": "Class ModularShader The main asset used for the modular shader system, containing informations to generate a shader from modules declared here. Inheritance Object Object ScriptableObject ModularShader Namespace : VRLabs.ModularShaderSystem Syntax [CreateAssetMenu(fileName = \"ModularShader\", menuName = \"Shader/VRLabs/Modular Shader/Modular Shader\", order = 0)] public class ModularShader : ScriptableObject Fields Name Description AdditionalModules List of additional modules. AdditionalSerializedData string that can contain whatever you want, it is originally intended to contain serialized data that you may need for your own custom system based on the modular shader system. Author Author of the modular shader. BaseModules List of base modules. CustomEditor Custom editor definition. DefaultTextures List of default Textures; Description Description of the modular shader. Id Id of the modular shader. LastGeneratedShaders List of shaders that have been last generated by this modular shader. Useful to backtrack from which modular shader a specific shader comes. LockBaseModules Boolean to disable the base modules list edit. Can be edited by either scripts or the debug inspector. Name Name of the modular shader. Properties List of properties defined. ShaderPath Path for the shader in the shader selector. ShaderPropertiesTemplate Template asset for defining properties. ShaderTemplate Main template asset for the shader. UseTemplatesForProperties Toggle to define if the modular shader can use templates to declare properties. Version Version of the modular shader."
   },
   "Next/api/VRLabs.ModularShaderSystem.ModularShader.Id.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ModularShader.Id.html",
@@ -2717,7 +2757,7 @@
   "Next/api/VRLabs.ModularShaderSystem.Property.DefaultTextureAsset.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.Property.DefaultTextureAsset.html",
     "title": "Field DefaultTextureAsset | Modular Shader System Documentation",
-    "keywords": "Field DefaultTextureAsset Default texture asset assigned to the property if it's a Texture2D or Texture3D; Namespace : VRLabs.ModularShaderSystem Syntax public Texture DefaultTextureAsset Returns Texture"
+    "keywords": "Field DefaultTextureAsset Default texture asset assigned to the property if it's a Texture2D or Texture3D. Obsolete as of 1.1.0, use the relative list in the ShaderModule or ModularShader assets. Namespace : VRLabs.ModularShaderSystem Syntax [Obsolete] public Texture DefaultTextureAsset Returns Texture"
   },
   "Next/api/VRLabs.ModularShaderSystem.Property.DefaultValue.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.Property.DefaultValue.html",
@@ -2742,7 +2782,7 @@
   "Next/api/VRLabs.ModularShaderSystem.Property.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.Property.html",
     "title": "Class Property | Modular Shader System Documentation",
-    "keywords": "Class Property Shader property information. Inheritance Object Property EnableProperty Implements IEquatable < Property > Namespace : VRLabs.ModularShaderSystem Syntax [Serializable] public class Property : IEquatable<Property> Fields Name Description Attributes List of attributes for the shader property. DefaultTextureAsset Default texture asset assigned to the property if it's a Texture2D or Texture3D; DefaultValue Default value of the shader property. DisplayName Display name of the shader property. Name Name of the shader property. Type Type of the shader property. Methods Name Description Equals(Object) GetHashCode() ToVariable() Convert the property to a shader variable. Operators Name Description Equality(Property, Property) Inequality(Property, Property) Explicit Interface Implementations Name Description IEquatable<Property>.Equals(Property)"
+    "keywords": "Class Property Shader property information. Inheritance Object Property EnableProperty Implements IEquatable < Property > Namespace : VRLabs.ModularShaderSystem Syntax [Serializable] public class Property : IEquatable<Property> Fields Name Description Attributes List of attributes for the shader property. DefaultTextureAsset Default texture asset assigned to the property if it's a Texture2D or Texture3D. Obsolete as of 1.1.0, use the relative list in the ShaderModule or ModularShader assets. DefaultValue Default value of the shader property. DisplayName Display name of the shader property. Name Name of the shader property. Type Type of the shader property. Methods Name Description Equals(Object) GetHashCode() ToVariable() Convert the property to a shader variable. Operators Name Description Equality(Property, Property) Inequality(Property, Property) Explicit Interface Implementations Name Description IEquatable<Property>.Equals(Property)"
   },
   "Next/api/VRLabs.ModularShaderSystem.Property.Name.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.Property.Name.html",
@@ -2969,6 +3009,11 @@
     "title": "Field Author | Modular Shader System Documentation",
     "keywords": "Field Author Author of the shader module. Namespace : VRLabs.ModularShaderSystem Syntax public string Author Returns String"
   },
+  "Next/api/VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures.html": {
+    "href": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.DefaultTextures.html",
+    "title": "Field DefaultTextures | Modular Shader System Documentation",
+    "keywords": "Field DefaultTextures List of default Textures; Namespace : VRLabs.ModularShaderSystem Syntax public List<DefaultTexture> DefaultTextures Returns List < DefaultTexture >"
+  },
   "Next/api/VRLabs.ModularShaderSystem.ShaderModule.Description.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.Description.html",
     "title": "Field Description | Modular Shader System Documentation",
@@ -2987,7 +3032,7 @@
   "Next/api/VRLabs.ModularShaderSystem.ShaderModule.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.html",
     "title": "Class ShaderModule | Modular Shader System Documentation",
-    "keywords": "Class ShaderModule Asset containing a module to add features to a shader. Inheritance Object Object ScriptableObject ShaderModule Namespace : VRLabs.ModularShaderSystem Syntax [CreateAssetMenu(fileName = \"ShaderModule\", menuName = \"Shader/VRLabs/Modular Shader/Shader Module\", order = 0)] public class ShaderModule : ScriptableObject Fields Name Description AdditionalSerializedData string that can contain whatever you want, it is originally intended to contain serialized data that you may need for your own custom system based on the modular shader system. Author Author of the shader module. Description Description of the shader model. EnableProperties List of properties declared by the module. Functions List functions this shader module uses. Id Id of the shader module. IncompatibleWith List of ids of shader modules this shader module is incompatible. ModuleDependencies List of ids of shader modules this shader module depends on. Name Name of the shader module. Properties List of properties declared by the module. Templates List of templates this shader module uses. Version Version of the shader module."
+    "keywords": "Class ShaderModule Asset containing a module to add features to a shader. Inheritance Object Object ScriptableObject ShaderModule Namespace : VRLabs.ModularShaderSystem Syntax [CreateAssetMenu(fileName = \"ShaderModule\", menuName = \"Shader/VRLabs/Modular Shader/Shader Module\", order = 0)] public class ShaderModule : ScriptableObject Fields Name Description AdditionalSerializedData string that can contain whatever you want, it is originally intended to contain serialized data that you may need for your own custom system based on the modular shader system. Author Author of the shader module. DefaultTextures List of default Textures; Description Description of the shader model. EnableProperties List of properties declared by the module. Functions List functions this shader module uses. Id Id of the shader module. IncompatibleWith List of ids of shader modules this shader module is incompatible. ModuleDependencies List of ids of shader modules this shader module depends on. Name Name of the shader module. Properties List of properties declared by the module. Templates List of templates this shader module uses. Version Version of the shader module."
   },
   "Next/api/VRLabs.ModularShaderSystem.ShaderModule.Id.html": {
     "href": "Next/api/VRLabs.ModularShaderSystem.ShaderModule.Id.html",
