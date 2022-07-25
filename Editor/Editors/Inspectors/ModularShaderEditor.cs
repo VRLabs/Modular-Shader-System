@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,6 +20,20 @@ namespace VRLabs.ModularShaderSystem.UI
         {
             _root = new VisualElement();
             _shader = (ModularShader)serializedObject.targetObject;
+            
+            // Temporary code to move default textures to the new place, will be removed sometime in the future
+            if (_shader.DefaultTextures == null) _shader.DefaultTextures = new List<DefaultTexture>();
+            foreach (var prop in _shader.Properties)
+            {
+#pragma warning disable CS0612
+                if (prop.DefaultTextureAsset != null)
+                {
+                    _shader.DefaultTextures.Add(new DefaultTexture{PropertyName = prop.Name, Texture = prop.DefaultTextureAsset});
+                }
+#pragma warning restore CS0612
+            }
+            
+            
             // Import UXML
             var visualTree = Resources.Load<VisualTreeAsset>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/ModularShaderEditor");
             VisualElement template = visualTree.CloneTree();

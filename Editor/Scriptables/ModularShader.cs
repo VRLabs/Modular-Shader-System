@@ -65,10 +65,15 @@ namespace VRLabs.ModularShaderSystem
         public List<Property> Properties;
         
         /// <summary>
+        /// List of default Textures;
+        /// </summary>
+        public List<DefaultTexture> DefaultTextures;
+        
+        /// <summary>
         /// List of base modules.
         /// </summary>
         public List<ShaderModule> BaseModules;
-        
+
         /// <summary>
         /// List of additional modules.
         /// </summary>

@@ -848,11 +848,12 @@ namespace VRLabs.ModularShaderSystem
             foreach (var context in contexts)
             {
                 var importedShader = AssetImporter.GetAtPath($"{context.FilePath}/" + context.VariantFileName) as ShaderImporter;
-                var customTextures = context.Modules.SelectMany(x => x.Properties).Where(x => x.DefaultTextureAsset != null).ToList();
+                var customTextures = context.Modules.SelectMany(x => x.DefaultTextures).Where(x => x.Texture != null).ToList();
+                customTextures.AddRange(context.Shader.DefaultTextures.Where(x => x.Texture != null).ToList());
                 if (importedShader != null)
                 {
-                    importedShader.SetDefaultTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
-                    importedShader.SetNonModifiableTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                    importedShader.SetDefaultTextures(customTextures.Select(x => x.PropertyName).ToArray(), customTextures.Select(x => x.Texture).ToArray());
+                    importedShader.SetNonModifiableTextures(customTextures.Select(x => x.PropertyName).ToArray(), customTextures.Select(x => x.Texture).ToArray());
                 }
                 AssetDatabase.ImportAsset($"{context.FilePath}/" + context.VariantFileName);
             }

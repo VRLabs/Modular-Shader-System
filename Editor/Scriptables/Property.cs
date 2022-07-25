@@ -49,8 +49,11 @@ namespace VRLabs.ModularShaderSystem
         public string DefaultValue;
 
         /// <summary>
-        /// Default texture asset assigned to the property if it's a Texture2D or Texture3D;
+        /// Default texture asset assigned to the property if it's a Texture2D or Texture3D.
+        ///
+        /// Obsolete as of 1.1.0, use the relative list in the <see cref="ShaderModule"/> or <see cref="ModularShader"/> assets.
         /// </summary>
+        [Obsolete]
         public Texture DefaultTextureAsset;
         
         /// <summary>
