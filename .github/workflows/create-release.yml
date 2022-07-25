@@ -20,34 +20,35 @@ jobs:
         run: |
           mkdir -p "Assets/VRLabs/ModularShaderSystem"
           ls | grep -v "Assets" | xargs mv -t "Assets/VRLabs/ModularShaderSystem"
-          echo "Assets/VRLabs.meta" > mssFullPackage
-          echo "Assets/VRLabs/ModularShaderSystem.meta" >> mssFullPackage
           echo -e "fileFormatVersion: 2\nguid: 652a1ba5b00554143bc9a76307dbc4e8\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs.meta"
           echo -e "fileFormatVersion: 2\nguid: 433bedcd0ded4bcf993b0088e99f493c\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs/ModularShaderSystem.meta"
-          find "Assets/VRLabs/ModularShaderSystem/" -name \*.meta >> mssFullPackage
-          grep -v "Assets/VRLabs/ModularShaderSystem/Examples" < mssFullPackage > mssDevPackage
-          grep 'Assets/VRLabs/ModularShaderSystem/Examples' < mssFullPackage > mssExamplesPackage
-          echo "Assets/VRLabs.meta" >> mssExamplesPackage
-          echo "Assets/VRLabs/ModularShaderSystem.meta" >> mssExamplesPackage
+          mkdir -p "Main"
+          mkdir -p "Examples"
+          cp -r "Assets" "Main"
+          mkdir -p "Examples/Assets/VRLabs/ModularShaderSystem"
+          echo -e "fileFormatVersion: 2\nguid: 652a1ba5b00554143bc9a76307dbc4e8\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Examples/Assets/VRLabs.meta"
+          echo -e "fileFormatVersion: 2\nguid: 433bedcd0ded4bcf993b0088e99f493c\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Examples/Assets/VRLabs/ModularShaderSystem.meta"
+          mv "Main/Assets/VRLabs/ModularShaderSystem/Examples" "Examples/Assets/VRLabs/ModularShaderSystem"
+          mv "Main/Assets/VRLabs/ModularShaderSystem/Examples.meta" "Examples/Assets/VRLabs/ModularShaderSystem"
       - name: Create UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-        uses: pCYSl5EDgo/create-unitypackage@master
+        uses: VRLabs/extract-unity-package-action@v1.2.1
         with:
-          package-path: 'Modular.Shader.System.${{ env.SOURCE_TAG }}.unitypackage'
-          include-files: mssDevPackage
+          outputPackagePath: 'Modular.Shader.System.${{ env.SOURCE_TAG }}.unitypackage'
+          unityProjectPath: 'Main'
 
       - name: Create Examples UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-        uses: pCYSl5EDgo/create-unitypackage@master
+        uses: VRLabs/extract-unity-package-action@v1.2.1
         with:
-          package-path: 'Modular.Shader.System.Examples.${{ env.SOURCE_TAG }}.unitypackage'
-          include-files: mssExamplesPackage
+          outputPackagePath: 'Modular.Shader.System.Examples.${{ env.SOURCE_TAG }}.unitypackage'
+          unityProjectPath: 'Examples'
 
       - name: Build Changelog
         id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v1
+        uses: mikepenz/release-changelog-builder-action@v2
         with:
           configuration: ".github/release-notes-configuration.json"
           outputFile: "releaseNotes.txt"

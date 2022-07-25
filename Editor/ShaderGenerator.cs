@@ -361,13 +361,14 @@ namespace VRLabs.ModularShaderSystem
         {
             if ((object)asset == null) return;
             if (dictionary.ContainsKey(asset)) return;
+            string assetName = asset.name;
             string assetPath = AssetDatabase.GetAssetPath(asset);
             var genericAsset = AssetDatabase.LoadMainAssetAtPath(assetPath);
             TemplateAsset template = null;
             switch (genericAsset)
             {
                 case TemplateCollectionAsset collection:
-                    template = collection.Templates.FirstOrDefault(x => x.name.Equals(asset.name));
+                    template = collection.Templates.FirstOrDefault(x => x.name.Equals(assetName));
                     break;
                 case TemplateAsset t:
                     template = t;

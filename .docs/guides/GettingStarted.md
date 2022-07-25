@@ -13,7 +13,7 @@ Once everything is imported let's start creating our first modular shader!
 
 Everything starts with a `Modular shader` asset. This Asset contains all the basic information about the shader.
 
-Create a new asset file by selecting `Assets > Create > VRLabs > Modular Shader > Modular Shader` (alternative you can bring up the `Assets` menu by right clicking in the project tab).
+Create a new asset file by selecting `Assets > Create > Shader > VRLabs > Modular Shader > Modular Shader` (alternative you can bring up the `Assets` menu by right clicking in the project tab).
 
 > [!WARNING]
 > All assets specific for the Modular Shader System like Modular Shader, Shader module and Template assets should always go inside an `Editor` folder, since they're used only in editor to generate the shaders.
@@ -31,7 +31,7 @@ After that there's the Custom editor value. If you're using a custom inspector y
 Now, let's get into the meat and let's make the base skeleton for our shader.
 This skeleton will be in the `template asset` that will be placed in the `shader template` field.
 
-Create the new template file by selecting `Assets > Create > VRLabs > Modular Shader > Template`, open the file in any text editor and paste the following code:
+Create the new template file by selecting `Assets > Create > Shader > VRLabs > Modular Shader > Template`, open the file in any text editor and paste the following code:
 
 [!code[Main](Code/BaseTemplate.txt)]
 
@@ -70,7 +70,7 @@ Perfect, now the shader has all the properties it uses. But it still doesn't out
 
 ## Creating a Module
 
-Time to create a module to give life to this shader, first create the module asset file by selecting `Assets > Create > VRLabs > Modular Shader > Shader Module`.
+Time to create a module to give life to this shader, first create the module asset file by selecting `Assets > Create > Shader > VRLabs > Modular Shader > Shader Module`.
 
 The informations area of the asset is similar to the modular shader assets, but with some key differences:
 - The id **needs** to be filled in since it's going to be used by the system to check for duplicate modules, incompatibilities, and dependencies.

@@ -31,13 +31,23 @@ You can select which timeline to show by selecting the root you want to see in t
 
 A single element contains the name of the function on the left, and it's queue on the right (the queue is always relative to its parent `AppendAfter`)
 
-The selected element will have a cyan border, while elements with a yellow borders indicate a function that contains the variable selected in the `Selected Function information` area.
+The selected element will have a cyan border, elements with a yellow borders indicate a function that contains the variable selected in the `Selected Function information` area, and elements with a red border indicate a function that contains the variable selected in the `Variables List` area.
 
 ![unselected item](/images/docs/ModularShaderDebugger/8.png)
 
 ![selected item](/images/docs/ModularShaderDebugger/9.png)
 
 ![item with selected variable](/images/docs/ModularShaderDebugger/10.png)
+
+![item with selected variable from variables list](/images/docs/ModularShaderDebugger/10-2.png)
+
+## Variables List
+
+![Variables List](/images/docs/ModularShaderDebugger/16.png)
+
+This area shows a list containing all the variables available in the modular shader.
+
+Selecting a variable will show which functions in the timeline use that variable, giving you the possibility to check where it's used and for what.
 
 ## Selected function information
 
@@ -47,7 +57,7 @@ This area shows informations relative to the function, such as the name, queue, 
 
 It also shows its variables and in which keywords variables and implementation are put on.
 
-Selecting a variable will show which other functions in the timeline that use the same variable, giving you the possibility to check where it's used and for what.
+Selecting a variable will show which other functions in the timeline use the same variable, giving you the possibility to check where it's used and for what.
 
 ## Function's module base info
 
