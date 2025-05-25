@@ -19,7 +19,7 @@ namespace VRLabs.ModularShaderSystem.UI
     /// <summary>
     /// Visual element used to show a list from a Serialized property containing a list
     /// </summary>
-    // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
+    // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/
     public class InspectorList : BindableElement, IInspectorList
     {
         Foldout _listContainer;
@@ -101,7 +101,7 @@ namespace VRLabs.ModularShaderSystem.UI
         }
 
         // Get the reference to the bound serialized object.
-        public override void HandleEvent(EventBase evt)
+        protected override void ExecuteDefaultAction(EventBase evt)
         {
             var type = evt.GetType(); //SerializedObjectBindEvent is internal, so need to use reflection here
             if ((type.Name == "SerializedPropertyBindEvent") && !string.IsNullOrWhiteSpace(bindingPath))
@@ -116,7 +116,7 @@ namespace VRLabs.ModularShaderSystem.UI
                 // Updating it twice here doesn't cause an issue.
                 UpdateList();
             }
-            base.HandleEvent(evt);
+            base.ExecuteDefaultAction(evt);
         }
 
         // Refresh/recreate the list.
@@ -165,7 +165,7 @@ namespace VRLabs.ModularShaderSystem.UI
                     if (_currentDrop == dropArea) _currentDrop = null;
                 }
             });
-            
+
             _listContainer.Add(dropArea);
             _drops.Add(dropArea);
         }
