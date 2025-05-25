@@ -120,13 +120,7 @@ namespace VRLabs.ModularShaderSystem.UI
             _listContainer.text = _array.displayName;
             CreateDrop();
 
-            _loadedModules = new List<string>();
-            for (int i = 0; i < _array.arraySize; i++)
-            {
-                if (_array.GetArrayElementAtIndex(i).objectReferenceValue != null)
-                    _loadedModules.Add(((ShaderModule)_array.GetArrayElementAtIndex(i).objectReferenceValue)?.Id);
-            }
-
+            ReloadLoadedModulesIds();
 
 
             for (int i = 0; i < _array.arraySize; i++)
@@ -145,16 +139,12 @@ namespace VRLabs.ModularShaderSystem.UI
                 moduleItem.Add(objectField);
                 moduleItem.Add(infoLabel);
 
-                objectField.RegisterCallback<ChangeEvent<Object>>(x =>
-                {
+                objectField.RegisterValueChangedCallback(x => {
                     var newValue = (ShaderModule)x.newValue;
                     var oldValue = (ShaderModule)x.previousValue;
 
-                    if (oldValue != null)
-                        _loadedModules.Remove(oldValue.Id);
-                    if (newValue != null)
-                        _loadedModules.Add(newValue.Id);
-
+                    ReloadLoadedModulesIds();
+                    
                     for (int j = 0; j < _array.arraySize; j++)
                     {
                         var element = ((ObjectField)x.target).parent.parent.parent.ElementAt(j*2+1).ElementAt(1);
@@ -165,6 +155,9 @@ namespace VRLabs.ModularShaderSystem.UI
                             CheckModuleValidity((ShaderModule)_array.GetArrayElementAtIndex(j).objectReferenceValue, label, element);
                     }
                 });
+                
+                /*objectField.RegisterCallback<ChangeEvent<Object>>(x =>
+                );*/
 
                 var item = new InspectorListItem(this, moduleItem, _array, index, _showElementsButtons);
                 item.removeButton.RegisterCallback<PointerUpEvent>((evt) => RemoveItem(index));
@@ -177,6 +170,16 @@ namespace VRLabs.ModularShaderSystem.UI
             }
             if (enabledSelf)
                 _listContainer.Add(_addButton);
+        }
+
+        private void ReloadLoadedModulesIds()
+        {
+            _loadedModules = new List<string>();
+            for (int i = 0; i < _array.arraySize; i++)
+            {
+                if (_array.GetArrayElementAtIndex(i).objectReferenceValue != null)
+                    _loadedModules.Add(((ShaderModule)_array.GetArrayElementAtIndex(i).objectReferenceValue)?.Id);
+            }
         }
 
         private void CreateDrop()
@@ -212,6 +215,7 @@ namespace VRLabs.ModularShaderSystem.UI
             if (newValue != null)
             {
                 var moduleId = newValue.Id;
+                
                 if (_loadedModules.Count(y => y.Equals(moduleId)) > 1)
                     problems.Add("The module is duplicate");
 

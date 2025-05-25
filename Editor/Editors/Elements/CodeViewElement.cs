@@ -68,7 +68,6 @@ namespace VRLabs.ModularShaderSystem.UI
                 _listView.itemsSource = _textLines;
 
                 float width =((_textLines.Length == 0 ? 0 : _textLines.Max(x => x.Length)) + _digits + 1) * 10;
-                _listView.contentContainer.style.width = width;
             }
         }
         
@@ -86,12 +85,11 @@ namespace VRLabs.ModularShaderSystem.UI
         {
             ScrollView s = new ScrollView(ScrollViewMode.Horizontal);
             _listView = new ListView();
-            _listView.itemHeight = 15;
+            _listView.fixedItemHeight = 15;
             _listView.AddToClassList("unity-base-text-field__input");
             _listView.AddToClassList("unity-text-field__input");
             _listView.AddToClassList("unity-base-field__input");
             _listView.style.flexGrow = 1;
-            _listView.contentContainer.style.flexGrow = 1;
             
             Func<VisualElement> makeItem = () => new LineItem();
             Action<VisualElement, int> bindItem = (e, i) => (e as LineItem).SetText(i+1, _textLines[i], _digits);
