@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 namespace VRLabs.ModularShaderSystem.UI
 {
 
-    // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
+    // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/
     public class ModuleInspectorList : BindableElement, IInspectorList
     {
         Foldout _listContainer;
@@ -91,7 +91,7 @@ namespace VRLabs.ModularShaderSystem.UI
         }
 
         // Get the reference to the bound serialized object.
-        public override void HandleEvent(EventBase evt)
+        protected override void ExecuteDefaultAction(EventBase evt)
         {
             var type = evt.GetType(); //SerializedObjectBindEvent is internal, so need to use reflection here
             if ((type.Name == "SerializedPropertyBindEvent") && !string.IsNullOrWhiteSpace(bindingPath))
@@ -106,7 +106,7 @@ namespace VRLabs.ModularShaderSystem.UI
                 // Updating it twice here doesn't cause an issue.
                 UpdateList();
             }
-            base.HandleEvent(evt);
+            base.ExecuteDefaultAction(evt);
         }
 
         // Refresh/recreate the list.
